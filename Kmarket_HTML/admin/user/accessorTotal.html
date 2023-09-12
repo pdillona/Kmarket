@@ -10,6 +10,31 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+        // 보류하겠음. 그래프 안 나옴
+        new Morris.Line({
+            element:'morrisChart',
+            data:[
+                {month:'1', value:30},
+                {month:'2', value:30},
+                {month:'3', value:30},
+                {month:'4', value:30},
+                {month:'5', value:30},
+                {month:'6', value:30},
+                {month:'7', value:30},
+                {month:'8', value:30},
+                {month:'9', value:30},
+                {month:'10', value:30}
+            ],
+            xkey:'month',
+            ykeys:['value'],
+            labels:['value']
+        });
+    </script>
 </head>
 <body>
     <div id="admin-wrapper">
@@ -66,96 +91,9 @@
                         HOME > 회원관리 > <strong>접속자집계</strong>
                     </p>
                 </nav>
-                <!-- 접속자집계 컨텐츠 시작 -->                                
-                <section>
-                    <div>
-                        <select name="search">
-                            <option value="search1">회원아이디</option>
-                            <option value="search1">회원이름</option>
-                        </select>
-                        <input type="text" name="search">
-                    </div>
-                    <table>
-                        <tr>
-                            <th><input type="checkbox" name="all"/></th>
-                            <th>아이디</th>
-                            <th>이름</th>
-                            <th>등급</th>
-                            <th>포인트</th>
-                            <th>휴대폰</th>
-                            <th>이메일</th>
-                            <th>우편번호</th>
-                            <th>주소</th>
-                            <th>관리</th>
-                        </tr>
-
-                        <tr>
-                            <td><input type="checkbox" name="all"/></td>
-                            <td>홍1234</td>
-                            <td>홍길동ㄴ</td>
-                            <td>골드</td>
-                            <td>800000</td>
-                            <td>010-2434-3243</td>
-                            <td>killdong@naver.com</td>
-                            <td>43534</td>
-                            <td>아무광역시 아무동 아무아파트115동 1234호</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="all"/></td>
-                            <td>홍1234</td>
-                            <td>홍길동ㄴ</td>
-                            <td>골드</td>
-                            <td>800000</td>
-                            <td>010-2434-3243</td>
-                            <td>killdong@naver.com</td>
-                            <td>43534</td>
-                            <td>아무광역시 아무동 아무아파트115동 1234호</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="all"/></td>
-                            <td>홍1234</td>
-                            <td>홍길동ㄴ</td>
-                            <td>골드</td>
-                            <td>800000</td>
-                            <td>010-2434-3243</td>
-                            <td>killdong@naver.com</td>
-                            <td>43534</td>
-                            <td>아무광역시 아무동 아무아파트115동 1234호</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        
-                    </table>
-                    <input class="btnDelete" type="button" value="선택삭제" />     
-                    <div class="paging">
-                        <span class="prev">
-                            <a href="#"><&nbsp;이전</a>
-                        </span>
-                        <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
-                        </span>
-                        <span class="next">
-                            <a href="#">다음&nbsp;></a>
-                        </span>
-                        </div>
-
-                </section>                
+                <!-- 접속자집계 컨텐츠 시작 --> 
+                <!-- 그래프 형식으로  -->                              
+                <div id="morrisChart"></div>
 
                 
                 <p class="ico info">
