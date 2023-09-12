@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>케이마켓::회원</title>
+    <title>케이마켓::판매자</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>    
@@ -53,85 +53,56 @@
                     </li>
                 </ul>
             </aside>
-            </aside>
-            <section id="admin-user-user">
+            <section id="admin-board-notice">
                 <nav>
-                    <h3>회원정보관리</h3>
+                    <h3>배송관리</h3>
                     <p>
-                        HOME > 회원관리 > <strong>회원정보관리</strong>
+                        HOME > 주문관리 > <strong>배송관리</strong>
                     </p>
                 </nav>
-                <!-- 상품목록 컨텐츠 시작 -->                                
+                <!-- 배송관리 컨텐츠 시작 -->                                
                 <section>
                     <div>
                         <select name="search">
-                            <option value="search1">회원아이디</option>
-                            <option value="search1">회원이름</option>
+                            <option value="search1">제목</option>
+                            <option value="search1">글쓴이</option>
                         </select>
                         <input type="text" name="search">
                     </div>
+                    <p class="sort">
+                        <a href="#" class="on">전체&nbsp;|</a>
+                        <a href="#" class="off">판매자&nbsp;|</a>
+                        <a href="#" class="off">구매자&nbsp;|</a>
+                    </p>
                     <table>
                         <tr>
-                            <th><input type="checkbox" name="all"/></th>
-                            <th>아이디</th>
-                            <th>이름</th>
-                            <th>등급</th>
-                            <th>포인트</th>
-                            <th>휴대폰</th>
-                            <th>이메일</th>
-                            <th>우편번호</th>
-                            <th>주소</th>
-                            <th>관리</th>
+                            <th>글번호</th>
+                            <th>글제목</th>
+                            <th>작성자</th>
+                            <th>작성일자</th>
                         </tr>
 
                         <tr>
-                            <td><input type="checkbox" name="all"/></td>
-                            <td>홍1234</td>
-                            <td>홍길동ㄴ</td>
-                            <td>골드</td>
-                            <td>800000</td>
-                            <td>010-2434-3243</td>
-                            <td>killdong@naver.com</td>
-                            <td>43534</td>
-                            <td>아무광역시 아무동 아무아파트115동 1234호</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
+                            <td>1</td>
+                            <td>공지사항입니다.</td>
+                            <td>홍길동</td>
+                            <td>23-05-25</td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" name="all"/></td>
-                            <td>홍1234</td>
-                            <td>홍길동ㄴ</td>
-                            <td>골드</td>
-                            <td>800000</td>
-                            <td>010-2434-3243</td>
-                            <td>killdong@naver.com</td>
-                            <td>43534</td>
-                            <td>아무광역시 아무동 아무아파트115동 1234호</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
+                            <td>1</td>
+                            <td>공지사항입니다.</td>
+                            <td>홍길동</td>
+                            <td>23-05-25</td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" name="all"/></td>
-                            <td>홍1234</td>
-                            <td>홍길동ㄴ</td>
-                            <td>골드</td>
-                            <td>800000</td>
-                            <td>010-2434-3243</td>
-                            <td>killdong@naver.com</td>
-                            <td>43534</td>
-                            <td>아무광역시 아무동 아무아파트115동 1234호</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
+                            <td>1</td>
+                            <td>공지사항입니다.</td>
+                            <td>홍길동</td>
+                            <td>23-05-25</td>
                         </tr>
                         
                     </table>
-                    <input class="btnDelete" type="button" value="선택삭제" />     
+
                     <div class="paging">
                         <span class="prev">
                             <a href="#"><&nbsp;이전</a>
@@ -160,7 +131,7 @@
 
                 
 
-                <!-- 상품목록 컨텐츠 끝 -->
+                <!-- 배송관리 컨텐츠 끝 -->
             </section>
         </main>
         <footer>
