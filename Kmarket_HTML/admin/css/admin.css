@@ -662,6 +662,8 @@ button[type=submit] {
     float: left;
     width: 100px;
     margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
 }
 
 #admin-store-userSeller .paging {
@@ -738,6 +740,8 @@ button[type=submit] {
     float: left;
     width: 100px;
     margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
 }
 
 #admin-user-user .paging {
@@ -813,10 +817,12 @@ button[type=submit] {
 
 #admin-board-notice > section > table img.thumb {width: 60px;}
 
-#admin-board-notice > section input[type=button] {
+#admin-board-notice > section .btnWrite {
     float: right;
     width: 100px;
     margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
 }
 
 #admin-board-notice .paging {
