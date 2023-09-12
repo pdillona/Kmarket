@@ -27,7 +27,7 @@
   -->
   
   <!-- 로그인 여부 체크 필터 등록 -->
-  <filter>
+<!--   <filter>
   	<filter-name>CheckLoginFilter</filter-name>
   	<filter-class>kr.co.farmstory2.filter.CheckLoginFilter</filter-class>
   </filter>
@@ -50,7 +50,7 @@
   <filter-mapping>
   	<filter-name>CheckLoginFilter</filter-name>
   	<url-pattern>/market/order.do</url-pattern>
-  </filter-mapping>
+  </filter-mapping> -->
   
   
   <!-- 인코딩 필터 등록 -->
