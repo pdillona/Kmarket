@@ -39,8 +39,6 @@
                         <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
                         <ol>
                             <li><a href="/seller/order/order.html">주문현황</a></li>
-                            <li><a href="/seller/order/sold.html">매출현황</a></li>
-                            <li><a href="/seller/order/orderComplete.html">결제관리</a></li>
                             <li><a href="/seller/order/delivery.html">배송관리</a></li>
                         </ol>
                     </li>
@@ -48,7 +46,6 @@
                         <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객문의</a>
                         <ol>
                             <li><a href="/seller/board/qna.html">Kmarket사용문의</a></li>
-                            <li><a href="/seller/board/answer.html">고객문의답변</a></li>
                         </ol>
                     </li>
                 </ul>
@@ -60,12 +57,14 @@
                         HOME > 주문관리 > <strong>주문현황</strong>
                     </p>
                 </nav>
-                <!-- 주문현황 컨텐츠 시작 -->                                
+                <!-- 주문현황 컨텐츠 시작 -->         
+                <!-- ordNo, prodNo, ordUid, ordDate, deliveryStatus, ordComplete(수정가능) -->                      
                 <section>
                     <div>
                         <select name="search">
                             <option value="search1">제목</option>
                             <option value="search1">글쓴이</option>
+                            <option value="search1">입금대기</option>
                         </select>
                         <input type="text" name="search">
                     </div>
