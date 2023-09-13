@@ -1,56 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>케이마켓::판매자</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>    
-    <script src="./js/gnb.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="./css/seller.css">
-</head>
-<body>
-    <div id="seller-wrapper">
-        <header>
-            <div>
-                <a href="./index.html" class="logo"><img src="./img/admin_logo.png" alt="admin_logo"/></a>
-                <p>
-                    <span>홍길동님 반갑습니다.</span>
-                    <a href="#">HOME |</a>
-                    <a href="#">로그아웃 |</a>
-                    <a href="#">고객센터</a>
-                </p>
-            </div>
-        </header>
-        <main>
-            <aside>
-                <!-- Global Navigation Bar -->
-                <ul id="gnb">
-                    <li>
-                        <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
-                        <ol>
-                            <li><a href="/seller/product/list.html">상품현황</a></li>
-                            <li><a href="/seller/product/register.html">상품등록</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
-                        <ol>
-                            <li><a href="/seller/order/order.html">주문현황</a></li>
-                            <li><a href="/seller/order/delivery.html">취소/반품/교환</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객문의</a>
-                        <ol>
-                            <li><a href="/seller/board/qna.html">Kmarket사용문의</a></li>
-                        </ol>
-                    </li>
-                </ul>
-            </aside>
+<%@ include file="./_header.jsp" %>
+<%@ include file="./_aside.jsp"%>
             <section id="seller-index">
                 <nav>
                     <h3>판매자 메인</h3>
@@ -266,11 +216,4 @@
                 </div>
             </section>
         </main>
-        <footer>
-            <div>
-                <p>Copyright ©kmarket.co.kr All rights reserved. KMARKET ADMINISTRATOR Version 5.4.1.2</p>
-            </div>
-        </footer>
-    </div>    
-</body>
-</html>
+<%@ include file="./_footer.jsp"%>
