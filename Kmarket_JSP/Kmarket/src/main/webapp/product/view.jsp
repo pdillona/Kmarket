@@ -303,4 +303,4 @@
             </section>
             <!-- 상품 상세페이지 끝 -->
         </main>
-<%@ include file="../_footer.jsp" %>
+<!--<%@ include file="../_footer.jsp" %>-->
