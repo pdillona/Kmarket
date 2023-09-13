@@ -36,7 +36,7 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="./member/login.html">로그인</a>
+                    <a href="${ctxPath}/member/login.do">로그인</a>
                     <a href="#">회원가입</a>
                     <a href="#">마이페이지</a>
                     <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
@@ -44,7 +44,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="../index.html"><img src="./img/header_logo.png" alt="로고"/></a>
+                    <a href="#"><img src="${ctxPath}/img/header_logo.png" alt="로고"/></a>
                 </div>
             </div>
         </header>
