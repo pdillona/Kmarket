@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,17 +11,6 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../css/admin.css">
-    <script>
-        $(function(){
-            $('#pointChange').click(function(e){
-                e.preventDefault();
-                $('input[name=savePoint]').show();
-                $('input[name=usedPoint]').show();
-                $('input[name=savePoint]').next().hide();
-                $('input[name=usedPoint]').next().hide();
-            });
-        });
-    </script>
 </head>
 <body>
     <div id="admin-wrapper">
@@ -70,68 +60,73 @@
                     </li>
                 </ul>
             </aside>
-            <section id="admin-user-point">
+            <section id="admin-board-notice">
                 <nav>
-                    <h3>포인트관리</h3>
+                    <h3>공지사항</h3>
                     <p>
-                        HOME > 회원관리 > <strong>포인트관리</strong>
+                        HOME > 게시판관리 > <strong>공지사항</strong>
                     </p>
                 </nav>
-                <!-- 포인트 컨텐츠 시작 --> 
-                <!-- 번호, 회원명, 아이디, 레벨, 주문확정일자, 지급포인트, 차감포인트 현재포인트 -->  
-                <!-- 주문으로만 포인트 변동됨 (다른 이벤트 없음)(구매금액의 1%)-->
+                <!-- 공지사항 컨텐츠 시작 -->                                
                 <section>
                     <div>
                         <select name="search">
-                            <option value="search1">아이디</option>
-                            <option value="search2">회원명</option>
+                            <option value="search1">제목</option>
+                            <option value="search1">글쓴이</option>
                         </select>
                         <input type="text" name="search">
                     </div>
-                    <div class="local_ov">
-                         전체 : 
-                        <b class="fc_red">1</b>
-                         건 조회
-                        <strong class="ov_a">포인트 합계 : 800,000원</strong>
-                    </div>
+                    <p class="sort">
+                        <a href="#" class="on">전체&nbsp;|</a>
+                        <a href="#" class="off">판매자&nbsp;|</a>
+                        <a href="#" class="off">구매자&nbsp;|</a>
+                    </p>
                     <table>
                         <tr>
-                            
-                            <th>번호</th>
-                            <th>회원명</th>
-                            <th>아이디</th>
-                            <th>등급</th>
-                            <th>주문번호</th>
-                            <th>구매확정일자</th>
-                            <th>지급포인트</th>
-                            <th>차감포인트</th>
-                            <th>현재포인트</th>
+                            <th><input type="checkbox" name="all"/></th>
+                            <th>글번호</th>
+                            <th>글제목</th>
+                            <th>작성자</th>
+                            <th>작성일자</th>
                             <th>관리</th>
-                            
                         </tr>
 
                         <tr>
-                           
+                            <td><input type="checkbox" name="chk"></td>
                             <td>1</td>
+                            <td>공지사항입니다.</td>
                             <td>홍길동</td>
-                            <td>hong1234</td>
-                            <td>gold</td>
-                            <td>주문번호112345</td>
-                            <td>2023.09.13.</td>
+                            <td>23-05-25</td>
                             <td>
-                                <input type="text" name="savePoint" value="8,800"/>
-                                <span>8,800</span>
-                            </td>
-                            <td>
-                                <input type="text" name="usedPoint" value="1,100"/>
-                                <span>1,100</span>
-                            </td>
-                            <td>7,700</td>
-                            <td>
-                                <a href="#" id="pointChange">[포인트변경]</a>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
                             </td>
                         </tr>
-                    </table>   
+                        <tr>
+                            <td><input type="checkbox" name="chk"></td>
+                            <td>1</td>
+                            <td>공지사항입니다.</td>
+                            <td>홍길동</td>
+                            <td>23-05-25</td>
+                            <td>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="chk"></td>
+                            <td>1</td>
+                            <td>공지사항입니다.</td>
+                            <td>홍길동</td>
+                            <td>23-05-25</td>
+                            <td>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <input class="btnDelete" type="button" value="선택삭제" />
+                    <input class="btnWrite" type="button" value="글등록" />
                     <div class="paging">
                         <span class="prev">
                             <a href="#"><&nbsp;이전</a>
@@ -155,12 +150,12 @@
                 
                 <p class="ico info">
                     <strong>Tip!</strong>
-                    구매확정 시 포인트 지급 및 차감. 포인트변경 클릭시 지급, 차감포인트 수정 가능.
+                    공지사항 등록 시 판매자와 구매자 구분 작성이 필요합니다.
                 </p>
 
                 
 
-                <!-- 포인트 컨텐츠 끝 -->
+                <!-- 공지사항 컨텐츠 끝 -->
             </section>
         </main>
         <footer>

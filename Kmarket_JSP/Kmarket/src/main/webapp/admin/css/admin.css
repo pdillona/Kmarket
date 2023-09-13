@@ -169,7 +169,6 @@ main table tr > td:nth-child(1) {
     width: 160px;
     border-top: 1px solid #e6e6e6;
     border-bottom: 1px solid #e6e6e6;
-    background: #f6f6f6;
     padding: 10px;    
     text-align: left;
 }
@@ -235,9 +234,18 @@ input {
     box-sizing: border-box;
 }
 
+input[name=search]{
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+}
+
 input[type=checkbox] {
     width: auto;
     margin-right: 6px;
+}
+
+.sort {
+    padding-bottom: 5px;
 }
 
 select {
@@ -415,17 +423,17 @@ button[type=submit] {
     text-align: center;
     box-sizing: border-box;
 }
-#admin-product-list > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-product-list > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
-#admin-product-list > section > table  tr > td:nth-child(5) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(11) {width: 100px;}
+#seller-product-list > section > table  tr > td:nth-child(1) {width: 20px;}
+#seller-product-list > section > table  tr > td:nth-child(2) {width: 80px;}
+#seller-product-list > section > table  tr > td:nth-child(3) {width: 80px;}
+#seller-product-list > section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
+#seller-product-list > section > table  tr > td:nth-child(5) {width: 80px;}
+#seller-product-list > section > table  tr > td:nth-child(6) {width: 80px;}
+#seller-product-list > section > table  tr > td:nth-child(7) {width: 80px;}
+#seller-product-list > section > table  tr > td:nth-child(8) {width: 80px;}
+#seller-product-list > section > table  tr > td:nth-child(9) {width: 80px;}
+#seller-product-list > section > table  tr > td:nth-child(10) {width: 80px;}
+#seller-product-list > section > table  tr > td:nth-child(11) {width: 100px;}
 
 #admin-product-list > section > table img.thumb {width: 60px;}
 
@@ -470,6 +478,91 @@ button[type=submit] {
     text-decoration: none;
 }
 #admin-product-list .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}
+/* 관리자관리 : admin-config-userAdmin */
+#admin-config-userAdmin {}
+#admin-config-userAdmin > section > div  {
+    margin-bottom: 10px;
+}
+
+#admin-config-userAdmin > section > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-config-userAdmin > section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-config-userAdmin > section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-config-userAdmin > section > table  tr > td:nth-child(1) {width: 20px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(2) {width: 100px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(3) {width: 100px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(4) {width: 300px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(5) {width: 300px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(6) {width: 100px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(7) {width: 80px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(8) {width: 80px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(9) {width: 80px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(10) {width: 80px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-config-userAdmin > section > table img.thumb {width: 60px;}
+
+#admin-config-userAdmin > section .btnDelete {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+}
+#admin-config-userAdmin > section .btnRegister {
+    float: right;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+}
+
+#admin-config-userAdmin .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#admin-config-userAdmin .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#admin-config-userAdmin .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#admin-config-userAdmin .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#admin-config-userAdmin .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#admin-config-userAdmin .paging > .num > a.on {
     color: #fe434c;
     font-weight: bold;
 }
@@ -541,4 +634,346 @@ button[type=submit] {
     vertical-align: middle;
     box-sizing: border-box;
     cursor: pointer;
+}
+/* 판매자관리 : admin-store-userSeller */
+#admin-store-userSeller {}
+#admin-store-userSeller > section > div  {
+    margin-bottom: 10px;
+}
+
+#admin-store-userSeller > section > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-store-userSeller > section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-store-userSeller > section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-store-userSeller > section > table  tr > td:nth-child(1) {width: 20px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(2) {width: 80px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(3) {width: 100px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(4) {width: 100px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(5) {width: 80px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(6) {width: 80px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(7) {width: 100px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(8) {width: 100px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(9) {width: 100px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(10) {width: 80px;}
+#admin-store-userSeller > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-store-userSeller > section > table img.thumb {width: 60px;}
+
+#admin-store-userSeller > section .btnDelete {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+}
+
+#admin-store-userSeller .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#admin-store-userSeller .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#admin-store-userSeller .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#admin-store-userSeller .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#admin-store-userSeller .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#admin-store-userSeller .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}
+/* 회원관리 : admin-user-user */
+#admin-user-user {}
+#admin-user-user > section > div  {
+    margin-bottom: 10px;
+}
+
+#admin-user-user > section > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-user-user > section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-user-user > section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-user-user > section > table  tr > td:nth-child(1) {width: 20px;}
+#admin-user-user > section > table  tr > td:nth-child(2) {width: 80px;}
+#admin-user-user > section > table  tr > td:nth-child(3) {width: 80px;}
+#admin-user-user > section > table  tr > td:nth-child(4) {width: 80px;}
+#admin-user-user > section > table  tr > td:nth-child(5) {width: 80px;}
+#admin-user-user > section > table  tr > td:nth-child(6) {width: 200px;}
+#admin-user-user > section > table  tr > td:nth-child(7) {width: 100px;}
+#admin-user-user > section > table  tr > td:nth-child(8) {width: 80px;}
+#admin-user-user > section > table  tr > td:nth-child(9) {width: 300px;}
+#admin-user-user > section > table  tr > td:nth-child(10) {width: 100px;}
+#admin-user-user > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-user-user > section > table img.thumb {width: 60px;}
+
+#admin-user-user > section .btnDelete {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+}
+
+#admin-user-user .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#admin-user-user .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#admin-user-user .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#admin-user-user .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#admin-user-user .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#admin-user-user .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}
+/* 포인트관리 : admin-user-point */
+#admin-user-point {}
+#admin-user-point > section > div  {
+    margin-bottom: 10px;
+}
+
+#admin-user-point > section > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-user-point > section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-user-point > section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-user-point > section > table  tr > td:nth-child(1) {width: 50px;}
+#admin-user-point > section > table  tr > td:nth-child(2) {width: 100px;}
+#admin-user-point > section > table  tr > td:nth-child(3) {width: 100px;}
+#admin-user-point > section > table  tr > td:nth-child(4) {width: 100px;}
+#admin-user-point > section > table  tr > td:nth-child(5) {width: 200px;}
+#admin-user-point > section > table  tr > td:nth-child(6) {width: 200px;}
+#admin-user-point > section > table  tr > td:nth-child(7) {width: 150px;}
+#admin-user-point > section > table  tr > td:nth-child(8) {width: 150px;}
+#admin-user-point > section > table  tr > td:nth-child(9) {width: 150px;}
+#admin-user-point > section > table  tr > td:nth-child(10) {width: 150px;}
+#admin-user-point > section > table  tr > td:nth-child(11) {width: 100px;}
+#admin-user-point > section > table  tr > td:nth-child(12) {width: 100px;}
+
+#admin-user-point > section > table  input[name=savePoint] {display: none; width: 80px; text-align: right;}
+#admin-user-point > section > table  input[name=usedPoint] {display: none; width: 80px; text-align: right;}
+
+#admin-user-point > section > table img.thumb {width: 60px;}
+
+#admin-user-point > section .btnDelete {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+}
+
+#admin-user-point .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#admin-user-point .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#admin-user-point .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#admin-user-point .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#admin-user-point .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#admin-user-point .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}
+.local_ov {
+    margin: 0;
+    padding: 10px;
+    border-top: 1px solid #aeaeae;
+}
+.fc_red {
+    color: red !important;
+}
+.ov_a {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    padding: 0 0 0 10px;
+    border-left: 1px solid #ccc;
+    color: red !important;
+}
+
+/* 공지사항 : admin-board-notice */
+#admin-board-notice {}
+#admin-board-notice > section > div  {
+    margin-bottom: 10px;
+}
+
+#admin-board-notice > section > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-board-notice > section > p {
+    margin-bottom: 5px;
+}    
+#admin-board-notice > section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-board-notice > section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-board-notice > section > table  tr > td:nth-child(1) {width: 100px;}
+#admin-board-notice > section > table  tr > td:nth-child(2) {width: auto;}
+#admin-board-notice > section > table  tr > td:nth-child(3) {width: 300px;}
+#admin-board-notice > section > table  tr > td:nth-child(4) {width: 300px;}
+#admin-board-notice > section > table  tr > td:nth-child(5) {width: 80px;}
+#admin-board-notice > section > table  tr > td:nth-child(6) {width: 200px;}
+#admin-board-notice > section > table  tr > td:nth-child(7) {width: 100px;}
+#admin-board-notice > section > table  tr > td:nth-child(8) {width: 80px;}
+#admin-board-notice > section > table  tr > td:nth-child(9) {width: 300px;}
+#admin-board-notice > section > table  tr > td:nth-child(10) {width: 100px;}
+#admin-board-notice > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-board-notice > section > table img.thumb {width: 60px;}
+
+#admin-board-notice > section .btnDelete {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+}
+#admin-board-notice > section .btnWrite {
+    float: right;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+}
+
+#admin-board-notice .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#admin-board-notice .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#admin-board-notice .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#admin-board-notice .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#admin-board-notice .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#admin-board-notice .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
 }

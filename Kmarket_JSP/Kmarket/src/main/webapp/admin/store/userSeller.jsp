@@ -1,8 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>케이마켓::관리자</title>
+    <title>케이마켓::판매자</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>    
@@ -10,17 +11,6 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../css/admin.css">
-    <script>
-        $(function(){
-            $('#pointChange').click(function(e){
-                e.preventDefault();
-                $('input[name=savePoint]').show();
-                $('input[name=usedPoint]').show();
-                $('input[name=savePoint]').next().hide();
-                $('input[name=usedPoint]').next().hide();
-            });
-        });
-    </script>
 </head>
 <body>
     <div id="admin-wrapper">
@@ -70,68 +60,86 @@
                     </li>
                 </ul>
             </aside>
-            <section id="admin-user-point">
+            <section id="admin-store-userSeller">
                 <nav>
-                    <h3>포인트관리</h3>
+                    <h3>판매자</h3>
                     <p>
-                        HOME > 회원관리 > <strong>포인트관리</strong>
+                        HOME > 상점관리 > <strong>판매자관리</strong>
                     </p>
                 </nav>
-                <!-- 포인트 컨텐츠 시작 --> 
-                <!-- 번호, 회원명, 아이디, 레벨, 주문확정일자, 지급포인트, 차감포인트 현재포인트 -->  
-                <!-- 주문으로만 포인트 변동됨 (다른 이벤트 없음)(구매금액의 1%)-->
+                <!-- 상품목록 컨텐츠 시작 -->                                
                 <section>
                     <div>
                         <select name="search">
-                            <option value="search1">아이디</option>
-                            <option value="search2">회원명</option>
+                            <option value="search1">판매자아이디</option>
+                            <option value="search1">판매자이름</option>
+                            <option value="search1">사업자등록번호</option>
                         </select>
                         <input type="text" name="search">
                     </div>
-                    <div class="local_ov">
-                         전체 : 
-                        <b class="fc_red">1</b>
-                         건 조회
-                        <strong class="ov_a">포인트 합계 : 800,000원</strong>
-                    </div>
                     <table>
                         <tr>
-                            
-                            <th>번호</th>
-                            <th>회원명</th>
+                            <th><input type="checkbox" name="all"/></th>
                             <th>아이디</th>
-                            <th>등급</th>
-                            <th>주문번호</th>
-                            <th>구매확정일자</th>
-                            <th>지급포인트</th>
-                            <th>차감포인트</th>
-                            <th>현재포인트</th>
+                            <th>회사명</th>
+                            <th>사업자등록번호</th>
+                            <th>대표</th>
+                            <th>담당자</th>
+                            <th>휴대폰번호</th>
+                            <th>이메일</th>
+                            <th>팩스번호</th>
                             <th>관리</th>
-                            
                         </tr>
 
                         <tr>
-                           
-                            <td>1</td>
+                            <td><input type="checkbox" name="all"/></td>
+                            <td>홍1234</td>
+                            <td>길동컴퍼니</td>
+                            <td>12331-214534-2</td>
                             <td>홍길동</td>
-                            <td>hong1234</td>
-                            <td>gold</td>
-                            <td>주문번호112345</td>
-                            <td>2023.09.13.</td>
+                            <td>홍길동</td>
+                            <td>010-4534-2345</td>
+                            <td>killdong@naver.com</td>
+                            <td>052-5533-55</td>
                             <td>
-                                <input type="text" name="savePoint" value="8,800"/>
-                                <span>8,800</span>
-                            </td>
-                            <td>
-                                <input type="text" name="usedPoint" value="1,100"/>
-                                <span>1,100</span>
-                            </td>
-                            <td>7,700</td>
-                            <td>
-                                <a href="#" id="pointChange">[포인트변경]</a>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
                             </td>
                         </tr>
-                    </table>   
+                        <tr>
+                            <td><input type="checkbox" name="all"/></td>
+                            <td>홍1234</td>
+                            <td>길동컴퍼니</td>
+                            <td>12331-214534-2</td>
+                            <td>홍길동</td>
+                            <td>홍길동</td>
+                            <td>010-4534-2345</td>
+                            <td>killdong@naver.com</td>
+                            <td>052-5533-55</td>
+                            <td>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="all"/></td>
+                            <td>홍1234</td>
+                            <td>길동컴퍼니</td>
+                            <td>12331-214534-2</td>
+                            <td>홍길동</td>
+                            <td>홍길동</td>
+                            <td>010-4534-2345</td>
+                            <td>killdong@naver.com</td>
+                            <td>052-5533-55</td>
+                            <td>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <input class="btnDelete" type="button" value="선택삭제" />                          
+                    
                     <div class="paging">
                         <span class="prev">
                             <a href="#"><&nbsp;이전</a>
@@ -155,12 +163,12 @@
                 
                 <p class="ico info">
                     <strong>Tip!</strong>
-                    구매확정 시 포인트 지급 및 차감. 포인트변경 클릭시 지급, 차감포인트 수정 가능.
+                    판매자 수수료는 없습니다.
                 </p>
 
                 
 
-                <!-- 포인트 컨텐츠 끝 -->
+                <!-- 상품목록 컨텐츠 끝 -->
             </section>
         </main>
         <footer>

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,17 +11,6 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../css/seller.css">
-    <script>
-        $(function(){
-            $('table a').click(function(e){
-                e.preventDefault();
-                $(this).text('완료');
-                $(this).prev().prev().show();
-                $(this).prev().hide();
-            });
-            /* 완료링크 눌리면 배송상태 변경하는 기능 구현 */
-        });
-    </script>
 </head>
 <body>
     <div id="seller-wrapper">
@@ -61,96 +51,54 @@
                     </li>
                 </ul>
             </aside>
-            <section id="seller-order-order">
+            <section id="seller-board-qna">
                 <nav>
-                    <h3>주문현황</h3>
+                    <h3>Kmarket사용문의</h3>
                     <p>
-                        HOME > 주문관리 > <strong>주문현황</strong>
+                        HOME > 고객문의 > <strong>Kmarket사용문의</strong>
                     </p>
                 </nav>
-                <!-- 주문현황 컨텐츠 시작 -->         
-                <!-- ordNo, prodName, ordUid, ordDate, deliveryStatus, ordComplete(수정가능) -->                      
+                <!-- kmarket사용문의 컨텐츠 시작 -->        
+                <!-- 자기 문의한 글만 볼수있는 list, 글쓰기 버튼도 구현하기 -->                        
                 <section>
                     <div>
                         <select name="search">
-                            <option value="search1">주문번호</option>
-                            <option value="search1">상품명</option>
-                            <option value="search1">주문일자</option>
+                            <option value="search1">제목</option>
+                            <option value="search2">글쓴이</option>
                         </select>
                         <input type="text" name="search">
                     </div>
-                    <p class="sort">
-                        <a href="#" class="on">전체&nbsp;|</a>
-                        <a href="#" class="off">입금대기&nbsp;|</a>
-                        <a href="#" class="off">판매량 많은 순&nbsp;|</a>
-                        <a href="#" class="off">판매금액 많은 순&nbsp;</a>
-                    </p>
+                    
                     <table>
                         <tr>
-                            <th>주문번호</th>
-                            <th>상품사진</th>
-                            <th>상품명</th>
-                            <th>주문일자</th>
-                            <th>입금상태</th>
-                            <th>배송상태</th>
+                            <th>글번호</th>
+                            <th>문의내용</th>
+                            <th>답변완료</th>
+                            <th>작성일자</th>
                         </tr>
 
                         <tr>
                             <td>1</td>
-                            <td><img src="/seller/img/sample_thumb.jpg" alt="상품사진"></td>
-                            <td>티셔츠</td>
+                            <td>이거 어떡해야하나요</td>
+                            <td>완료</td>
                             <td>23-05-25</td>
-                            <td>
-                                <label><input type="checkbox">입금완료확인</label>
-                            </td>
-                            <td>
-                                <select name="deliveryStatus">
-                                    <option value="not">배송전</option>
-                                    <option value="ing">배송중</option>
-                                    <option value="success">배송완료</option>
-                                </select>
-                                <span>배송전</span>
-                                <a href="#"><수정></a>
-                            </td>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td><img src="/seller/img/sample_thumb.jpg" alt="상품사진"></td>
-                            <td>티셔츠</td>
+                            <td>2</td>
+                            <td>이거 어떡해야하나요</td>
+                            <td>미완료</td>
                             <td>23-05-25</td>
-                            <td>
-                                <label><input type="checkbox">입금완료확인</label>
-                            </td>
-                            <td>
-                                <select name="deliveryStatus">
-                                    <option value="not">배송전</option>
-                                    <option value="ing">배송중</option>
-                                    <option value="success">배송완료</option>
-                                </select>
-                                <span>배송전</span>
-                                <a href="#"><수정></a>
-                            </td>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td><img src="/seller/img/sample_thumb.jpg" alt="상품사진"></td>
-                            <td>티셔츠</td>
+                            <td>3</td>
+                            <td>이거 어떡해야하나요</td>
+                            <td>완료</td>
                             <td>23-05-25</td>
-                            <td>
-                                <label><input type="checkbox">입금완료확인</label>
-                            </td>
-                            <td>
-                                <select name="deliveryStatus">
-                                    <option value="not">배송전</option>
-                                    <option value="ing">배송중</option>
-                                    <option value="success">배송완료</option>
-                                </select>
-                                <span>배송전</span>
-                                <a href="#"><수정></a>
-                            </td>
                         </tr>
-                        
+                                               
                     </table>
+                    
+                    <input class="btnWrite" type="button" value="문의하기" /> 
 
                     <div class="paging">
                         <span class="prev">
@@ -175,12 +123,12 @@
                 
                 <p class="ico info">
                     <strong>Tip!</strong>
-                    주문현황입니다. 고객의 입금을 확인하면 입금 확인 완료를 체크해주십시오. 
+                    사이트 이용 시 불편한 점이 있다면 문의해주십시오. 
                 </p>
 
                 
 
-                <!-- 주문현황 컨텐츠 끝 -->
+                <!-- kmarket사용문의 컨텐츠 끝 -->
             </section>
         </main>
         <footer>

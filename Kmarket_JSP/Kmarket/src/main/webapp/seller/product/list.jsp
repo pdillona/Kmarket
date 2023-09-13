@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,17 +11,6 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../css/seller.css">
-    <script>
-        $(function(){
-            $('table a').click(function(e){
-                e.preventDefault();
-                $(this).text('완료');
-                $(this).prev().prev().show();
-                $(this).prev().hide();
-            });
-            /* 완료링크 눌리면 배송상태 변경하는 기능 구현 */
-        });
-    </script>
 </head>
 <body>
     <div id="seller-wrapper">
@@ -61,96 +51,93 @@
                     </li>
                 </ul>
             </aside>
-            <section id="seller-order-order">
+            <section id="seller-product-list">
                 <nav>
-                    <h3>주문현황</h3>
+                    <h3>상품관리</h3>
                     <p>
-                        HOME > 주문관리 > <strong>주문현황</strong>
+                        HOME > 상품관리 > <strong>상품현황</strong>
                     </p>
                 </nav>
-                <!-- 주문현황 컨텐츠 시작 -->         
-                <!-- ordNo, prodName, ordUid, ordDate, deliveryStatus, ordComplete(수정가능) -->                      
+                <!-- 상품현황 컨텐츠 시작 -->                                
                 <section>
                     <div>
                         <select name="search">
-                            <option value="search1">주문번호</option>
                             <option value="search1">상품명</option>
-                            <option value="search1">주문일자</option>
+                            <option value="search1">상품코드</option>
+                            <option value="search1">제조사</option>
+                            <option value="search1">판매자</option>                                    
                         </select>
                         <input type="text" name="search">
                     </div>
-                    <p class="sort">
-                        <a href="#" class="on">전체&nbsp;|</a>
-                        <a href="#" class="off">입금대기&nbsp;|</a>
-                        <a href="#" class="off">판매량 많은 순&nbsp;|</a>
-                        <a href="#" class="off">판매금액 많은 순&nbsp;</a>
-                    </p>
                     <table>
                         <tr>
-                            <th>주문번호</th>
-                            <th>상품사진</th>
+                            <th><input type="checkbox" name="all"/></th>
+                            <th>이미지</th>
+                            <th>상품코드</th>
                             <th>상품명</th>
-                            <th>주문일자</th>
-                            <th>입금상태</th>
-                            <th>배송상태</th>
+                            <th>판매가격</th>
+                            <th>할인율</th>
+                            <th>포인트</th>
+                            <th>재고</th>
+                            <th>판매자</th>
+                            <th>조회</th>
+                            <th>관리</th>
                         </tr>
 
                         <tr>
-                            <td>1</td>
-                            <td><img src="/seller/img/sample_thumb.jpg" alt="상품사진"></td>
-                            <td>티셔츠</td>
-                            <td>23-05-25</td>
+                            <td><input type="checkbox" name="상품코드"/></td>
+                            <td><img src="../img/sample_thumb.jpg" class="thumb"></td>
+                            <td>201603292</td>
+                            <td>FreeMovement BLUEFORCE</td>
+                            <td>36,000</td>
+                            <td>10</td>
+                            <td>360</td>
+                            <td>400</td>
+                            <td>홍길동</td>
+                            <td>126</td>
                             <td>
-                                <label><input type="checkbox">입금완료확인</label>
-                            </td>
-                            <td>
-                                <select name="deliveryStatus">
-                                    <option value="not">배송전</option>
-                                    <option value="ing">배송중</option>
-                                    <option value="success">배송완료</option>
-                                </select>
-                                <span>배송전</span>
-                                <a href="#"><수정></a>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
                             </td>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td><img src="/seller/img/sample_thumb.jpg" alt="상품사진"></td>
-                            <td>티셔츠</td>
-                            <td>23-05-25</td>
+                            <td><input type="checkbox" name="상품코드"/></td>
+                            <td><img src="../img/sample_thumb.jpg" class="thumb"></td>
+                            <td>201603292</td>
+                            <td>FreeMovement BLUEFORCE</td>
+                            <td>36,000</td>
+                            <td>10</td>
+                            <td>360</td>
+                            <td>400</td>
+                            <td>홍길동</td>
+                            <td>126</td>
                             <td>
-                                <label><input type="checkbox">입금완료확인</label>
-                            </td>
-                            <td>
-                                <select name="deliveryStatus">
-                                    <option value="not">배송전</option>
-                                    <option value="ing">배송중</option>
-                                    <option value="success">배송완료</option>
-                                </select>
-                                <span>배송전</span>
-                                <a href="#"><수정></a>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
                             </td>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td><img src="/seller/img/sample_thumb.jpg" alt="상품사진"></td>
-                            <td>티셔츠</td>
-                            <td>23-05-25</td>
+                            <td><input type="checkbox" name="상품코드"/></td>
+                            <td><img src="../img/sample_thumb.jpg" class="thumb"></td>
+                            <td>201603292</td>
+                            <td>FreeMovement BLUEFORCE</td>
+                            <td>36,000</td>
+                            <td>10</td>
+                            <td>360</td>
+                            <td>400</td>
+                            <td>홍길동</td>
+                            <td>126</td>
                             <td>
-                                <label><input type="checkbox">입금완료확인</label>
-                            </td>
-                            <td>
-                                <select name="deliveryStatus">
-                                    <option value="not">배송전</option>
-                                    <option value="ing">배송중</option>
-                                    <option value="success">배송완료</option>
-                                </select>
-                                <span>배송전</span>
-                                <a href="#"><수정></a>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
                             </td>
                         </tr>
                         
                     </table>
+
+                    
+                    <input class="btnDelete" type="button" value="선택삭제" />                          
+
 
                     <div class="paging">
                         <span class="prev">
@@ -175,12 +162,12 @@
                 
                 <p class="ico info">
                     <strong>Tip!</strong>
-                    주문현황입니다. 고객의 입금을 확인하면 입금 확인 완료를 체크해주십시오. 
+                    전자상거래 등에서의 상품 등의 정보제공에 관한 고시에 따라 총 35개 상품군에 대해 상품 특성 등을 양식에 따라 입력할 수 있습니다.
                 </p>
 
                 
 
-                <!-- 주문현황 컨텐츠 끝 -->
+                <!-- 상품현황 컨텐츠 끝 -->
             </section>
         </main>
         <footer>
