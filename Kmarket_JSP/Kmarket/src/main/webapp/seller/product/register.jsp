@@ -35,6 +35,7 @@
                                 </c:choose>
                                 <tr>
                                     <td>2차 분류</td>
+                                    
                                     <td>
                                         <select name="category2">
                                             <option disabled>2차 분류 선택</option>
@@ -44,6 +45,7 @@
                                             <option value="beauty">뷰티</option>                                                
                                         </select>
                                     </td>
+                                    
                                 </tr>
                             </table>
                         </section>
