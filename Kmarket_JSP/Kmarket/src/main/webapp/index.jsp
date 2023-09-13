@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctxPath" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
@@ -58,10 +57,8 @@
           </div>
         </div>
       </header>
-=======
-<%@ include file="./_header.jsp" %>
 
->>>>>>> 73e58183224c65fc25a197c67144a8a860a0828a
+<!-- <%@ include file="./_header.jsp" %>  -->
       <main>
         <!-- 카테고리/베스트 상품 영역 -->
         <aside>
@@ -810,4 +807,5 @@
           </section>
         </section>
       </main>
-<%@ include file="./_footer.jsp" %>
+     
+  <!--  <%@ include file="./_footer.jsp" %>-->
