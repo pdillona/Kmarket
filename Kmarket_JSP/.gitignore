@@ -1,5 +1,7 @@
 /.metadata/
 /.recommenders/
+context.xml
+*.xml
 .classpath
 .project
 .gitignore
