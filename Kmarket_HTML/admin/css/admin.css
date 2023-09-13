@@ -491,11 +491,11 @@ button[type=submit] {
     box-sizing: border-box;
 }
 #admin-config-userAdmin > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-config-userAdmin > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-config-userAdmin > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-config-userAdmin > section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
-#admin-config-userAdmin > section > table  tr > td:nth-child(5) {width: 80px;}
-#admin-config-userAdmin > section > table  tr > td:nth-child(6) {width: 80px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(2) {width: 100px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(3) {width: 100px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(4) {width: 300px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(5) {width: 300px;}
+#admin-config-userAdmin > section > table  tr > td:nth-child(6) {width: 100px;}
 #admin-config-userAdmin > section > table  tr > td:nth-child(7) {width: 80px;}
 #admin-config-userAdmin > section > table  tr > td:nth-child(8) {width: 80px;}
 #admin-config-userAdmin > section > table  tr > td:nth-child(9) {width: 80px;}
