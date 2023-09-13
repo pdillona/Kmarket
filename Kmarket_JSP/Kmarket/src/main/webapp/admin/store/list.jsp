@@ -32,60 +32,42 @@
                     <li>
                         <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
                         <ol>
-                            <li><a href="#">기본환경설정</a></li>
-                            <li><a href="#">배너관리</a></li>
+                            <li><a href="/admin/config/info.html">기본환경정보</a></li>
+                            <li><a href="/admin/config/userAdmin.html">관리자</a></li>
+                            <li><a href="/admin/config/banner.html">디자인관리</a></li>
                         </ol>
                     </li>
                     <li>
                         <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
                         <ol>
-                            <li><a href="#">판매자현황</a></li>
-                            <li><a href="#">재고관리</a></li>
+                            <li><a href="/admin/store/userSeller.html">판매자관리</a></li>
+                            <li><a href="/admin/store/list.html">상품관리</a></li>
                         </ol>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
                         <ol>
-                            <li><a href="#">회원현황</a></li>
-                            <li><a href="#">포인트관리</a></li>
-                            <li><a href="#">비회원관리</a></li>
-                            <li><a href="#">접속자집계</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
-                        <ol>
-                            <li><a href="#">상품현황</a></li>
-                            <li><a href="#">상품등록</a></li>
-                            <li><a href="#">재고관리</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
-                        <ol>
-                            <li><a href="#">주문현황</a></li>
-                            <li><a href="#">매출현황</a></li>
-                            <li><a href="#">결제관리</a></li>
-                            <li><a href="#">배송관리</a></li>
+                            <li><a href="/admin/user/user.html">회원정보관리</a></li>
+                            <li><a href="/admin/user/point.html">포인트관리</a></li>
+                            <li><a href="/admin/user/accessorTotal.html">접속자집계</a></li>
                         </ol>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
                         <ol>
-                            <li><a href="#">게시판현황</a></li>
-                            <li><a href="#">고객문의</a></li>
+                            <li><a href="/admin/board/notice.html">공지사항</a></li>
                         </ol>
                     </li>
                 </ul>
             </aside>
             <section id="admin-product-list">
                 <nav>
-                    <h3>상품목록</h3>
+                    <h3>상품관리</h3>
                     <p>
-                        HOME > 상품관리 > <strong>상품목록</strong>
+                        HOME > 상점관리 > <strong>상품관리</strong>
                     </p>
                 </nav>
-                <!-- 상품목록 컨텐츠 시작 -->                                
+                <!-- 상품관리 컨텐츠 시작 -->                                
                 <section>
                     <div>
                         <select name="search">
@@ -194,7 +176,7 @@
 
                 
 
-                <!-- 상품목록 컨텐츠 끝 -->
+                <!-- 상품관리 컨텐츠 끝 -->
             </section>
         </main>
         <footer>
