@@ -13,6 +13,11 @@ public class CsDAO extends DBHelper{
 	private String aSQL = "";
 	private CsArticleDTO dto = null;
 	
+	private static CsDAO instance = new CsDAO();
+	public static CsDAO getInstance() {
+		return instance;
+	}
+	
 	//FaqStart
 	public int insertFaq(CsArticleDTO dto) {
 		
@@ -20,7 +25,8 @@ public class CsDAO extends DBHelper{
 		
 		conn = getConnection();
 		SQL = "INSERT INTO `km_cs_article` SET"
-				+ "`cate`=?, "
+				+ "`cate`=?,"
+				+ "`cateDetail`= ?, "
 				+ "`title`=?, "
 				+ "`content`=?,"
 				+ "`file`=?,"
@@ -36,11 +42,12 @@ public class CsDAO extends DBHelper{
 			stmt = conn.createStatement();
 			psmt = conn.prepareStatement(SQL);
 			psmt.setString(1, dto.getCate());
-			psmt.setString(2, dto.getTitle());
-			psmt.setString(3, dto.getContent());
-			psmt.setInt(4, dto.getFile());
-			psmt.setString(5, dto.getWriter());
-			psmt.setString(6, dto.getRegip());
+			psmt.setString(2, dto.getCatedetail());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			psmt.setInt(5, dto.getFile());
+			psmt.setString(6, dto.getWriter());
+			psmt.setString(7, dto.getRegip());
 			psmt.executeUpdate();
 			rs = stmt.executeQuery(aSQL);
 			conn.commit(); // 작업확정
@@ -57,6 +64,12 @@ public class CsDAO extends DBHelper{
 		return no;
 	};
 	
+	
+	
+	public int selectCountTotal(String cate) {
+		return dao.selectCountTotal(cate);
+	}
+	
 	//FaqEnd
 	
 	//QnaStart
@@ -66,7 +79,8 @@ public class CsDAO extends DBHelper{
 		
 		conn = getConnection();
 		SQL = "INSERT INTO `km_cs_article` SET"
-				+ "`cate`=?, "
+				+ "`cate`=?,"
+				+ "`cateDetail`= ?, "
 				+ "`title`=?, "
 				+ "`content`=?,"
 				+ "`file`=?,"
@@ -82,14 +96,16 @@ public class CsDAO extends DBHelper{
 			stmt = conn.createStatement();
 			psmt = conn.prepareStatement(SQL);
 			psmt.setString(1, dto.getCate());
-			psmt.setString(2, dto.getTitle());
-			psmt.setString(3, dto.getContent());
-			psmt.setInt(4, dto.getFile());
-			psmt.setString(5, dto.getWriter());
-			psmt.setString(6, dto.getRegip());
+			psmt.setString(2, dto.getCatedetail());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			psmt.setInt(5, dto.getFile());
+			psmt.setString(6, dto.getWriter());
+			psmt.setString(7, dto.getRegip());
 			psmt.executeUpdate();
 			rs = stmt.executeQuery(aSQL);
 			conn.commit(); // 작업확정
+			
 			
 			if(rs.next()) {
 				
@@ -112,7 +128,8 @@ public class CsDAO extends DBHelper{
 		
 		conn = getConnection();
 		SQL = "INSERT INTO `km_cs_article` SET"
-				+ "`cate`=?, "
+				+ "`cate`=?,"
+				+ "`cateDetail`= ?, "
 				+ "`title`=?, "
 				+ "`content`=?,"
 				+ "`file`=?,"
@@ -128,14 +145,16 @@ public class CsDAO extends DBHelper{
 			stmt = conn.createStatement();
 			psmt = conn.prepareStatement(SQL);
 			psmt.setString(1, dto.getCate());
-			psmt.setString(2, dto.getTitle());
-			psmt.setString(3, dto.getContent());
-			psmt.setInt(4, dto.getFile());
-			psmt.setString(5, dto.getWriter());
-			psmt.setString(6, dto.getRegip());
+			psmt.setString(2, dto.getCatedetail());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			psmt.setInt(5, dto.getFile());
+			psmt.setString(6, dto.getWriter());
+			psmt.setString(7, dto.getRegip());
 			psmt.executeUpdate();
 			rs = stmt.executeQuery(aSQL);
 			conn.commit(); // 작업확정
+			
 			
 			if(rs.next()) {
 				
