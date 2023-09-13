@@ -1,56 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>케이마켓::판매자</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>    
-    <script src="../js/gnb.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="../css/seller.css">
-</head>
-<body>
-    <div id="seller-wrapper">
-        <header>
-            <div>
-                <a href="./index.html" class="logo"><img src="./img/admin_logo.png" alt="admin_logo"/></a>
-                <p>
-                    <span>홍길동님 반갑습니다.</span>
-                    <a href="#">HOME |</a>
-                    <a href="#">로그아웃 |</a>
-                    <a href="#">고객센터</a>
-                </p>
-            </div>
-        </header>
-        <main>
-            <aside>
-                <!-- Global Navigation Bar -->
-                <ul id="gnb">
-                    <li>
-                        <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
-                        <ol>
-                            <li><a href="/seller/product/list.html">상품현황</a></li>
-                            <li><a href="/seller/product/register.html">상품등록</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
-                        <ol>
-                            <li><a href="/seller/order/order.html">주문현황</a></li>
-                            <li><a href="/seller/order/delivery.html">취소/반품/교환</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객문의</a>
-                        <ol>
-                            <li><a href="/seller/board/qna.html">Kmarket사용문의</a></li>
-                        </ol>
-                    </li>
-                </ul>
-            </aside>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../_header.jsp" %>
+<%@ include file="../_aside.jsp"%>
             <section id="seller-product-register">
                 <nav>
                     <h3>상품등록</h3>
@@ -60,8 +11,7 @@
                 </nav>
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
-                    <form action="#">
-
+                    <form action="/seller/product/register.do" method="post" enctype="multipart/form-data">
                         <!-- 상품분류 -->
                         <section>
                             <h4>상품분류</h4>
@@ -73,23 +23,25 @@
                                     <td>1차 분류</td>
                                     <td>
                                         <select name="category1">
-                                            <option value="cate0">1차 분류 선택</option>
-                                            <option value="cate11">패션·의류·뷰티</option>
-                                            <option value="cate12">가전·디지털</option>
-                                            <option value="cate13">식품·생필품</option>
-                                            <option value="cate14">홈·문구·취미</option>                                                
+                                        	<option selected disabled>1차 분류 선택</option>
+                                        <c:forEach var="cate1" items="${cate1s}">
+                                        	<option value="${cate1.cate1}">${cate1.c1Name}</option>
+                                        </c:forEach>                                                
                                         </select>
                                     </td>
                                 </tr>
+                                <c:choose>
+                                	<c:when test="${category1}"></c:when>
+                                </c:choose>
                                 <tr>
                                     <td>2차 분류</td>
                                     <td>
                                         <select name="category2">
-                                            <option value="cate0">2차 분류 선택</option>
-                                            <option value="cate21">남성의류</option>
-                                            <option value="cate22">여성의류</option>
-                                            <option value="cate23">잡화</option>
-                                            <option value="cate24">뷰티</option>                                                
+                                            <option disabled>2차 분류 선택</option>
+                                            <option value="men">남성의류</option>
+                                            <option value="women">여성의류</option>
+                                            <option value="stuff">잡화</option>
+                                            <option value="beauty">뷰티</option>                                                
                                         </select>
                                     </td>
                                 </tr>
@@ -211,11 +163,4 @@
                 <!-- 상품등록 컨텐츠 끝 -->
             </section>
         </main>
-        <footer>
-            <div>
-                <p>Copyright ©kmarket.co.kr All rights reserved. KMARKET ADMINISTRATOR Version 5.4.1.2</p>
-            </div>
-        </footer>
-    </div>    
-</body>
-</html>
+<%@ include file="../_footer.jsp" %>
