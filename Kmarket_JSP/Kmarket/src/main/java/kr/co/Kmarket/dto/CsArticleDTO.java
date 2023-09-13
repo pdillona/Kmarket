@@ -5,6 +5,7 @@ public class CsArticleDTO {
 	private int no;
 	private int parent;
 	private String cate;
+	private String catedetail;
 	private String title;
 	private String content;
 	private int file;
@@ -13,6 +14,12 @@ public class CsArticleDTO {
 	private String rdate;
 	
 	
+	public String getCatedetail() {
+		return catedetail;
+	}
+	public void setCatedetail(String catedetail) {
+		this.catedetail = catedetail;
+	}
 	public int getNo() {
 		return no;
 	}
