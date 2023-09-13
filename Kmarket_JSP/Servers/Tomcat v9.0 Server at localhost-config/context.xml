@@ -26,4 +26,17 @@
     <!--
     <Manager pathname="" />
     -->
+    
+    <Resource
+        name="jdbc/Kmarket"
+        auth="Container"
+        type="javax.sql.DataSource"
+        driverClassName="com.mysql.cj.jdbc.Driver"
+        url="jdbc:mysql://3.25.59.91:3306/Kmarket"
+        username="member"
+        password="qw12er34!!QW"
+        maxTotal="13"
+        maxIdle="13"
+        maxWaitMillis="10000"
+    />
 </Context>
