@@ -1,6 +1,9 @@
 /.metadata/
 /.recommenders/
+<<<<<<< HEAD
 context.xml
+=======
+>>>>>>> 46b9100c7991877eb676235d45c4518ca1d886f7
 *.xml
 .classpath
 .project
