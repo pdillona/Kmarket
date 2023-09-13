@@ -26,23 +26,4 @@
     <!--
     <Manager pathname="" />
     -->
-    
-    
-    
-        <!-- 커넥션 풀 설정 -->
-    <Resource
-        name="jdbc/Kmarket"
-        auth="Container"
-        type="javax.sql.DataSource"
-        driverClassName="com.mysql.cj.jdbc.Driver"
-        url="jdbc:mysql://3.25.59.91:3306/Kmarket"
-        username="wpdjvks"
-        password="Sa1953vb!"
-        maxTotal="13"
-        maxIdle="13"
-        maxWaitMillis="10000"
-    />
-    
-    
-    
 </Context>

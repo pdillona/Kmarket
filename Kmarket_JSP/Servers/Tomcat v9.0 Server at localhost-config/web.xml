@@ -137,7 +137,8 @@
   <!--   classdebuginfo      Should the class file be compiled with         -->
   <!--                       debugging information?  [true]                 -->
   <!--                                                                      -->
-  <!--   classpath           What class path should I use while compiling   -->
+  <!--   
+           What class path should I use while compiling   -->
   <!--                       generated servlets?  [Created dynamically      -->
   <!--                       based on the current web application]          -->
   <!--                                                                      -->
