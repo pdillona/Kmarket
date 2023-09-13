@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <title>케이마켓 고객센터</title>
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
     <div id="wrapper">
@@ -25,7 +25,7 @@
         </div>
         <div class="logo">
           <div>
-            <a href="#"><img src="../images/logo.png" alt="로고" />고객센터</a>
+            <a href="#"><img src="./images/logo.png" alt="로고" />고객센터</a>
           </div>
         </div>
       </header>
@@ -131,7 +131,7 @@
           <li><a href="#">전자금융거래약관</a></li>
         </ul>
         <div>
-          <p><img src="../images/footer_logo.png" alt="로고" /></p>
+          <p><img src="./images/footer_logo.png" alt="로고" /></p>
           <p>
             <strong>(주)KMARKET</strong><br />
             부산시 강남구 테헤란로 152 (역삼동 강남파이낸스센터)<br />
