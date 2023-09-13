@@ -222,7 +222,10 @@ label {
     vertical-align: top;
 }
 
-
+input[name=search]{
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+}
 input {
     width: 200px;
     padding: 6px;
@@ -284,7 +287,23 @@ button[type=submit] {
     color: #fff;            
     vertical-align: middle;
 }
-
+.btnDelete {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+}
+ .btnRegister {
+    float: right;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
+}
+.sort {
+    padding-bottom: 5px;
+}
 
 /* seller-index */
 #seller-index {}        
@@ -473,71 +492,244 @@ button[type=submit] {
     font-weight: bold;
 }
 
-/* 배너관리 config-banner */
-#seller-config-banner {}
-#seller-config-banner > article > section {
+/* 주문현황 seller-order-order */
+#seller-order-order {}
+#seller-order-order > article > section {
     overflow: hidden;
 }
-#seller-config-banner > section > div  {
+#seller-order-order > section > div  {
     margin-bottom: 10px;
 }
 
-#seller-config-banner section > table  {
+#seller-order-order section > table  {
     border-top: 2px solid #8798a3;
 }
-#seller-config-banner section > table  tr > th{
+#seller-order-order section > table  tr > th{
     padding: 10px 0;
     background: #f6f6f6;
 }
-#seller-config-banner section > table  tr > td {
+#seller-order-order section > table  tr > td {
     background: #fff;
     text-align: center;
     box-sizing: border-box;
 }
-#seller-config-banner section > table  tr > td:nth-child(1) {width: 20px;}
-#seller-config-banner section > table  tr > td:nth-child(2) {width: 80px;}
-#seller-config-banner section > table  tr > td:nth-child(3) {width: 80px;}
-#seller-config-banner section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
-#seller-config-banner section > table  tr > td:nth-child(5) {width: 240px;}
-#seller-config-banner section > table  tr > td:nth-child(6) {width: 80px;}
-#seller-config-banner section > table  tr > td:nth-child(7) {width: 80px;}
-#seller-config-banner section > table  tr > td:nth-child(8) {width: 80px;}
-#seller-config-banner section > table  tr > td:nth-child(9) {width: 80px;}
-#seller-config-banner section > table  tr > td:nth-child(10) {width: 80px;}
-#seller-config-banner section > table  tr > td:nth-child(11) {width: 100px;}
+#seller-order-order section > table  tr > td:nth-child(1) {width: 100px;}
+#seller-order-order section > table  tr > td:nth-child(2) {width: 80px;}
+#seller-order-order section > table  tr > td:nth-child(3) {width: auto; text-align: left;}
+#seller-order-order section > table  tr > td:nth-child(4) {width: 200px;}
+#seller-order-order section > table  tr > td:nth-child(5) {width: 200px;}
+#seller-order-order section > table  tr > td:nth-child(6) {width: 250px;}
+#seller-order-order section > table  tr > td:nth-child(7) {width: 80px;}
+#seller-order-order section > table  tr > td:nth-child(8) {width: 80px;}
+#seller-order-order section > table  tr > td:nth-child(9) {width: 80px;}
+#seller-order-order section > table  tr > td:nth-child(10) {width: 80px;}
+#seller-order-order section > table  tr > td:nth-child(11) {width: 100px;}
 
-#seller-config-banner section > table img.thumb {width: 60px;}
-#seller-config-banner section > table ul > li {line-height: 19px;}
+#seller-order-order section > table img {width: 60px;}
+#seller-order-order section > table select {display: none;}
+#seller-order-order section > table ul > li {line-height: 19px;}
 
-#seller-config-banner section input[type=button] {
+#seller-order-order section input[type=button] {
     width: 100px;
     margin-top: 10px;
 }
 
-#seller-config-banner .btnPositive {
+#seller-order-order .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#seller-order-order .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#seller-order-order .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#seller-order-order .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#seller-order-order .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#seller-order-order .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}
+/* 배송관리 seller-order-delivery */
+#seller-order-delivery {}
+#seller-order-delivery > article > section {
+    overflow: hidden;
+}
+#seller-order-delivery > section > div  {
+    margin-bottom: 10px;
+}
+
+#seller-order-delivery section > table  {
+    border-top: 2px solid #8798a3;
+}
+#seller-order-delivery section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#seller-order-delivery section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#seller-order-delivery section > table  tr > td:nth-child(1) {width: 150px;}
+#seller-order-delivery section > table  tr > td:nth-child(2) {width: 150px;}
+#seller-order-delivery section > table  tr > td:nth-child(3) {width: 200px;}
+#seller-order-delivery section > table  tr > td:nth-child(4) {width: 200px;}
+#seller-order-delivery section > table  tr > td:nth-child(5) {width: 250px;}
+#seller-order-delivery section > table  tr > td:nth-child(6) {width: 200px;}
+#seller-order-delivery section > table  tr > td:nth-child(7) {width: 80px;}
+#seller-order-delivery section > table  tr > td:nth-child(8) {width: 80px;}
+#seller-order-delivery section > table  tr > td:nth-child(9) {width: 80px;}
+#seller-order-delivery section > table  tr > td:nth-child(10) {width: 80px;}
+#seller-order-delivery section > table  tr > td:nth-child(11) {width: 100px;}
+
+#seller-order-delivery section > table img {width: 60px;}
+#seller-order-delivery section > table select {display: none;}
+#seller-order-delivery section > table ul > li {line-height: 19px;}
+
+#seller-order-delivery section input[type=button] {
+    width: 100px;
+    margin-top: 10px;
+}
+
+#seller-order-delivery .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#seller-order-delivery .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#seller-order-delivery .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#seller-order-delivery .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#seller-order-delivery .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#seller-order-delivery .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}
+/* 사용문의 : seller-board-qna */
+#seller-board-qna {}
+#seller-board-qna > section > div  {
+    margin-bottom: 10px;
+}
+
+#seller-board-qna > section > table  {
+    border-top: 2px solid #8798a3;
+}
+#seller-board-qna > section > p {
+    margin-bottom: 5px;
+}    
+#seller-board-qna > section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#seller-board-qna > section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#seller-board-qna > section > table  tr > td:nth-child(1) {width: 100px;}
+#seller-board-qna > section > table  tr > td:nth-child(2) {width: auto;}
+#seller-board-qna > section > table  tr > td:nth-child(3) {width: 300px;}
+#seller-board-qna > section > table  tr > td:nth-child(4) {width: 300px;}
+#seller-board-qna > section > table  tr > td:nth-child(5) {width: 80px;}
+#seller-board-qna > section > table  tr > td:nth-child(6) {width: 200px;}
+#seller-board-qna > section > table  tr > td:nth-child(7) {width: 100px;}
+#seller-board-qna > section > table  tr > td:nth-child(8) {width: 80px;}
+#seller-board-qna > section > table  tr > td:nth-child(9) {width: 300px;}
+#seller-board-qna > section > table  tr > td:nth-child(10) {width: 100px;}
+#seller-board-qna > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#seller-board-qna > section > table img.thumb {width: 60px;}
+
+#seller-board-qna > section .btnWrite {
     float: right;
     width: 100px;
-    padding: 6px;
     margin-top: 10px;
-    border: 1px solid #8798a3;
-    font-size: 13px;
-    background-color: #fefefe;
-    color: #333;
-    vertical-align: middle;
-    box-sizing: border-box;
-    cursor: pointer;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
 }
 
-#seller-config-banner .btnNegative {
-    float: left;
-    width: 100px;
-    padding: 6px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    font-size: 13px;
-    background-color: #eaeaea;
-    color: #333;
-    vertical-align: middle;
-    box-sizing: border-box;
-    cursor: pointer;
+#seller-board-qna .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#seller-board-qna .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#seller-board-qna .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#seller-board-qna .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#seller-board-qna .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#seller-board-qna .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
 }
