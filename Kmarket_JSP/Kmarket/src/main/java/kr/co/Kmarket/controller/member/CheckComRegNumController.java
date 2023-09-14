@@ -1,6 +1,5 @@
 package kr.co.Kmarket.controller.member;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -16,8 +15,8 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonObject;
 
 
-@WebServlet("/user/checkNick.do")
-public class CheckNickController extends HttpServlet {
+@WebServlet("/user/checkEmail.do")
+public class CheckComRegNumController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,10 +26,11 @@ public class CheckNickController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String nick = req.getParameter("nick");
-		logger.debug("nick : " + nick);
+		String email = req.getParameter("email");
+		logger.debug("email : " + email );
 		
-
+		
+		
 		JsonObject json = new JsonObject();
 		
 		PrintWriter writer = resp.getWriter();
