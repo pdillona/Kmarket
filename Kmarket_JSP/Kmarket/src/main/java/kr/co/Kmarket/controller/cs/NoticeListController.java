@@ -14,8 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dao.CsDAO;
+import kr.co.Kmarket.dto.CsArticleDTO;
 import kr.co.Kmarket.service.CsService;
-import kr.co.farmstory2.dto.ArticleDTO;
 
 @WebServlet("/cs/notice.do")
 public class NoticeListController extends HttpServlet{
@@ -52,16 +52,16 @@ public class NoticeListController extends HttpServlet{
 		int start = service.getStartNum(currentPage);
 		
 		// 현재 페이지 게시물 조회
-		List<CsDAO> articles = service.selectArticles(cate, start);
+		List<CsArticleDTO> articles = service.selectArticles(cate, start);
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
-		req.setAttribute("articles", articles);
+		//req.setAttribute("articles", articles);
 		req.setAttribute("currentPage", currentPage);
-		req.setAttribute("lastPageNum", lastPageNum);
-		req.setAttribute("pageGroupStart", result[0]);
-		req.setAttribute("pageGroupEnd", result[1]);
-		req.setAttribute("pageStartNum", pageStartNum+1);
+		//req.setAttribute("lastPageNum", lastPageNum);
+		//req.setAttribute("pageGroupStart", result[0]);
+		//req.setAttribute("pageGroupEnd", result[1]);
+		//req.setAttribute("pageStartNum", pageStartNum+1);
 
 		
 		

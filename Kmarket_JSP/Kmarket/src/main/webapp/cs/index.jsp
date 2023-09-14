@@ -96,7 +96,7 @@
             </h1>
             <ul>
               <li>
-                <a href="./qna/list.html" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
+                <a href="${ctxPath}/qna/list.do" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
                 <p>
                   <span class="uid">chh**</span>
                   <span class="date">22.10.31</span>

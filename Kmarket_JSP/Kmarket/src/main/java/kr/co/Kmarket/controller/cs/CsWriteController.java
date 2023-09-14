@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(value={"/cs", "/cs/index.do"})
-public class IndexController extends HttpServlet{
-
-
-	private static final long serialVersionUID = 4872308842394693534L;
+@WebServlet("/cs/write.do")
+public class CsWriteController extends HttpServlet{
+	
+	private static final long serialVersionUID = 1950905414750457227L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/write.jsp");
 		dispatcher.forward(req, resp);	
-	
+
+		
+		
 	}
-	
-	
-	
 	
 }
