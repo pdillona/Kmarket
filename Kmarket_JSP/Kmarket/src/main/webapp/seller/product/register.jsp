@@ -3,47 +3,42 @@
 <%@ include file="../_header.jsp" %>
 <%@ include file="../_aside.jsp"%>
 <script>
-	function changeSelect(){
-		const selectValue = $('#selectBox option:selected').val();
-		
-		const jsonData = {
-				"selectValue":selectValue
-		}
-		$.ajax({
-			url:'/Kmarket/seller/product/cate2.do',
-			type:'GET',
-			data: jsonData,
-			dataType:'json',
-			success:function(data){
-				console.log(data);
-				
-				const cate2Select = $('#cate2');
-				const cateOption1 = $('.cate2Option');
-				
-				var dynamicElement = getElementsByClassName('.dOption');
-				
-				dynamicElement.forEach(function(option) {
-					  if (option.classList.contains('dOption')) {
-					    option.remove();
-					  }
-					});
-				
-	
-				cate2Select.append("<option selected disabled class=\"cate2Option\">2차 분류 선택</option>");
-				
-				
-				for(let i =0; i < data.length; i++){
-					
-					let option = "<option value='"+data[i].cate2+"' class=\"dOption\">"+data[i].c2Name+"</option>";
-					cate2Select.append(option);
-					
-				}
-				
-			}
-			
-		});
-	}
-	
+    function changeSelect() {
+        const selectValue = $('#selectBox').val();
+
+        const jsonData = {
+            "selectValue": selectValue
+        };
+
+        $.ajax({
+            url: '/Kmarket/seller/product/cate2.do',
+            type: 'GET',
+            data: jsonData,
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+
+                const cate2Select = $('#cate2');
+                cate2Select.empty(); // 기존 옵션을 모두 제거합니다.
+
+                // 새로운 옵션 추가
+                cate2Select.append($('<option>', {
+                    value: '',
+                    text: '2차 분류 선택',
+                    disabled: 'disabled',
+                    selected: 'selected'
+                }));
+
+                // 데이터를 이용하여 옵션을 동적으로 생성
+                $.each(data, function(index, item) {
+                    cate2Select.append($('<option>', {
+                        value: item.cate2,
+                        text: item.c2Name
+                    }));
+                });
+            }
+        });
+    }
 </script>
             <section id="seller-product-register">
                 <nav>
@@ -76,11 +71,10 @@
                                 <tr>
                                     <td>2차 분류</td>
                                     <td>
-                                        <select name="category2">
-                                        <option selected disabled id="cate2" class="cate2Option">2차 분류 선택</option>
+                                        <select name="category2" id="cate2">
+                                        <option selected disabled>2차 분류 선택</option>
                                         </select>
                                     </td>
-                                    
                                 </tr>
                             </table>
                         </section>
