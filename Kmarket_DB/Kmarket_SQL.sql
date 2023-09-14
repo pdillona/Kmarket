@@ -1,0 +1,1 @@
+ALTER TABLE `km_product_cate2` RENAME COLUMN `km_product_cate1_cate1` TO cate1;

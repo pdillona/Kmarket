@@ -23,7 +23,7 @@ public class DBHelper {
 		
 		try {
 			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
-			DataSource ds = (DataSource) ctx.lookup("jdbc/Farmstory");
+			DataSource ds = (DataSource) ctx.lookup("jdbc/Kmarket");
 			conn = ds.getConnection();
 		}catch (Exception e) {
 			e.printStackTrace();
