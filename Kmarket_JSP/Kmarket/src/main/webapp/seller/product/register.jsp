@@ -2,6 +2,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../_header.jsp" %>
 <%@ include file="../_aside.jsp"%>
+<script>
+	function changeSelect(){
+		const selectBox = $('#selectBox');
+		
+		const selectValue = $('#selectBox option:selected').val();
+		
+		const jsonData = {
+				"selectValue":selectValue
+		}
+		$.ajax({
+			url:'/Kmarket/seller/product/cate2.do',
+			type:'GET',
+			data: jsonData,
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				
+				for(let i =0; i <= data.length; i++){
+					const cate2Option = $('#cate2');
+					let option = "<option value=\""+data[i].cate2+"\">"+data[i].c2Name+"</option>";
+					cate2Option.append(option);
+				}
+				
+			}
+		});
+		
+	}
+</script>
             <section id="seller-product-register">
                 <nav>
                     <h3>상품등록</h3>
@@ -22,7 +50,7 @@
                                 <tr>
                                     <td>1차 분류</td>
                                     <td>
-                                        <select name="category1">
+                                        <select id="selectBox"  name="category1" onchange="changeSelect()">
                                         	<option selected disabled>1차 분류 선택</option>
                                         <c:forEach var="cate1" items="${cate1s}">
                                         	<option value="${cate1.cate1}">${cate1.c1Name}</option>
@@ -30,19 +58,11 @@
                                         </select>
                                     </td>
                                 </tr>
-                                <c:choose>
-                                	<c:when test="${category1}"></c:when>
-                                </c:choose>
                                 <tr>
                                     <td>2차 분류</td>
-                                    
                                     <td>
                                         <select name="category2">
-                                            <option disabled>2차 분류 선택</option>
-                                            <option value="men">남성의류</option>
-                                            <option value="women">여성의류</option>
-                                            <option value="stuff">잡화</option>
-                                            <option value="beauty">뷰티</option>                                                
+                                        <option selected disabled id="cate2">2차 분류 선택</option>
                                         </select>
                                     </td>
                                     
