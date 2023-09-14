@@ -27,7 +27,7 @@ public class RegisterController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		List<Cate1DTO> cate1s = cateService.selectCate1s();
-
+		logger.debug("cates1 : "+cate1s);
 		req.setAttribute("cate1s", cate1s);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/seller/product/register.jsp");
