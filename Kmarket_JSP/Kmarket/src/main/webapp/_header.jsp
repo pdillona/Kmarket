@@ -7,6 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
+    <!-- 
+		날짜 : 2023/09/14
+		이름 : 김무현
+		내용 : include 작업
+	 -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"/>
     <link rel="stylesheet" href="${ctxPath}/css/common.css">

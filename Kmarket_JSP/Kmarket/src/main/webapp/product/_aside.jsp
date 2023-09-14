@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+	<!-- 
+		날짜 : 2023/09/14
+		이름 : 김무현
+		내용 : include 작업
+	 -->
 <aside>
                 <ul class="category">     
                     <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
