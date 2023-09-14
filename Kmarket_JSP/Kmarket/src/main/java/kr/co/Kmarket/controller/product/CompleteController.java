@@ -17,16 +17,16 @@ import org.slf4j.LoggerFactory;
 	이름 : 김무현
 	내용 : Controller 기본셋팅
 */
-@WebServlet("/product/list.do")
-public class listController extends HttpServlet{
-	
+@WebServlet("/product/complete.do")
+public class CompleteController extends HttpServlet{
 
-	private static final long serialVersionUID = -9106083246555768149L;
+	private static final long serialVersionUID = -480497830900404005L;
+	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/complete.jsp");
 		dispatcher.forward(req, resp);
 	}
 

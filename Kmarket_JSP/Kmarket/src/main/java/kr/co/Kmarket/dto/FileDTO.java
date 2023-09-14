@@ -1,5 +1,11 @@
 package kr.co.Kmarket.dto;
 
+/*
+ * 날짜 : 2023-09-14
+ * 이름 : 최정민
+ * 내용 : 파일 업로드용 파일 DTO
+ */
+
 public class FileDTO {
 
 	private int fno;
