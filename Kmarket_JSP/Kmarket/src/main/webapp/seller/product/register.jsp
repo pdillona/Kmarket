@@ -26,16 +26,14 @@
                     value: '',
                     text: '2차 분류 선택',
                     disabled: 'disabled',
-                    selected: 'selected',
-                    class: 'cate2Option'
+                    selected: 'selected'
                 }));
 
                 // 데이터를 이용하여 옵션을 동적으로 생성
                 $.each(data, function(index, item) {
                     cate2Select.append($('<option>', {
                         value: item.cate2,
-                        text: item.c2Name,
-                        class: 'dOption'
+                        text: item.c2Name
                     }));
                 });
             }
@@ -74,7 +72,7 @@
                                     <td>2차 분류</td>
                                     <td>
                                         <select name="category2" id="cate2">
-                                        <option selected disabled class="cate2Option">2차 분류 선택</option>
+                                        <option selected disabled>2차 분류 선택</option>
                                         </select>
                                     </td>
                                 </tr>
