@@ -1,5 +1,11 @@
 package kr.co.Kmarket.dao.seller;
 
+/*
+ * 날짜 : 2023-09-14
+ * 이름 : 최정민
+ * 내용 : cate1 조회DAO 생성
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 

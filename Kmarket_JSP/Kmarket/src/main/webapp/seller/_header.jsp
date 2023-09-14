@@ -17,7 +17,7 @@
     <div id="seller-wrapper">
         <header>
             <div>
-                <a href="./index.html" class="logo"><img src="./img/admin_logo.png" alt="admin_logo"/></a>
+                <a href="/Kmarket/seller" class="logo"><img src="/Kmarket/seller/img/admin_logo.png" alt="admin_logo"/></a>
                 <p>
                     <span>홍길동님 반갑습니다.</span>
                     <a href="#">HOME |</a>
