@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>product list</title>
+    <title>Product</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="${ctxPath}/product/css/product.css">
@@ -46,8 +46,8 @@
                         <li><a href="#">쿠폰존</a></li>
                         <li><a href="#">사용후기</a></li>
                         <li><a href="#">개인결제</a></li>
-                        <li><a href="#">고객센터</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="${ctxPath}/cs/index.do">고객센터</a></li>
+                        <li><a href="${ctxPath}/cs/faq.do">FAQ</a></li>
                     </ul>
                 </div>
             </div>
