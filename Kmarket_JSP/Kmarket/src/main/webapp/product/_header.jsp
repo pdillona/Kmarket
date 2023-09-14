@@ -4,6 +4,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- 
+		날짜 : 2023/09/14
+		이름 : 김무현
+		내용 : include 작업
+	 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
