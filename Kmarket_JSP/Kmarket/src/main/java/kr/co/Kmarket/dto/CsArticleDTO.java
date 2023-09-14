@@ -1,8 +1,9 @@
 package kr.co.Kmarket.dto;
 
+
 public class CsArticleDTO {
 
-	private int no;
+	private int ano;
 	private int parent;
 	private String cate;
 	private String catedetail;
@@ -14,18 +15,20 @@ public class CsArticleDTO {
 	private String rdate;
 	
 	
+	
+	public int getAno() {
+		return ano;
+	}
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
 	public String getCatedetail() {
 		return catedetail;
 	}
 	public void setCatedetail(String catedetail) {
 		this.catedetail = catedetail;
 	}
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
-	}
+
 	public int getParent() {
 		return parent;
 	}

@@ -57,11 +57,7 @@
           </div>
         </div>
       </header>
-<<<<<<< HEAD
-
 <!-- <%@ include file="./_header.jsp" %>  -->
-=======
->>>>>>> 041d7be7d43d3526524558264c5e3817006f7619
       <main>
         <!-- 카테고리/베스트 상품 영역 -->
         <aside>
@@ -810,9 +806,5 @@
           </section>
         </section>
       </main>
-<<<<<<< HEAD
-     
+      
   <!--  <%@ include file="./_footer.jsp" %>-->
-=======
-<%--<%@ include file="./_footer.jsp" %>  --%>
->>>>>>> 041d7be7d43d3526524558264c5e3817006f7619

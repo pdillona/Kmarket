@@ -4,8 +4,6 @@
 <%@ include file="../_aside.jsp"%>
 <script>
 	function changeSelect(){
-		const selectBox = $('#selectBox');
-		
 		const selectValue = $('#selectBox option:selected').val();
 		
 		const jsonData = {
@@ -19,16 +17,33 @@
 			success:function(data){
 				console.log(data);
 				
-				for(let i =0; i <= data.length; i++){
-					const cate2Option = $('#cate2');
-					let option = "<option value=\""+data[i].cate2+"\">"+data[i].c2Name+"</option>";
-					cate2Option.append(option);
+				const cate2Select = $('#cate2');
+				const cateOption1 = $('.cate2Option');
+				
+				var dynamicElement = getElementsByClassName('.dOption');
+				
+				dynamicElement.forEach(function(option) {
+					  if (option.classList.contains('dOption')) {
+					    option.remove();
+					  }
+					});
+				
+	
+				cate2Select.append("<option selected disabled class=\"cate2Option\">2차 분류 선택</option>");
+				
+				
+				for(let i =0; i < data.length; i++){
+					
+					let option = "<option value='"+data[i].cate2+"' class=\"dOption\">"+data[i].c2Name+"</option>";
+					cate2Select.append(option);
+					
 				}
 				
 			}
+			
 		});
-		
 	}
+	
 </script>
             <section id="seller-product-register">
                 <nav>
@@ -62,7 +77,7 @@
                                     <td>2차 분류</td>
                                     <td>
                                         <select name="category2">
-                                        <option selected disabled id="cate2">2차 분류 선택</option>
+                                        <option selected disabled id="cate2" class="cate2Option">2차 분류 선택</option>
                                         </select>
                                     </td>
                                     
