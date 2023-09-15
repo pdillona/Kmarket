@@ -1,5 +1,6 @@
 package kr.co.Kmarket.dao.seller;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,27 +40,57 @@ public class Cate2DAO extends DBHelper{
 		return cate2s;
 	}
 	
-	//추가 카테고리 리스트 출력 (김무현)
-	public List<Cate2DTO> selectCate2sInt(int cate1) {
-		List<Cate2DTO> cate2s = new ArrayList<Cate2DTO>();
+	
+	//강사님이 주신 코드 (김무현)
+	public List<List<Cate2DTO>> selectCategories() {
+		
+		List<List<Cate2DTO>> categories = new ArrayList<>();
+		
 		conn = getConnection();
 		try {
-			sql= "SELECT * FROM `km_product_cate2` WHERE `cate1`=?";
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, cate1);
+			sql = "SELECT * FROM `km_product_cate1` AS a "
+					+ "JOIN `km_product_cate2` AS b "
+					+ "ON a.cate1 = b.cate1;";
+			
+			psmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = psmt.executeQuery();
+			
+			List<Cate2DTO> cate2s = null;
+			int currentCate1 = 0;
 			while(rs.next()) {
-				Cate2DTO dto = new Cate2DTO();
-				dto.setCate2(rs.getInt(1));
-				dto.setC2Name(rs.getString(2));
-				dto.setCate1(rs.getInt(3));
-				cate2s.add(dto);
+				
+				if(currentCate1 == 0) {
+					
+					currentCate1 = rs.getInt(1);
+					cate2s = new ArrayList<Cate2DTO>();
+					
+				}else {
+					
+					if(currentCate1 == rs.getInt(1)) {
+						
+						Cate2DTO dto = new Cate2DTO();
+						dto.setCate1(rs.getInt(1));
+						dto.setC1Name(rs.getString(2));
+						dto.setCate2(rs.getInt(3));
+						dto.setC2Name(rs.getString(4));
+						cate2s.add(dto);
+						
+					}else {
+						
+						categories.add(cate2s);
+						currentCate1 = 0;
+						
+						// 커서 다시 한줄 위로 이동
+						rs.previous();
+					}
+				}
 			}
 			close();
+			
 		} catch (Exception e) {
-			logger.error("selectCate2 error : "+e.getMessage());
+			logger.error("selectCategories error : "+e.getMessage());
 		}
-		return cate2s;
+		return categories;
 	}
 	
 	public void updateCate2(Cate2DTO dto) {}

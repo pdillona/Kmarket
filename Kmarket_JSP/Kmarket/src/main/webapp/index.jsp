@@ -10,39 +10,30 @@
         <!-- 카테고리/베스트 상품 영역 -->
         <aside>
           <!-- 카테고리 -->
-          <ul class="category">
-            <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
-            <c:forEach var="cate1gory1" items="${cate1gory1}">
-        		<li>
-            	<a href="#">
-                <i class="fas fa-tshirt"></i>${cate1gory1.c1Name}<i class="fas fa-angle-right"></i>
-            	</a>
-            	<ol>
-                	<!-- 해당 카테고리에 속한 두 번째 카테고리 목록 -->
-                	<c:forEach var="cate2gory1" items="${cate2gory1}">
-                    <li><a href="#">${cate2gory1.c2Name}</a></li>
-                	</c:forEach>
-           	 	</ol>
+          <ul class="category">     
+          	<li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
+          		<c:forEach var="cate2s" items="${categories}">
+                 <li>
+                        <a href="#">
+                        <c:if test="${cate2s.get(0).cate1 == 10}"><i class="fas fa-tshirt"></i></c:if>                        
+                        <c:if test="${cate2s.get(0).cate1 == 11}"><i class="fas fa-socks"></i></c:if>                        
+                        <c:if test="${cate2s.get(0).cate1 == 12}"><i class="fas fa-child"></i></c:if>                        
+                        <c:if test="${cate2s.get(0).cate1 == 13}"><i class="fas fa-utensils"></i></c:if>                        
+                        <c:if test="${cate2s.get(0).cate1 == 14}"><i class="fas fa-home"></i></c:if>                        
+                        <c:if test="${cate2s.get(0).cate1 == 15}"><i class="fas fa-laptop"></i></c:if>     	                   
+                        <c:if test="${cate2s.get(0).cate1 == 16}"><i class="fas fa-medal"></i></c:if>                        
+                        <c:if test="${cate2s.get(0).cate1 == 17}"><i class="fas fa-car"></i></c:if>                        
+                        <c:if test="${cate2s.get(0).cate1 == 18}"><i class="fas fa-tshirt"></i></c:if>                        
+                        	${cate2s.get(0).c1Name}
+                        </a>
+                        <ol>
+                        	<c:forEach var="cate2" items="${cate2s}">
+                            	<li><a href="#">${cate2.c2Name}</a></li>
+                            </c:forEach>
+                        </ol>
         		</li>
-    		</c:forEach>
-            
-           <!-- 두 번째 카테고리 그룹 -->
-   		 <c:forEach var="cate1gory2" items="${cate1gory2}">
-        	<li>
-            <a href="#">
-                <i class="fas fa-tshirt"></i>${cate1gory2.c1Name}<i class="fas fa-angle-right"></i>
-            </a>
-            <ol>
-                <!-- 해당 카테고리에 속한 두 번째 카테고리 목록 -->
-                <c:forEach var="cate2gory2" items="${cate2gory2}">
-                <li><a href="#">${cate2gory2.c2Name}</a></li>
-                </c:forEach>
-            </ol>
-       		</li>
-    	</c:forEach>
-
-    
-	</ul>
+               </c:forEach>
+		</ul>
 
     <!-- 베스트상품 배너 -->
     <article class="best">
