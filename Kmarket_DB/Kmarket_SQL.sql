@@ -90,4 +90,4 @@ INSERT INTO `km_product_cate2` VALUES(11, '도서/음반/e교육', 18);
 INSERT INTO `km_product_cate2` VALUES(12, '공연티켓', 18);
 INSERT INTO `km_product_cate2` VALUES(13, 'e쿠폰', 18);
 INSERT INTO `km_product_cate2` VALUES(14, '상품권', 18);
-INSERT INTO `km_product_cate2` VALUES(15, '캠핑/낚시', 18);
+
