@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(value={"/cs", "/cs/index.do"})
+@WebServlet(value={"/cs/index.do"})
 public class IndexController extends HttpServlet{
 
 

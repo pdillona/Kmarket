@@ -1,32 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>케이마켓 고객센터</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
-    <link rel="stylesheet" href="../css/style.css" />    
-  </head>
-  <body>
-    <div id="wrapper">
-      <header>
-        <div class="top">
-          <div>
-            <p>
-              <a href="./member/login.html">로그인</a>
-              <a href="#">회원가입</a>
-              <a href="#">마이페이지</a>
-              <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-            </p>
-          </div>
-        </div>
-        <div class="logo">
-          <div>
-            <a href="../index.html"><img src="../images/logo.png" alt="로고" />고객센터</a>
-          </div>
-        </div>
-      </header>
-
+<%@ include file="../_header.jsp" %>
       <section id="cs">
         <div class="qna">
           <nav>
@@ -48,7 +21,12 @@
               </ul>
             </aside>
             <article>
-              <form action="#">
+              <form action="${ctxPath}/cs/write.do"  method="post" enctype="multipart/form-data">
+                  <%-- <input type="hidden" name="writer" value="${sessUser.uid}"/> --%>
+                  <input type="hidden" name="writer" value="wpdjvks"/>
+				  <input type="hidden" name="group" value="${group}"/>
+			      <input type="hidden" name="cate" value="${cate}"/>
+			      <input type="hidden" name="cate" value="${cateDtail}"/>
                 <table>
                   <tr>
                     <td>문의유형</td>
@@ -76,7 +54,8 @@
                   </tr>
                 </table>
                 <div>
-                  <a href="./list.html" class="btnList">취소하기</a>
+                  <a href="${ctxPath}/cs/qna.do?cate=qna&cateDeatil=member" class="btnList">취소하기</a>
+<%--                   <a href="${ctxPath}/cs/list.do?cate=qna&cateDeatil=member" class="btnList">취소하기</a> --%>
                   <input type="submit" class="btnSubmit" value="등록하기"/>
                 </div>
               </form>

@@ -1,45 +1,47 @@
 package kr.co.Kmarket.dto;
 
-
 public class CsArticleDTO {
 
-	private int ano;
-	private int parent;
+	private int aNo;
 	private String cate;
-	private String catedetail;
+	private String cateDtail;
 	private String title;
 	private String content;
 	private int file;
 	private String writer;
 	private String regip;
 	private String rdate;
+	private String aeName;
+	private String akName;
+	private int type;
+	private String dName;
+	
+	private FileDTO fileDto;
 	
 	
-	
-	public int getAno() {
-		return ano;
+	public FileDTO getFileDto() {
+		return fileDto;
 	}
-	public void setAno(int ano) {
-		this.ano = ano;
+	public void setFileDto(FileDTO fileDto) {
+		this.fileDto = fileDto;
 	}
-	public String getCatedetail() {
-		return catedetail;
+	public int getaNo() {
+		return aNo;
 	}
-	public void setCatedetail(String catedetail) {
-		this.catedetail = catedetail;
-	}
-
-	public int getParent() {
-		return parent;
-	}
-	public void setParent(int parent) {
-		this.parent = parent;
+	public void setaNo(int aNo) {
+		this.aNo = aNo;
 	}
 	public String getCate() {
 		return cate;
 	}
 	public void setCate(String cate) {
 		this.cate = cate;
+	}
+	public String getCateDtail() {
+		return cateDtail;
+	}
+	public void setCateDtail(String cateDtail) {
+		this.cateDtail = cateDtail;
 	}
 	public String getTitle() {
 		return title;
@@ -59,6 +61,14 @@ public class CsArticleDTO {
 	public void setFile(int file) {
 		this.file = file;
 	}
+	public void setFile(String oriName) {
+		
+		if(oriName != null) {
+			this.file = 1;	
+		}else {
+			this.file = 0;
+		}
+	}
 	public String getWriter() {
 		return writer;
 	}
@@ -77,6 +87,31 @@ public class CsArticleDTO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	public String getAeName() {
+		return aeName;
+	}
+	public void setAeName(String aeName) {
+		this.aeName = aeName;
+	}
+	public String getAkName() {
+		return akName;
+	}
+	public void setAkName(String akName) {
+		this.akName = akName;
+	}
+	public int getdType() {
+		return type;
+	}
+	public void setdType(int type) {
+		this.type = type;
+	}
+	public String getdName() {
+		return dName;
+	}
+	public void setdName(String dName) {
+		this.dName = dName;
+	}
+	
 
 	
 	

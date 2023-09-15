@@ -19,39 +19,62 @@ import org.slf4j.LoggerFactory;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import kr.co.Kmarket.dao.CsDAO;
+import kr.co.Kmarket.dao.CsArticleDAO;
 import kr.co.Kmarket.dto.CsArticleDTO;
 import kr.co.Kmarket.dto.FileDTO;
 
-public enum CsService {
+
+public enum CsArticleService {
+
+	INSTANCE;
 	
-	instace;
-    
-	CsDAO dao = CsDAO.getInstance();	
-	Logger logger = LoggerFactory.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass()); 
+	private CsArticleDAO dao = new CsArticleDAO();
 	
-	public int insertFaq(CsArticleDTO dto) {
+	public int insertArticle(CsArticleDTO dto) {
+
+		logger.debug("ArticleService dto: " + dto);
 		
-		return dao.insertFaq(dto);
+		return dao.insertArticle(dto);
 	}
 	
-	
-	
-
+	public CsArticleDTO selectArticle(String no) {
+		return dao.selectArticle(no);
+	}
 	
 	public List<CsArticleDTO> selectArticles(String cate, int start) {
 		return dao.selectArticles(cate, start);
 	}
 	
+	public void updateArticle(CsArticleDTO dto) {
+		dao.updateArticle(dto);
+	}
 	
-	
-	
-	
+	public void deleteArticle(String no) {
+		dao.deleteArticle(no);
+	}
+
+	// 추가 
 	public int selectCountTotal(String cate) {
 		return dao.selectCountTotal(cate);
 	}
 	
+	public List<CsArticleDTO> selectComments(String parent) {
+		return dao.selectComments(parent);
+	}
 	
+	public CsArticleDTO insertComment(CsArticleDTO dto) {
+		return dao.insertComment(dto);
+	}
+	
+	
+	public int updateComment(String no, String content) {
+		return dao.updateComment(no, content);
+	}
+	
+	public int deleteComment(String no) {
+		return dao.deleteComment(no);
+	}
 	
 	// 업로드 경로 구하기
 	public String getPath(HttpServletRequest req, String dir) {
@@ -103,7 +126,7 @@ public enum CsService {
 	public void downloadFile(HttpServletRequest req, HttpServletResponse resp, FileDTO dto) throws IOException {
 		// response 파일 다운로드 헤더 수정
 		resp.setContentType("application/octet-stream");
-		resp.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(dto.getOriname(), "utf-8")); //ori가 oname이었음
+		resp.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(dto.getNewname(), "utf-8"));
 		resp.setHeader("Content-Transfer-Encoding", "binary");
 		resp.setHeader("Pragma", "no-cache");
 		resp.setHeader("Cache-Control", "private");
@@ -111,7 +134,7 @@ public enum CsService {
 		// response 파일 스트림 작업
 		String path = getPath(req, "/upload");
 		
-		File file = new File(path+"/"+dto.getNewname()); //sname이었음
+		File file = new File(path+"/"+dto.getNewname());
 		
 		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 		BufferedOutputStream bos = new BufferedOutputStream(resp.getOutputStream());
@@ -180,4 +203,7 @@ public enum CsService {
 	public int getStartNum(int currentPage) {
 		return (currentPage - 1) * 10;
 	}
+
+	
+	
 }
