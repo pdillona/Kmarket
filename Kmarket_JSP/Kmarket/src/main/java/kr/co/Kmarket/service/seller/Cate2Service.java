@@ -24,4 +24,10 @@ public class Cate2Service {
 	public void deleteCate2(String cate1) {
 		dao.deleteCate2(cate1);
 	}
+	
+	//추가 index 카테고리 출력 (김무현)
+	public List<Cate2DTO> selectCate2sint(int cate1) {
+		return dao.selectCate2sInt(cate1);
+	}
+	
 }

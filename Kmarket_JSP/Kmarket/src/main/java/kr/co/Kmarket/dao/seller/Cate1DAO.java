@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.dto.seller.Cate1DTO;
+import kr.co.Kmarket.dto.seller.Cate2DTO;
 
 public class Cate1DAO extends DBHelper{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -55,4 +56,26 @@ public class Cate1DAO extends DBHelper{
 	}
 	public void updateCate1(Cate1DTO dto) {}
 	public void deleteCate1(String cate1) {}
+	
+	//추가 카테고리 리스트 출력 (김무현)
+			public List<Cate1DTO> selectCate1sInt(int cate1) {
+				List<Cate1DTO> cate1s = new ArrayList<Cate1DTO>();
+				conn = getConnection();
+				try {
+					sql= "SELECT * FROM `km_product_cate1` WHERE `cate1`=?";
+					psmt = conn.prepareStatement(sql);
+					psmt.setInt(1, cate1);
+					rs = psmt.executeQuery();
+					while(rs.next()) {
+						Cate1DTO dto = new Cate1DTO();
+						dto.setCate1(rs.getInt(1));
+						dto.setC1Name(rs.getString(2));
+						cate1s.add(dto);
+					}
+					close();
+				} catch (Exception e) {
+					logger.error("selectCate1sInt error : "+e.getMessage());
+				}
+				return cate1s;
+			}
 }

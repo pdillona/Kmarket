@@ -38,6 +38,30 @@ public class Cate2DAO extends DBHelper{
 		}
 		return cate2s;
 	}
+	
+	//추가 카테고리 리스트 출력 (김무현)
+	public List<Cate2DTO> selectCate2sInt(int cate1) {
+		List<Cate2DTO> cate2s = new ArrayList<Cate2DTO>();
+		conn = getConnection();
+		try {
+			sql= "SELECT * FROM `km_product_cate2` WHERE `cate1`=?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, cate1);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				Cate2DTO dto = new Cate2DTO();
+				dto.setCate2(rs.getInt(1));
+				dto.setC2Name(rs.getString(2));
+				dto.setCate1(rs.getInt(3));
+				cate2s.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectCate2 error : "+e.getMessage());
+		}
+		return cate2s;
+	}
+	
 	public void updateCate2(Cate2DTO dto) {}
 	public void deleteCate2(String cate1) {}
 }
