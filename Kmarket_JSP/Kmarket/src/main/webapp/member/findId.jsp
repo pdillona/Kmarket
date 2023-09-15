@@ -17,9 +17,9 @@
 		});
 	});
 </script>
-        <main id="user">
+        <main id="member">
             <section class="find findId">
-                <form id="formFindId" action="/Jboard2/user/findIdResult.do" method="POST">
+                <form id="formFindId" action="/Kmarket/member/findIdResult.do" method="POST">
                 <input type="hidden" name="type" value="FIND_ID"/> <!-- 이메일 인증 - 회원가입, 아이디 찾기, 비밀번호 찾기 구분짓기 위해서 -->
                     <table border="0">
                         <caption>아이디 찾기</caption>
@@ -50,8 +50,8 @@
                 </p>
 
                 <div>
-                    <a href="/Jboard2/user/login.do" class="btn btnCancel">취소</a>
-                    <a href="/Jboard2/user/findIdResult.do" class="btn btnNext">다음</a>
+                    <a href="/Kmarket/member/login.do" class="btn btnCancel">취소</a>
+                    <a href="/Kmarket/member/findIdResult.do" class="btn btnNext">다음</a>
                 </div>
             </section>
         </main>

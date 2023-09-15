@@ -54,8 +54,8 @@
                 </nav>
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
-                    <form action="/seller/product/register.do" method="post" enctype="multipart/form-data">
-						<input type="text" name="seller" value="홍길동"/>
+                    <form action="/Kmarket/seller/product/register.do" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="seller" value="홍길동"/>
                         <!-- 상품분류 -->
                         <section>
                             <h4>상품분류</h4>
@@ -168,23 +168,23 @@
                             <table>
                                 <tr>
                                     <td>상품상태</td>
-                                    <td><input type="text" name="status" value="새상품"/></td>
+                                    <td><input type="text" name="status" placeholder="새상품"/></td>
                                 </tr>
                                 <tr>
                                     <td>부가세 면세여부</td>
-                                    <td><input type="text" name="duty" value="과세상품"/></td>
+                                    <td><input type="text" name="duty" placeholder="과세상품"/></td>
                                 </tr>
                                 <tr>
                                     <td>영수증발행</td>
-                                    <td><input type="text" name="receipt" value="발행가능 - 신용카드 전표, 온라인 현금영수증"/></td>
+                                    <td><input type="text" name="receipt" placeholder="발행가능 - 신용카드 전표, 온라인 현금영수증"/></td>
                                 </tr>
                                 <tr>
                                     <td>사업자구분</td>
-                                    <td><input type="text" name="bizType" value="사업자 판매자"/></td>
+                                    <td><input type="text" name="bizType" placeholder="사업자 판매자"/></td>
                                 </tr>                                
                                 <tr>
                                     <td>원산지</td>
-                                    <td><input type="text" name="origin" value="국내산"/></td>
+                                    <td><input type="text" name="origin" placeholder="국내산"/></td>
                                 </tr>                                
                             </table>                                
                         </section>
