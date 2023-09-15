@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonObject;
 
 
-@WebServlet("/user/checkEmail.do")
+@WebServlet("/member/checkEmail.do")
 public class CheckEmailController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
