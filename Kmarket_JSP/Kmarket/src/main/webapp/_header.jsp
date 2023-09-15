@@ -40,8 +40,8 @@
       <header>
         <div class="top">
           <div>
-            <a href="${ctxPath}/user/login.do">로그인</a>
-            <a href="${ctxPath}/user/terms.do">회원가입</a>
+            <a href="${ctxPath}/member/login.do">로그인</a>
+            <a href="${ctxPath}/member/join.do">회원가입</a>
             <a href="#">마이페이지</a>
             <!-- 세션구축되면<c:if test="${not empty sessUser}">
             	<a href="${ctxPath}/user/logout.do">로그아웃</a>
