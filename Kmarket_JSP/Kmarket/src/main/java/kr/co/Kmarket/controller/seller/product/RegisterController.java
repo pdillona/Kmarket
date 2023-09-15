@@ -51,7 +51,14 @@ public class RegisterController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String path = fileService.getPath(req, "/thumb");
+		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
+		logger.debug("cate1 : "+cate1);
+		logger.debug("cate2 : "+cate2);
+		String fileUrl = "/thumb/"+cate1+"/"+cate2;
+		logger.debug("fileUrl : "+fileUrl);
+		
+		String path = fileService.getPath(req, fileUrl);
 		logger.debug("path : "+path);
 		
 		MultipartRequest mr = fileService.uploadFile(req, path);
