@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
-<script src="/Jboard2/js/zipcode.js"></script>
-<script src="/Jboard2/js/validation.js"></script> 
-<script src="/Jboard2/js/checkUser.js"></script> 
-<script src="/Jboard2/js/authEmail.js"></script>
+<script src="/Kmarket/js/zipcode.js"></script>
+<script src="/Kmarket/js/validation.js"></script> 
+<script src="/Kmarket/js/checkUser.js"></script> 
+<script src="/Kmarket/js/authEmail.js"></script>
 <script>
 	//checkUser.js에서 window.onload 사용했기 때문에 실행안돼(한 번만 onload함수가 실행됨) 둘 다 제이쿼리로 바꿔줌 
 	$(function(){
@@ -25,7 +25,7 @@
 				params.append('pass', inputPass.value);
 				
 				//fetch함수로 AJAX통신
-				fetch('/Jboard2/user/myInfo.do', {
+				fetch('/Kmarket/member/myInfo.do', {
 					method: 'POST',
 					body: params
 				})
@@ -34,7 +34,7 @@
 					concole.log('data : ' + data);
 					if(data.result > 0){
 						alert('비밀번호가 수정되었습니다. 다시 로그인하십시오.');
-						location.href = '/Jboard2/user/logout.do';
+						location.href = '/Kmarket/member/logout.do';
 					}
 				});
 			}else {
@@ -54,7 +54,7 @@
 			};
 			
 			$.ajax({
-				url: '/Jboard2/user/myInfo.do',
+				url: '/Kmarket/member/myInfo.do',
 				type: 'POST',
 				data: jsonData,
 				dataType: 'json',
@@ -62,7 +62,7 @@
 					console.log('data : ' + data);
 					if(data.result > 0){
 						alert('회원탈퇴 처리가 완료되었습니다. 이용해 주셔서 감사합니다.');
-						location.href = '/Jboard2/user/logout.do';
+						location.href = '/Kmarket/member/logout.do';
 					}
 				}
 			});
@@ -73,9 +73,9 @@
 	});
 
 </script>
-        <main id="user">
+        <main id="member">
             <section class="myInfo">
-                <form action="/Jboard2/user/myInfo.do" method="post">
+                <form action="/Kmarket/member/myInfo.do" method="post">
                 <input type="hidden" name="kind" value="MODIFY" />
                 <input type="hidden" name="type" value="MODIFY" />
                 <input type="hidden" name="uid" value="${sessUser.uid} " />
@@ -161,7 +161,7 @@
                     </table>
         
                     <div>
-                        <a href="/Jboard2/user/login.do" class="btn btnCancel">취소</a>
+                        <a href="/Kmarket/member/login.do" class="btn btnCancel">취소</a>
                         <input type="submit" value="회원수정" class="btn btnRegister"/>
                     </div>
         

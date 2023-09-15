@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
-<script src="/Jboard2/js/validation.js"></script>
-<script src="/Jboard2/js/authEmail.js"></script>
+<script src="/Kmarket/js/validation.js"></script>
+<script src="/Kmarket/js/authEmail.js"></script>
 <script>
     //다음(a태그)누를 때 form전송으로 사용
 	$(function(){
@@ -17,9 +17,9 @@
 		});
 	});
 </script>
-        <main id="user">
+        <main id="member">
             <section class="find findPass">
-                <form id="formFindPass" action="/Jboard2/user/findPass.do" method="POST" >
+                <form id="formFindPass" action="/Kmarket/member/findPass.do" method="POST" >
                 <input type="hidden" name="type" value="FIND_PASS"/> <!-- 이메일 인증 - 회원가입, 아이디 찾기, 비밀번호 찾기 구분짓기 위해서 -->
                     <table border="0">
                         <caption>비밀번호 찾기</caption>                        
@@ -51,7 +51,7 @@
                 </p>
 
                 <div>
-                    <a href="/Jboard2/user/login.do" class="btn btnCancel">취소</a>
+                    <a href="/Kmarket/member/login.do" class="btn btnCancel">취소</a>
                     <a href="#" class="btn btnNext">다음</a> <!-- form전송으로 사용 -->
                 </div>
             </section>

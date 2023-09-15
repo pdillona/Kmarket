@@ -26,8 +26,8 @@ public class FindIdResultController extends HttpServlet{
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 		
-		MemberDTO user = service.selectMemberByNameAndEmail(name, email);
-		req.setAttribute("user", user);
+		MemberDTO member = service.selectMemberByNameAndEmail(name, email);
+		req.setAttribute("member", member);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/findIdResult.jsp");

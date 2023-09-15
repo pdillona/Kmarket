@@ -17,6 +17,7 @@ public class MemberDAO extends DBHelper{
 	public static MemberDAO getInstance() {
 		return instance;
 	}
+	
 	private MemberDAO() {}
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

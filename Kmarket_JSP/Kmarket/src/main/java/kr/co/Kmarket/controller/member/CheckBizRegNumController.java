@@ -26,15 +26,7 @@ public class CheckBizRegNumController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String email = req.getParameter("email");
-		logger.debug("email : " + email );
 		
-		
-		
-		JsonObject json = new JsonObject();
-		
-		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
 		
 	}
 }
