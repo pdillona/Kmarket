@@ -5,7 +5,6 @@ import java.util.List;
 
 import kr.co.Kmarket.dao.seller.Cate1DAO;
 import kr.co.Kmarket.dto.seller.Cate1DTO;
-import kr.co.Kmarket.dto.seller.Cate2DTO;
 
 public class Cate1Service {
 	Cate1DAO dao = new Cate1DAO();
@@ -22,8 +21,5 @@ public class Cate1Service {
 	public void updateCate1(Cate1DTO dto) {}
 	public void deleteCate1(String cate1) {}
 	
-	//추가 index 카테고리 출력 (김무현)
-		public List<Cate1DTO> selectCate1sInt(int cate1) {
-			return dao.selectCate1sInt(cate1);
-		}
+	
 }

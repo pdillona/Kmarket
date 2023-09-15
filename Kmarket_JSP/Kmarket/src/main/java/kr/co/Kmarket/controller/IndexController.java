@@ -32,31 +32,17 @@ public class IndexController extends HttpServlet{
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	private Cate1Service Ct1Service = new Cate1Service();
 	private Cate2Service Ct2Service = new Cate2Service();
 	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		List<Cate1DTO> cate1gory1 = Ct1Service.selectCate1sInt(1);
-		List<Cate1DTO> cate1gory2 = Ct1Service.selectCate1sInt(2);
+		List<List<Cate2DTO>> categories = Ct2Service.selectCategories();
 		
-		logger.debug("cate1gory1 :" + cate1gory1);
-		logger.debug("cate1gory2 :" + cate1gory2);
+		logger.debug("categories : "+ categories);
 		
-		List<Cate2DTO> cate2gory1 = Ct2Service.selectCate2sint(1);
-		List<Cate2DTO> cate2gory2 = Ct2Service.selectCate2sint(2);
-		
-		logger.debug("cate2gory1 :" + cate2gory1);
-		logger.debug("cate2gory2 :" + cate2gory2);
-		
-		
-		req.setAttribute("cate1gory1", cate1gory1);
-		req.setAttribute("cate1gory2", cate1gory2);
-		
-		req.setAttribute("cate2gory1", cate2gory1);
-		req.setAttribute("cate2gory2", cate2gory2);
+		req.setAttribute("categories", categories);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
