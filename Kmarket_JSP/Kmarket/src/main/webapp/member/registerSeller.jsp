@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script src="${ctxPath}/js/zipcode.js"></script>
+<script src="${ctxPath}/js/validation.js"></script>
+<script src="${ctxPath}/js/checkMember.js"></script>
         <main id="member">
             <div class="registerSeller">
 				<nav>
@@ -7,6 +10,7 @@
 				</nav>
                 
 				<form action="#" method="POST">
+				<input type="hidden" name="type" value="${type}"/>
 					<section>
 						<table>
 							<caption>필수 정보입력</caption>

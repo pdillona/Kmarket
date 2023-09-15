@@ -63,6 +63,9 @@ public class MemberDTO {
 	public void setGender(int gender) {
 		this.gender = gender;
 	}
+	public void setGender(String gender) {
+		this.gender = Integer.valueOf(gender).intValue();
+	}
 	public String getHp() {
 		return hp;
 	}

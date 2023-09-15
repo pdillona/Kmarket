@@ -3,13 +3,13 @@
  */
 $(function(){
 	// 아이디 중복체크
-	const inputUid = document.getElementsByName('uid')[0];
-	const uidResult = document.getElementsByClassName('uidResult')[0];
-	const btnCheckUid = document.getElementById('btnCheckUid');
+	const inputUid = document.getElementsByName('km_uid')[0];
+	const uidResult = document.getElementsByClassName('msgId')[0];
+	const btnCheckUid = document.getElementByClassName('btnCheckUid');
 	
 	if(btnCheckUid != null){
 		
-		btnCheckUid.onclick = function(){
+		btnCheckUid.keydown = function(){
 		
 			const uid = inputUid.value;
 			
@@ -23,7 +23,7 @@ $(function(){
 			
 			// 서버전송
 			const xhr = new XMLHttpRequest();
-			xhr.open('GET', '/Jboard2/checkUid.do?uid='+uid);
+			xhr.open('GET', '/Kmarket/checkUid.do?uid='+uid);
 			xhr.send();
 			
 			xhr.onreadystatechange = function(){

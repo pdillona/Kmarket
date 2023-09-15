@@ -379,6 +379,12 @@ header {
     border-radius: 2px;
     cursor: pointer;
   }
+  #member > .register table button {
+    border: none;
+    vertical-align: bottom;
+    margin-bottom: 6px;
+    
+}
   
   /* member > .registerSeller */
   #member > .registerSeller {

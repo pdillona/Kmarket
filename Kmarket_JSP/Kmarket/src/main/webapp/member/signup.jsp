@@ -6,6 +6,7 @@
     		const agree1 = document.getElementsByName('agree1')[0];
     		const agree2 = document.getElementsByName('agree2')[0];
     		const agree3 = document.getElementsByName('agree3')[0];
+    		const type = document.getElementsByName('type')[0];
     		
     		const agree = document.querySelector('.agree'); 
     		agree.addEventListener('click', function(e){
@@ -21,7 +22,13 @@
     				alert('개인정보 수집동의에 동의하셔야 합니다.');
     				return;
     			}else{
-    				location.href = '/Kmarket/member/register.do';
+    				if(type.value == 'normal'){
+    					location.href = '/Kmarket/member/register.do';
+    				}else{
+    					location.href = '/Kmarket/member/registerSeller.do';	
+    				}
+    				
+    				
     			}
     		});
     	}
@@ -73,7 +80,9 @@
 				
 				
 				<div>
+					
 					<input type="button" class="agree" value="동의하기" />
+					
 				</div>
             </div>
         </main>        
