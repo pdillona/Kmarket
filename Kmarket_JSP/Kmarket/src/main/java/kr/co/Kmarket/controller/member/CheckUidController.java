@@ -17,7 +17,7 @@ import com.google.gson.JsonObject;
 
 import netscape.javascript.JSObject;
 
-@WebServlet("/user/checkUid.do")
+@WebServlet("/member/checkUid.do")
 public class CheckUidController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
