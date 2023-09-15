@@ -1,9 +1,8 @@
 /.metadata/
 /.recommenders/
-context.xml
-*.xml
 .classpath
 .project
 .gitignore
 .settings
 Servers/
+Kmarket_DB/

@@ -99,7 +99,7 @@ public class MemberService {
 	//기본정보
 	String sender = "z82714567@gmail.com";
 	String password = "hygeihfpwgeukruv";
-	String title = "Jboard2 인증코드 입니다.";
+	String title = "Kmarket 인증코드 입니다.";
 	String content = "<h1>인증코드는 " + code + "</h1>";
 	
 	//Gmail SMTP 서버 설정

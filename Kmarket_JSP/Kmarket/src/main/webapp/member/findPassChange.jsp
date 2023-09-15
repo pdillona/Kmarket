@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
-<script src="/Jboard2/js/validation.js"></script>
+<script src="/Kmarket/js/validation.js"></script>
 <script>
 	window.onload = function(){
 		const btnPassChange = document.getElementById('btnPassChange');
@@ -17,9 +17,9 @@
 		}
 	}	
 </script>
-        <main id="user">
+        <main id="member">
             <section class="find findPassChange">
-                <form id="formFindPassChange" action="/Jboard2/user/findPassChange.do" method="POST">
+                <form id="formFindPassChange" action="/Kmarket/member/findPassChange.do" method="POST">
                 <input type="hidden" name="uid" value="${sessionScope.uid}"/> <!-- FindPassController에서 session값(모든 자원에서 공유 가능) 사용 -->
                     <table border="0">
                         <caption>비밀번호 변경</caption>  <!-- 암호화된 비밀번호는 찾을 수 없음 변경만 가능 -->                      
@@ -49,7 +49,7 @@
                 </p>
 
                 <div>
-                    <a href="/Jboard2/user/login.do" class="btn btnCancel">취소</a>
+                    <a href="/Kmarket/member/login.do" class="btn btnCancel">취소</a>
                     <a href="#" id="btnPassChange" class="btn btnNext">비밀번호 변경</a>
                 </div>
             </section>

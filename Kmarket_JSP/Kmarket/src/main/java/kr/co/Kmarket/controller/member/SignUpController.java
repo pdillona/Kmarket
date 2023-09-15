@@ -13,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dao.member.TermsDAO;
+import kr.co.Kmarket.dto.member.MemberDTO;
 import kr.co.Kmarket.dto.member.TermsDTO;
+import kr.co.Kmarket.service.member.MemberService;
 import kr.co.Kmarket.service.member.TermsService;
 
 @WebServlet("/member/signup.do")
@@ -26,8 +28,13 @@ public class SignUpController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String type = req.getParameter("type");
+		req.setAttribute("type", type);
+		logger.debug("type : " + type );
+		
 		TermsDTO dto = service.selectTerms();
 		req.setAttribute("dto", dto);
+		logger.debug("dto : " + dto );
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/signup.jsp");
 		dispatcher.forward(req, resp);
