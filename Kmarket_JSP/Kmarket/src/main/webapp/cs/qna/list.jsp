@@ -86,7 +86,7 @@
                 <a href="#" class="next">다음</a>
               </div>
 
-              <a href="./write.html" class="btnWrite">문의하기</a>
+              <a href="${ctxPath}/cs/write.do" class="btnWrite">문의하기</a>
 
             </article>
           </section>

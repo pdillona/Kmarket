@@ -158,5 +158,10 @@ public class FileService {
 			public int getStartNum(int currentPage) {
 				return (currentPage - 1) * 10;
 			}
+
+			public void insertFile(FileDTO fileDto) {
+				// TODO Auto-generated method stub
+				
+			}
 	
 }

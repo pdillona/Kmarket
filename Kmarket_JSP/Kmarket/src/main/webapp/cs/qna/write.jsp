@@ -21,7 +21,12 @@
               </ul>
             </aside>
             <article>
-              <form action="#">
+              <form action="${ctxPath}/cs/write.do"  method="post" enctype="multipart/form-data">
+                  <%-- <input type="hidden" name="writer" value="${sessUser.uid}"/> --%>
+                  <input type="hidden" name="writer" value="wpdjvks"/>
+				  <input type="hidden" name="group" value="${group}"/>
+			      <input type="hidden" name="cate" value="${cate}"/>
+			      <input type="hidden" name="cate" value="${cateDtail}"/>
                 <table>
                   <tr>
                     <td>문의유형</td>
@@ -49,7 +54,8 @@
                   </tr>
                 </table>
                 <div>
-                  <a href="./list.html" class="btnList">취소하기</a>
+                  <a href="${ctxPath}/cs/qna.do?cate=qna&cateDeatil=member" class="btnList">취소하기</a>
+<%--                   <a href="${ctxPath}/cs/list.do?cate=qna&cateDeatil=member" class="btnList">취소하기</a> --%>
                   <input type="submit" class="btnSubmit" value="등록하기"/>
                 </div>
               </form>
