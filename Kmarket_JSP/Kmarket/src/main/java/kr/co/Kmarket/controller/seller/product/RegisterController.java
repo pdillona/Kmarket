@@ -20,8 +20,11 @@ import org.slf4j.LoggerFactory;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import kr.co.Kmarket.dto.FileDTO;
+import kr.co.Kmarket.dto.ProductDTO;
 import kr.co.Kmarket.dto.seller.Cate1DTO;
 import kr.co.Kmarket.service.FileService;
+import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.service.seller.Cate1Service;
 
 @WebServlet("/seller/product/register.do")
@@ -31,20 +34,25 @@ public class RegisterController extends HttpServlet{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private Cate1Service cateService = new Cate1Service();
 	private FileService fileService = new FileService();
+	private ProductService productService = new ProductService();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		String success = req.getParameter("success");
 		List<Cate1DTO> cate1s = cateService.selectCate1s();
 		logger.debug("cates1 : "+cate1s);
+		req.setAttribute("success", success);
 		req.setAttribute("cate1s", cate1s);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/seller/product/register.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = fileService.getPath(req, "/thumb");
+		logger.debug("path : "+path);
 		
 		MultipartRequest mr = fileService.uploadFile(req, path);
 		
@@ -59,10 +67,10 @@ public class RegisterController extends HttpServlet{
 		String point = mr.getParameter("point");  
 		String stock = mr.getParameter("stock");
 		String delivery = mr.getParameter("delivery");
-		String thumb1 = mr.getParameter("thumb1");
-		String thumb2 = mr.getParameter("thumb2");
-		String thumb3 = mr.getParameter("thumb3");
-		String detail = mr.getParameter("detail");
+		String thumb1 = mr.getOriginalFileName("thumb1");
+		String thumb2 = mr.getOriginalFileName("thumb2");
+		String thumb3 = mr.getOriginalFileName("thumb3");
+		String detail = mr.getOriginalFileName("detail");
 		String status = mr.getParameter("status");
 		String duty = mr.getParameter("duty");
 		String receipt = mr.getParameter("receipt");
@@ -92,7 +100,41 @@ public class RegisterController extends HttpServlet{
 		logger.debug("origin : "+origin);
 		logger.debug("ip : "+ip);
 		
+		String newThumb1 = fileService.renameToFile(req, path, thumb1);
+		String newThumb2 = fileService.renameToFile(req, path, thumb2);
+		String newThumb3 = fileService.renameToFile(req, path, thumb3);
+		String newDetail = fileService.renameToFile(req, path, detail);
 		
+		ProductDTO dto = new ProductDTO();
+		dto.setSeller(seller);
+		dto.setProdCate1(prodCate1);
+		dto.setProdCate2(prodCate2);
+		dto.setProdName(prodName);
+		dto.setDescript(descript);
+		dto.setCompany(company);
+		dto.setPrice(price);
+		dto.setDiscount(discount);
+		dto.setPoint(point);
+		dto.setStock(stock);
+		dto.setDelivery(delivery);
+		dto.setThumb1(thumb1);
+		dto.setNewThumb1(newThumb1);
+		dto.setThumb2(thumb2);
+		dto.setNewThumb2(newThumb2);
+		dto.setThumb3(thumb3);
+		dto.setNewThumb3(newThumb3);
+		dto.setDetail(detail);
+		dto.setNewDetail(newDetail);
+		dto.setStatus(status);
+		dto.setDuty(duty);
+		dto.setReceipt(receipt);
+		dto.setBizType(bizType);
+		dto.setOrigin(origin);
+		dto.setIp(ip);
+		logger.debug("dto : "+dto);
 		
+		productService.insertProduct(dto);
+		
+		resp.sendRedirect("/Kmarket/seller/product/register.do?success=200");
 	}
 }
