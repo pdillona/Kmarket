@@ -14,14 +14,17 @@ public class ProductService {
 	public ProductDTO selectProduct(String prodNo) {
 		return dao.selectProduct(prodNo);
 	}
-	public List<ProductDTO> selectProducts() {
-		return dao.selectProducts();
+	public List<ProductDTO> selectProducts(int start, String search, String search_text) {
+		return dao.selectProducts(start, search, search_text);
 	}
 	public void updateProduct(ProductDTO dto) {
 		dao.updateProduct(dto);
 	}
 	public void deleteProduct(String prodNo) {
 		dao.deleteProduct(prodNo);
+	}
+	public int selectCountTotal(String search, String search_text) {
+		return dao.selectCountTotal(search, search_text);
 	}
 	
 }

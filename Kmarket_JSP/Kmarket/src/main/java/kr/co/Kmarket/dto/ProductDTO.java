@@ -1,6 +1,9 @@
 package kr.co.Kmarket.dto;
 
+import kr.co.Kmarket.utils.Utils;
+
 public class ProductDTO {
+	private Utils utils = new Utils();
 	private int prodNo;
 	private String seller;
 	private int prodCate1;
@@ -88,6 +91,9 @@ public class ProductDTO {
 	}
 	public int getPrice() {
 		return price;
+	}
+	public String getPriceComma() {
+		return utils.comma(price);
 	}
 	public void setPrice(int price) {
 		this.price = price;
