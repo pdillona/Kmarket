@@ -3,9 +3,9 @@
 <%@ include file="../_header.jsp" %>
 <%@ include file="../_aside.jsp"%>
 <!-- 
-	날짜 : 2023-09-14
+	날짜 : 2023-09-18
 	이름 : 최정민
-	내용 : 상품 등록
+	내용 : 상품 수정
  -->
 <script>
     function changeSelect() {
@@ -54,7 +54,7 @@
     		
     		
     		let actionUrl = "/Kmarket/seller/product/register.do?cate1="+cate1+"&cate2="+cate2;
-    		$('#formRegister').attr('action', actionUrl);
+    		$('#formModify').attr('action', actionUrl);
     		
     		
     	});
@@ -74,7 +74,7 @@
                 </nav>
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
-                    <form id="formRegister" action="/Kmarket/seller/product/register.do" method="post" enctype="multipart/form-data">
+                    <form id="formModify" action="/Kmarket/seller/product/modify.do" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="seller" value="홍길동"/>
                         <!-- 상품분류 -->
                         <section>
