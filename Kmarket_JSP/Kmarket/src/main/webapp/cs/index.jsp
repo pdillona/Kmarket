@@ -4,7 +4,7 @@
         <div class="main">
           <h1 class="title"><strong>케이마켓</strong>이 도와드릴게요!</h1>              
           <section class="notice">
-            <h1>공지사항<a href="${ctxPath}/cs/notice.do">전체보기</a></h1>
+            <h1>공지사항<a href="${ctxPath}/cs/notice.do?group=notice&aeName=all&type=1">전체보기</a></h1>
             <ul>
               <li>
                 <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
@@ -30,29 +30,29 @@
           </section>
         
           <section class="faq">
-            <h1>자주 묻는 질문<a href="${ctxPath}/cs/faq.do">전체보기</a>
+            <h1>자주 묻는 질문<a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20">전체보기</a>
             </h1>
             <ol>
               <li>
-                <a href="#"><span>회원</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=member&type=20"><span>회원</span></a>
               </li>
               <li>
-                <a href="#"><span>쿠폰/이벤트</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=coupon&type=20"><span>쿠폰/이벤트</span></a>
               </li>
               <li>
-                <a href="#"><span>주문/결제</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=order&type=20"><span>주문/결제</span></a>
               </li>
               <li>
-                <a href="#"><span>배송</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=delivery&type=20"><span>배송</span></a>
               </li>
               <li>
-                <a href="#"><span>취소/반품/교환</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=cancle&type=20"><span>취소/반품/교환</span></a>
               </li>
               <li>
-                <a href="#"><span>여행/숙박/항공</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=travel&type=20"><span>여행/숙박/항공</span></a>
               </li>
               <li>
-                <a href="#"><span>안전거래</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=safe&type=20"><span>안전거래</span></a>
               </li>
             </ol>
           </section>
@@ -60,7 +60,7 @@
           <section class="qna">
             <h1>
               문의하기
-              <a href="${ctxPath}/cs/qna.do">전체보기</a>
+              <a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=all&type=20">전체보기</a>
             </h1>
             <ul>
               <li>

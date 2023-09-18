@@ -74,9 +74,9 @@
               <li><a href="#">할인상품</a></li>
             </ul>
             <ul>
-              <li><a href="${ctxPath}/cs/notice.do">공지사항</a></li>
-              <li><a href="${ctxPath}/cs/faq.do">자주묻는질문</a></li>
-              <li><a href="${ctxPath}/cs/qna.do">문의하기</a></li>
+              <li><a href="${ctxPath}/cs/notice.do?group=notice&aeName=all">공지사항</a></li>
+              <li><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all">자주묻는질문</a></li>
+              <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=all">문의하기</a></li>
               <li><a href="${ctxPath}/cs/index.do">고객센터</a></li>
             </ul>
           </div>

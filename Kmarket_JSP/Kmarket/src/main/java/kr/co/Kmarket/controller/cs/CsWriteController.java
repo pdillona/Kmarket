@@ -73,30 +73,9 @@ public class CsWriteController extends HttpServlet{
 		logger.debug("oName : " + oriName);
 		logger.debug("regip : " + regip);
 				
-		// DTO 생성
-		CsArticleDTO dto = new CsArticleDTO();
-		dto.setCate(cate);
-		dto.setTitle(title);
-		dto.setContent(content);
-		dto.setFile(oriName);
-		dto.setWriter(writer);
-		dto.setRegip(regip);
 
-		// 글 Insert
-		int no = aService.insertArticle(dto);
-		
-		// 파일명 수정 및 파일 Insert
-		if(oriName != null) {			
-			String sName = aService.renameToFile(req, path, oriName);
-			
-			// 파일 Insert
-			FileDTO fileDto = new FileDTO();
-			fileDto.setAno(no);
-			fileDto.setOriname(oriName);
-			fileDto.setNewname(sName);
-			
-			fService.insertFile(fileDto);
-		}
+
+
 		
 		// 리다이렉트
 		resp.sendRedirect("/Kmarket/cs/qna/list.do?group="+group+"&cate="+cate+"&cateDetail="+cateDtail);

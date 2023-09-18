@@ -34,27 +34,11 @@ public class FaqListController extends HttpServlet{
 		String cate  = req.getParameter("cate");
 		String pg    = req.getParameter("pg");
 		
-		// 현재 페이지 번호
-		int currentPage = service.getCurrentPage(pg);
-		
-		// 전체 게시물 갯수 
-		int total = service.selectCountTotal(cate);
-		
-		// 마지막 페이지 번호
-		int lastPageNum = service.getLastPageNum(total);
-		
-		// 페이지 그룹 start, end 번호
-		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
-		
-		// 페이지 시작번호
-		int pageStartNum = service.getPageStartNum(total, currentPage);
-		
-		// 시작 인덱스
-		int start = service.getStartNum(currentPage);
+
 		
 		
 		
-		List<CsArticleDTO> articles = service.selectArticles(cate, start);
+	
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/list.jsp");

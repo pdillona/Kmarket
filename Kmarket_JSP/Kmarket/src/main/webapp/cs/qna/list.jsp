@@ -11,13 +11,13 @@
             <aside>
               <h2>문의하기</h2>
               <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
+            	<li class="on"><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=member&type=20">회원</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=coupon&type=20">쿠폰/이벤트</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=order&type=20">주문/결제</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=delivery&type=20">배송</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=cancle&type=20">취소/반품/교환</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=travel&type=20">여행/숙박/항공</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=safe&type=20">안전거래</a></li>
               </ul>
             </aside>
             <article>
@@ -26,65 +26,28 @@
                 <h2>회원관련 문의 내용입니다.</h2>
               </nav>
               <table>
+              	<c:forEach var="article" items="${articles}">
                 <tr>
-                  <td><a href="./view.html">[가입] 가입 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
+                  <td><a href="./view.html">[ ${article.dName}  ] ${article.title}  </a></td>
+                  <td>${article.writer}</td>
+                  <td>${article.rdate}</td>
                 </tr>
-                <tr>
-                  <td><a href="./view.html">[탈퇴] 탈퇴 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
-                </tr>
-                <tr>
-                  <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
-                </tr>
-                <tr>
-                  <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
-                </tr>
-                <tr>
-                  <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
-                </tr>
-                <tr>
-                  <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
-                </tr>
-                <tr>
-                  <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
-                </tr>
-                <tr>
-                  <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
-                </tr>
-                <tr>
-                  <td><a href="#">[탈퇴] 회원정보 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
-                </tr>
-                <tr>
-                  <td><a href="#">[탈퇴] 회원정보 문의내용</a></td>
-                  <td>chh**</td>
-                  <td>2022.11.21</td>
-                </tr>
+               	</c:forEach> 
+                
               </table>
 
-              <div class="page">
-                <a href="#" class="prev">이전</a>
-                <a href="#" class="num on">1</a>
-                <a href="#" class="num">2</a>
-                <a href="#" class="num">3</a>
-                <a href="#" class="next">다음</a>
-              </div>
+		    <!-- 페이지 네비게이션 -->
+		        <div class="page">
+		        	<c:if test="${pageGroupStart > 1}">
+		            	<a href="${ctxPath}/cs/qna.do?group=qna&type=20&pg=${pageGroupStart - 1}" class="prev">이전</a>
+		            </c:if>
+		            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+		            	<a href="${ctxPath}/cs/qna.do?group=qna&type=20&pg=${i}&" class="num ${currentPage == i?'current':'off'}">${i}</a>
+		            </c:forEach>
+		            <c:if test="${pageGroupEnd < lastPageNum}">
+		            	<a href="${ctxPath}/cs/qna.do?group=qna&type=20&pg=${pageGroupEnd + 1}" class="next">다음</a>
+		            </c:if>
+		        </div>
 
               <a href="${ctxPath}/cs/write.do" class="btnWrite">문의하기</a>
 
