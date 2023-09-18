@@ -1,24 +1,29 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script src="${ctxPath}/js/zipcode.js"></script>
 <script src="${ctxPath}/js/validation.js"></script>
 <script src="${ctxPath}/js/checkMember.js"></script>
+<script src="${ctxPath}/js/authEmail.js"></script>
         <main id="member">
             <div class="registerSeller">
 				<nav>
 					<h1>판매자 회원가입</h1>
 				</nav>
                 
-				<form action="#" method="POST">
+				<form id="formUser" action="/Kmarket/member/register.do" method="POST">
+				<input type="hidden" name="division" value="REGISTER"/> <!-- 이메일 인증 - 회원가입, 아이디 찾기, 비밀번호 찾기 구분짓기 위해서 -->
 				<input type="hidden" name="type" value="${type}"/>
 					<section>
 						<table>
 							<caption>필수 정보입력</caption>
 							<tr>
 								<th><span class="essential">*</span>아이디</th>
-								<td><input type="text" name="km_uid" placeholder="아이디를 입력"
-									required /> <span class="msgSId">&nbsp;&nbsp;영문, 숫자로
-										4~12자까지 설정해 주세요.</span></td>
+								<td>
+								<input type="text" name="km_uid" placeholder="아이디를 입력" required /> 
+								<button type="button" id="btnCheckUid"><img src="./img/chk_id.gif" alt="중복확인"/></button>
+								<span class="msgSId">&nbsp;&nbsp;영문, 숫자로 4~12자까지 설정해 주세요.</span>
+								</td>
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>비밀번호</th>
@@ -76,15 +81,22 @@
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>EMAIL</th>
-								<td><input type="email" name="kms_email"
-									placeholder="이메일 입력" required /></td>
+								<td>
+								<input type="email" name="kms_email" placeholder="이메일 입력" required />
+								<button type="button" id="btnEmailCode"><img src="./img/chk_auth.gif" alt="인증번호 받기"/></button>
+								<span class="resultEmail"></span>
+								<div class="auth">
+                                    <input type="text" name="auth" placeholder="인증번호 입력"/>
+                                    <button type="button" id="btnEmailAuth"><img src="./img/chk_confirm.gif" alt="확인"/></button>
+                                </div>
+								</td>
 							</tr>
 							<tr class="addr">
 								<th>회사주소</th>
 								<td>
 									<div>
-										<input type="text" name="kms_zip" id="zip"
-											placeholder="우편번호 입력 클릭" readonly />
+										<input type="text" name="kms_zip" id="zip" placeholder="우편번호" readonly />
+										<button type="button" onclick="zipcode()"><img src="./img/chk_post.gif" alt="우편번호찾기"/></button>
 									</div>
 									<div>
 										<input type="text" name="kms_addr1" id="addr1" size="50"

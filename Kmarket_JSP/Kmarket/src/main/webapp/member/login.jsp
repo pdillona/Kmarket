@@ -6,7 +6,7 @@
                     <h1>로그인</h1>                    
                 </nav>
                 
-				<form action="#">
+				<form action="/Kmarket/member/login.do" method="post">
 
                     <table border="0">
                         <tr>
@@ -26,10 +26,10 @@
 						<a href="${ctxPath}/member/join.do">회원가입</a>
 					</span>
 
-                    <a href="#" class="banner"><img src="${ctxPath}/img/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기"></a>
+                    <a href="https://safelogin.kr/sauth/regist?site_code=NA&sub_code=0" class="banner"><img src="${ctxPath}/member/img/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기"></a>
 
 				</form>
-				<img src="${ctxPath}/img/member_certifi_logo.gif" alt="banner">
+				<img src="${ctxPath}/member/img/member_certifi_logo.gif" alt="banner">
             </div>
         </main>        
 <%@ include file="./_footer.jsp" %>

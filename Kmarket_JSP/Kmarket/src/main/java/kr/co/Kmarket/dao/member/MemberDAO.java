@@ -12,6 +12,7 @@ import kr.co.Kmarket.dto.member.MemberDTO;
 public class MemberDAO extends DBHelper{
 	
 	private String SQL = "";
+	private String SQL2 = "";
 	
 	private static MemberDAO instance = new MemberDAO();
 	public static MemberDAO getInstance() {
@@ -23,59 +24,76 @@ public class MemberDAO extends DBHelper{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//회원가입
-	public void insertMember(MemberDTO dto) {
+	public void insertMember(String type, MemberDTO dto) {
 		
 		SQL = "INSERT INTO `km_member` SET "
 				+ "`uid`=?, "
-				+ "`level`=?, "
-				+ "`pass`=SHA2(?, 256),"
-				+ "`name`=?,"
-				+ "`gender`=?,"
-				+ "`hp`=?,"
+				+ "`pass`=SHA2(?, 256), "
+				+ "`name`=?, "
+				+ "`gender`=?, "
+				+ "`hp`=?, "
 				+ "`email`=?, "
-				+ "`type`=?, "
-				+ "`point`=?, "
-				+ "`zip`=?,"
-				+ "`addr1`=?,"
-				+ "`addr2`=?,"
+				+ "`type`=1, "
+				+ "`zip`=?, "
+				+ "`addr1`=?, "
+				+ "`addr2`=?, "
+				+ "`regip`=?, "
+				+ "`rdate`=NOW()";
+		
+		SQL2 = "INSERT INTO `km_member` SET "
+				+ "`uid`=?, "
+				+ "`pass`=SHA2(?, 256), "
+				+ "`email`=?, "
+				+ "`type`=2, "
+				+ "`level`=5, "
+				+ "`zip`=?, "
+				+ "`addr1`=?, "
+				+ "`addr2`=?, "
 				+ "`company`=?, "
 				+ "`ceo`=?, "
 				+ "`bizRegNum`=?, "
 				+ "`comRegNum`=?, "
 				+ "`tel`=?, "
 				+ "`manager`=?, "
-				+ "`menagerHp`=?, "
+				+ "`managerHp`=?, "
 				+ "`fax`=?, "
-				+ "`regip`=?,"
+				+ "`regip`=?, "
 				+ "`rdate`=NOW()";
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL);
-			psmt.setString(1, dto.getUid());
-			psmt.setInt(2, dto.getLevel());
-			psmt.setString(3, dto.getPass());
-			psmt.setString(4, dto.getName());
-			psmt.setInt(5, dto.getGender());
-			psmt.setString(6, dto.getHp());
-			psmt.setString(7, dto.getEmail());
-			psmt.setInt(8, dto.getType());
-			psmt.setInt(9, dto.getPoint());
-			psmt.setString(10, dto.getZip());
-			psmt.setString(11, dto.getAddr1());
-			psmt.setString(12, dto.getAddr2());
-			psmt.setString(13, dto.getCompany());
-			psmt.setString(14, dto.getCeo());
-			psmt.setString(15, dto.getBizRegNum());
-			psmt.setString(16, dto.getComRegNum());
-			psmt.setString(17, dto.getTel());
-			psmt.setString(18, dto.getManager());
-			psmt.setString(19, dto.getManagerHp());
-			psmt.setString(20, dto.getFax());
-			psmt.setString(21, dto.getRegip());
-			psmt.setString(22, dto.getRdate());
-			psmt.executeUpdate();
-			
+			if(type.equals("normal")) {
+				psmt = conn.prepareStatement(SQL);
+				psmt.setString(1, dto.getUid());
+				psmt.setString(2, dto.getPass());
+				psmt.setString(3, dto.getName());
+				psmt.setInt(4, dto.getGender());
+				psmt.setString(5, dto.getHp());
+				psmt.setString(6, dto.getEmail());
+				psmt.setString(7, dto.getZip());
+				psmt.setString(8, dto.getAddr1());
+				psmt.setString(9, dto.getAddr2());
+				psmt.setString(10, dto.getRegip());
+				psmt.executeUpdate();
+			}else {
+				psmt = conn.prepareStatement(SQL2);
+				psmt.setString(1, dto.getUid());
+				psmt.setString(2, dto.getPass());
+				psmt.setString(3, dto.getEmail());
+				psmt.setString(4, dto.getZip());
+				psmt.setString(5, dto.getAddr1());
+				psmt.setString(6, dto.getAddr2());
+				psmt.setString(7, dto.getCompany());
+				psmt.setString(8, dto.getCeo());
+				psmt.setString(9, dto.getBizRegNum());
+				psmt.setString(10, dto.getComRegNum());
+				psmt.setString(11,dto.getTel());
+				psmt.setString(12, dto.getManager());
+				psmt.setString(13, dto.getManagerHp());
+				psmt.setString(14, dto.getFax());
+				psmt.setString(15, dto.getRegip());
+				psmt.executeUpdate();
+			}
 			close();
 			
 		}catch(Exception e) {
