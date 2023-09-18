@@ -6,7 +6,6 @@
     		const agree1 = document.getElementsByName('agree1')[0];
     		const agree2 = document.getElementsByName('agree2')[0];
     		const agree3 = document.getElementsByName('agree3')[0];
-    		const type = document.getElementsByName('type')[0];
     		
     		const agree = document.querySelector('.agree'); 
     		agree.addEventListener('click', function(e){
@@ -21,20 +20,13 @@
     			}else if(!agree3.checked){
     				alert('개인정보 수집동의에 동의하셔야 합니다.');
     				return;
-    			}else{
-    				if(type.value == 'normal'){
-    					location.href = '/Kmarket/member/register.do';
-    				}else{
-    					location.href = '/Kmarket/member/registerSeller.do';	
-    				}
-    				
-    				
     			}
     		});
     	}
 </script>
         <main id="member">
             <div class="signup">
+            	<form action="/Kmarket/member/SignUpController.do" method="post">
             	<input type="hidden" name="type" value="${type}"/>
 				<nav>
 					<h1>약관동의</h1>
@@ -84,6 +76,7 @@
 					<input type="button" class="agree" value="동의하기" />
 					
 				</div>
+				</form>
             </div>
         </main>        
 <%@ include file="./_footer.jsp" %>

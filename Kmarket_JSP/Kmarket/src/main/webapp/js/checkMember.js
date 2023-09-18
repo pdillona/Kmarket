@@ -5,11 +5,11 @@ $(function(){
 	// 아이디 중복체크
 	const inputUid = document.getElementsByName('km_uid')[0];
 	const uidResult = document.getElementsByClassName('msgId')[0];
-	const btnCheckUid = document.getElementByClassName('btnCheckUid');
+	const btnCheckUid = document.getElementById('btnCheckUid');
 	
 	if(btnCheckUid != null){
 		
-		btnCheckUid.keydown = function(){
+		btnCheckUid.onclick = function(){
 		
 			const uid = inputUid.value;
 			
@@ -23,7 +23,7 @@ $(function(){
 			
 			// 서버전송
 			const xhr = new XMLHttpRequest();
-			xhr.open('GET', '/Kmarket/checkUid.do?uid='+uid);
+			xhr.open('GET', '/Kmarket/member/checkUid.do?uid='+uid);
 			xhr.send();
 			
 			xhr.onreadystatechange = function(){
@@ -49,67 +49,29 @@ $(function(){
 		}// btnCheckUid onclick end
 	}
 	
-	// 닉네임 중복체크
-	$('#btnCheckNick').click(function(){
 		
-		console.log('here...1');
-		
-		const nick = $('input[name=nick]').val();
-		console.log('here...2 : ' + nick);
-		
-		// 별명 유효성 검사
-		if(!nick.match(reNick)){
-			console.log('here...3');
-			$('.nickResult').css('color', 'red').text('유효한 별명이 아닙니다.');
-			isNickOk = false;
-			return;				
-		}
-		
-		console.log('here...4');
-		
-		$.ajax({
-			url:'/Jboard2/checkNick.do?nick='+nick,
-			type:'get',
-			dataType:'json',
-			success: function(data){
-				
-				console.log('here...5 : ' + data);
-				
-				if(data.result > 0){
-					$('.nickResult').css('color', 'red').text('이미 사용중인 별명입니다.');
-					isNickOk = false;
-				}else{
-					$('.nickResult').css('color', 'green').text('사용 가능한 별명입니다.');
-					isNickOk = true;
-				}
-				
-			}
-		});
-		
-	});// btnCheckNick end
-	
 	// 휴대폰 중복체크
-	$('input[name=hp]').focusout(function(){
+	$('input[name=km_hp]').focusout(function(){
 		
-		const hp = $(this).val();
+		const km_hp = $(this).val();
 		
-		if(!hp.match(reHp)){
-			$('.resultHp').text('휴대폰 번호가 유효하지 않습니다.');
+		if(!km_hp.match(reHp)){
+			$('.msgHp').css('color', 'red').text('휴대폰 번호가 유효하지 않습니다.');
 			isHpOk = false;
 			return;	
 		}
 		
-		const url = '/Jboard2/checkHp.do?hp='+hp;
+		const url = '/Kmarket/member/checkHp.do?hp='+km_hp;
 		
 		$.get(url, function(result){
 			
 			const data = JSON.parse(result);
 			
 			if(data.result > 0){
-				$('.resultHp').css('color', 'red').text('이미 사용중인 휴대폰입니다.');
+				$('.msgHp').css('color', 'red').text('이미 사용중인 휴대폰입니다.');
 				isHpOk = false;
 			}else{
-				$('.resultHp').css('color', 'green').text('사용 가능한 휴대폰입니다.');
+				$('.msgHp').css('color', 'green').text('사용 가능한 휴대폰입니다.');
 				isHpOk = true;
 			}
 			

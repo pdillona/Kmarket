@@ -385,6 +385,11 @@ header {
     margin-bottom: 6px;
     
 }
+
+#member > .register form .auth {
+    display: none;
+    margin-top: 6px;
+}
   
   /* member > .registerSeller */
   #member > .registerSeller {
@@ -482,6 +487,12 @@ header {
     border-radius: 2px;
     cursor: pointer;
   }
+  #member > .registerSeller table button {
+    border: none;
+    vertical-align: bottom;
+    margin-bottom: 6px;
+    
+}
   
   /* member > .findId */
   #member > .findId {

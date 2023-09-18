@@ -25,7 +25,10 @@ public class RegisterController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
+		String type = req.getParameter("type");
+		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/register.jsp");
 		dispatcher.forward(req, resp);
 	
@@ -34,30 +37,32 @@ public class RegisterController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String uid = req.getParameter("uid");
-		String pass1 = req.getParameter("pass1");
-		String name = req.getParameter("name");
-		String gender = req.getParameter("gender");
-		String email = req.getParameter("email");
-		String hp = req.getParameter("hp");
-		String zip = req.getParameter("zip");
-		String addr1 = req.getParameter("addr1");
-		String addr2 = req.getParameter("addr2");
+		String type = req.getParameter("type");
+		
+		String km_uid = req.getParameter("km_uid");
+		String km_pass1 = req.getParameter("km_pass1");
+		String km_name = req.getParameter("km_name");
+		String km_gender = req.getParameter("km_gender");
+		String km_email = req.getParameter("km_email");
+		String km_hp = req.getParameter("km_hp");
+		String km_zip = req.getParameter("km_zip");
+		String km_addr1 = req.getParameter("km_addr1");
+		String km_addr2 = req.getParameter("km_addr2");
 		String regip = req.getRemoteAddr();
 		
 		MemberDTO dto = new MemberDTO();
-		dto.setUid(uid);
-		dto.setPass(pass1);
-		dto.setName(name);
-		dto.setGender(gender);
-		dto.setEmail(email);
-		dto.setHp(hp);
-		dto.setZip(zip);
-		dto.setAddr1(addr1);
-		dto.setAddr2(addr2);
+		dto.setUid(km_uid);
+		dto.setPass(km_pass1);
+		dto.setName(km_name);
+		dto.setGender(km_gender);
+		dto.setEmail(km_email);
+		dto.setHp(km_hp);
+		dto.setZip(km_zip);
+		dto.setAddr1(km_addr1);
+		dto.setAddr2(km_addr2);
 		dto.setRegip(regip);
 		
-		service.insertMember(dto);
+		service.insertMember(type, dto);
 		
 		resp.sendRedirect("/Kmarket/member/login.do");
 	

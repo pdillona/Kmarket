@@ -2,6 +2,7 @@ package kr.co.Kmarket.controller.member;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,11 +21,23 @@ public class JoinController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		String type = req.getParameter("type");
-		req.setAttribute("type", type);
-		logger.debug("type : " + type );
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/join.jsp");
+		dispatcher.forward(req, resp);
 	
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String type = req.getParameter("type");
+
+        if ("normal".equals(type)) {
+            //일반 회원 가입 페이지
+            resp.sendRedirect("/Kmarket/member/register.do");
+        } else if("seller".equals(type)) {
+            //판매자 가입 페이지
+            resp.sendRedirect("/Kmarket/member/registerSeller.do");
+        } 
 	
 	}
 	

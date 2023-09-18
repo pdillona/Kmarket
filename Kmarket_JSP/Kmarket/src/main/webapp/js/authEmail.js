@@ -8,18 +8,18 @@ $(function(){
 	
 	$('#btnEmailCode').click(function(){
 		
-		const type  = $('input[name=type]').val();
+		const division  = $('input[name=division]').val();
 		const uid   = $('input[name=uid]').val();
 		const name  = $('input[name=name]').val();
-		const email = $('input[name=email]').val();
+		const email = $('input[name=km_email]').val();
 		
-		console.log('type : ' + type);
+		console.log('division : ' + division);
 		console.log('uid : ' + uid);
 		console.log('name : ' + name);
 		console.log('email : ' + email);
 		
 		const jsonData = {
-			"type": type,
+			"division": division,
 			"uid": uid,
 			"name": name,
 			"email": email
@@ -39,7 +39,7 @@ $(function(){
 		setTimeout(function(){
 			
 			$.ajax({
-				url:'/Jboard2/authEmail.do',
+				url:'/Kmarket/member/authEmail.do',
 				type: 'GET',
 				data: jsonData,
 				dataType: 'json',
@@ -63,7 +63,7 @@ $(function(){
 						if(data.status > 0){
 							$('.resultEmail').css('color', 'green').text('이메일을 확인 후 인증코드를 입력하세요.');
 							$('.auth').show();
-							$('input[name=email]').attr('readonly', true);
+							$('input[name=km_email]').attr('readonly', true);
 						}else{
 							$('.resultEmail').css('color', 'red').text('인증코드 전송이 실패했습니다. 잠시후 다시 시도하십시요.');
 							$('.resultEmailForId').css('color', 'red').text('해당하는 사용자, 이메일이 일치하지 않습니다.');
@@ -85,7 +85,7 @@ $(function(){
 		};
 				
 		$.ajax({
-			url: '/Jboard2/authEmail.do',
+			url: '/Kmarket/member/authEmail.do',
 			type: 'POST',
 			data: jsonData,
 			dataType: 'json',
