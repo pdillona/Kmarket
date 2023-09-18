@@ -222,7 +222,7 @@ label {
     vertical-align: top;
 }
 
-input[name=search]{
+input[name=search_text]{
     margin-bottom: 4px;
     padding-bottom: 8px;
 }

@@ -1,5 +1,6 @@
 package kr.co.Kmarket.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -77,8 +78,126 @@ public class ProductDAO extends DBHelper{
 	public ProductDTO selectProduct(String prodNo) {
 		return null;
 	}
-	public List<ProductDTO> selectProducts() {
-		return null;
+	public List<ProductDTO> selectProducts(int start, String search, String search_text) {
+		List<ProductDTO> products = new ArrayList<ProductDTO>();
+		sql = "SELECT * FROM `km_product` ORDER BY `prodNo` DESC LIMIT ?, 10";
+		String sql_search1 =  "SELECT * FROM `km_product` "
+							+ "WHERE `prodName` LIKE ? "
+							+ "ORDER BY `prodNo`DESC "
+							+ "LIMIT ?, 10";
+		String sql_search2 =  "SELECT * FROM `km_product` "
+							+ "WHERE `prodNo` LIKE ? "
+							+ "ORDER BY `prodNo`DESC "
+							+ "LIMIT ?, 10";
+		String sql_search3 =  "SELECT * FROM `km_product` "
+							+ "WHERE `company` LIKE ? "
+							+ "ORDER BY `prodNo`DESC "
+							+ "LIMIT ?, 10";
+		String sql_search4 =  "SELECT * FROM `km_product` "
+							+ "WHERE `seller` LIKE ? "
+							+ "ORDER BY `prodNo`DESC "
+							+ "LIMIT ?, 10";
+		conn = getConnection();
+		try {
+			if(search == null) {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, start);
+			}else {
+				if(search.equals("search1")) {
+					psmt = conn.prepareStatement(sql_search1);
+				}else if(search.equals("search2")) {
+					psmt = conn.prepareStatement(sql_search2);
+				}else if(search.equals("search3")) {
+					psmt = conn.prepareStatement(sql_search3);
+				}else {
+					psmt = conn.prepareStatement(sql_search4);
+				}
+				psmt.setString(1, "%"+search_text+"%");
+				psmt.setInt(2, start);
+			}
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getInt(1));
+				dto.setSeller(rs.getString(2));
+				dto.setProdCate1(rs.getInt(3));
+				dto.setProdCate2(rs.getInt(4));
+				dto.setProdName(rs.getString(5));
+				dto.setDescript(rs.getString(6));
+				dto.setCompany(rs.getString(7));
+				dto.setPrice(rs.getInt(8));
+				dto.setDiscount(rs.getInt(9));
+				dto.setPoint(rs.getInt(10));
+				dto.setStock(rs.getInt(11));
+				dto.setSold(rs.getInt(12));
+				dto.setDelivery(rs.getInt(13));
+				dto.setHit(rs.getInt(14));
+				dto.setScore(rs.getInt(15));
+				dto.setReview(rs.getInt(16));
+				dto.setThumb1(rs.getString(17));
+				dto.setNewThumb1(rs.getString(18));
+				dto.setThumb2(rs.getString(19));
+				dto.setNewThumb2(rs.getString(20));
+				dto.setThumb3(rs.getString(21));
+				dto.setNewThumb3(rs.getString(22));
+				dto.setDetail(rs.getString(23));
+				dto.setNewDetail(rs.getString(24));
+				dto.setStatus(rs.getString(25));
+				dto.setDuty(rs.getString(26));
+				dto.setReceipt(rs.getString(27));
+				dto.setBizType(rs.getString(28));
+				dto.setOrigin(rs.getString(29));
+				dto.setIp(rs.getString(30));
+				dto.setRdate(rs.getString(31));
+				dto.setEtc1(rs.getInt(32));
+				dto.setEtc2(rs.getInt(33));
+				dto.setEtc3(rs.getString(34));
+				dto.setEtc4(rs.getString(35));
+				dto.setEtc5(rs.getString(36));
+				products.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectProducts error : "+e.getMessage());
+		}
+		return products;
+	}
+	public int selectCountTotal(String search, String search_text) {
+		int total = 0;
+		sql = "SELECT COUNT(*) FROM `km_product`";
+		String sql_search1 =  "SELECT COUNT(*) FROM `km_product` "
+							+ "WHERE `prodName` LIKE ?";
+		String sql_search2 =  "SELECT COUNT(*) FROM `km_product` "
+							+ "WHERE `prodNo` LIKE ?";
+		String sql_search3 =  "SELECT COUNT(*) FROM `km_product` "
+							+ "WHERE `company` LIKE ?";
+		String sql_search4 =  "SELECT COUNT(*) FROM `km_product` "
+							+ "WHERE `seller` LIKE ?";
+		conn = getConnection();
+		try {
+			if(search == null) {
+				psmt = conn.prepareStatement(sql);
+			}else {
+				if(search.equals("search1")) {
+					psmt = conn.prepareStatement(sql_search1);
+				}else if(search.equals("search2")) {
+					psmt = conn.prepareStatement(sql_search2);
+				}else if(search.equals("search3")) {
+					psmt = conn.prepareStatement(sql_search3);
+				}else {
+					psmt = conn.prepareStatement(sql_search4);
+				}
+				psmt.setString(1, "%"+search_text+"%");
+			}
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectCountTotal : "+e.getMessage());
+		}
+		return total;
 	}
 	public void updateProduct(ProductDTO dto) {}
 	public void deleteProduct(String prodNo) {}
