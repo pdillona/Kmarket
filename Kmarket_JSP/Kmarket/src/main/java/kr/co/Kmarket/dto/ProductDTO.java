@@ -3,6 +3,7 @@ package kr.co.Kmarket.dto;
 import kr.co.Kmarket.utils.Utils;
 
 public class ProductDTO {
+	
 	private Utils utils = new Utils();
 	private int prodNo;
 	private String seller;
@@ -293,7 +294,5 @@ public class ProductDTO {
 				+ ", origin=" + origin + ", ip=" + ip + ", rdate=" + rdate + ", etc1=" + etc1 + ", etc2=" + etc2
 				+ ", etc3=" + etc3 + ", etc4=" + etc4 + ", etc5=" + etc5 + "]";
 	}
-	
-	
 	
 }

@@ -2,11 +2,15 @@ package kr.co.Kmarket.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.Kmarket.dao.ProductDAO;
 import kr.co.Kmarket.dto.ProductDTO;
 
 public class ProductService {
 	private ProductDAO dao = new ProductDAO();
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public void insertProduct(ProductDTO dto) {
 		dao.insertProduct(dto);
@@ -14,8 +18,12 @@ public class ProductService {
 	public ProductDTO selectProduct(String prodNo) {
 		return dao.selectProduct(prodNo);
 	}
-	public List<ProductDTO> selectProducts(int start, String search, String search_text) {
-		return dao.selectProducts(start, search, search_text);
+	public List<ProductDTO> selectProducts(String seller, int start, String search, String search_text) {
+		return dao.selectProducts(seller, start, search, search_text);
+	}
+	public ProductDTO selectImages(String prodNo) {
+		logger.debug(prodNo);
+		return dao.selectImages(prodNo);
 	}
 	public void updateProduct(ProductDTO dto) {
 		dao.updateProduct(dto);

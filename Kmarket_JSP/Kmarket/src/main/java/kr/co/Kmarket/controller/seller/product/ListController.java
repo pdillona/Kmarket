@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dto.ProductDTO;
+import kr.co.Kmarket.dto.member.MemberDTO;
 import kr.co.Kmarket.service.PageService;
 import kr.co.Kmarket.service.ProductService;
 
@@ -34,6 +36,11 @@ public class ListController extends HttpServlet{
 		logger.debug("search : "+search);
 		logger.debug("search_text : "+search_text);
 		
+		HttpSession session = req.getSession();
+		MemberDTO sessUser  = (MemberDTO) session.getAttribute("sessUser");
+		//String seller = sessUser.getUid();
+		String seller = "홍길동";
+		
 		// 현재 페이지 계산
 		int currentPage = pageService.getCurrentPage(pg);
 		
@@ -53,7 +60,7 @@ public class ListController extends HttpServlet{
 		int pageStartNum = pageService.getPageStartNum(total, currentPage);
 		
 		// 현재 페이지 게시물 조회
-		List<ProductDTO> products = productService.selectProducts(start, search, search_text);
+		List<ProductDTO> products = productService.selectProducts(seller, start, search, search_text);
 		
 		req.setAttribute("products", products);
 		req.setAttribute("currentPage", currentPage);
