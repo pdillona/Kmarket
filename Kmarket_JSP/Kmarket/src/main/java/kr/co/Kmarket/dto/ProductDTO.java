@@ -291,6 +291,8 @@ public class ProductDTO {
 				+ review + ", thumb1=" + thumb1 + ", newThumb1=" + newThumb1 + ", thumb2=" + thumb2 + ", newThumb2="
 				+ newThumb2 + ", thumb3=" + thumb3 + ", newThumb3=" + newThumb3 + ", detail=" + detail + ", newDetail="
 				+ newDetail + ", status=" + status + ", duty=" + duty + ", receipt=" + receipt + ", bizType=" + bizType
-				+ ", origin=" + origin + ", ip=" + ip + ", rdate=" + rdate + "]";
+				+ ", origin=" + origin + ", ip=" + ip + ", rdate=" + rdate + ", etc1=" + etc1 + ", etc2=" + etc2
+				+ ", etc3=" + etc3 + ", etc4=" + etc4 + ", etc5=" + etc5 + "]";
 	}
+	
 }

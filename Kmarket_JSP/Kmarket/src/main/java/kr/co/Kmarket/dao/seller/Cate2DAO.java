@@ -56,36 +56,35 @@ public class Cate2DAO extends DBHelper{
 			rs = psmt.executeQuery();
 			
 			List<Cate2DTO> cate2s = null;
-			int currentCate1 = 0;
-			while(rs.next()) {
-				
-				if(currentCate1 == 0) {
-					
-					currentCate1 = rs.getInt(1);
-					cate2s = new ArrayList<Cate2DTO>();
-					
-				}else {
-					
-					if(currentCate1 == rs.getInt(1)) {
-						
-						Cate2DTO dto = new Cate2DTO();
-						dto.setCate1(rs.getInt(1));
-						dto.setC1Name(rs.getString(2));
-						dto.setCate2(rs.getInt(3));
-						dto.setC2Name(rs.getString(4));
-						cate2s.add(dto);
-						
-					}else {
-						
-						categories.add(cate2s);
-						currentCate1 = 0;
-						
-						// 커서 다시 한줄 위로 이동
-						rs.previous();
-					}
-				}
-			}
-			close();
+	        int currentCate1 = 0;
+	        while (rs.next()) {
+	            
+	            if (currentCate1 == 0) {
+	                
+	                currentCate1 = rs.getInt(1);
+	                cate2s = new ArrayList<Cate2DTO>();
+	            }
+	            
+	            Cate2DTO dto = new Cate2DTO();
+	            dto.setCate1(rs.getInt(1));
+	            dto.setC1Name(rs.getString(2));
+	            dto.setCate2(rs.getInt(3));
+	            dto.setC2Name(rs.getString(4));
+	            cate2s.add(dto);
+	            
+	            // 마지막 레코드 처리
+	            if (rs.isLast()) {
+	                categories.add(cate2s);
+	            }
+	            else if (currentCate1 != rs.getInt(1)) {
+	                categories.add(cate2s);
+	                currentCate1 = rs.getInt(1);
+	                cate2s = new ArrayList<Cate2DTO>();
+	            }
+	        }
+	        
+	        close();
+
 			
 		} catch (Exception e) {
 			logger.error("selectCategories error : "+e.getMessage());

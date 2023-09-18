@@ -265,6 +265,124 @@ public class ProductDAO extends DBHelper{
 		}
 		return total;
 	}
+	
+	//무현 추가 베스트 상품
+	
+	public List<ProductDTO> selectProductsBest() {
+		List<ProductDTO> products = new ArrayList<>();
+		try {
+			conn = getConnection();
+			sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `sold` DESC LIMIT 5";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getInt(1));
+				dto.setSeller(rs.getString(2));
+				dto.setProdCate1(rs.getInt(3));
+				dto.setProdCate2(rs.getInt(4));
+				dto.setProdName(rs.getString(5));
+				dto.setDescript(rs.getString(6));
+				dto.setCompany(rs.getString(7));
+				dto.setPrice(rs.getInt(8));
+				dto.setDiscount(rs.getInt(9));
+				dto.setPoint(rs.getInt(10));
+				dto.setStock(rs.getInt(11));
+				dto.setSold(rs.getInt(12));
+				dto.setDelivery(rs.getInt(13));
+				dto.setHit(rs.getInt(14));
+				dto.setScore(rs.getInt(15));
+				dto.setReview(rs.getInt(16));
+				dto.setThumb1(rs.getString(17));
+				dto.setNewThumb1(rs.getString(18));
+				dto.setThumb2(rs.getString(19));
+				dto.setNewThumb2(rs.getString(20));
+				dto.setThumb3(rs.getString(21));
+				dto.setNewThumb3(rs.getString(22));
+				dto.setDetail(rs.getString(23));
+				dto.setNewDetail(rs.getString(24));
+				dto.setStatus(rs.getString(25));
+				dto.setDuty(rs.getString(26));
+				dto.setReceipt(rs.getString(27));
+				dto.setBizType(rs.getString(28));
+				dto.setOrigin(rs.getString(29));
+				dto.setIp(rs.getString(30));
+				dto.setRdate(rs.getString(31));
+				dto.setEtc1(rs.getInt(32));
+				dto.setEtc2(rs.getInt(33));
+				dto.setEtc3(rs.getString(34));
+				dto.setEtc4(rs.getString(35));
+				dto.setEtc5(rs.getString(36));
+				products.add(dto);
+				
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsbest : "+e.getMessage());
+		}
+		return products;
+		
+	}
+	
+	//무현 추가 히트상품 8건 조회
+	
+	public List<ProductDTO> selectProductsHit() {
+		List<ProductDTO> products = new ArrayList<>();
+		try {
+			conn = getConnection();
+			sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `hit` DESC LIMIT 8";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getInt(1));
+				dto.setSeller(rs.getString(2));
+				dto.setProdCate1(rs.getInt(3));
+				dto.setProdCate2(rs.getInt(4));
+				dto.setProdName(rs.getString(5));
+				dto.setDescript(rs.getString(6));
+				dto.setCompany(rs.getString(7));
+				dto.setPrice(rs.getInt(8));
+				dto.setDiscount(rs.getInt(9));
+				dto.setPoint(rs.getInt(10));
+				dto.setStock(rs.getInt(11));
+				dto.setSold(rs.getInt(12));
+				dto.setDelivery(rs.getInt(13));
+				dto.setHit(rs.getInt(14));
+				dto.setScore(rs.getInt(15));
+				dto.setReview(rs.getInt(16));
+				dto.setThumb1(rs.getString(17));
+				dto.setNewThumb1(rs.getString(18));
+				dto.setThumb2(rs.getString(19));
+				dto.setNewThumb2(rs.getString(20));
+				dto.setThumb3(rs.getString(21));
+				dto.setNewThumb3(rs.getString(22));
+				dto.setDetail(rs.getString(23));
+				dto.setNewDetail(rs.getString(24));
+				dto.setStatus(rs.getString(25));
+				dto.setDuty(rs.getString(26));
+				dto.setReceipt(rs.getString(27));
+				dto.setBizType(rs.getString(28));
+				dto.setOrigin(rs.getString(29));
+				dto.setIp(rs.getString(30));
+				dto.setRdate(rs.getString(31));
+				dto.setEtc1(rs.getInt(32));
+				dto.setEtc2(rs.getInt(33));
+				dto.setEtc3(rs.getString(34));
+				dto.setEtc4(rs.getString(35));
+				dto.setEtc5(rs.getString(36));
+				products.add(dto);
+				
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsbest : "+e.getMessage());
+		}
+		return products;
+		
+	}
 	public void updateProduct(ProductDTO dto) {}
 	public void deleteProduct(String prodNo) {
 		sql = "DELETE FROM `km_product` WHERE `prodNo`=?";
