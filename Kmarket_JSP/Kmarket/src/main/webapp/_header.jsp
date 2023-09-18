@@ -26,7 +26,8 @@
           $(this).closest('#bannerTop').removeClass('on');
         });
       });
-
+	
+     
     </script>
 </head>
 <body>

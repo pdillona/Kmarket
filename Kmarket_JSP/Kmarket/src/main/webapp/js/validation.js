@@ -22,65 +22,59 @@
 	//유효성 검사 (Validation)
 	$(function(){
 		
-		// 아이디 검사
-		$('input[name=uid]').keydown(function () {
-			$('.uidResult').text('');
+		// 아이디 검사(유효하지 않은 아이디 입력 후 재입력시 span부분 초기화(공백))
+		$('input[name=km_uid]').keydown(function () {
+			$('.msgId').text('');
 			isUidOk= false;
 		});
 		
 		// 비번 검사
-		$('input[name=pass2]').focusout(function() {
+		$('input[name=km_pass2]').focusout(function() {
 			
-			const pass1 = $('input[name=pass1]').val();
-			const pass2 = $('input[name=pass2]').val();
+			const pass1 = $('input[name=km_pass1]').val();
+			const pass2 = $('input[name=km_pass2]').val();
 			
 			if(pass1 == pass2){
 				
 				if(pass2.match(rePass)){
-					$('.passResult').css('color','green').text('사용할 수 있는 비밀번호 입니다.');
+					$('.msgPass2').css('color','green').text('사용할 수 있는 비밀번호 입니다.');
 					isPassOk= true;
 				}else{
-					$('.passResult').css('color','red').text('사용할 수 없는 비밀번호 입니다.');
+					$('.msgPass2').css('color','red').text('사용할 수 없는 비밀번호 입니다.');
 					isPassOk= false;
 				}
 				
 			}else{
-				$('.passResult').css('color','red').text('비밀번호가 일지 하지 않습니다.');
+				$('.msgPass2').css('color','red').text('비밀번호가 일지 하지 않습니다.');
 				isPassOk = false;
 			}
 			
 		});
 		
 		// 이름 
-		$('input[name=name]').focusout(function() {
+		$('input[name=km_name]').focusout(function() {
 			const name = $(this).val();
 			
 			if(name.match(reName)){
-				$('.nameResult').text('');
+				$('.msgName').text('');
 				isNameOk = true;
 			}else{
-				$('.nameResult').css('color','red').text('유효한이름이 아닙니다.');
+				$('.msgName').css('color','red').text('유효한 이름이 아닙니다.');
 				isNameOk = false;
 			}
 		});
 		
-		// 별명
-		$('input[name=nick]').keydown(function () {
-			$('.nickResult').text('');
-			isNickOk= false;
-		});
-		
 		
 		// 이메일
-		$('input[name=email]').keydown(function () {
+		$('input[name=km_email]').keydown(function () {
 			$('.resultEmail').text('');
 			isEmailOk= false;
 		});
 		
 		// 휴대폰
-		$('input[name=hp]').keydown(function () {
+		$('input[name=km_hp]').keydown(function () {
 			
-			$('.hpResult').text('');
+			$('.msgHp').text('');
 			isHpOk= false;
 		});
 		
@@ -106,13 +100,7 @@
 				return false;
 			}
 			
-			if(!isNickOk){
-				alert('닉네임을 확인 하세요');
-				
-				return false;
-			}
-			
-			
+						
 			if(!isEmailOk){
 				alert('이메일을 확인 하세요');
 				

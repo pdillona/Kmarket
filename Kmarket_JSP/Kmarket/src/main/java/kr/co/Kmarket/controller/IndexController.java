@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.Kmarket.dto.ProductDTO;
 import kr.co.Kmarket.dto.seller.Cate1DTO;
 import kr.co.Kmarket.dto.seller.Cate2DTO;
+import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.service.seller.Cate1Service;
 import kr.co.Kmarket.service.seller.Cate2Service;
 
@@ -34,15 +36,26 @@ public class IndexController extends HttpServlet{
 	
 	private Cate2Service Ct2Service = new Cate2Service();
 	
+	private ProductService pService = new ProductService();
+	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		List<List<Cate2DTO>> categories = Ct2Service.selectCategories();
 		
+		List<ProductDTO> products = pService.selectProductBest();
+		
+		List<ProductDTO> productshit = pService.selectProductHit();
+		
+		
+		logger.debug("products : "+ products);
 		logger.debug("categories : "+ categories);
+		logger.debug("productshit : "+ productshit);
 		
 		req.setAttribute("categories", categories);
+		req.setAttribute("products", products);
+		req.setAttribute("productshit", productshit);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");

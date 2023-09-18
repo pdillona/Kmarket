@@ -1,9 +1,45 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%@ include file="../_aside.jsp"%>
+<script>
+$(function(){
+	$('input[name=all]').change(function(){
+		const isChecked = $(this).is(':checked');
+		
+		if(isChecked){
+			// 전체선택
+			$('input[name=chk]').prop('checked', true);
+		}else{
+			// 전체해제
+			$('input[name=chk]').prop('checked', false);
+		}
+	});
+	$('input[name=chk]').change(function(){
+		const isChecked = $(this).is(':checked');
+		
+		if(!isChecked){
+			// 전체선택
+			$('input[name=all]').prop('checked', false);
+		}
+	});
+	
+	$('.btnDelete').click(function(e){
+		e.preventDefault();
+		const isChecked = $('input[name=chk]').is(':checked');
+		if(isChecked){
+			if(confirm('정말 삭제하시겠습니까?')) {
+			$('#formCheck').submit();
+			}	
+		}
+	});
+});
+	$('#btnSearch').click(function(){
+		$('#formSearch').submit();
+	});
+</script>
    <section id="seller-product-list">
        <nav>
-           <h3>상품관리</h3>
+           <h3>상품현황</h3>
            <p>
                HOME > 상품관리 > <strong>상품현황</strong>
            </p>
@@ -11,16 +47,17 @@
        <!-- 상품현황 컨텐츠 시작 -->                                
        <section>
            <div>
-           <form action="/Kmarket/seller/product/list.do" method="get">
+           <form id="formSearch" action="/Kmarket/seller/product/list.do" method="get">
 	           <select name="search">
 	                  <option value="search1">상품명</option>
-	                  <option value="search2">상품코드</option>
-	                  <option value="search3">제조사</option>
-	                  <option value="search4">판매자</option>                                    
+	                  <option value="search2">상품코드</option>                               
 	           </select>
 	           <input type="text" name="search_text">
+	           <button id="btnSearch">검색</button>
            </form>
+           
            </div>
+           <form id="formCheck" action="/Kmarket/seller/product/delete.do" method="post">
            <table>
                <tr>
                    <th><input type="checkbox" name="all"/></th>
@@ -35,29 +72,28 @@
                    <th>조회</th>
                    <th>관리</th>
                </tr>
-               <tr>
                <c:forEach var="product" items="${products}">
-               	<td><input type="checkbox" name="chk"/></td>
+               <tr>
+               	<td><input type="checkbox" name="chk" value="${product.prodNo}"/></td>
                 <td><img src="/Kmarket/thumb/${product.prodCate1}/${product.prodCate2}/${product.newThumb1}" class="thumb"></td>
                 <td>${product.prodNo}</td>
-                <td>${product.prodName}</td>
-                <td>${product.getPriceComma}</td>
+                <td><a href="/Kmarket/product/view.do?prodNo=${product.prodNo}">${product.prodName}</a></td>
+                <td>${product.getPriceComma()}</td>
                 <td>${product.discount}</td>
                 <td>${product.point}</td>
                 <td>${product.stock}</td>
                 <td>${product.seller}</td>
                 <td>${product.hit}</td>
                 <td>
-                    <a href="#">[삭제]</a>
-                    <a href="#">[수정]</a>
+                    <a href="/Kmarket/seller/product/delete.do?prodNo=${product.prodNo}">[삭제]</a>
+                    <a href="/Kmarket/seller/product/modify.do?prodNo=${product.prodNo}">[수정]</a>
                 </td>
-               </c:forEach>
                </tr>
+			</c:forEach>
            </table>
+           </form>
 
-           
            <input class="btnDelete" type="button" value="선택삭제" />                          
-
 
            <div class="paging">
            	<c:if test="${pageGroupStart > 1}">

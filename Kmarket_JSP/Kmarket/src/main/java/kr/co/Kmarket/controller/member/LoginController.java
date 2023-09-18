@@ -27,6 +27,11 @@ public class LoginController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String success = req.getParameter("success");
+		logger.debug("success : " + success);
+		
+		req.setAttribute("success", success);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/login.jsp");
 		dispatcher.forward(req, resp);
 		
@@ -41,6 +46,18 @@ public class LoginController extends HttpServlet{
 		logger.debug("pass : " + pass);
 		
 		MemberDTO dto = service.selectMember(uid, pass);
+		
+	
+		if (dto != null) {
+            // 로그인 성공 시 세션에 사용자 정보를 저장
+            req.getSession().setAttribute("sessUser", dto);
+
+            // 로그인 성공 후 메인 페이지로 리다이렉트
+            resp.sendRedirect("/Kmarket/index.do");
+        } else {
+            // 로그인 실패 시 
+            resp.sendRedirect("/Kmarket/member/login.do");
+        }
 		
 	
 		

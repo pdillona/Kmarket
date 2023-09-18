@@ -28,8 +28,8 @@ public class MemberService {
 	private MemberDAO dao = MemberDAO.getInstance();
 	
 	//회원가입
-	public void insertMember(MemberDTO dto) {
-		dao.insertMember(dto);
+	public void insertMember(String type, MemberDTO dto) {
+		dao.insertMember(type, dto);
 	}
 
 	//중복확인
