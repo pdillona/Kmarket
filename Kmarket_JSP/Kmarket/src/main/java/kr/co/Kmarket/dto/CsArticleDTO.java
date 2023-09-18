@@ -3,8 +3,8 @@ package kr.co.Kmarket.dto;
 public class CsArticleDTO {
 
 	private int aNo;
-	private String cate;
-	private String cateDtail;
+	private String group;
+	private String cateDetail;
 	private String title;
 	private String content;
 	private int file;
@@ -15,10 +15,26 @@ public class CsArticleDTO {
 	private String akName;
 	private int type;
 	private String dName;
+	private int uLevle;
+	
 	
 	private FileDTO fileDto;
 	
 	
+	
+	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public int getuLevle() {
+		return uLevle;
+	}
+	public void setuLevle(int uLevle) {
+		this.uLevle = uLevle;
+	}
 	public FileDTO getFileDto() {
 		return fileDto;
 	}
@@ -31,17 +47,18 @@ public class CsArticleDTO {
 	public void setaNo(int aNo) {
 		this.aNo = aNo;
 	}
-	public String getCate() {
-		return cate;
+
+	public String getGroup() {
+		return group;
 	}
-	public void setCate(String cate) {
-		this.cate = cate;
+	public void setGroup(String group) {
+		this.group = group;
 	}
-	public String getCateDtail() {
-		return cateDtail;
+	public String getCateDetail() {
+		return cateDetail;
 	}
-	public void setCateDtail(String cateDtail) {
-		this.cateDtail = cateDtail;
+	public void setCateDetail(String cateDetail) {
+		this.cateDetail = cateDetail;
 	}
 	public String getTitle() {
 		return title;
@@ -110,6 +127,17 @@ public class CsArticleDTO {
 	}
 	public void setdName(String dName) {
 		this.dName = dName;
+	}
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "CsArticleDTO [aNo=" + aNo + ", group=" + group + ", cateDetail=" + cateDetail + ", title=" + title
+				+ ", content=" + content + ", file=" + file + ", writer=" + writer + ", regip=" + regip + ", rdate="
+				+ rdate + ", aeName=" + aeName + ", akName=" + akName + ", type=" + type + ", dName=" + dName
+				+ "]";
 	}
 	
 

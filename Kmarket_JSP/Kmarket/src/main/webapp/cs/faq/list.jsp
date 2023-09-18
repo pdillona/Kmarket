@@ -32,13 +32,13 @@
             <aside>
               <h2>자주묻는 질문</h2>
               <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
+      			<li class="on"><a href="${ctxPath}/cs/qna.do?group=qna&aeName=member&type=20">회원</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=coupon&type=20">쿠폰/이벤트</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=order&type=20">주문/결제</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=delivery&type=20">배송</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=cancle&type=20">취소/반품/교환</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=travel&type=20">여행/숙박/항공</a></li>
+                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=safe&type=20">안전거래</a></li>
               </ul>
             </aside>
             <article>              

@@ -31,6 +31,34 @@ public enum CsArticleService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass()); 
 	private CsArticleDAO dao = new CsArticleDAO();
 	
+//===================================================================================	
+	
+	
+	
+	
+	
+//===================  qna   ============================================
+	
+	
+	 public List<CsArticleDTO> SelectQnaArticlesAll(String group, int start, String cateDetail) {
+		 
+		 logger.debug("qnalistController group값: "+ group);
+		 logger.debug("qnalistController start값: "+ start);
+		 
+		 
+		 return dao.SelectQnaArticlesAll(group, start, cateDetail);
+	 }
+		
+	
+	
+
+	 
+	 
+	 
+//================ qna end======================================================
+	 
+	 
+	 
 	public int insertArticle(CsArticleDTO dto) {
 
 		logger.debug("ArticleService dto: " + dto);
@@ -55,8 +83,8 @@ public enum CsArticleService {
 	}
 
 	// 추가 
-	public int selectCountTotal(String cate) {
-		return dao.selectCountTotal(cate);
+	public int selectCountTotal(String group, String type, String cateDetail) {
+		return dao.selectCountTotal(group, type, cateDetail);
 	}
 	
 	public List<CsArticleDTO> selectComments(String parent) {
@@ -75,6 +103,10 @@ public enum CsArticleService {
 	public int deleteComment(String no) {
 		return dao.deleteComment(no);
 	}
+	
+	
+	
+	
 	
 	// 업로드 경로 구하기
 	public String getPath(HttpServletRequest req, String dir) {
@@ -151,57 +183,6 @@ public enum CsArticleService {
 		
 		bos.close();
 		bis.close();
-	}
-	
-	// 페이지 마지막 번호
-	public int getLastPageNum(int total) {
-		
-		int lastPageNum = 0;
-		
-		if(total % 10 == 0){
-			lastPageNum = total / 10;
-		}else{
-			lastPageNum = total / 10 + 1;
-		}
-		
-		return lastPageNum;
-	}
-	
-	// 페이지 그룹
-	public int[] getPageGroupNum(int currentPage, int lastPageNum) {
-		int currentPageGroup = (int)Math.ceil(currentPage / 10.0);
-		int pageGroupStart = (currentPageGroup - 1) * 10 + 1;
-		int pageGroupEnd = currentPageGroup * 10;
-		
-		if(pageGroupEnd > lastPageNum){
-			pageGroupEnd = lastPageNum;
-		}
-		
-		int[] result = {pageGroupStart, pageGroupEnd};
-		
-		return result;
-	}
-	
-	// 페이지 시작번호
-	public int getPageStartNum(int total, int currentPage) {
-		int start = (currentPage - 1) * 10;
-		return total - start;
-	}
-	
-	// 현재 페이지 번호
-	public int getCurrentPage(String pg) {
-		int currentPage = 1;
-		
-		if(pg != null){
-			currentPage = Integer.parseInt(pg);	
-		}
-		
-		return currentPage;
-	}
-	
-	// Limit 시작번호
-	public int getStartNum(int currentPage) {
-		return (currentPage - 1) * 10;
 	}
 
 	
