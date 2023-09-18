@@ -27,4 +27,14 @@ public class ProductService {
 		return dao.selectCountTotal(search, search_text);
 	}
 	
+	//추가 무현 베스트 상품 5개
+	public List<ProductDTO> selectProductBest (){
+		return dao.selectProductsBest();
+	}
+	
+	//추가 무현 히트상품 8개 출력
+	public List<ProductDTO> selectProductHit(){
+		return dao.selectProductsHit();
+	}
+	
 }
