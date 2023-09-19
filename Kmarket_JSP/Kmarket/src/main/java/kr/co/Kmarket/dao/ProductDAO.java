@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.dto.ProductDTO;
+import kr.co.Kmarket.dto.SearchDTO;
 
 public class ProductDAO extends DBHelper{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -78,7 +79,13 @@ public class ProductDAO extends DBHelper{
 	}
 	public ProductDTO selectProduct(String prodNo) {
 		ProductDTO dto = null;
-		sql="SELECT * FROM `km_product` WHERE `prodNo`=?";
+		sql= "SELECT DISTINCT a.*, b.`c1Name` , c.`c2Name` "
+				+ "FROM `km_product` AS a "
+				+ "JOIN `km_product_cate1` AS b "
+				+ "ON a.`prodCate1`=b.`cate1` "
+				+ "JOIN `km_product_cate2` AS c "
+				+ "ON b.`cate1`=c.`cate1` AND a.`prodCate2`=c.cate2 "
+				+ "WHERE `prodNo`=?";
 		conn = getConnection();
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -122,6 +129,8 @@ public class ProductDAO extends DBHelper{
 				dto.setEtc3(rs.getString(34));
 				dto.setEtc4(rs.getString(35));
 				dto.setEtc5(rs.getString(36));
+				dto.setC1Name(rs.getString(37));
+				dto.setC2Name(rs.getString(38));
 			}
 			close();
 		} catch (Exception e) {
@@ -129,7 +138,7 @@ public class ProductDAO extends DBHelper{
 		}
 		return dto;
 	}
-	public List<ProductDTO> selectProducts(String seller, int start, String search, String search_text) {
+	public List<ProductDTO> selectProducts(int start, SearchDTO search) {
 		List<ProductDTO> products = new ArrayList<ProductDTO>();
 		sql = "SELECT * FROM `km_product` WHERE `seller`=? ORDER BY `prodNo` DESC LIMIT ?, 10";
 		String sql_search1 =  "SELECT * FROM `km_product` "
@@ -142,18 +151,18 @@ public class ProductDAO extends DBHelper{
 							+ "LIMIT ?, 10";
 		conn = getConnection();
 		try {
-			if(search == null) {
+			if(search.getSearch() == null || search.getSearch().equals("")) {
 				psmt = conn.prepareStatement(sql);
-				psmt.setString(1, seller);
+				psmt.setString(1, search.getSeller());
 				psmt.setInt(2, start);
 			}else {
-				if(search.equals("search1")) {
+				if(search.getSearch().equals("search1")) {
 					psmt = conn.prepareStatement(sql_search1);
-				}else if(search.equals("search2")) {
+				}else if(search.getSearch().equals("search2")) {
 					psmt = conn.prepareStatement(sql_search2);
 				}
-				psmt.setString(1, seller);
-				psmt.setString(2, "%"+search_text+"%");
+				psmt.setString(1, search.getSeller());
+				psmt.setString(2, "%"+search.getSearch_text()+"%");
 				psmt.setInt(3, start);
 			}
 			rs = psmt.executeQuery();

@@ -86,7 +86,7 @@ $(function(){
                 <td>${product.hit}</td>
                 <td>
                     <a href="/Kmarket/seller/product/delete.do?prodNo=${product.prodNo}">[삭제]</a>
-                    <a href="/Kmarket/seller/product/modify.do?prodNo=${product.prodNo}">[수정]</a>
+                    <a href="/Kmarket/seller/product/modify.do?prodNo=${product.prodNo}&cate1=${product.prodCate1}&cate2=${product.prodCate2}">[수정]</a>
                 </td>
                </tr>
 			</c:forEach>
@@ -98,7 +98,7 @@ $(function(){
            <div class="paging">
            	<c:if test="${pageGroupStart > 1}">
            		<span class="prev">
-           			<a href="/Kmarket/seller/seller/product/list.do?pg=${pageGroupStart - 1}&search=${search}&search_text=${search_text}">
+           			<a href="/Kmarket/seller/product/list.do?pg=${pageGroupStart - 1}&search=${search}&search_text=${search_text}">
            			<&nbsp;이전
            			</a>
             	</span>

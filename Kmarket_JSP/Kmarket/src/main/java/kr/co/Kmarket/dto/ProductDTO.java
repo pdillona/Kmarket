@@ -41,7 +41,22 @@ public class ProductDTO {
 	private String etc3;
 	private String etc4;
 	private String etc5;
+	private String c1Name;
+	private String c2Name;
 	
+
+	public String getC2Name() {
+		return c2Name;
+	}
+	public void setC2Name(String c2Name) {
+		this.c2Name = c2Name;
+	}
+	public String getC1Name() {
+		return c1Name;
+	}
+	public void setC1Name(String c1Name) {
+		this.c1Name = c1Name;
+	}
 	//추가필드
 	private String priceWithComma;
 	
@@ -51,7 +66,6 @@ public class ProductDTO {
 	public String getPriceWithComma() {
 		return priceWithComma;
 	}
-	
 	public int getProdNo() {
 		return prodNo;
 	}
