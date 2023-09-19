@@ -1,5 +1,6 @@
 package kr.co.Kmarket.dao;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -286,6 +287,7 @@ public class ProductDAO extends DBHelper{
 				dto.setDescript(rs.getString(6));
 				dto.setCompany(rs.getString(7));
 				dto.setPrice(rs.getInt(8));
+				dto.setPriceWithComma(rs.getString(8));
 				dto.setDiscount(rs.getInt(9));
 				dto.setPoint(rs.getInt(10));
 				dto.setStock(rs.getInt(11));
@@ -345,6 +347,7 @@ public class ProductDAO extends DBHelper{
 				dto.setDescript(rs.getString(6));
 				dto.setCompany(rs.getString(7));
 				dto.setPrice(rs.getInt(8));
+				dto.setPriceWithComma(rs.getString(8));
 				dto.setDiscount(rs.getInt(9));
 				dto.setPoint(rs.getInt(10));
 				dto.setStock(rs.getInt(11));
@@ -381,8 +384,271 @@ public class ProductDAO extends DBHelper{
 			logger.error("selectProductsbest : "+e.getMessage());
 		}
 		return products;
-		
 	}
+	
+	//무현 추가 추천상품 8건 조회
+	
+		public List<ProductDTO> selectProductsScore() {
+			List<ProductDTO> products = new ArrayList<>();
+			try {
+				conn = getConnection();
+				sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `score` DESC LIMIT 8";
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+				
+				while(rs.next()) {
+					ProductDTO dto = new ProductDTO();
+					dto.setProdNo(rs.getInt(1));
+					dto.setSeller(rs.getString(2));
+					dto.setProdCate1(rs.getInt(3));
+					dto.setProdCate2(rs.getInt(4));
+					dto.setProdName(rs.getString(5));
+					dto.setDescript(rs.getString(6));
+					dto.setCompany(rs.getString(7));
+					dto.setPrice(rs.getInt(8));
+					dto.setPriceWithComma(rs.getString(8));
+					dto.setDiscount(rs.getInt(9));
+					dto.setPoint(rs.getInt(10));
+					dto.setStock(rs.getInt(11));
+					dto.setSold(rs.getInt(12));
+					dto.setDelivery(rs.getInt(13));
+					dto.setHit(rs.getInt(14));
+					dto.setScore(rs.getInt(15));
+					dto.setReview(rs.getInt(16));
+					dto.setThumb1(rs.getString(17));
+					dto.setNewThumb1(rs.getString(18));
+					dto.setThumb2(rs.getString(19));
+					dto.setNewThumb2(rs.getString(20));
+					dto.setThumb3(rs.getString(21));
+					dto.setNewThumb3(rs.getString(22));
+					dto.setDetail(rs.getString(23));
+					dto.setNewDetail(rs.getString(24));
+					dto.setStatus(rs.getString(25));
+					dto.setDuty(rs.getString(26));
+					dto.setReceipt(rs.getString(27));
+					dto.setBizType(rs.getString(28));
+					dto.setOrigin(rs.getString(29));
+					dto.setIp(rs.getString(30));
+					dto.setRdate(rs.getString(31));
+					dto.setEtc1(rs.getInt(32));
+					dto.setEtc2(rs.getInt(33));
+					dto.setEtc3(rs.getString(34));
+					dto.setEtc4(rs.getString(35));
+					dto.setEtc5(rs.getString(36));
+					products.add(dto);
+					
+				}
+				close();
+			} catch (Exception e) {
+				logger.error("selectProductsScore : "+e.getMessage());
+			}
+			return products;
+		}
+		
+		//무현 추가 최신상품 8건 조회
+		
+			public List<ProductDTO> selectProductsRdate() {
+				List<ProductDTO> products = new ArrayList<>();
+				try {
+					conn = getConnection();
+					sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `rdate` DESC LIMIT 8";
+					stmt = conn.createStatement();
+					rs = stmt.executeQuery(sql);
+					
+					while(rs.next()) {
+						ProductDTO dto = new ProductDTO();
+						dto.setProdNo(rs.getInt(1));
+						dto.setSeller(rs.getString(2));
+						dto.setProdCate1(rs.getInt(3));
+						dto.setProdCate2(rs.getInt(4));
+						dto.setProdName(rs.getString(5));
+						dto.setDescript(rs.getString(6));
+						dto.setCompany(rs.getString(7));
+						dto.setPrice(rs.getInt(8));
+						dto.setPriceWithComma(rs.getString(8));
+						dto.setDiscount(rs.getInt(9));
+						dto.setPoint(rs.getInt(10));
+						dto.setStock(rs.getInt(11));
+						dto.setSold(rs.getInt(12));
+						dto.setDelivery(rs.getInt(13));
+						dto.setHit(rs.getInt(14));
+						dto.setScore(rs.getInt(15));
+						dto.setReview(rs.getInt(16));
+						dto.setThumb1(rs.getString(17));
+						dto.setNewThumb1(rs.getString(18));
+						dto.setThumb2(rs.getString(19));
+						dto.setNewThumb2(rs.getString(20));
+						dto.setThumb3(rs.getString(21));
+						dto.setNewThumb3(rs.getString(22));
+						dto.setDetail(rs.getString(23));
+						dto.setNewDetail(rs.getString(24));
+						dto.setStatus(rs.getString(25));
+						dto.setDuty(rs.getString(26));
+						dto.setReceipt(rs.getString(27));
+						dto.setBizType(rs.getString(28));
+						dto.setOrigin(rs.getString(29));
+						dto.setIp(rs.getString(30));
+						dto.setRdate(rs.getString(31));
+						dto.setEtc1(rs.getInt(32));
+						dto.setEtc2(rs.getInt(33));
+						dto.setEtc3(rs.getString(34));
+						dto.setEtc4(rs.getString(35));
+						dto.setEtc5(rs.getString(36));
+						products.add(dto);
+						
+					}
+					close();
+				} catch (Exception e) {
+					logger.error("selectProductsRdate : "+e.getMessage());
+				}
+				return products;
+			}
+			
+			//무현 추가 할인률 높은 상품 8건 조회
+			
+			public List<ProductDTO> selectProductsDiscount() {
+				List<ProductDTO> products = new ArrayList<>();
+				try {
+					conn = getConnection();
+					sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `discount` DESC LIMIT 8";
+					stmt = conn.createStatement();
+					rs = stmt.executeQuery(sql);
+					
+					while(rs.next()) {
+						ProductDTO dto = new ProductDTO();
+						dto.setProdNo(rs.getInt(1));
+						dto.setSeller(rs.getString(2));
+						dto.setProdCate1(rs.getInt(3));
+						dto.setProdCate2(rs.getInt(4));
+						dto.setProdName(rs.getString(5));
+						dto.setDescript(rs.getString(6));
+						dto.setCompany(rs.getString(7));
+						dto.setPrice(rs.getInt(8));
+						dto.setPriceWithComma(rs.getString(8));
+						dto.setDiscount(rs.getInt(9));
+						dto.setPoint(rs.getInt(10));
+						dto.setStock(rs.getInt(11));
+						dto.setSold(rs.getInt(12));
+						dto.setDelivery(rs.getInt(13));
+						dto.setHit(rs.getInt(14));
+						dto.setScore(rs.getInt(15));
+						dto.setReview(rs.getInt(16));
+						dto.setThumb1(rs.getString(17));
+						dto.setNewThumb1(rs.getString(18));
+						dto.setThumb2(rs.getString(19));
+						dto.setNewThumb2(rs.getString(20));
+						dto.setThumb3(rs.getString(21));
+						dto.setNewThumb3(rs.getString(22));
+						dto.setDetail(rs.getString(23));
+						dto.setNewDetail(rs.getString(24));
+						dto.setStatus(rs.getString(25));
+						dto.setDuty(rs.getString(26));
+						dto.setReceipt(rs.getString(27));
+						dto.setBizType(rs.getString(28));
+						dto.setOrigin(rs.getString(29));
+						dto.setIp(rs.getString(30));
+						dto.setRdate(rs.getString(31));
+						dto.setEtc1(rs.getInt(32));
+						dto.setEtc2(rs.getInt(33));
+						dto.setEtc3(rs.getString(34));
+						dto.setEtc4(rs.getString(35));
+						dto.setEtc5(rs.getString(36));
+						products.add(dto);
+						
+					}
+					close();
+				} catch (Exception e) {
+					logger.error("selectProductsDiscount : "+e.getMessage());
+				}
+				return products;
+			}
+			
+	//무현 추가 cate1 별로 전체상품
+	public List<ProductDTO> selectProductsAll(String prodCate1, int start) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			sql = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? LIMIT ?, 10";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, prodCate1);
+			psmt.setInt(2, start);
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getInt(1));
+				dto.setSeller(rs.getString(2));
+				dto.setProdCate1(rs.getInt(3));
+				dto.setProdCate2(rs.getInt(4));
+				dto.setProdName(rs.getString(5));
+				dto.setDescript(rs.getString(6));
+				dto.setCompany(rs.getString(7));
+				dto.setPrice(rs.getInt(8));
+				dto.setPriceWithComma(rs.getString(8));
+				dto.setDiscount(rs.getInt(9));
+				dto.setPoint(rs.getInt(10));
+				dto.setStock(rs.getInt(11));
+				dto.setSold(rs.getInt(12));
+				dto.setDelivery(rs.getInt(13));
+				dto.setHit(rs.getInt(14));
+				dto.setScore(rs.getInt(15));
+				dto.setReview(rs.getInt(16));
+				dto.setThumb1(rs.getString(17));
+				dto.setNewThumb1(rs.getString(18));
+				dto.setThumb2(rs.getString(19));
+				dto.setNewThumb2(rs.getString(20));
+				dto.setThumb3(rs.getString(21));
+				dto.setNewThumb3(rs.getString(22));
+				dto.setDetail(rs.getString(23));
+				dto.setNewDetail(rs.getString(24));
+				dto.setStatus(rs.getString(25));
+				dto.setDuty(rs.getString(26));
+				dto.setReceipt(rs.getString(27));
+				dto.setBizType(rs.getString(28));
+				dto.setOrigin(rs.getString(29));
+				dto.setIp(rs.getString(30));
+				dto.setRdate(rs.getString(31));
+				dto.setEtc1(rs.getInt(32));
+				dto.setEtc2(rs.getInt(33));
+				dto.setEtc3(rs.getString(34));
+				dto.setEtc4(rs.getString(35));
+				dto.setEtc5(rs.getString(36));
+				products.add(dto);
+				
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll : "+e.getMessage());
+		}
+		return products;
+	}
+	
+	//게시판 총 갯수 추가
+	
+	public int selectCountTotalProdCate(String prodCate1) {
+		int total = 0;
+		
+		try {
+			conn = getConnection();
+			sql = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, prodCate1);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountTotal : "+e.getMessage());
+		}
+		return total;
+	}
+			
 	public void updateProduct(ProductDTO dto) {}
 	public void deleteProduct(String prodNo) {
 		sql = "DELETE FROM `km_product` WHERE `prodNo`=?";
