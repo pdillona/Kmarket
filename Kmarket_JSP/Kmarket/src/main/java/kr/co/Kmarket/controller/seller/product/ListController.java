@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dto.ProductDTO;
+import kr.co.Kmarket.dto.SearchDTO;
 import kr.co.Kmarket.dto.member.MemberDTO;
 import kr.co.Kmarket.service.PageService;
 import kr.co.Kmarket.service.ProductService;
@@ -40,6 +41,11 @@ public class ListController extends HttpServlet{
 		MemberDTO sessUser  = (MemberDTO) session.getAttribute("sessUser");
 		//String seller = sessUser.getUid();
 		String seller = "홍길동";
+
+		SearchDTO searchDTO = new SearchDTO();
+		searchDTO.setSeller(seller);
+		searchDTO.setSearch(search);
+		searchDTO.setSearch_text(search_text);
 		
 		// 현재 페이지 계산
 		int currentPage = pageService.getCurrentPage(pg);
@@ -60,7 +66,7 @@ public class ListController extends HttpServlet{
 		int pageStartNum = pageService.getPageStartNum(total, currentPage);
 		
 		// 현재 페이지 게시물 조회
-		List<ProductDTO> products = productService.selectProducts(seller, start, search, search_text);
+		List<ProductDTO> products = productService.selectProducts(start, searchDTO);
 		
 		req.setAttribute("products", products);
 		req.setAttribute("currentPage", currentPage);

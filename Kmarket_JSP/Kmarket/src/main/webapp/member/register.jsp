@@ -5,6 +5,9 @@
 <script src="${ctxPath}/js/validation.js"></script>
 <script src="${ctxPath}/js/checkMember.js"></script>
 <script src="${ctxPath}/js/authEmail.js"></script>
+<script>
+	
+</script>
         <main id="member">
             <div class="register">
                 <nav>
@@ -19,22 +22,22 @@
 							<tr>
 								<th><span class="essential">*</span>아이디</th>
 								<td>
-								<input type="text" name="km_uid" placeholder="아이디를 입력" required /> 
+								<input type="text" name="km_uid" placeholder="아이디를 입력" required/> 
 								<button type="button" id="btnCheckUid"><img src="./img/chk_id.gif" alt="중복확인"/></button>
-								<span class="msgId">영문, 숫자로 4~12자까지 설정해 주세요.</span>
+								<span class="msgId">&nbsp;영문, 숫자로 4~12자까지 설정해 주세요.</span>
 								
 								</td>
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>비밀번호</th>
 								<td><input type="password" name="km_pass1" placeholder="비밀번호를 입력"
-									required /> <span class="msgPass">영문, 숫자, 특수문자를 조합하여
+									required /> <span class="msgPass">&nbsp;영문, 숫자, 특수문자를 조합하여
 										8~12자까지 설정해 주세요.</span></td>
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>비밀번호확인</th>
 								<td><input type="password" name="km_pass2" placeholder="비밀번호를 확인"
-									required /> <span class="msgPass2">비밀번호 재입력</span></td>
+									required /> <span class="msgPass2">&nbsp;비밀번호 재입력</span></td>
 							</tr>
 						</table>
 					</section>
