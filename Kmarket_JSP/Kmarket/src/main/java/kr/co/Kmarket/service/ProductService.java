@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dao.ProductDAO;
 import kr.co.Kmarket.dto.ProductDTO;
+import kr.co.Kmarket.dto.SearchDTO;
 
 public class ProductService {
 	private ProductDAO dao = new ProductDAO();
@@ -18,8 +19,8 @@ public class ProductService {
 	public ProductDTO selectProduct(String prodNo) {
 		return dao.selectProduct(prodNo);
 	}
-	public List<ProductDTO> selectProducts(String seller, int start, String search, String search_text) {
-		return dao.selectProducts(seller, start, search, search_text);
+	public List<ProductDTO> selectProducts(int start, SearchDTO search) {
+		return dao.selectProducts(start, search);
 	}
 	public ProductDTO selectImages(String prodNo) {
 		logger.debug(prodNo);

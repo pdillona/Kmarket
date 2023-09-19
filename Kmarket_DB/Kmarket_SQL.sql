@@ -91,3 +91,21 @@ INSERT INTO `km_product_cate2` VALUES(12, '공연티켓', 18);
 INSERT INTO `km_product_cate2` VALUES(13, 'e쿠폰', 18);
 INSERT INTO `km_product_cate2` VALUES(14, '상품권', 18);
 
+# 게시물 채우기 
+INSERT INTO `km_product` (`seller`, `prodCate1`, `prodCate2`, `prodName`, `descript`,`company`, `price`, `discount`, `point`, `stock`, `delivery`, `thumb1`, `newThumb1`, `thumb2`, `newThumb2`, `thumb3`, `newThumb3`, `detail`, `newDetail`, `ip`, `rdate`) 
+SELECT `seller`, `prodCate1`, `prodCate2`, `prodName`, `descript`,`company`, `price`, `discount`, `point`, `stock`, `delivery`, `thumb1`, `newThumb1`, `thumb2`, `newThumb2`, `thumb3`, `newThumb3`, `detail`, `newDetail`, `ip`, `rdate` FROM `km_product`;
+
+update `km_product` set `sold`=CEILING(RAND()*100);
+update `km_product` set `hit`=CEILING(RAND()*100);
+update `km_product` set `score`=CEILING(RAND()*5);
+update `km_product` set `review`=CEILING(RAND()*100);
+
+SELECT `prodCate1`, `prodCate2`, `newThumb1`, `newThumb2`, `newThumb3`, `newDetail` FROM `km_product` WHERE `prodNo`=1049130;
+
+SELECT DISTINCT a.*, b.`c1Name` , c.`c2Name`  
+	FROM `km_product` AS a 
+	JOIN `km_product_cate1` AS b 
+	ON a.`prodCate1`=b.`cate1` 
+	JOIN `km_product_cate2` AS c
+	ON b.`cate1`=c.`cate1`
+	WHERE `prodNo`=1049129;

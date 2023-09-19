@@ -7,6 +7,11 @@
 	이름 : 최정민
 	내용 : 상품 수정
  -->
+<!-- 
+	날짜 : 2023-09-19
+	이름 : 최정민
+	내용 : 상품 수정
+ -->
 <script>
     function changeSelect() {
         const selectValue = $('#selectBox').val();
@@ -26,14 +31,6 @@
                 const cate2Select = $('#cate2');
                 cate2Select.empty(); // 기존 옵션을 모두 제거합니다.
 
-                // 새로운 옵션 추가
-                cate2Select.append($('<option>', {
-                    value: '',
-                    text: '2차 분류 선택',
-                    disabled: 'disabled',
-                    selected: 'selected'
-                }));
-
                 // 데이터를 이용하여 옵션을 동적으로 생성
                 $.each(data, function(index, item) {
                     cate2Select.append($('<option>', {
@@ -44,8 +41,7 @@
             }
         });
     }
-    
-    $(function(){
+$(function(){
     	
     	$('select[name=prodCate2]').change(function(){
     		
@@ -54,16 +50,13 @@
     		
     		
     		let actionUrl = "/Kmarket/seller/product/register.do?cate1="+cate1+"&cate2="+cate2;
-    		$('#formModify').attr('action', actionUrl);
+    		$('#formRegister').attr('action', actionUrl);
     		
     		
     	});
     	
     	
     });
-    
-  
-    
 </script>
             <section id="seller-product-register">
                 <nav>
@@ -74,8 +67,8 @@
                 </nav>
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
-                    <form id="formModify" action="/Kmarket/seller/product/modify.do" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="seller" value="홍길동"/>
+                    <form id="formModify" action="/Kmarket/seller/product/modify.do?oriCate1=${oriCate1}&oriCate2=${oriCate2}" method="post" enctype="multipart/form-data">
+                    	<input type="hidden" name="prodNo" value="${product.prodNo}"/>
                         <!-- 상품분류 -->
                         <section>
                             <h4>상품분류</h4>
@@ -87,9 +80,13 @@
                                     <td>1차 분류</td>
                                     <td>
                                         <select id="selectBox" required name="prodCate1" onchange="changeSelect()">
-                                        	<option selected disabled>1차 분류 선택</option>
+                                        	<option>${product.c1Name}</option>
 	                                        <c:forEach var="cate1" items="${cate1s}">
-	                                        	<option value="${cate1.cate1}">${cate1.c1Name}</option>
+	                                        	<c:choose>
+	                                        		<c:when test="${product.prodCate1 ne cate1.cate1}">
+	                                        		<option value="${cate1.cate1}">${cate1.c1Name}</option>
+	                                        		</c:when>
+	                                        	</c:choose>
 	                                        </c:forEach>                                                
                                         </select>
                                     </td>
@@ -98,7 +95,14 @@
                                     <td>2차 분류</td>
                                     <td>
                                         <select required name="prodCate2" id="cate2">
-                                        <option selected disabled>2차 분류 선택</option>
+                                        	<option>${product.c2Name}</option>
+                                        <c:forEach var="cate2" items="${cate2s}">
+                                        	<c:choose>
+	                                        		<c:when test="${product.prodCate2 ne cate2.cate2}">
+	                                        		<option value="${cate2.cate2}">${cate2.c2Name}</option>
+	                                        		</c:when>
+	                                        	</c:choose>
+                                        </c:forEach>
                                         </select>
                                     </td>
                                 </tr>
@@ -114,66 +118,70 @@
                             <table>
                                 <tr>
                                     <td>상품명</td>
-                                    <td><input required type="text" name="prodName"/></td>
+                                    <td><input required type="text" name="prodName" value="${product.prodName}"/></td>
                                 </tr>
                                 <tr>
                                     <td>기본설명</td>
                                     <td>
                                         <span>상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력</span>
-                                        <input required type="text" name="descript"/>
+                                        <input required type="text" name="descript" value="${product.descript}"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>제조사</td>
-                                    <td><input required type="text" name="company"/></td>
+                                    <td><input required type="text" name="company" value="${product.company}"/></td>
                                 </tr>
                                 <tr>
                                     <td>판매가격</td>
-                                    <td><input type="text" name="price"/>원</td>
+                                    <td><input required type="text" name="price" value="${product.price}"/>원</td>
                                 </tr>                                    
                                 <tr>
                                     <td>할인율</td>
                                     <td>
                                         <span>0을 입력하면 할인율 없음</span>
-                                        <input type="text" name="discount" value="0"/>원
+                                        <input required type="text" name="discount" value="${product.discount}"/>원
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>포인트</td>
                                     <td>
                                         <span>0을 입력하면 포인트 없음</span>
-                                        <input type="text" name="point" value="0"/>점
+                                        <input required type="text" name="point" value="${product.point}"/>점
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>재고수량</td>
-                                    <td><input type="text" required name="stock"/>개</td>
+                                    <td><input type="text" required name="stock" value="${product.stock}"/>개</td>
                                 </tr>
                                 <tr>
                                     <td>배송비</td>
                                     <td>
                                         <span>0을 입력하면 배송비 무료</span>
-                                        <input type="text" name="delivery" value="0"/>원
+                                        <input required type="text" name="delivery" value="${product.delivery}"/>원
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>상품 썸네일</td>
                                     <td>
                                         <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다. </span>
-                                        <input required type="file" name="thumb1"/>
+                                        <input type="file" name="thumb1"/>
+                                        <input type="hidden" name="oriThumb1" value="${product.newThumb1}"/>
 
                                         <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다. </span>
-                                        <input required type="file" name="thumb2"/>
+                                        <input type="file" name="thumb2"/>
+                                        <input type="hidden" name="oriThumb2" value="${product.newThumb2}"/>
 
                                         <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다. </span>
-                                        <input required type="file" name="thumb3"/>
+                                        <input type="file" name="thumb3"/>
+                                        <input type="hidden" name="oriThumb3" value="${product.newThumb3}"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>상세 상품정보</td>
                                     <td>
                                         <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
-                                        <input required type="file" name="detail"/>
+                                        <input type="file" name="detail"/>
+                                        <input type="hidden" name="oriDetail" value="${product.newDetail}"/>
                                     </td>
                                 </tr>
                             </table>                                
@@ -188,28 +196,28 @@
                             <table>
                                 <tr>
                                     <td>상품상태</td>
-                                    <td><input type="text" name="status" value="새상품"/></td>
+                                    <td><input type="text" name="status" value="${product.status}"/></td>
                                 </tr>
                                 <tr>
                                     <td>부가세 면세여부</td>
-                                    <td><input type="text" name="duty" value="과세상품"/></td>
+                                    <td><input type="text" name="duty" value="${product.duty}"/></td>
                                 </tr>
                                 <tr>
                                     <td>영수증발행</td>
-                                    <td><input type="text" name="receipt" value="발행가능 - 신용카드 전표, 온라인 현금영수증"/></td>
+                                    <td><input type="text" name="receipt" value="${product.receipt}"/></td>
                                 </tr>
                                 <tr>
                                     <td>사업자구분</td>
-                                    <td><input type="text" name="bizType" value="사업자 판매자"/></td>
+                                    <td><input type="text" name="bizType" value="${product.bizType}"/></td>
                                 </tr>                                
                                 <tr>
                                     <td>원산지</td>
-                                    <td><input type="text" name="origin" value="국내산"/></td>
+                                    <td><input type="text" name="origin" value="${product.origin}"/></td>
                                 </tr>                                
                             </table>                                
                         </section>
                         
-                        <input type="submit" value="등록하기"/>
+                        <input type="submit" value="수정완료"/>
                     </form>
                 </article>
 
