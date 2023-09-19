@@ -50,7 +50,7 @@ $(function(){
 	}
 	
 		
-	// 휴대폰 중복체크
+	// member휴대폰 , managerHp 중복체크 
 	$('input[name=km_hp]').focusout(function(){
 		
 		const km_hp = $(this).val();

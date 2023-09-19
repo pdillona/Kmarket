@@ -23,7 +23,7 @@ public class MemberDAO extends DBHelper{
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	//회원가입
+	//member, seller 회원가입
 	public void insertMember(String type, MemberDTO dto) {
 		
 		SQL = "INSERT INTO `km_member` SET "
@@ -42,10 +42,10 @@ public class MemberDAO extends DBHelper{
 		
 		SQL2 = "INSERT INTO `km_member` SET "
 				+ "`uid`=?, "
+				+ "`level`=5, "
 				+ "`pass`=SHA2(?, 256), "
 				+ "`email`=?, "
 				+ "`type`=2, "
-				+ "`level`=5, "
 				+ "`zip`=?, "
 				+ "`addr1`=?, "
 				+ "`addr2`=?, "
