@@ -46,4 +46,27 @@ public class ProductService {
 		return dao.selectProductsHit();
 	}
 	
+	//추가 무현 추천상품 8개 출력
+	public List<ProductDTO> selectProductsScore(){
+		return dao.selectProductsScore();
+	}
+	
+	//추가 무현 추천상품 8개 출력
+	public List<ProductDTO> selectProductsRdate(){
+		return dao.selectProductsRdate();
+	}
+	
+	//추가 무현 할인상품 8개 출력
+	public List<ProductDTO> selectProductsDiscount(){
+		return dao.selectProductsDiscount();
+	}
+	
+	//추가 무현 카테고리1별 상품전체 출력
+	public List<ProductDTO> selectProductsAll(String prodCate1, int start){
+		return dao.selectProductsAll(prodCate1, start);
+	}
+	//게시판 총 갯수 카운트
+	public int selectCountTotalProdCate(String prodCate1) {
+		return dao.selectCountTotalProdCate(prodCate1);
+	}
 }

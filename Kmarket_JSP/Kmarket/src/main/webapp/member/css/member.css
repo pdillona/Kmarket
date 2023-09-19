@@ -228,11 +228,11 @@ header {
     box-sizing: border-box;
   }
   
-  #member > .signup > nav {
+  #member > .signup > form > nav {
     border-bottom: 2px solid #0e6ad3;
   }
   
-  #member > .signup > nav > h1 {
+  #member > .signup > form > nav > h1 {
     font-size: 24px;
     margin-bottom: 6px;
   }

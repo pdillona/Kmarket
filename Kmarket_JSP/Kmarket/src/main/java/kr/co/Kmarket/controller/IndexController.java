@@ -48,14 +48,26 @@ public class IndexController extends HttpServlet{
 		
 		List<ProductDTO> productshit = pService.selectProductHit();
 		
+		List<ProductDTO> productsScore = pService.selectProductsScore();
+		
+		List<ProductDTO> productsRdate = pService.selectProductsRdate();
+		
+		List<ProductDTO> productsDiscount = pService.selectProductsDiscount();
+		
 		
 		logger.debug("products : "+ products);
 		logger.debug("categories : "+ categories);
 		logger.debug("productshit : "+ productshit);
+		logger.debug("productsScore : "+ productsScore);
+		logger.debug("productsRdate : "+ productsRdate);
+		logger.debug("productsDiscount : "+ productsDiscount);
 		
 		req.setAttribute("categories", categories);
 		req.setAttribute("products", products);
 		req.setAttribute("productshit", productshit);
+		req.setAttribute("productsScore", productsScore);
+		req.setAttribute("productsRdate", productsRdate);
+		req.setAttribute("productsDiscount", productsDiscount);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");

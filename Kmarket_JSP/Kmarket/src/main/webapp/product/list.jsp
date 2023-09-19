@@ -2,9 +2,9 @@
 <%@ include file="./_header.jsp" %>
 <main id="product">
 	<!-- 
-		날짜 : 2023/09/14
+		날짜 : 2023/09/19
 		이름 : 김무현
-		내용 : include 작업
+		내용 : 카테고리1별 리스트 출력
 	 -->            
 <jsp:include page="./_aside.jsp"/>
     
@@ -25,139 +25,70 @@
           <li><a href="#">최근등록순</a></li>
       </ul>
 
-      <!-- 상품목록 -->              
-      <table border="0">                  
+      <!-- 상품목록 -->
+      <c:forEach var="products" items="${products}">                
+      <table border="0">
         <tr>
-          <td><a href="#" class="thumb"><img src="https://via.placeholder.com/120x120" alt="상품이미지"/></a></td>
+          <td><a href="#" class="thumb"><img src="/Kmarket/thumb/${products.prodCate1}/${products.prodCate2}/${products.thumb1}" alt="상품이미지"/></a></td>
           <td>
-            <h3 class="name">상품명</h3>
-            <a href="#" class="desc">상품설명</a>
+            <h3 class="name">${products.prodName}</h3>
+            <a href="#" class="desc">${products.descript}</a>
           </td>
           <td>
             <ul>
-              <li><ins class="dis-price">27,000</ins></li>
               <li>
-                <del class="org-price">30,000</del>
-                <span class="discount">10%</span>
+	              	<ins class="dis-price">
+					    <c:set var="discountedPrice" value="0" />
+					    <c:choose>
+					        <c:when test="${products.discount != 0}">
+					            <c:set var="discountedPrice" value="${products.price - (products.price * (products.discount / 100))}"/>
+					        </c:when>
+					        <c:otherwise>
+					            <c:set var="discountedPrice" value="${products.price}"/>
+					        </c:otherwise>
+					    </c:choose>
+					    <fmt:formatNumber value="${discountedPrice}"/>
+					</ins>
+				</li>
+              <li>
+                <del class="org-price">${products.priceWithComma}</del>
+                <span class="discount">${products.discount}</span>
               </li>
-              <li><span class="free-delivery">무료배송</span></li>
+              <li><span class="${products.delivery == 0 ? 'free-delivery' : ''}">배송비 ${products.delivery}</span></li>
             </ul>
           </td>
           <td>
-            <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
+            <h4 class="seller"><i class="fas fa-home"></i>&nbsp;${products.seller}</h4>
             <h5 class="badge power">판매자등급</h5>
             <h6 class="rating star1">상품평</h6>
           </td>
         </tr>
-        <tr>
-          <td><a href="#" class="thumb"><img src="https://via.placeholder.com/120x120" alt="상품이미지"/></a></td>
-          <td>
-            <h3 class="name">상품명</h3>
-            <a href="#" class="desc">상품설명</a>
-          </td>
-          <td>
-            <ul>
-              <li><ins class="dis-price">27,000</ins></li>
-              <li>
-                <del class="org-price">30,000</del>
-                <span class="discount">10%</span>
-              </li>
-              <li><span class="free-delivery">무료배송</span></li>
-            </ul>
-          </td>
-          <td>
-            <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
-            <h5 class="badge power">판매자등급</h5>
-            <h6 class="rating star2">상품평</h6>
-          </td>
-        </tr>
-        <tr>
-          <td><a href="#" class="thumb"><img src="https://via.placeholder.com/120x120" alt="상품이미지"/></a></td>
-          <td>
-            <h3 class="name">상품명</h3>
-            <a href="#" class="desc">상품설명</a>
-          </td>
-          <td>
-            <ul>
-              <li><ins class="dis-price">27,000</ins></li>
-              <li>
-                <del class="org-price">30,000</del>
-                <span class="discount">10%</span>
-              </li>
-              <li><span class="free-delivery">무료배송</span></li>
-            </ul>
-          </td>
-          <td>
-            <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자명</h4>
-            <h5 class="badge power">판매자등급</h5>
-            <h6 class="rating star3">상품평</h6>
-          </td>
-        </tr>
-        <tr>
-          <td><a href="#" class="thumb"><img src="https://via.placeholder.com/120x120" alt="상품이미지"/></a></td>
-          <td>
-            <h3 class="name">상품명</h3>
-            <a href="#" class="desc">상품설명</a>
-          </td>
-          <td>
-            <ul>
-              <li><ins class="dis-price">27,000</ins></li>
-              <li>
-                <del class="org-price">30,000</del>
-                <span class="discount">10%</span>
-              </li>
-              <li><span class="free-delivery">무료배송</span></li>
-            </ul>
-          </td>
-          <td>
-            <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자명</h4>
-            <h5 class="badge power">판매자등급</h5>
-            <h6 class="rating star4">상품평</h6>
-          </td>
-        </tr>
-        <tr>
-          <td><a href="#" class="thumb"><img src="https://via.placeholder.com/120x120" alt="상품이미지"/></a></td>
-          <td>
-            <h3 class="name">상품명</h3>
-            <a href="#" class="desc">상품설명</a>
-          </td>
-          <td>
-            <ul>
-              <li><ins class="dis-price">27,000</ins></li>
-              <li>
-                <del class="org-price">30,000</del>
-                <span class="discount">10%</span>
-              </li>
-              <li><span>배송비 2500</span></li>
-            </ul>
-          </td>
-          <td>
-            <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자명</h4>
-            <h5 class="badge power">판매자등급</h5>
-            <h6 class="rating star5">상품평</h6>
-          </td>
-        </tr>
         
       </table>            
-
+	</c:forEach> 
       <!-- 상품목록 페이지번호 -->
-      <div class="paging">
-        <span class="prev">
-          <a href="#"><&nbsp;이전</a>
-        </span>
-        <span class="num">
-          <a href="#" class="on">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a>
-          <a href="#">7</a>
-        </span>
-        <span class="next">
-          <a href="#">다음&nbsp;></a>
-        </span>
-      </div>
+       <div class="paging">
+           	<c:if test="${pageGroupStart > 1}">
+           		<span class="prev">
+           			<a href="/Kmarket/product/list.do?prodCate1=${prodCate1}&pg=${pageGroupStart - 1}">
+           			<&nbsp;이전
+           			</a>
+            	</span>
+           	</c:if>
+               <span class="num">
+            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+            	<a href="/Kmarket/product/list.do?prodCate1=${prodCate1}&pg=${i}" class="${currentPage == i? 'on':'off'}">${i}</a>
+            </c:forEach>
+               </span>
+            <c:if test="${pageGroupEnd < lastPageNum}">
+	            <span class="next">
+	                   <a href="/Kmarket/product/list.do?prodCate1=${prodCate1}&pg=${pageGroupEnd + 1}">
+	                   다음&nbsp;>
+	                   </a>
+	            </span>
+            </c:if>
+               
+           </div>
 
     </section>
 </main>

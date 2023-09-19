@@ -44,6 +44,7 @@ public class ProductDTO {
 	private String c1Name;
 	private String c2Name;
 	
+
 	public String getC2Name() {
 		return c2Name;
 	}
@@ -55,6 +56,15 @@ public class ProductDTO {
 	}
 	public void setC1Name(String c1Name) {
 		this.c1Name = c1Name;
+	}
+	//추가필드
+	private String priceWithComma;
+	
+	public void setPriceWithComma(String priceWithComma) {
+		this.priceWithComma = Utils.comma(priceWithComma);
+	}
+	public String getPriceWithComma() {
+		return priceWithComma;
 	}
 	public int getProdNo() {
 		return prodNo;
@@ -306,7 +316,8 @@ public class ProductDTO {
 				+ newThumb2 + ", thumb3=" + thumb3 + ", newThumb3=" + newThumb3 + ", detail=" + detail + ", newDetail="
 				+ newDetail + ", status=" + status + ", duty=" + duty + ", receipt=" + receipt + ", bizType=" + bizType
 				+ ", origin=" + origin + ", ip=" + ip + ", rdate=" + rdate + ", etc1=" + etc1 + ", etc2=" + etc2
-				+ ", etc3=" + etc3 + ", etc4=" + etc4 + ", etc5=" + etc5 + "]";
+				+ ", etc3=" + etc3 + ", etc4=" + etc4 + ", etc5=" + etc5 + ", priceWithComma=" + priceWithComma + "]";
 	}
+	
 	
 }
