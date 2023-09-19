@@ -8,30 +8,20 @@
             </div>
           </nav>
           <section class="write">
-            <aside>
-              <h2>문의하기</h2>
-              <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
-              </ul>
-            </aside>
+          <%@ include file="../_aside.jsp" %>
             <article>
               <form action="${ctxPath}/cs/write.do"  method="post" enctype="multipart/form-data">
-                  <%-- <input type="hidden" name="writer" value="${sessUser.uid}"/> --%>
-                  <input type="hidden" name="writer" value="wpdjvks"/>
-				  <input type="hidden" name="group" value="${group}"/>
-			      <input type="hidden" name="cate" value="${cate}"/>
-			      <input type="hidden" name="cate" value="${cateDtail}"/>
+				  <input type="text" name="group" value="${group}"/>
+			      <input type="text" name="type" value="${type}"/>
+			      <input type="text" name="cateDetail" value="${cateDetail}"/>
+                  <input type="hidden" name="writer" value="zzz1101"/>
+			      <input type="hidden" name="uLevel" value="3"/>
+			      <input type="hidden" name="regip" value="4341414"/> 
                 <table>
                   <tr>
                     <td>문의유형</td>
                     <td>
-                      <select name="type">
+                      <select name="${type}">
                         <option value="0">선택</option>
                         <option>가입</option>
                         <option>탈퇴</option>
@@ -52,10 +42,15 @@
                       <textarea name="content" placeholder="내용을 입력하세요."></textarea>
                     </td>
                   </tr>
+                  <tr>
+                    <td>첨부 파일</td>                  
+                    <td>
+                      <div name="file" placeholder="내용을 입력하세요."> <button>파일찾기</button></div>
+                    </td>
+                  </tr>
                 </table>
                 <div>
-                  <a href="${ctxPath}/cs/qna.do?cate=qna&cateDeatil=member" class="btnList">취소하기</a>
-<%--                   <a href="${ctxPath}/cs/list.do?cate=qna&cateDeatil=member" class="btnList">취소하기</a> --%>
+                  <a href="${ctxPath}/cs/qna.do?group=qna&type=${type}&cateDeatil=${cateDetail}" class="btnList">취소하기</a>
                   <input type="submit" class="btnSubmit" value="등록하기"/>
                 </div>
               </form>

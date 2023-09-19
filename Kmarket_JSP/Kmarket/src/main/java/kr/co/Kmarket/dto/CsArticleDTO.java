@@ -15,7 +15,7 @@ public class CsArticleDTO {
 	private String akName;
 	private int type;
 	private String dName;
-	private int uLevle;
+	private int uLevel;
 	
 	
 	private FileDTO fileDto;
@@ -29,11 +29,14 @@ public class CsArticleDTO {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public int getuLevle() {
-		return uLevle;
+	public void setType(String type) {
+		this.type = Integer.parseInt(type);
 	}
-	public void setuLevle(int uLevle) {
-		this.uLevle = uLevle;
+	public int getuLevel() {
+		return uLevel;
+	}
+	public void setuLevel(int uLevel) {
+		this.uLevel = uLevel;
 	}
 	public FileDTO getFileDto() {
 		return fileDto;
@@ -103,6 +106,9 @@ public class CsArticleDTO {
 	}
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
+	}
+	public void setRdateYYMMDD(String rdate) {
+		this.rdate = rdate.substring(2, 10);
 	}
 	public String getAeName() {
 		return aeName;

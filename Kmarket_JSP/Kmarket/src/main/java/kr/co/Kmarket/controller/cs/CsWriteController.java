@@ -32,16 +32,14 @@ public class CsWriteController extends HttpServlet{
 
 		
 		String group = req.getParameter("group");
-		String cate = req.getParameter("cate");
-		String cateDtail = req.getParameter("cateDtail");
-		String writer = req.getParameter("writer");
+		String type = req.getParameter("type");
+		String cateDetail = req.getParameter("cateDetail");
 		
 		
 		
 		req.setAttribute("group", group);
-		req.setAttribute("cate", cate);
-		req.setAttribute("cateDetail", cateDtail);
-		req.setAttribute("writer", writer);
+		req.setAttribute("type", type);
+		req.setAttribute("cateDetail", cateDetail);
 		
 		
 		
@@ -53,17 +51,18 @@ public class CsWriteController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 파일 업로드
+		// 파일 업로드 
 		String path = aService.getPath(req, "/upload");
 		MultipartRequest mr = aService.uploadFile(req, path);
 		
 		// 폼 데이터 수신
 		String group   = mr.getParameter("group");
-		String cate   = mr.getParameter("cate");
-		String cateDtail   = mr.getParameter("cateDtail");
+		String cateDetail   = mr.getParameter("cateDetail");
+		String type   = mr.getParameter("type");
 		String title   = mr.getParameter("title");
 		String content = mr.getParameter("content");
 		String writer  = mr.getParameter("writer");
+		String uLevel  = mr.getParameter("uLevel");
 		String oriName   = mr.getOriginalFileName("file");
 		String regip   = req.getRemoteAddr();
 		
@@ -73,11 +72,40 @@ public class CsWriteController extends HttpServlet{
 		logger.debug("oName : " + oriName);
 		logger.debug("regip : " + regip);
 				
+		//DTO생성
+		CsArticleDTO dto = new CsArticleDTO();
+		dto.setCateDetail(cateDetail);
+		dto.setType(type);
+		dto.setGroup(group);
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setFile(oriName);
+		dto.setWriter(writer);
+		dto.setRegip(regip);
+		dto.setuLevel(Integer.parseInt(uLevel));
 
-
+		//글 Insert
+		int no = aService.insertArticle(dto);
+		
+		//파일명 수정 및 파일 Insert
+		if(oriName != null) {
+			
+			String sName = aService.renameToFile(req, path, oriName);
+			
+			// 파일 Insert
+			FileDTO fileDto = new FileDTO();
+			fileDto.setAno(no);
+			fileDto.setOriname(oriName);
+			fileDto.setNewname(sName);
+			
+			fService.insertFile(fileDto);
+			
+			
+		}
+		
 
 		
 		// 리다이렉트
-		resp.sendRedirect("/Kmarket/cs/qna/list.do?group="+group+"&cate="+cate+"&cateDetail="+cateDtail);
+		resp.sendRedirect("/Kmarket/cs/qna/list.do?group="+group+"&cateDetail=all");
 	}
 }

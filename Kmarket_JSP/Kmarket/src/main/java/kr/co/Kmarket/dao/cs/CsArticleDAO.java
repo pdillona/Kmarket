@@ -1,4 +1,4 @@
-package kr.co.Kmarket.dao;
+package kr.co.Kmarket.dao.cs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,47 +19,42 @@ public class CsArticleDAO extends DBHelper{
 	String SQL2 = "";
 	
 	public int insertArticle(CsArticleDTO dto) {
-		int no = 0;
+		
+		SQL = "INSERT INTO `km_cs_article` SET "
+				+ "`group`=?, "
+				+ "`cateDetail`=?, "
+				+ "`title`=?, "
+				+ "`content`=?, "
+				+ "`file`=?, "
+				+ "`writer`=?, "
+				+ "`regip`=?, "
+				+ "`type`=?, "
+				+ "`uLevel`=?, "
+				+ "`rdate`=NOW()";
+		
+		conn = getConnection();
 		
 		try {
 			
-			SQL = "INSERT INTO `km_cs_article` SET "
-					+ "`group`=?, "
-					+ "`cateDtail`=? "
-					+ "`title`=?, "
-					+ "`content`=?, "
-					+ "`file`=?, "
-					+ "`writer`=?, "
-					+ "`regip`=?, "
-					+ "`rdate`=NOW() ";
-			
-			SQL2 = "SELECT MAX(`no`) FROM `Article`";
-			
-			
-			conn = getConnection();
-			conn.setAutoCommit(false); // Transaction 시작
-			
-			stmt = conn.createStatement();
 			psmt = conn.prepareStatement(SQL);
 			psmt.setString(1, dto.getGroup());
-			psmt.setString(2, dto.getTitle());
-			psmt.setString(3, dto.getContent());
-			psmt.setInt(4, dto.getFile());
-			psmt.setString(5, dto.getWriter());
-			psmt.setString(6, dto.getRegip());
+			psmt.setString(2, dto.getCateDetail());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			psmt.setInt(5, dto.getFile());
+			psmt.setString(6, dto.getWriter());
+			psmt.setString(7, dto.getRegip());
+			psmt.setInt(8, dto.getType());
+			psmt.setInt(9, dto.getuLevel());
 			psmt.executeUpdate();
-			rs = stmt.executeQuery(SQL2);
-			conn.commit(); // 작업확정
-			
-			if(rs.next()) {
-				no = rs.getInt(1);
-			}
+	
 			close();
 		}catch(Exception e){
-			e.printStackTrace();
+			logger.debug(e.getMessage());
 		}
 		
-		return no;
+		
+		return 0;
 	}
 
 	
@@ -101,7 +96,7 @@ public class CsArticleDAO extends DBHelper{
 				dto.setWriter(rs.getString("writer"));
 				dto.setRdate(rs.getString("rdate"));
 				dto.setAeName(rs.getString("aeName"));
-				dto.setuLevle(rs.getInt("uLevel"));
+				dto.setuLevel(rs.getInt("uLevel"));
 				dto.setType(rs.getInt("type"));
 				dto.setdName(rs.getString("dName"));
 				

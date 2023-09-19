@@ -37,6 +37,18 @@ public class FileService {
 		return path;
 	}
 	
+	
+	// 파일 업로드
+	public String insertFile(FileDTO fileDto) {
+		
+		
+		return null;
+		
+	}
+	
+	
+	
+	
 	// 파일명 수정
 	public String renameToFile(HttpServletRequest req, String path, String oName) {
 		

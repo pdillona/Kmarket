@@ -59,6 +59,8 @@ public class QnaListController extends HttpServlet{
 		// 시작 인덱스
 		int start = ps.getStartNum(currentPage);
 		
+		logger.debug("카테 디테일정보11======================="+ cateDetail);
+		
 		// 현재 페이지 게시물 조회
 		List<CsArticleDTO> articles = cas.SelectQnaArticlesAll(group, start, cateDetail);
 		
@@ -70,7 +72,9 @@ public class QnaListController extends HttpServlet{
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
+		req.setAttribute("cateDetail", cateDetail);
 		
+		logger.debug("카테 디테일정보22======================="+ cateDetail);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/list.jsp");
 		dispatcher.forward(req, resp);	

@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import kr.co.Kmarket.dao.CsArticleDAO;
+import kr.co.Kmarket.dao.cs.CsArticleDAO;
 import kr.co.Kmarket.dto.CsArticleDTO;
 import kr.co.Kmarket.dto.FileDTO;
 
