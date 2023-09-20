@@ -390,6 +390,10 @@ header {
     display: none;
     margin-top: 6px;
 }
+#member > .registerSeller form .auth {
+    display: none;
+    margin-top: 6px;
+}
   
   /* member > .registerSeller */
   #member > .registerSeller {

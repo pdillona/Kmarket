@@ -11,12 +11,17 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.Kmarket.dao.member.MemberDAO;
 import kr.co.Kmarket.dto.member.MemberDTO;
 
 public class MemberService {
 	
 	private static MemberService instance = new  MemberService();
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	public static MemberService getInstance() {
 		return instance;
 	}
@@ -132,8 +137,11 @@ public class MemberService {
 		
 		status = 1;
 	}catch(Exception e){
+		logger.debug("메일 발송 에러============="+e.getMessage());
 		status = 0;
 	}
+	
+	logger.debug("이메일 스테이터스 status값 확인=====" + status);
 	return status;
 	}//sendCodeByEmail end
 

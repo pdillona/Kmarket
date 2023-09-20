@@ -11,7 +11,7 @@ $(function(){
 		const division  = $('input[name=division]').val();
 		const uid   = $('input[name=uid]').val();
 		const name  = $('input[name=name]').val();
-		const email = $('input[name=km_email]').val();
+		const email = $('input[name=km_email], input[name=kms_email]').val();
 		
 		console.log('division : ' + division);
 		console.log('uid : ' + uid);
@@ -24,7 +24,7 @@ $(function(){
 			"name": name,
 			"email": email
 		};
-		
+		 
 		console.log('jsonData : ' + jsonData);
 		
 		if(preventDoubleClick){
@@ -45,6 +45,7 @@ $(function(){
 				dataType: 'json',
 				success: function(data){
 					console.log(data);
+					console.log(data.status);
 					
 					if(data.result > 0){						
 						$('.resultEmail').css('color', 'red').text('이미 사용중인 이메일 입니다.');
@@ -63,7 +64,7 @@ $(function(){
 						if(data.status > 0){
 							$('.resultEmail').css('color', 'green').text('이메일을 확인 후 인증코드를 입력하세요.');
 							$('.auth').show();
-							$('input[name=km_email]').attr('readonly', true);
+							$('input[name=km_email], input[name=kms_email]').attr('readonly', true);
 						}else{
 							$('.resultEmail').css('color', 'red').text('인증코드 전송이 실패했습니다. 잠시후 다시 시도하십시요.');
 							$('.resultEmailForId').css('color', 'red').text('해당하는 사용자, 이메일이 일치하지 않습니다.');

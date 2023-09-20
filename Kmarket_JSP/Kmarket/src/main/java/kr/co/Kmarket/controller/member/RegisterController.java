@@ -45,9 +45,9 @@ public class RegisterController extends HttpServlet{
 		String km_gender = req.getParameter("km_gender");
 		String km_email = req.getParameter("km_email");
 		String km_hp = req.getParameter("km_hp");
-		String km_zip = req.getParameter("km_zip");
-		String km_addr1 = req.getParameter("km_addr1");
-		String km_addr2 = req.getParameter("km_addr2");
+		String km_zip = req.getParameter("zip");
+		String km_addr1 = req.getParameter("addr1");
+		String km_addr2 = req.getParameter("addr2");
 		String regip = req.getRemoteAddr();
 		
 		MemberDTO dto = new MemberDTO();

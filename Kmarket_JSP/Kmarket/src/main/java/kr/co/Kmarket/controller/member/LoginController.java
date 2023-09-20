@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,6 +54,11 @@ public class LoginController extends HttpServlet{
 			HttpSession session = req.getSession();
             //로그인 성공 시 세션에 사용자 정보를 저장
             session.setAttribute("sessUser", dto);
+            
+            //자동 로그인 쿠키 설정
+            Cookie autoLoginCookie = new Cookie("autoLogin", "true");
+            autoLoginCookie.setMaxAge(30 * 24 * 60 * 60); // 30일간 유효
+            resp.addCookie(autoLoginCookie);
 
             
             //로그인 성공 후 메인 페이지로 리다이렉트
