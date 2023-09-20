@@ -41,7 +41,7 @@ public class Cate2DAO extends DBHelper{
 	}
 	
 	
-	//강사님이 주신 코드 (김무현)
+	//카테고리 리스트안에 리스트 (김무현)
 	public List<List<Cate2DTO>> selectCategories() {
 		
 		List<List<Cate2DTO>> categories = new ArrayList<>();
@@ -55,41 +55,38 @@ public class Cate2DAO extends DBHelper{
 			psmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = psmt.executeQuery();
 			
-			List<Cate2DTO> cate2s = null;
+			List<Cate2DTO> cate2s = new ArrayList<>();
 	        int currentCate1 = 0;
+
 	        while (rs.next()) {
+	            int cate1 = rs.getInt(1);
 	            
-	            if (currentCate1 == 0) {
-	                
-	                currentCate1 = rs.getInt(1);
-	                cate2s = new ArrayList<Cate2DTO>();
+	            if (currentCate1 != cate1) {
+	                if (!cate2s.isEmpty()) {
+	                    categories.add(cate2s);
+	                }
+	                currentCate1 = cate1;
+	                cate2s = new ArrayList<>();
 	            }
-	            
+
 	            Cate2DTO dto = new Cate2DTO();
-	            dto.setCate1(rs.getInt(1));
+	            dto.setCate1(cate1);
 	            dto.setC1Name(rs.getString(2));
 	            dto.setCate2(rs.getInt(3));
 	            dto.setC2Name(rs.getString(4));
 	            cate2s.add(dto);
-	            
-	            // 마지막 레코드 처리
-	            if (rs.isLast()) {
-	                categories.add(cate2s);
-	            }
-	            else if (currentCate1 != rs.getInt(1)) {
-	                categories.add(cate2s);
-	                currentCate1 = rs.getInt(1);
-	                cate2s = new ArrayList<Cate2DTO>();
-	            }
 	        }
-	        
-	        close();
 
-			
-		} catch (Exception e) {
-			logger.error("selectCategories error : "+e.getMessage());
-		}
-		return categories;
+	       
+	        if (!cate2s.isEmpty()) {
+	            categories.add(cate2s);
+	        }
+	        close();
+	    } catch (Exception e) {
+	        logger.error("selectCategories error: " + e.getMessage());
+	    }
+
+	    return categories;
 	}
 	
 	public void updateCate2(Cate2DTO dto) {}
