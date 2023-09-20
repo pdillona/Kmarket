@@ -136,48 +136,63 @@ public class ModifyController extends HttpServlet{
 		logger.debug("receipt : "+receipt);
 		logger.debug("bizType : "+bizType);
 		logger.debug("origin : "+origin);
-		
-		String newThumb1;
-		String newThumb2;
-		String newThumb3;
-		String newDetail;
-		
-		// 파일 uuid 생성
-		if(thumb1 != null) {
-			newThumb1 = fileService.uuidName(thumb1);
-		}else {
-			thumb1 = oName1;
-			newThumb1 = oriThumb1;
-		}
-		logger.debug("newThumb1: "+ newThumb1);
-		if(thumb2 != null) {
-			newThumb2 = fileService.uuidName(thumb2);
-		}else {
-			thumb2 = oName2;
-			newThumb2 = oriThumb2;
-		}
-		logger.debug("newThumb2: "+ newThumb2);
-		if(thumb3 != null) {
-			newThumb3 = fileService.uuidName(thumb3);
-		}else {
-			thumb3 = oName3;
-			newThumb3 = oriThumb3;
-		}
-		logger.debug("newThumb3: "+ newThumb3);
-		if(detail != null) {
-			newDetail = fileService.uuidName(detail);
-		}else {
-			detail = oName4;
-			newDetail = oriDetail;
-		}
-		logger.debug("newDetail: "+ newDetail);
-		
-		
+
 		// 카테고리 변경 했을 때 newPath
 		String newFileUrl = "/thumb/"+prodCate1+"/"+prodCate2;
 		logger.debug("newFileUrl : "+newFileUrl);
 		String newPath = fileService.getPath(req, newFileUrl);
 		logger.debug("newPath : "+newPath);
+		
+		String newThumb1;
+		String newThumb2;
+		String newThumb3;
+		String newDetail;
+		File fileThumb1;
+		File fileThumb2;
+		File fileThumb3;
+		File fileDetail;
+		
+		// 파일 uuid 생성
+		if(thumb1 != null) {
+			newThumb1 = fileService.uuidName(thumb1);
+			fileThumb1 = new File(path+"/"+thumb1);
+			logger.debug("fileThumb1 : "+fileThumb1);
+		}else {
+			thumb1 = oName1;
+			newThumb1 = oriThumb1;
+			fileThumb1 = new File(path+"/"+newThumb1);
+			logger.debug("fileThumb1 : "+fileThumb1);
+		}
+		logger.debug("thumb1: "+ thumb1);
+		logger.debug("newThumb1: "+ newThumb1);
+		
+		if(thumb2 != null) {
+			newThumb2 = fileService.uuidName(thumb2);
+			fileThumb2 = new File(path+"/"+thumb2);
+		}else {
+			thumb2 = oName2;
+			newThumb2 = oriThumb2;
+			fileThumb2 = new File(path+"/"+newThumb2);
+		}
+		logger.debug("newThumb2: "+ newThumb2);
+		if(thumb3 != null) {
+			newThumb3 = fileService.uuidName(thumb3);
+			fileThumb3 = new File(path+"/"+thumb3);
+		}else {
+			thumb3 = oName3;
+			newThumb3 = oriThumb3;
+			fileThumb3 = new File(path+"/"+newThumb3);
+		}
+		logger.debug("newThumb3: "+ newThumb3);
+		if(detail != null) {
+			newDetail = fileService.uuidName(detail);
+			fileDetail = new File(path+"/"+detail);
+		}else {
+			detail = oName4;
+			newDetail = oriDetail;
+			fileDetail = new File(path+"/"+newDetail);
+		}
+		logger.debug("newDetail: "+ newDetail);
 		
 		// 원본파일
 		File oriFileThumb1 = new File(path+"/"+oriThumb1);
@@ -185,42 +200,38 @@ public class ModifyController extends HttpServlet{
 		File oriFileThumb3 = new File(path+"/"+oriThumb3);
 		File oriFileDetail = new File(path+"/"+oriDetail);
 		
+		// 파일경로 변경		
+		
+		
+		File newFileThumb1 = new File(newPath+"/"+newThumb1);
+		logger.debug("newFileThumb1 : "+newFileThumb1);
+		fileThumb1.renameTo(newFileThumb1);
+		logger.debug("fileThumb1 : "+fileThumb1);
+		
+		File newFileThumb2 = new File(newPath+"/"+newThumb2);
+		fileThumb2.renameTo(newFileThumb2);
+		
+		File newFileThumb3 = new File(newPath+"/"+newThumb3);
+		fileThumb3.renameTo(newFileThumb3);
+		
+		File newFileDetail = new File(newPath+"/"+newDetail);
+		fileDetail.renameTo(newFileDetail);
+		
 		// 원본파일 uuid와 새로운 파일 uuid 비교 
-		if(!newThumb1.equals(oriThumb1)) {
-			File fileThumb1 = new File(path+"/"+thumb1);
-			File newFileThumb1 = new File(newPath+"/"+newThumb1);
-			fileThumb1.renameTo(newFileThumb1);
-			
-			if(oriFileThumb1.exists()) {
-				oriFileThumb1.delete();
-			}
+		if(!newThumb1.equals(oriThumb1) && oriFileThumb1.exists()) {
+			oriFileThumb1.delete();
 		}
-		if(!newThumb2.equals(oriThumb2)) {
-			File fileThumb2 = new File(path+"/"+thumb2);
-			File newFileThumb2 = new File(newPath+"/"+newThumb2);
-			fileThumb2.renameTo(newFileThumb2);
-			
-			if(oriFileThumb2.exists()) {
-				oriFileThumb2.delete();
-			}
+		
+		if(!newThumb2.equals(oriThumb2) && oriFileThumb2.exists()) {
+			oriFileThumb2.delete();
 		}
-		if(!newThumb3.equals(oriThumb3)) {
-			File fileThumb3 = new File(path+"/"+thumb3);
-			File newFileThumb3 = new File(newPath+"/"+newThumb3);
-			fileThumb3.renameTo(newFileThumb3);
-			
-			if(oriFileThumb3.exists()) {
-				oriFileThumb3.delete();
-			}
+		
+		if(!newThumb3.equals(oriThumb3) && oriFileThumb3.exists()) {
+			oriFileThumb3.delete();
 		}
-		if(!newDetail.equals(oriDetail)) {
-			File fileDetail = new File(path+"/"+detail);
-			File newFileDetail = new File(newPath+"/"+newDetail);
-			fileDetail.renameTo(newFileDetail);
-			
-			if(oriFileDetail.exists()) {
-				oriFileDetail.delete();
-			}
+		
+		if(!newDetail.equals(oriDetail) && oriFileDetail.exists()) {
+			oriFileDetail.delete();
 		}
 		
 		ProductDTO dto = new ProductDTO();
