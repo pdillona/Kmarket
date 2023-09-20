@@ -20,8 +20,9 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.Kmarket.dao.cs.CsArticleDAO;
-import kr.co.Kmarket.dto.CsArticleDTO;
 import kr.co.Kmarket.dto.FileDTO;
+import kr.co.Kmarket.dto.cs.CsArticleDTO;
+import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 
 
 public enum CsArticleService {
@@ -50,7 +51,11 @@ public enum CsArticleService {
 	 }
 		
 	
-	
+	public List<CsCateDetailDTO> selectCsWriteCate(String cateDetail){
+		
+		
+		return dao.selectCsWriteCate(cateDetail);
+	}
 
 	 
 	 

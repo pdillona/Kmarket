@@ -7,7 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
-import kr.co.Kmarket.dto.CsArticleDTO;
+import kr.co.Kmarket.dto.cs.CsArticleDTO;
+import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 
 public class CsArticleDAO extends DBHelper{
 
@@ -188,6 +189,42 @@ public class CsArticleDAO extends DBHelper{
 
 	
 	
+	public List<CsCateDetailDTO> selectCsWriteCate(String cateDetail){
+		
+		List<CsCateDetailDTO> cateList = new ArrayList<CsCateDetailDTO>();
+		
+		conn = getConnection();
+		
+		SQL = "SELECT dName FROM `km_cs_cate_detail` WHERE `TYPE`>=20 AND `aeName` = '?' ";
+		
+		try {
+		
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, cateDetail);
+			rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				CsCateDetailDTO dto = new CsCateDetailDTO();
+				dto.setAeName(rs.getString("aeName"));
+				dto.setType(rs.getInt("type"));
+				dto.setdName(rs.getString("dName"));
+				
+				cateList.add(dto);
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.debug("selectCsWriteCateDAO 에러~~~"+ e.getMessage());
+		}
+		
+		
+		
+		logger.debug("selectCsWriteCateDAO cateList 정보~~~~~"+ cateList);
+		
+		
+		return cateList; 
+	}
 	
 	
 	

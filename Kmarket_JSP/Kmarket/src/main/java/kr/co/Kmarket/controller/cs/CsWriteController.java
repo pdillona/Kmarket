@@ -8,14 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.oreilly.servlet.MultipartRequest;
 
-import kr.co.Kmarket.dto.CsArticleDTO;
 import kr.co.Kmarket.dto.FileDTO;
+import kr.co.Kmarket.dto.cs.CsArticleDTO;
+import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 import kr.co.Kmarket.service.CsArticleService;
 import kr.co.Kmarket.service.FileService;
 
@@ -27,6 +29,7 @@ public class CsWriteController extends HttpServlet{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private CsArticleService aService = CsArticleService.INSTANCE;
 	private FileService fService = new FileService();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -36,10 +39,12 @@ public class CsWriteController extends HttpServlet{
 		String cateDetail = req.getParameter("cateDetail");
 		
 		
+		aService.selectCsWriteCate(cateDetail);
 		
 		req.setAttribute("group", group);
 		req.setAttribute("type", type);
 		req.setAttribute("cateDetail", cateDetail);
+		
 		
 		
 		

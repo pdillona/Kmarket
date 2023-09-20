@@ -1,4 +1,6 @@
-package kr.co.Kmarket.dto;
+package kr.co.Kmarket.dto.cs;
+
+import kr.co.Kmarket.dto.FileDTO;
 
 public class CsArticleDTO {
 
@@ -11,8 +13,8 @@ public class CsArticleDTO {
 	private String writer;
 	private String regip;
 	private String rdate;
-	private String aeName;
 	private String akName;
+	private String aeName;
 	private int type;
 	private String dName;
 	private int uLevel;
