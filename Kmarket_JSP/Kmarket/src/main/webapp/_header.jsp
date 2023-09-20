@@ -45,12 +45,12 @@
             <a href="${ctxPath}/member/login.do">로그인</a>
             <a href="${ctxPath}/member/join.do">회원가입</a>
             <a href="#">마이페이지</a>
-            <!-- 세션구축되면<c:if test="${not empty sessUser}">
-            	<a href="${ctxPath}/user/logout.do">로그아웃</a>
-            	<c:if test="${sessUser.role ne 'USER'}">
-            	<a href="${ctxPath}/admin/index.do">관리자</a>
+            <c:if test="${not empty sessUser}">
+            	<a href="${ctxPath}/member/logout.do">로그아웃</a>
+            	<c:if test="${sessUer.type eq 2}">
+            	<a href="${ctxPath}/seller/index.do">판매자</a>
             	</c:if>
-            </c:if> -->
+            </c:if> 
             <a href="#"
               ><i class="fa fa-shopping-cart" aria-hidden="true"></i
               >&nbsp;장바구니</a

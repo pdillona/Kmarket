@@ -17,6 +17,7 @@
     	if(success == 200){
     		alert('상품등록이 완료되었습니다.');
     	}
+    	
     </script>
 </head>
 <body>
@@ -25,7 +26,7 @@
             <div>
                 <a href="/Kmarket/seller" class="logo"><img src="/Kmarket/seller/img/admin_logo.png" alt="admin_logo"/></a>
                 <p>
-                    <span>홍길동님 반갑습니다.</span>
+                    <span>${sessUser.manager}님 반갑습니다.</span>
                     <a href="#">HOME |</a>
                     <a href="#">로그아웃 |</a>
                     <a href="#">고객센터</a>

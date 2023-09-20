@@ -75,7 +75,7 @@
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
                     <form id="formRegister" action="/Kmarket/seller/product/register.do" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="seller" value="홍길동"/>
+						<input type="hidden" name="seller" value="${sessUser.uid}"/>
                         <!-- 상품분류 -->
                         <section>
                             <h4>상품분류</h4>

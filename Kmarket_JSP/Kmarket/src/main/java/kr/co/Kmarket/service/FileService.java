@@ -66,6 +66,18 @@ public class FileService {
 		
 		return sName;
 	}
+
+	// 파일명 수정(상품목록 수정)
+	public String uuidName(String oName) {
+		
+		int i = oName.lastIndexOf(".");
+		String ext = oName.substring(i);
+		
+		String uuid  = UUID.randomUUID().toString();
+		String sName = uuid + ext;
+		
+		return sName;
+	}
 	
 	
 	// 파일 업로드

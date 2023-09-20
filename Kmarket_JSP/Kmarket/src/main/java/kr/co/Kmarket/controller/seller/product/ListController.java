@@ -33,14 +33,17 @@ public class ListController extends HttpServlet{
 		String pg = req.getParameter("pg");
 		String search = req.getParameter("search");
 		String search_text = req.getParameter("search_text");
+		String seller = req.getParameter("seller");
 		logger.debug("pg : "+pg);
 		logger.debug("search : "+search);
 		logger.debug("search_text : "+search_text);
+		logger.debug("seller : "+seller);
 		
-		HttpSession session = req.getSession();
-		MemberDTO sessUser  = (MemberDTO) session.getAttribute("sessUser");
-		//String seller = sessUser.getUid();
-		String seller = "홍길동";
+		/*
+		 * HttpSession session = req.getSession(); MemberDTO sessUser = (MemberDTO)
+		 * session.getAttribute("sessUser"); String seller = sessUser.getUid();
+		 * logger.debug("seller : "+seller);
+		 */
 
 		SearchDTO searchDTO = new SearchDTO();
 		searchDTO.setSeller(seller);
