@@ -72,6 +72,9 @@ public class ProductDTO {
 	public void setProdNo(int prodNo) {
 		this.prodNo = prodNo;
 	}
+	public void setProdNo(String prodNo) {
+		this.prodNo = Integer.parseInt(prodNo);
+	}
 	public String getSeller() {
 		return seller;
 	}

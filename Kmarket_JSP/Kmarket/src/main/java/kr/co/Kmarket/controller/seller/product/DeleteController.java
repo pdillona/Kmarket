@@ -14,11 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dto.ProductDTO;
+import kr.co.Kmarket.dto.member.MemberDTO;
 import kr.co.Kmarket.service.FileService;
 import kr.co.Kmarket.service.ProductService;
 
@@ -34,6 +36,9 @@ public class DeleteController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String prodNo = req.getParameter("prodNo");
 		logger.debug("prodNo"+prodNo);
+		HttpSession session = req.getSession();
+		MemberDTO sessUser = (MemberDTO)session.getAttribute("sessUser");
+		String seller = sessUser.getUid();
 		
 		ProductDTO image = productService.selectImages(prodNo);
 		
@@ -54,14 +59,15 @@ public class DeleteController extends HttpServlet{
 			}
 		productService.deleteProduct(prodNo);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/seller/product/list.jsp");
-		dispatcher.forward(req, resp);
+		resp.sendRedirect("/Kmarket/seller/product/list.do?seller="+seller);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String[]  chks = req.getParameterValues("chk");
 		logger.debug("chks : "+chks[0]);
-		
+		HttpSession session = req.getSession();
+		MemberDTO sessUser = (MemberDTO)session.getAttribute("sessUser");
+		String seller = sessUser.getUid();
 		for (String chk : chks) {
 			
 			ProductDTO image = productService.selectImages(chk);
@@ -86,6 +92,6 @@ public class DeleteController extends HttpServlet{
 			productService.deleteProduct(chk);
 			
 		}
-		resp.sendRedirect("/Kmarket/seller/product/list.do");
+		resp.sendRedirect("/Kmarket/seller/product/list.do?seller="+seller);
 	}
 }

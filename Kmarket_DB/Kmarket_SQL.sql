@@ -109,3 +109,42 @@ SELECT DISTINCT a.*, b.`c1Name` , c.`c2Name`
 	JOIN `km_product_cate2` AS c
 	ON b.`cate1`=c.`cate1`
 	WHERE `prodNo`=1049129;
+	
+#일반회원 정보	
+INSERT INTO `km_member` 
+	SET `uid`='user', 
+	`pass`=SHA2(1234, 256), 
+	`name`='유저', 
+	`gender`=1, 
+	`hp`='010-1234-1234', 
+	`email`='user@gmail.com', 
+	`type`=1, 
+	`zip`='45521', 
+	`addr1`='부산광역시', 
+	`addr2`='아무아파트', 
+	`regip`='0:0:0:0:0:0:0:1', 
+	`rdate`=NOW();
+	
+#판매자 정보
+INSERT INTO `km_member` 
+	SET `uid`='seller', 
+	`level`=5, 
+	`pass`=SHA2(1234, 256), 
+	`email`='seller', 
+	`type`=2, 
+	`zip`='25346', 
+	`addr1`='부산광역시', 
+	`addr2`='아무회사', 
+	`company`='아무회사', 
+	`ceo`='셀러', 
+	`bizRegNum`='121212121212', 
+	`comRegNum`='232145345', 
+	`tel`='051-525-2336', 
+	`manager`='길동홍', 
+	`managerHp`='010-2526-2353', 
+	`fax`='010-3453-213', 
+	`regip`='0:0:0:0:0:0:0:1', 
+	`rdate`=NOW();
+	
+#상품 삭제
+TRUNCATE TABLE `km_product`;
