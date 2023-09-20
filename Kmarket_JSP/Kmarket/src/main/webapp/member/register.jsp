@@ -6,7 +6,17 @@
 <script src="${ctxPath}/js/checkMember.js"></script>
 <script src="${ctxPath}/js/authEmail.js"></script>
 <script>
-	
+	const HpAutoHyphen = (target) => {
+		 target.value = target.value
+		   .replace(/[^0-9]/g, '') //숫자가 아닌 문자를 모두 제거
+		  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3") //자동(000-0000-0000) 하이픈 형식으로 변환
+		  .replace(/(\-{1,2})$/g, ""); //번호입력 시 자동 하이픈 반복에서 연속된 하이픈을 모두 제거 
+		}
+</script>
+<script>
+	$("input[name='km_gender']").change(function(){
+		var checked = $("input[name='km_gender']:checked").val();
+	});	
 </script>
         <main id="member">
             <div class="register">
@@ -54,8 +64,8 @@
 							<tr>
 								<th><span class="essential">*</span>성별</th>
 								<td>
-								<label><input type="radio" name="km_gender" value="1" checked>&nbsp;남</label> 
-								<label><input type="radio" name="gender" value="2">&nbsp;여</label></td>
+								<label><input type="radio" name="km_gender" value="1" checked="checked">&nbsp;남</label> 
+								<label><input type="radio" name="km_gender" value="2">&nbsp;여</label></td>
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>EMAIL</th>
@@ -71,23 +81,23 @@
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>휴대폰</th>
-								<td><input type="text" name="km_hp" maxlength="13"
-									placeholder="휴대폰번호 입력" required /> <span class="msgHp"> -
-										포함 13자리를 입력하세요.</span></td>
+								<td><input type="text" oninput="HpAutoHyphen(this)" name="km_hp" maxlength="13"
+									placeholder="휴대폰번호 입력" required /> <span class="msgHp"> 
+										13자리를 입력하세요.</span></td>
 							</tr>
 							<tr class="addr">
 								<th>주소</th>
 								<td>
 									<div>
-										<input type="text" name="km_zip" id="zip" placeholder="우편번호" readonly />
+										<input type="text" name="zip" id="km_zip" placeholder="우편번호" readonly />
 										<button type="button" onclick="zipcode()"><img src="./img/chk_post.gif" alt="우편번호찾기"/></button>
 									</div>
 									<div>
-										<input type="text" name="km_addr1" id="addr1" size="50"
+										<input type="text" name="addr1" id="km_addr1" size="50"
 											placeholder="주소를 검색하세요." readonly />
 									</div>
 									<div>
-										<input type="text" name="km_addr2" id="addr2" size="50"
+										<input type="text" name="addr2" id="km_addr2" size="50"
 											placeholder="상세주소를 입력하세요." />
 									</div>
 								</td>

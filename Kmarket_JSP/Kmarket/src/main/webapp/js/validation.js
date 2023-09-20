@@ -8,8 +8,9 @@
 	let isEmailOk = false;
 	let isHpOk = false;
 	let isCompanyOk = false;
+	let isCeoOk = false;
 	let isBizNumOk = false;
-	let isComNumOk = false;
+	let isTelOk = false;
 	let isFaxOk = false;
 	
 	
@@ -19,7 +20,9 @@
 	const reName  = /^[가-힣]{2,10}$/ 
 	const reEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 	const reHp    = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;
-	const reCompany = /\(주\)\s+\S+/;	
+	const reCompany = /\(주\)/g;	
+	const reBizNum = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
+	const reTel = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
 	
 	//유효성 검사 (Validation)
 	$(function(){
@@ -53,6 +56,18 @@
 			
 		});
 		
+		// seller 회사명 
+		$('input[name=kms_company]').focusout(function() {
+			const company = $(this).val();
+			
+			if(company.match(reCompany)){
+				$('.msgCompany').text('');
+				isCompanyOk = true;
+			}else{
+				$('.msgCompany').css('color','red').text('유효한 회사명이 아닙니다.');
+				isCompanyOk = false;
+			}
+		});
 		// member이름, seller 대표자, 담당자
 		$('input[name=km_name], input[name=kms_ceo]').focusout(function() {
 			const name = $(this).val();
@@ -60,15 +75,57 @@
 			if(name.match(reName)){
 				$('.msgName').text('');
 				isNameOk = true;
+				isCeoOk = true;
 			}else{
 				$('.msgName').css('color','red').text('유효한 이름이 아닙니다.');
 				isNameOk = false;
+				isCeoOk = false;
+			}
+		});
+		
+		// seller 사업자등록번호 
+		$('input[name=kms_corp_reg]').focusout(function() {
+			const BizNum = $(this).val();
+			
+			if(BizNum.match(reBizNum)){
+				$('.msgCorp').text('');
+				isBizNumOk = true;
+			}else{
+				$('.msgCorp').css('color','red').text('유효한 사업자등록번호가 아닙니다.');
+				isBizNumOk = false;
+			}
+		});
+		
+		// seller 전화번호
+		$('input[name=kms_tel]').focusout(function() {
+			const Tel = $(this).val();
+			
+			if(Tel.match(reTel)){
+				$('.msgTel').text('');
+				isTelOk = true;
+			}else{
+				$('.msgTel').css('color','red').text('유효한 전화번호가 아닙니다.');
+				isTelOk = false;
+			}
+		});
+		
+		// seller 팩스번호
+		$('input[name=kms_fax]').focusout(function() {
+			const Fax = $(this).val();
+			
+			if(Fax.match(reTel)){
+				$('.msgFax').text('');
+				isFaxOk = true;
+			}else{
+				$('.msgFax').css('color','red').text('유효한 전화번호가 아닙니다.');
+				isFaxOk = false;
 			}
 		});
 		
 		
+		
 		// 이메일
-		$('input[name=km_email]').keydown(function () {
+		$('input[name=km_email], input[name=kms_email]').keydown(function () {
 			$('.resultEmail').text('');
 			isEmailOk= false;
 		});
@@ -79,6 +136,14 @@
 			$('.msgHp').text('');
 			isHpOk= false;
 		});
+		// 전화번호
+		$('input[name=kms_tel]').keydown(function () {
+			
+			$('.msgTel').text('');
+			isTelOk= false;
+		});
+		
+
 		
 		// 최종 확인
 		$('#formUser').submit(function() { //서브밋 일어났을 때니 전송 전에 실행됨
@@ -102,6 +167,12 @@
 				return false;
 			}
 			
+			if(!isCeoOk){
+				alert('대표자 이름을 확인 하세요');
+				
+				return false;
+			}
+			
 						
 			if(!isEmailOk){
 				alert('이메일을 확인 하세요');
@@ -109,6 +180,11 @@
 				return false;
 			}
 			
+			if(!isTelOk){
+				alert('전화번호를 확인 하세요');
+				
+				return false;
+			}
 			if(!isHpOk){
 				alert('휴대폰 번호를 확인 하세요');
 				

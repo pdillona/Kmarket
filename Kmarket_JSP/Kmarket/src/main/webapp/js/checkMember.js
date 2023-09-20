@@ -50,7 +50,7 @@ $(function(){
 	}
 	
 		
-	// member휴대폰 , managerHp 중복체크 
+	// member휴대폰 , managerHp 중복체크 & 유효성검사  
 	$('input[name=km_hp]').focusout(function(){
 		
 		const km_hp = $(this).val();
@@ -77,6 +77,8 @@ $(function(){
 			
 		});
 	});
+	
+	
 	
 	
 });
