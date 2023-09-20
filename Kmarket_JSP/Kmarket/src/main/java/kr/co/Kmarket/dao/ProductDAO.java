@@ -658,7 +658,65 @@ public class ProductDAO extends DBHelper{
 		return total;
 	}
 			
-	public void updateProduct(ProductDTO dto) {}
+	public void updateProduct(ProductDTO dto) {
+		sql = "UPDATE `km_product` SET "
+				+ "`prodCate1`=?, "
+				+ "`prodCate2`=?, "
+				+ "`prodName`=?, "
+				+ "`descript`=?, "
+				+ "`company`=?, "
+				+ "`price`=?, "
+				+ "`discount`=?, "
+				+ "`point`=?, "
+				+ "`stock`=?, "
+				+ "`delivery`=?, "
+				+ "`thumb1`=?, "
+				+ "`newThumb1`=?, "
+				+ "`thumb2`=?, "
+				+ "`newThumb2`=?, "
+				+ "`thumb3`=?, "
+				+ "`newThumb3`=?, "
+				+ "`detail`=?, "
+				+ "`newDetail`=?, "
+				+ "`status`=?, "
+				+ "`duty`=?, "
+				+ "`receipt`=?, "
+				+ "`bizType`=?, "
+				+ "`origin`=? "
+				+ "WHERE `prodNo`=?";
+		conn = getConnection();
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, dto.getProdCate1());
+			psmt.setInt(2, dto.getProdCate2());
+			psmt.setString(3, dto.getProdName());
+			psmt.setString(4, dto.getDescript());
+			psmt.setString(5, dto.getCompany());
+			psmt.setInt(6, dto.getPrice());
+			psmt.setInt(7, dto.getDiscount());
+			psmt.setInt(8, dto.getPoint());
+			psmt.setInt(9, dto.getStock());
+			psmt.setInt(10, dto.getDelivery());
+			psmt.setString(11, dto.getThumb1());
+			psmt.setString(12, dto.getNewThumb1());
+			psmt.setString(13, dto.getThumb2());
+			psmt.setString(14, dto.getNewThumb2());
+			psmt.setString(15, dto.getThumb3());
+			psmt.setString(16, dto.getNewThumb3());
+			psmt.setString(17, dto.getDetail());
+			psmt.setString(18, dto.getNewDetail());
+			psmt.setString(19, dto.getStatus());
+			psmt.setString(20, dto.getDuty());
+			psmt.setString(21, dto.getReceipt());
+			psmt.setString(22, dto.getBizType());
+			psmt.setString(23, dto.getOrigin());
+			psmt.setInt(24, dto.getProdNo());
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error("updateProduct error : "+e.getMessage());
+		}
+	}
 	public void deleteProduct(String prodNo) {
 		sql = "DELETE FROM `km_product` WHERE `prodNo`=?";
 		conn = getConnection();

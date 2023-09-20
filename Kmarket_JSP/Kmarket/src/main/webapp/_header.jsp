@@ -46,11 +46,19 @@
             <a href="${ctxPath}/member/join.do">회원가입</a>
             <a href="#">마이페이지</a>
             <c:if test="${not empty sessUser}">
+<<<<<<< HEAD
             	<a href="${ctxPath}/user/logout.do">로그아웃</a>
             	<c:if test="${sessUser.type ne '1'}">
             	<a href="${ctxPath}/admin/index.do">관리자</a>
             	</c:if>
             </c:if>
+=======
+            	<a href="${ctxPath}/member/logout.do">로그아웃</a>
+            	<c:if test="${sessUer.type eq 2}">
+            	<a href="${ctxPath}/seller/index.do">판매자</a>
+            	</c:if>
+            </c:if> 
+>>>>>>> 702d01685a1688bc124e6846bbd002dd2b22d6df
             <a href="#"
               ><i class="fa fa-shopping-cart" aria-hidden="true"></i
               >&nbsp;장바구니</a
