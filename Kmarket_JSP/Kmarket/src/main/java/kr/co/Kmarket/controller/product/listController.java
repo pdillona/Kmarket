@@ -41,10 +41,18 @@ public class listController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String prodCate1 = req.getParameter("prodCate1");
+		String prodCate2 = req.getParameter("prodCate2");
 		String pg = req.getParameter("pg");
-		
+		String type = req.getParameter("type");
 		logger.debug("prodCate1 : " + prodCate1);
+		logger.debug("prodCate2 : " + prodCate2);
 		logger.debug("pg : " + pg);
+		logger.debug("type : " + type);
+		
+		if(prodCate2 == null) {
+			prodCate2 = "0";
+		}
+		
 		
 		
 		// 현재 페이지 계산
@@ -54,7 +62,7 @@ public class listController extends HttpServlet{
 		int start = pageService.getStartNum(currentPage);
 		
 		// 전체 게시물 개수 조회
-		int total = pService.selectCountTotalProdCate(prodCate1);
+		int total = pService.selectCountTotalProdCate(prodCate1, prodCate2);
 		
 		// 마지막 페이지 번호 계산
 		int lastPageNum = pageService.getLastPageNum(total);
@@ -66,7 +74,7 @@ public class listController extends HttpServlet{
 		int pageStartNum = pageService.getPageStartNum(total, currentPage);
 		
 		// 현재 페이지 게시물 조회
-		List<ProductDTO> products = pService.selectProductsAll(prodCate1, start);
+		List<ProductDTO> products = pService.selectProductsAll(prodCate1, prodCate2, start ,type);
 
 		//aside 카테고리
 		List<List<Cate2DTO>> categories = Ct2Service.selectCategories();
@@ -74,6 +82,7 @@ public class listController extends HttpServlet{
 		logger.debug(products.toString());
 		
 		req.setAttribute("prodCate1", prodCate1);
+		req.setAttribute("prodCate2", prodCate2);
 		req.setAttribute("pg", pg);
 		req.setAttribute("total", total);
 		req.setAttribute("currentPage", currentPage);

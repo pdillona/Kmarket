@@ -572,17 +572,52 @@ public class ProductDAO extends DBHelper{
 				return products;
 			}
 			
-	//무현 추가 cate1 별로 전체상품
-	public List<ProductDTO> selectProductsAll(String prodCate1, int start) {
+	//무현 추가 카테고리별로 전체상품
+	public List<ProductDTO> selectProductsAll(String prodCate1, String prodCate2, int start ,String type) {
 		
 		List<ProductDTO> products = new ArrayList<>();
 		
+		logger.debug("selectProductsAll==========================="+type);
+		
+		
+		String sql2 ="SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? LIMIT ?, 10";
+		
+		String sql3_sold = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `sold` DESC LIMIT ?, 10";
+		String sql3_price= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` DESC LIMIT ?, 10";
+		String sql3_pricedown= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` ASC LIMIT ?, 10";
+		String sql3_score = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `score` DESC LIMIT ?, 10";
+		String sql3_review = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `review` DESC LIMIT ?, 10";
+		String sql3_rdate = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `rdate` DESC LIMIT ?, 10";
 		try {
 			conn = getConnection();
-			sql = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? LIMIT ?, 10";
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, prodCate1);
-			psmt.setInt(2, start);
+			if(prodCate2.equals("0")) {
+					
+				switch(type) {
+					case "1": psmt=conn.prepareStatement(sql3_sold);
+							  psmt.setString(1, prodCate1);
+							  psmt.setInt(2, start);
+							  break;
+				
+				}
+			
+					sql = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? LIMIT ?, 10";
+					psmt = conn.prepareStatement(sql);
+					psmt.setString(1, prodCate1);
+					psmt.setInt(2, start);
+				
+				
+			}else {
+				
+				
+				
+					psmt = conn.prepareStatement(sql2);
+					psmt.setString(1, prodCate1);
+					psmt.setString(2, prodCate2);
+					psmt.setInt(3, start);
+				
+			
+			}
+			
 			
 			rs = psmt.executeQuery();
 			
@@ -635,16 +670,24 @@ public class ProductDAO extends DBHelper{
 		return products;
 	}
 	
-	//게시판 총 갯수 추가
+	//무현 추가 카테고리별 게시판 총 갯수 추가
 	
-	public int selectCountTotalProdCate(String prodCate1) {
+	public int selectCountTotalProdCate(String prodCate1, String prodCate2) {
 		int total = 0;
+		String sql2 ="SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
 		
 		try {
 			conn = getConnection();
-			sql = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, prodCate1);
+			if(prodCate2.equals("0")) {
+				sql = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, prodCate1);
+			}else {
+				psmt = conn.prepareStatement(sql2);
+				psmt.setString(1, prodCate1);
+				psmt.setString(2, prodCate2);
+			}
+			
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {

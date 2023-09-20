@@ -24,10 +24,12 @@
         </a>
         <ol>
         	<c:forEach var="cate2" items="${cate2s}">
-            	<li><a href="#">${cate2.c2Name}</a></li>
+            	<li><a href="/Kmarket/product/list.do?prodCate1=${cate2s.get(0).cate1}&prodCate2=${cate2.cate2}">${cate2.c2Name}</a></li>
                   </c:forEach>
               </ol>
 </li>
      </c:forEach>
       </ul>
   </aside>
+  
+  

@@ -9,15 +9,10 @@
 <jsp:include page="./_aside.jsp"/>
     
     <section class="list">              
-      <!-- 제목, 페이지 네비게이션 -->
-      <nav>
-        <h1>상품목록</h1>
-        <p>HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong></p>
-      </nav>
-
+      <jsp:include page="./_nav.jsp"/>
       <!-- 정렬 메뉴 -->
       <ul class="sort">
-          <li><a href="#" class="on">판매많은순</a></li>
+          <li><a href="/Kmarket/product/list.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&type=1" class="on">판매많은순</a></li>
           <li><a href="#">낮은가격순</a></li>
           <li><a href="#">높은가격순</a></li>
           <li><a href="#">평점높은순</a></li>
@@ -52,7 +47,7 @@
 				</li>
               <li>
                 <del class="org-price">${products.priceWithComma}</del>
-                <span class="discount">${products.discount}</span>
+                <span class="discount">${products.discount}%</span>
               </li>
               <li><span class="${products.delivery == 0 ? 'free-delivery' : ''}">배송비 ${products.delivery}</span></li>
             </ul>

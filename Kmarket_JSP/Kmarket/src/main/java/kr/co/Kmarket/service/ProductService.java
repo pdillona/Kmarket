@@ -62,11 +62,11 @@ public class ProductService {
 	}
 	
 	//추가 무현 카테고리1별 상품전체 출력
-	public List<ProductDTO> selectProductsAll(String prodCate1, int start){
-		return dao.selectProductsAll(prodCate1, start);
+	public List<ProductDTO> selectProductsAll(String prodCate1, String prodCate2, int start , String type){
+		return dao.selectProductsAll(prodCate1, prodCate2, start, type);
 	}
 	//게시판 총 갯수 카운트
-	public int selectCountTotalProdCate(String prodCate1) {
-		return dao.selectCountTotalProdCate(prodCate1);
+	public int selectCountTotalProdCate(String prodCate1, String prodCate2) {
+		return dao.selectCountTotalProdCate(prodCate1, prodCate2);
 	}
 }
