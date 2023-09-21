@@ -47,7 +47,7 @@
 							<tr>
 								<th><span class="essential">*</span>비밀번호확인</th>
 								<td><input type="password" name="km_pass2" placeholder="비밀번호를 확인"
-									required /> <span class="msgPass2">&nbsp;비밀번호 재입력</span></td>
+									required />&nbsp; <span class="msgPass2">&nbsp;비밀번호 재입력</span></td>
 							</tr>
 						</table>
 					</section>
@@ -57,7 +57,7 @@
 							<tr>
 								<th><span class="essential">*</span>이름</th>
 								<td>
-								<input type="text" name="km_name" placeholder="이름을 입력" required />
+								<input type="text" name="km_name" placeholder="이름을 입력" required />&nbsp;
 								<span class="msgName"></span>
 								</td>
 							</tr>
@@ -82,7 +82,7 @@
 							<tr>
 								<th><span class="essential">*</span>휴대폰</th>
 								<td><input type="text" oninput="HpAutoHyphen(this)" name="km_hp" maxlength="13"
-									placeholder="휴대폰번호 입력" required /> <span class="msgHp"> 
+									placeholder="휴대폰번호 입력" required />&nbsp; <span class="msgHp"> 
 										13자리를 입력하세요.</span></td>
 							</tr>
 							<tr class="addr">

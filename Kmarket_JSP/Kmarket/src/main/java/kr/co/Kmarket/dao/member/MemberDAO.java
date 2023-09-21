@@ -203,6 +203,28 @@ public class MemberDAO extends DBHelper{
 		return result;
 	}
 	
+	//자동로그인(쿠키 조회)
+	public MemberDTO selectCookie(String uid) {
+		SQL = "SELECT * FROM `km_member` WHERE `uid`=?";
+		MemberDTO dto = null;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, uid);
+			rs =  psmt.executeQuery();
+			if(rs.next()) {
+				dto = new MemberDTO();
+				dto.setUid(rs.getString(1));
+			}
+			close();
+			
+			
+		}catch(Exception e) {
+			logger.error("selectCookie error : " + e.getMessage());
+		}
+		return dto;
+	}
+	
 	//로그인
 	public MemberDTO selectMember(String uid, String pass) {
 		MemberDTO dto = null;
