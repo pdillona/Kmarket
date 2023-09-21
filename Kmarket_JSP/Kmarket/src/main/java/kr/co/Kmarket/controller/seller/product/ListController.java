@@ -46,7 +46,7 @@ public class ListController extends HttpServlet{
 		 */
 
 		SearchDTO searchDTO = new SearchDTO();
-		searchDTO.setSeller(seller);
+		searchDTO.setCompany(seller);
 		searchDTO.setSearch(search);
 		searchDTO.setSearch_text(search_text);
 		
@@ -57,7 +57,7 @@ public class ListController extends HttpServlet{
 		int start = pageService.getStartNum(currentPage);
 		
 		// 전체 게시물 개수 조회
-		int total = productService.selectCountTotal(search, search_text);
+		int total = productService.selectCountTotal(searchDTO);
 		
 		// 마지막 페이지 번호 계산
 		int lastPageNum = pageService.getLastPageNum(total);

@@ -59,6 +59,12 @@
     		
     	});
     	
+    	$('input[name=price]').focusout(function(){
+    		const price = $(this).val();
+    		const point = $('input[name=point]');
+    		
+    		point.val(price * 0.01);
+    	});
     	
     });
     
@@ -135,7 +141,7 @@
                                     <td>할인율</td>
                                     <td>
                                         <span>0을 입력하면 할인율 없음</span>
-                                        <input type="text" name="discount" value="0"/>원
+                                        <input type="text" name="discount" value="0"/>%
                                     </td>
                                 </tr>
                                 <tr>

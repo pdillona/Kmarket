@@ -978,3 +978,10 @@
     padding: 10px;
     box-sizing: border-box;
   }
+  
+  .sort > a {
+    color: #999;
+  }
+  .sort > .on {
+    color:#111;
+  }

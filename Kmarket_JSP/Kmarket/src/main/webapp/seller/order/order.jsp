@@ -12,12 +12,15 @@
                 <!-- ordNo, prodName, ordUid, ordDate, deliveryStatus, ordComplete(수정가능) -->                      
                 <section>
                     <div>
-                        <select name="search">
-                            <option value="search1">주문번호</option>
-                            <option value="search1">상품명</option>
-                            <option value="search1">주문일자</option>
-                        </select>
-                        <input type="text" name="search">
+                        <form id="formSearch" action="/Kmarket/seller/order/order.do" method="get">
+			           		<input type="hidden" name="seller" value="${sessUser.company}"/>
+				           <select name="search">
+				                  <option value="search1">상품명</option>
+				                  <option value="search2">주문번호</option>                               
+				           </select>
+				           <input type="text" name="search_text">
+				           <button id="btnSearch">검색</button>
+			           </form>
                     </div>
                     <p class="sort">
                         <a href="#" class="on">전체&nbsp;|</a>
@@ -37,7 +40,7 @@
 
                         <tr>
                             <td>1</td>
-                            <td><img src="/seller/img/sample_thumb.jpg" alt="상품사진"></td>
+                            <td><img src="/Kmarket/seller/img/sample_thumb.jpg" alt="상품사진"></td>
                             <td>티셔츠</td>
                             <td>23-05-25</td>
                             <td>

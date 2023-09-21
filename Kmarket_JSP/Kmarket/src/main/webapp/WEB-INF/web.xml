@@ -21,21 +21,33 @@
   		<role-name>nobody</role-name>
   	</auth-constraint>  
   </security-constraint>
+  
+  <filter>
+  	<filter-name>AutoLoginFilter</filter-name>
+  	<filter-class>kr.co.Kmarket.filter.AutoLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AutoLoginFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
   <!-- 
   	- 시작 페이지 index.jsp 설정하지 않음
   	- controller.IndexController를 통한 기본 메인페이지 출력
   -->
   
   <!-- 로그인 여부 체크 필터 등록 -->
-<!--   <filter>
+ <filter>
   	<filter-name>CheckLoginFilter</filter-name>
-  	<filter-class>kr.co.farmstory2.filter.CheckLoginFilter</filter-class>
+  	<filter-class>kr.co.Kmarket.filter.CheckLoginFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>CheckLoginFilter</filter-name>
-  	<url-pattern>/board/write.do</url-pattern>
+  	<url-pattern>/index.do</url-pattern>
   </filter-mapping>
-  <filter-mapping>
+  
+ <!-- <filter-mapping>
   	<filter-name>CheckLoginFilter</filter-name>
   	<url-pattern>/board/view.do</url-pattern>
   </filter-mapping>
@@ -51,11 +63,6 @@
   	<filter-name>CheckLoginFilter</filter-name>
   	<url-pattern>/market/order.do</url-pattern>
   </filter-mapping> -->
-  
-  <!-- 세션 타임아웃 설정 -->
-  <session-config>
-  	<session-timeout>60</session-timeout>
-  </session-config>
   
   
   <!-- 인코딩 필터 등록 -->

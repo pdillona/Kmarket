@@ -12,12 +12,17 @@
                 <!-- 자기 문의한 글만 볼수있는 list, 글쓰기 버튼도 구현하기 -->                        
                 <section>
                     <div>
-                        <select name="search">
-                            <option value="search1">제목</option>
-                            <option value="search2">글쓴이</option>
-                        </select>
-                        <input type="text" name="search">
-                    </div>
+                        <form id="formSearch" action="/Kmarket/seller/product/list.do" method="get">
+			           		<input type="hidden" name="seller" value="${sessUser.company}"/>
+				           <select name="search">
+				                  <option value="search1">상품명</option>
+				                  <option value="search2">상품코드</option>                               
+				                  <option value="search3">담당자명</option>                               
+				           </select>
+				           <input type="text" name="search_text">
+				           <button id="btnSearch">검색</button>
+			           </form>
+                    </div> 
                     
                     <table>
                         <tr>

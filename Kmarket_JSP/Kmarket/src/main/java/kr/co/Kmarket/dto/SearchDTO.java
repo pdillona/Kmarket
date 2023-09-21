@@ -3,7 +3,7 @@ package kr.co.Kmarket.dto;
 public class SearchDTO {
 	private String search;
 	private String search_text;
-	private String seller;
+	private String company;
 	
 	public String getSearch() {
 		return search;
@@ -17,11 +17,11 @@ public class SearchDTO {
 	public void setSearch_text(String search_text) {
 		this.search_text = search_text;
 	}
-	public String getSeller() {
-		return seller;
+	public String getCompany() {
+		return company;
 	}
-	public void setSeller(String seller) {
-		this.seller = seller;
+	public void setCompany(String company) {
+		this.company = company;
 	}
 	
 	
