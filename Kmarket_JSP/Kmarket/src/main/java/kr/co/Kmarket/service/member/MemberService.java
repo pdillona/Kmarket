@@ -67,6 +67,10 @@ public class MemberService {
 	public MemberDTO selectMember(String uid, String pass) {
 		return dao.selectMember(uid, pass);
 	}
+
+	public MemberDTO selectMember(String uid) {
+		return dao.selectMember(uid);
+	}
 	
 	//아이디 찾기
 	public int selectCountNameAndEmail(String name,String email) {

@@ -22,7 +22,7 @@ public class LogoutController extends HttpServlet {
 		session.invalidate();
 		
 		//쿠키 삭제
-		Cookie cookie = new Cookie("cid", "");
+		Cookie cookie = new Cookie("cid", null);
 		cookie.setMaxAge(0);
 		cookie.setPath("/");
 		resp.addCookie(cookie);

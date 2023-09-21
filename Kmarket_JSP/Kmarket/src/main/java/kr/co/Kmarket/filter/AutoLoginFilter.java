@@ -1,6 +1,7 @@
 package kr.co.Kmarket.filter;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -9,7 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -19,11 +19,6 @@ import kr.co.Kmarket.dto.member.MemberDTO;
 import kr.co.Kmarket.service.member.MemberService;
 
 
-/*
- * 로그인 여부 체크 필터 작성
- * web.xml 필터 등록 및 해당 필터가 작동할 주소 매핑 작업
- * 
- * */
 
 public class AutoLoginFilter implements Filter {
 
@@ -31,32 +26,34 @@ public class AutoLoginFilter implements Filter {
 	private MemberService service = MemberService.getInstance();
 	
 	@Override
-		public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-				throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+	        throws IOException, ServletException {
+	    logger.info("AutoLoginFilter is processing...");
+	    HttpSession session = ((HttpServletRequest) request).getSession();
 
-				logger.info("");
-				HttpSession session = ((HttpServletRequest)request).getSession();
-				
-				MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
-				
-				Cookie[] cookies  = ((HttpServletRequest)request).getCookies();
-				
-				if(cookies != null && sessUser == null) {
-					for(Cookie cookie : cookies) {
-						if(cookie.getName().equals("cid")) {
-							MemberDTO dto = service.selectCookie(cookie.getValue());
-							session.setAttribute("sessUser", dto);
-							
-							String id = cookie.getValue();
-							session.setAttribute("sessid", id);
-						}
-					}
-				}
-				chain.doFilter(request, response);
-				
-			
-		
-		
-		}
-	
+	    MemberDTO filterSessUser = (MemberDTO) session.getAttribute("sessUser");
+	    logger.info("sessUser : " + filterSessUser);
+
+	    Cookie[] cookies = ((HttpServletRequest) request).getCookies();
+	    
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("cid")) { // 쿠키 이름을 상수로 추출
+	                try {
+	                    String ck = cookie.getValue();
+	                    MemberDTO sessUser = service.selectMember(ck); // 예제에서는 이런 메서드를 가정함
+
+	                    if (sessUser != null) {
+	                        session.setAttribute("sessUser", sessUser); // 세션에 사용자 정보 설정
+	                        logger.info("Auto login successful for user: " + sessUser.getUid());
+	                    }
+	                } catch (Exception e) {
+	                    logger.error("Error processing auto login cookie.", e);
+	                }
+	            }
+	        }
+	    }
+
+	    chain.doFilter(request, response);
+	}
 }
