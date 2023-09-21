@@ -7,7 +7,7 @@
 		내용 : include 작업
 	 -->
             
-<jsp:include page="./_aside.jsp"/>    
+<jsp:include page="../_aside.jsp"/>    
 
     <!-- 장바구니 페이지 시작 -->
     <section class="cart">

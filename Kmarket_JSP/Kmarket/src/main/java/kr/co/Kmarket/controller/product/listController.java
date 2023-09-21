@@ -53,6 +53,9 @@ public class listController extends HttpServlet{
 			prodCate2 = "0";
 		}
 		
+		if(prodCate1 == null) {
+			prodCate1 = "0";
+		}
 		
 		
 		// 현재 페이지 계산
@@ -79,12 +82,15 @@ public class listController extends HttpServlet{
 		//aside 카테고리
 		List<List<Cate2DTO>> categories = Ct2Service.selectCategories();
 		
+		List<ProductDTO> productsaside = pService.selectProductBest();
+		
 		logger.debug(products.toString());
 		
 		req.setAttribute("prodCate1", prodCate1);
 		req.setAttribute("prodCate2", prodCate2);
 		req.setAttribute("pg", pg);
 		req.setAttribute("total", total);
+		req.setAttribute("type", type);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
@@ -92,6 +98,7 @@ public class listController extends HttpServlet{
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("products", products);
 		req.setAttribute("categories", categories);
+		req.setAttribute("productsaside", productsaside);
 		
 		logger.debug("categories : "+ categories);
 		
