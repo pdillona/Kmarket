@@ -140,28 +140,37 @@ public class ProductDAO extends DBHelper{
 	}
 	public List<ProductDTO> selectProducts(int start, SearchDTO search) {
 		List<ProductDTO> products = new ArrayList<ProductDTO>();
-		sql = "SELECT * FROM `km_product` WHERE `seller`=? ORDER BY `prodNo` DESC LIMIT ?, 10";
+		sql = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`=? ORDER BY `prodNo` DESC LIMIT ?, 10";
 		String sql_search1 =  "SELECT * FROM `km_product` "
-							+ "WHERE `seller`=? AND `prodName` LIKE ? "
+							+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
+							+ "WHERE b.`company`=? AND `prodName` LIKE ? "
 							+ "ORDER BY `prodNo` DESC "
 							+ "LIMIT ?, 10";
 		String sql_search2 =  "SELECT * FROM `km_product` "
-							+ "WHERE `seller`=? AND `prodNo` LIKE ? "
+							+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
+							+ "WHERE b.`company`=? AND `prodNo` LIKE ? "
 							+ "ORDER BY `prodNo` DESC "
 							+ "LIMIT ?, 10";
+		String sql_search3 =  "SELECT * FROM `km_product` "
+								+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
+								+ "WHERE b.`company`=? AND b.`manager` LIKE ? "
+								+ "ORDER BY `prodNo` DESC "
+								+ "LIMIT ?, 10";
 		conn = getConnection();
 		try {
 			if(search.getSearch() == null || search.getSearch().equals("")) {
 				psmt = conn.prepareStatement(sql);
-				psmt.setString(1, search.getSeller());
+				psmt.setString(1, search.getCompany());
 				psmt.setInt(2, start);
 			}else {
 				if(search.getSearch().equals("search1")) {
 					psmt = conn.prepareStatement(sql_search1);
 				}else if(search.getSearch().equals("search2")) {
 					psmt = conn.prepareStatement(sql_search2);
+				}else if(search.getSearch().equals("search3")) {
+					psmt = conn.prepareStatement(sql_search3);
 				}
-				psmt.setString(1, search.getSeller());
+				psmt.setString(1, search.getCompany());
 				psmt.setString(2, "%"+search.getSearch_text()+"%");
 				psmt.setInt(3, start);
 			}
@@ -245,10 +254,6 @@ public class ProductDAO extends DBHelper{
 							+ "WHERE `prodName` LIKE ?";
 		String sql_search2 =  "SELECT COUNT(*) FROM `km_product` "
 							+ "WHERE `prodNo` LIKE ?";
-		String sql_search3 =  "SELECT COUNT(*) FROM `km_product` "
-							+ "WHERE `company` LIKE ?";
-		String sql_search4 =  "SELECT COUNT(*) FROM `km_product` "
-							+ "WHERE `seller` LIKE ?";
 		conn = getConnection();
 		try {
 			if(search == null) {
@@ -258,10 +263,6 @@ public class ProductDAO extends DBHelper{
 					psmt = conn.prepareStatement(sql_search1);
 				}else if(search.equals("search2")) {
 					psmt = conn.prepareStatement(sql_search2);
-				}else if(search.equals("search3")) {
-					psmt = conn.prepareStatement(sql_search3);
-				}else {
-					psmt = conn.prepareStatement(sql_search4);
 				}
 				psmt.setString(1, "%"+search_text+"%");
 			}

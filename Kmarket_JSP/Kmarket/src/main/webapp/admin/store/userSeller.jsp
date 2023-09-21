@@ -1,65 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>케이마켓::판매자</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>    
-    <script src="../js/gnb.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="../css/admin.css">
-</head>
-<body>
-    <div id="admin-wrapper">
-        <header>
-            <div>
-                <a href="../index.html" class="logo"><img src="../img/admin_logo.png" alt="admin_logo"/></a>
-                <p>
-                    <span>홍길동님 반갑습니다.</span>
-                    <a href="#">HOME |</a>
-                    <a href="#">로그아웃 |</a>
-                    <a href="#">고객센터</a>
-                </p>
-            </div>
-        </header>
-        <main>
-            <aside>
-                <!-- Global Navigation Bar -->
-                <ul id="gnb">
-                    <li>
-                        <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
-                        <ol>
-                            <li><a href="/admin/config/info.html">기본환경정보</a></li>
-                            <li><a href="/admin/config/userAdmin.html">관리자</a></li>
-                            <li><a href="/admin/config/banner.html">디자인관리</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
-                        <ol>
-                            <li><a href="/admin/store/userSeller.html">판매자관리</a></li>
-                            <li><a href="/admin/store/list.html">상품관리</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
-                        <ol>
-                            <li><a href="/admin/user/user.html">회원정보관리</a></li>
-                            <li><a href="/admin/user/point.html">포인트관리</a></li>
-                            <li><a href="/admin/user/accessorTotal.html">접속자집계</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
-                        <ol>
-                            <li><a href="/admin/board/notice.html">공지사항</a></li>
-                        </ol>
-                    </li>
-                </ul>
-            </aside>
+<%@ include file="../_header.jsp" %>
+<%@ include file="../_aside.jsp" %>
             <section id="admin-store-userSeller">
                 <nav>
                     <h3>판매자</h3>
@@ -70,12 +11,16 @@
                 <!-- 상품목록 컨텐츠 시작 -->                                
                 <section>
                     <div>
-                        <select name="search">
-                            <option value="search1">판매자아이디</option>
-                            <option value="search1">판매자이름</option>
-                            <option value="search1">사업자등록번호</option>
-                        </select>
-                        <input type="text" name="search">
+                        <form id="formSearch" action="/Kmarket/seller/product/list.do" method="get">
+			           		<input type="hidden" name="seller" value="${sessUser.company}"/>
+				           	<select name="search">
+				                  <option value="search1">상품명</option>
+				                  <option value="search2">상품코드</option>                               
+				                  <option value="search3">담당자명</option>                               
+				           </select>
+				           <input type="text" name="search_text">
+				           <button id="btnSearch">검색</button>
+           				</form>
                     </div>
                     <table>
                         <tr>
@@ -171,11 +116,4 @@
                 <!-- 상품목록 컨텐츠 끝 -->
             </section>
         </main>
-        <footer>
-            <div>
-                <p>Copyright ©kmarket.co.kr All rights reserved. KMARKET ADMINISTRATOR Version 5.4.1.2</p>
-            </div>
-        </footer>
-    </div>    
-</body>
-</html>
+<%@ include file="../_footer.jsp" %>

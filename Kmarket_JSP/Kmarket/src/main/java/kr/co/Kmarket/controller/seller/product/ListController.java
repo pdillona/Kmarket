@@ -46,7 +46,7 @@ public class ListController extends HttpServlet{
 		 */
 
 		SearchDTO searchDTO = new SearchDTO();
-		searchDTO.setSeller(seller);
+		searchDTO.setCompany(seller);
 		searchDTO.setSearch(search);
 		searchDTO.setSearch_text(search_text);
 		

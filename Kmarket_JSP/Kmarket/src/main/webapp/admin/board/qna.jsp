@@ -3,9 +3,9 @@
 <%@ include file="../_aside.jsp" %>
             <section id="admin-board-notice">
                 <nav>
-                    <h3>공지사항</h3>
+                    <h3>고객문의</h3>
                     <p>
-                        HOME > 게시판관리 > <strong>공지사항</strong>
+                        HOME > 게시판관리 > <strong>고객문의</strong>
                     </p>
                 </nav>
                 <!-- 공지사항 컨텐츠 시작 -->                                
@@ -13,7 +13,7 @@
                     <div>
                         <form id="formSearch" action="/Kmarket/seller/product/list.do" method="get">
 			           		<input type="hidden" name="seller" value="${sessUser.company}"/>
-				           <select name="search">
+				           	<select name="search">
 				                  <option value="search1">상품명</option>
 				                  <option value="search2">상품코드</option>                               
 				                  <option value="search3">담당자명</option>                               

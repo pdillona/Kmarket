@@ -110,7 +110,7 @@ public class ModifyController extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		MemberDTO sessUser = (MemberDTO)session.getAttribute("sessUser");
-		String seller = sessUser.getUid();
+		String seller = sessUser.getCompany();
 
 		logger.debug("prodNo : "+prodNo);
 		logger.debug("prodCate1 : "+prodCate1);

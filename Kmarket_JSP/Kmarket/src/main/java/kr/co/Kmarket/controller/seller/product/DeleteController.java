@@ -38,7 +38,7 @@ public class DeleteController extends HttpServlet{
 		logger.debug("prodNo"+prodNo);
 		HttpSession session = req.getSession();
 		MemberDTO sessUser = (MemberDTO)session.getAttribute("sessUser");
-		String seller = sessUser.getUid();
+		String seller = sessUser.getCompany();
 		
 		ProductDTO image = productService.selectImages(prodNo);
 		
@@ -67,7 +67,7 @@ public class DeleteController extends HttpServlet{
 		logger.debug("chks : "+chks[0]);
 		HttpSession session = req.getSession();
 		MemberDTO sessUser = (MemberDTO)session.getAttribute("sessUser");
-		String seller = sessUser.getUid();
+		String seller = sessUser.getCompany();
 		for (String chk : chks) {
 			
 			ProductDTO image = productService.selectImages(chk);
