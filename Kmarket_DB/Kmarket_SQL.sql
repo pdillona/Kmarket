@@ -1,6 +1,7 @@
 ALTER TABLE `km_product_cate2` RENAME COLUMN `km_product_cate1_cate1` TO cate1;
 
 ALTER TABLE `km_product` AUTO_INCREMENT=1000000;
+ALTER TABLE `km_product_order` AUTO_INCREMENT=1000000;
 
 ALTER TABLE `km_product` MODIFY COLUMN `seller` VARCHAR(20) AFTER `prodNo`;
 ALTER TABLE `km_product` MODIFY COLUMN `prodName` VARCHAR(100) AFTER `prodCate2`;
@@ -148,3 +149,7 @@ INSERT INTO `km_member`
 	
 #상품 삭제
 TRUNCATE TABLE `km_product`;
+
+SELECT * FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`='아무회사' ORDER BY `prodNo` DESC LIMIT 0, 10;
+
+SELECT COUNT(*) FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company=? AND `b.`manager` LIKE '길동홍';
