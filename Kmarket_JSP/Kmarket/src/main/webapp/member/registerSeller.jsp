@@ -63,7 +63,7 @@ const HpAutoHyphen = (target) => {
 							<tr>
 								<th><span class="essential">*</span>비밀번호확인</th>
 								<td><input type="password" name="km_pass2"
-									placeholder="비밀번호를 확인" required /> <span class="msgPass2">&nbsp;비밀번호
+									placeholder="비밀번호를 확인" required />&nbsp; <span class="msgPass2">&nbsp;비밀번호
 										재입력</span></td>
 							</tr>
 						</table>
@@ -75,7 +75,7 @@ const HpAutoHyphen = (target) => {
 							<tr>
 								<th><span class="essential">*</span>회사명</th>
 								<td><input type="text" oninput="ComAutoChange(this)" name="kms_company"
-									placeholder="회사명 입력" required /> <span class="msgCompany">&nbsp;(주)포함
+									placeholder="회사명 입력" required />&nbsp; <span class="msgCompany">&nbsp;(주)포함
 										입력, 예) (주)케이마켓</span></td>
 							</tr>
 							<tr>
@@ -88,7 +88,7 @@ const HpAutoHyphen = (target) => {
 							<tr>
 								<th><span class="essential">*</span>사업자등록번호</th>
 								<td><input type="text" oninput="BizNumAutoHyphen(this)" name="kms_corp_reg" maxlength="12"
-									placeholder="사업자등록번호 입력" required /> <span class="msgCorp">&nbsp;</span></td>
+									placeholder="사업자등록번호 입력" required />&nbsp; <span class="msgCorp">&nbsp;</span></td>
 
 							</tr>
 							<tr>
@@ -100,13 +100,13 @@ const HpAutoHyphen = (target) => {
 							<tr>
 								<th><span class="essential">*</span>전화번호</th>
 								<td><input type="text" oninput="TelAutoHyphen(this)" name="kms_tel" placeholder="전화번호 입력" maxlength="12"
-									required /> <span class="msgTel">&nbsp;
+									required />&nbsp; <span class="msgTel">&nbsp;
 										지역번호 포함</span></td>
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>팩스번호</th>
 								<td><input type="text" oninput="FaxAutoHyphen(this)" name="kms_fax" placeholder="팩스번호 입력" maxlength="12"
-									required /> <span class="msgFax">&nbsp;
+									required />&nbsp; <span class="msgFax">&nbsp;
 										지역번호 포함</span></td>
 							</tr>
 							<tr>
@@ -152,7 +152,7 @@ const HpAutoHyphen = (target) => {
 							<tr>
 								<th><span class="essential">*</span>휴대폰</th>
 								<td><input type="text" oninput="HpAutoHyphen(this)" name="km_hp" maxlength="13"
-									placeholder="휴대폰번호 입력" required /> <span class="msgHp">&nbsp;</span></td>
+									placeholder="휴대폰번호 입력" required />&nbsp; <span class="msgHp">&nbsp;</span></td>
 							</tr>
 						</table>
 					</section>

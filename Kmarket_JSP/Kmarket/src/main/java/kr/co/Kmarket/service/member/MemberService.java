@@ -58,6 +58,11 @@ public class MemberService {
 		return dao.selectCountcomRegNum(comRegNum);
 	}
 	
+	//자동로그인(쿠키 조회)
+	public MemberDTO selectCookie(String uid) {
+		return dao.selectCookie(uid);
+	}
+	
 	//로그인
 	public MemberDTO selectMember(String uid, String pass) {
 		return dao.selectMember(uid, pass);
