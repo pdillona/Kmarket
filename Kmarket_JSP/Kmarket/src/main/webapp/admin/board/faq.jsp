@@ -3,9 +3,9 @@
 <%@ include file="../_aside.jsp" %>
             <section id="admin-board-notice">
                 <nav>
-                    <h3>공지사항</h3>
+                    <h3>자주묻는 질문</h3>
                     <p>
-                        HOME > 게시판관리 > <strong>공지사항</strong>
+                        HOME > 게시판관리 > <strong>자주묻는 질문</strong>
                     </p>
                 </nav>
                 <!-- 공지사항 컨텐츠 시작 -->                                
@@ -20,7 +20,7 @@
 				           </select>
 				           <input type="text" name="search_text">
 				           <button id="btnSearch">검색</button>
-           				</form>
+			           </form>
                     </div>
                     <p class="sort">
                         <a href="#" class="on">전체&nbsp;|</a>

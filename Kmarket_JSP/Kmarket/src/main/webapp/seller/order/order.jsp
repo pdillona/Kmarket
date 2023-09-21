@@ -12,12 +12,16 @@
                 <!-- ordNo, prodName, ordUid, ordDate, deliveryStatus, ordComplete(수정가능) -->                      
                 <section>
                     <div>
-                        <select name="search">
-                            <option value="search1">주문번호</option>
-                            <option value="search1">상품명</option>
-                            <option value="search1">주문일자</option>
-                        </select>
-                        <input type="text" name="search">
+                        <form id="formSearch" action="/Kmarket/seller/product/list.do" method="get">
+			           		<input type="hidden" name="seller" value="${sessUser.company}"/>
+				           <select name="search">
+				                  <option value="search1">상품명</option>
+				                  <option value="search2">상품코드</option>                               
+				                  <option value="search3">담당자명</option>                               
+				           </select>
+				           <input type="text" name="search_text">
+				           <button id="btnSearch">검색</button>
+			           </form>
                     </div>
                     <p class="sort">
                         <a href="#" class="on">전체&nbsp;|</a>

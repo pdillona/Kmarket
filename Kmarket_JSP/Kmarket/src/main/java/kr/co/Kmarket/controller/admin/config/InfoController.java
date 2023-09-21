@@ -1,4 +1,4 @@
-package kr.co.Kmarket.controller.admin;
+package kr.co.Kmarket.controller.admin.config;
 
 import java.io.IOException;
 
@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(value = {"/admin", "/admin/index.do"})
-public class IndexController extends HttpServlet{
+@WebServlet("/admin/config/info.do")
+public class InfoController extends HttpServlet{
 
-	private static final long serialVersionUID = 3512922298209856025L;
+	private static final long serialVersionUID = -1114277643249821639L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/config/info.jsp");
 		dispatcher.forward(req, resp);
 	}
 }

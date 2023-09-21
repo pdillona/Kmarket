@@ -5,7 +5,7 @@
                     <li>
                         <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                         <ol>
-                            <li><a href="/Kmarket/seller/product/list.do?seller=${sessUser.uid}">상품현황</a></li>
+                            <li><a href="/Kmarket/seller/product/list.do?seller=${sessUser.company}">상품현황</a></li>
                             <li><a href="/Kmarket/seller/product/register.do">상품등록</a></li>
                         </ol>
                     </li>

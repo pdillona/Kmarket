@@ -48,10 +48,11 @@ $(function(){
        <section>
            <div>
            <form id="formSearch" action="/Kmarket/seller/product/list.do" method="get">
-           		<input type="hidden" name="seller" value="${sessUser.uid}"/>
+           		<input type="hidden" name="seller" value="${sessUser.company}"/>
 	           <select name="search">
 	                  <option value="search1">상품명</option>
 	                  <option value="search2">상품코드</option>                               
+	                  <option value="search3">담당자명</option>                               
 	           </select>
 	           <input type="text" name="search_text">
 	           <button id="btnSearch">검색</button>
