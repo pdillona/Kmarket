@@ -6,7 +6,7 @@
 		이름 : 김무현
 		내용 : include 작업
 	 -->            
-<jsp:include page="./_aside.jsp"/>
+<jsp:include page="../_aside.jsp"/>
 
     <!-- 결제완료 페이지 시작 -->
     <section class="complete">

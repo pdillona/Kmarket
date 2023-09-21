@@ -3,6 +3,7 @@ package kr.co.Kmarket.dao;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -583,40 +584,123 @@ public class ProductDAO extends DBHelper{
 		
 		String sql2 ="SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? LIMIT ?, 10";
 		
-		String sql3_sold = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `sold` DESC LIMIT ?, 10";
-		String sql3_price= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` DESC LIMIT ?, 10";
-		String sql3_pricedown= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` ASC LIMIT ?, 10";
-		String sql3_score = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `score` DESC LIMIT ?, 10";
-		String sql3_review = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `review` DESC LIMIT ?, 10";
-		String sql3_rdate = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `rdate` DESC LIMIT ?, 10";
+		String sql3_sold = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `sold` DESC LIMIT ?, 10";
+		String sql3_sold2 = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `sold` DESC LIMIT ?, 10";
+		
+		String sql3_pricedown= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `price` ASC LIMIT ?, 10";
+		String sql3_pricedown2= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` ASC LIMIT ?, 10";
+		
+		String sql3_price= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `price` DESC LIMIT ?, 10";
+		String sql3_price2= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` DESC LIMIT ?, 10";
+		
+		String sql3_score = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `score` DESC LIMIT ?, 10";
+		String sql3_score2 = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `score` DESC LIMIT ?, 10";
+		
+		String sql3_review = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `review` DESC LIMIT ?, 10";
+		String sql3_review2 = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `review` DESC LIMIT ?, 10";
+		
+		String sql3_rdate = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `rdate` DESC LIMIT ?, 10";
+		String sql3_rdate2 = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `rdate` DESC LIMIT ?, 10";
+		
+	
+	
+		
 		try {
 			conn = getConnection();
 			if(prodCate2.equals("0")) {
-					
-				switch(type) {
-					case "1": psmt=conn.prepareStatement(sql3_sold);
-							  psmt.setString(1, prodCate1);
-							  psmt.setInt(2, start);
-							  break;
 				
-				}
-			
+				if("1".equals(type)) {
+					  psmt=conn.prepareStatement(sql3_sold);
+					  psmt.setString(1, prodCate1);
+					  psmt.setInt(2, start);
+							
+				}else if("2".equals(type)) {
+					  psmt=conn.prepareStatement(sql3_pricedown);
+					  psmt.setString(1, prodCate1);
+					  psmt.setInt(2, start);
+					
+				}else if("3".equals(type)) {
+					  psmt=conn.prepareStatement(sql3_price);
+					  psmt.setString(1, prodCate1);
+					  psmt.setInt(2, start);
+					
+				}else if("4".equals(type)) {
+					  psmt=conn.prepareStatement(sql3_score);
+					  psmt.setString(1, prodCate1);
+					  psmt.setInt(2, start);
+					
+				}else if("5".equals(type)) {
+					  psmt=conn.prepareStatement(sql3_review);
+					  psmt.setString(1, prodCate1);
+					  psmt.setInt(2, start);
+					
+				}else if("6".equals(type)) {
+					  psmt=conn.prepareStatement(sql3_rdate);
+					  psmt.setString(1, prodCate1);
+					  psmt.setInt(2, start);
+					
+				}else {
 					sql = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? LIMIT ?, 10";
 					psmt = conn.prepareStatement(sql);
 					psmt.setString(1, prodCate1);
 					psmt.setInt(2, start);
-				
+					
+				}
+					
 				
 			}else {
 				
+				if("1".equals(type)) {
+					  psmt=conn.prepareStatement(sql3_sold2);
+					  psmt.setString(1, prodCate1);
+					  psmt.setString(2, prodCate2);
+					  psmt.setInt(3, start);
 				
 				
+				}else if("2".equals(type)){
+					 psmt=conn.prepareStatement(sql3_pricedown2);
+					 psmt.setString(1, prodCate1);
+					 psmt.setString(2, prodCate2);
+					 psmt.setInt(3, start);
+					
+					
+				}else if("3".equals(type)){
+					 psmt=conn.prepareStatement(sql3_price2);
+					 psmt.setString(1, prodCate1);
+					 psmt.setString(2, prodCate2);
+					 psmt.setInt(3, start);
+					
+					
+				}else if("4".equals(type)){
+					 psmt=conn.prepareStatement(sql3_score2);
+					 psmt.setString(1, prodCate1);
+					 psmt.setString(2, prodCate2);
+					 psmt.setInt(3, start);
+					
+					
+				}else if("5".equals(type)){
+					 psmt=conn.prepareStatement(sql3_review2);
+					 psmt.setString(1, prodCate1);
+					 psmt.setString(2, prodCate2);
+					 psmt.setInt(3, start);
+					
+					
+				}else if("6".equals(type)){
+					 psmt=conn.prepareStatement(sql3_rdate2);
+					 psmt.setString(1, prodCate1);
+					 psmt.setString(2, prodCate2);
+					 psmt.setInt(3, start);
+					
+					
+				}else {
 					psmt = conn.prepareStatement(sql2);
 					psmt.setString(1, prodCate1);
 					psmt.setString(2, prodCate2);
 					psmt.setInt(3, start);
+					
+				}
 				
-			
+				
 			}
 			
 			
@@ -674,32 +758,41 @@ public class ProductDAO extends DBHelper{
 	//무현 추가 카테고리별 게시판 총 갯수 추가
 	
 	public int selectCountTotalProdCate(String prodCate1, String prodCate2) {
-		int total = 0;
-		String sql2 ="SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
-		
-		try {
-			conn = getConnection();
-			if(prodCate2.equals("0")) {
-				sql = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
-				psmt = conn.prepareStatement(sql);
-				psmt.setString(1, prodCate1);
-			}else {
-				psmt = conn.prepareStatement(sql2);
-				psmt.setString(1, prodCate1);
-				psmt.setString(2, prodCate2);
-			}
-			
-			rs = psmt.executeQuery();
-			
-			if(rs.next()) {
-				total = rs.getInt(1);
-			}
-			close();
-			
-		} catch (Exception e) {
-			logger.error("selectCountTotal : "+e.getMessage());
-		}
-		return total;
+	    int total = 0;
+	    
+	    // 기본 SQL 쿼리
+	    String sql = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
+	    
+	    try {
+	        conn = getConnection();
+	        
+	        if (!"0".equals(prodCate1) && !prodCate1.isEmpty()) {
+	            sql += " AND `prodCate1`=?";
+	            
+	            if (!"0".equals(prodCate2) && !prodCate2.isEmpty()) {
+	                sql += " AND `prodCate2`=?";
+	                psmt = conn.prepareStatement(sql);
+	                psmt.setString(1, prodCate1);
+	                psmt.setString(2, prodCate2);
+	            } else {
+	                psmt = conn.prepareStatement(sql);
+	                psmt.setString(1, prodCate1);
+	            }
+	        } else {
+	            psmt = conn.prepareStatement(sql);
+	        }
+	        
+	        rs = psmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            total = rs.getInt(1);
+	        }
+	        close();
+	    } catch (Exception e) {
+	        logger.error("selectCountTotal : " + e.getMessage());
+	    }
+	    logger.debug("selectCountTotal"+total);
+	    return total;
 	}
 			
 	public void updateProduct(ProductDTO dto) {
