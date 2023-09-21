@@ -85,11 +85,10 @@
         <div class="menu">
           <div>
             <ul>
-              <li><a href="#">히트상품</a></li>
-              <li><a href="#">추천상품</a></li>
-              <li><a href="#">최신상품</a></li>
-              <li><a href="#">인기상품</a></li>
-              <li><a href="#">할인상품</a></li>
+              <li><a href="javascript:void(0);" onclick="scrollToHitProduct()">히트상품</a></li>
+              <li><a href="javascript:void(0);" onclick="scrollToHitProduct2()">추천상품</a></li>
+              <li><a href="javascript:void(0);" onclick="scrollToHitProduct3()">최신상품</a></li>
+              <li><a href="javascript:void(0);" onclick="scrollToHitProduct4()">할인상품</a></li>
             </ul>
             <ul>
               <li><a href="${ctxPath}/cs/notice.do?group=notice&aeName=all">공지사항</a></li>

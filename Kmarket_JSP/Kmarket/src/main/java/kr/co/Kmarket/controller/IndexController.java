@@ -45,7 +45,7 @@ public class IndexController extends HttpServlet{
 		
 		List<List<Cate2DTO>> categories = Ct2Service.selectCategories();
 		
-		List<ProductDTO> products = pService.selectProductBest();
+		List<ProductDTO> productsaside = pService.selectProductBest();
 		
 		List<ProductDTO> productshit = pService.selectProductHit();
 		
@@ -56,7 +56,7 @@ public class IndexController extends HttpServlet{
 		List<ProductDTO> productsDiscount = pService.selectProductsDiscount();
 		
 		
-		logger.debug("products : "+ products);
+		logger.debug("productsaside : "+ productsaside);
 		logger.debug("categories : "+ categories);
 		logger.debug("productshit : "+ productshit);
 		logger.debug("productsScore : "+ productsScore);
@@ -64,7 +64,7 @@ public class IndexController extends HttpServlet{
 		logger.debug("productsDiscount : "+ productsDiscount);
 		
 		req.setAttribute("categories", categories);
-		req.setAttribute("products", products);
+		req.setAttribute("productsaside", productsaside);
 		req.setAttribute("productshit", productshit);
 		req.setAttribute("productsScore", productsScore);
 		req.setAttribute("productsRdate", productsRdate);

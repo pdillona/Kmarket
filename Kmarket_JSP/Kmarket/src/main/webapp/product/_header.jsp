@@ -17,6 +17,7 @@
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="${ctxPath}/product/css/product.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css">
+    <script src="${ctxPath}/js/index.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -42,11 +43,10 @@
             <div class="menu">
                 <div>
                     <ul>
-                        <li><a href="#">히트상품</a></li>
-                        <li><a href="#">추천상품</a></li>
-                        <li><a href="#">최신상품</a></li>
-                        <li><a href="#">인기상품</a></li>
-                        <li><a href="#">할인상품</a></li>
+                        <li><a href="${ctxPath}">히트상품</a></li>
+			            <li><a href="${ctxPath}">추천상품</a></li>
+			            <li><a href="${ctxPath}">최신상품</a></li>
+			            <li><a href="${ctxPath}">할인상품</a></li>
                     </ul>
                     <ul>
                         <li><a href="#">쿠폰존</a></li>
