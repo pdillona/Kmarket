@@ -247,24 +247,33 @@ public class ProductDAO extends DBHelper{
 		}
 		return dto;
 	}
-	public int selectCountTotal(String search, String search_text) {
+	public int selectCountTotal(SearchDTO dto) {
 		int total = 0;
-		sql = "SELECT COUNT(*) FROM `km_product`";
-		String sql_search1 =  "SELECT COUNT(*) FROM `km_product` "
-							+ "WHERE `prodName` LIKE ?";
-		String sql_search2 =  "SELECT COUNT(*) FROM `km_product` "
-							+ "WHERE `prodNo` LIKE ?";
+		sql = "SELECT COUNT(*) FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`=?";
+		String sql_search1 =  "SELECT COUNT(*) FROM `km_product` AS a "
+									+ "JOIN `km_member` AS b ON a.`seller`=b.`uid` "
+									+ "WHERE b.`company=? AND `prodName` LIKE ?";
+		String sql_search2 = "SELECT COUNT(*) FROM `km_product` AS a "
+									+ "JOIN `km_member` AS b ON a.`seller`=b.`uid` "
+									+ "WHERE b.`company=? AND `prodNo` LIKE ?";
+		String sql_search3 =  "SELECT COUNT(*) FROM `km_product` AS a "
+									+ "JOIN `km_member` AS b ON a.`seller`=b.`uid` "
+									+ "WHERE b.`company`=? AND b.`manager` LIKE ?";
 		conn = getConnection();
 		try {
-			if(search == null) {
+			if(dto.getSearch() == null) {
 				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, dto.getCompany());
 			}else {
-				if(search.equals("search1")) {
+				if(dto.getSearch().equals("search1")) {
 					psmt = conn.prepareStatement(sql_search1);
-				}else if(search.equals("search2")) {
+				}else if(dto.getSearch().equals("search2")) {
 					psmt = conn.prepareStatement(sql_search2);
+				}else if(dto.getSearch().equals("search3")) {
+					psmt = conn.prepareStatement(sql_search3);
 				}
-				psmt.setString(1, "%"+search_text+"%");
+				psmt.setString(1, dto.getCompany());
+				psmt.setString(2, "%"+dto.getSearch_text()+"%");
 			}
 			rs = psmt.executeQuery();
 			if(rs.next()) {

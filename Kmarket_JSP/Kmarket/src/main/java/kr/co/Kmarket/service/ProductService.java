@@ -32,8 +32,8 @@ public class ProductService {
 	public void deleteProduct(String prodNo) {
 		dao.deleteProduct(prodNo);
 	}
-	public int selectCountTotal(String search, String search_text) {
-		return dao.selectCountTotal(search, search_text);
+	public int selectCountTotal(SearchDTO dto) {
+		return dao.selectCountTotal(dto);
 	}
 	
 	//추가 무현 베스트 상품 5개

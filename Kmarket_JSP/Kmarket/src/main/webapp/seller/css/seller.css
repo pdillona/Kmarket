@@ -734,3 +734,9 @@ button[type=submit] {
     color: #fe434c;
     font-weight: bold;
 }
+  .sort > a {
+    color: #999;
+  }
+  .sort > .on {
+    color:#111;
+  }
