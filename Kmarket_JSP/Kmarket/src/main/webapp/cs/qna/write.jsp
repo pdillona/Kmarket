@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+
+
+
       <section id="cs">
         <div class="qna">
           <nav>
@@ -12,7 +15,7 @@
             <article>
               <form action="${ctxPath}/cs/write.do"  method="post" enctype="multipart/form-data">
 				  <input type="text" name="group" value="${group}"/>
-			      <input type="text" name="type" value="${type}"/>
+			      <input type="text" name="type" value="23"/>
 			      <input type="text" name="cateDetail" id="cateDetail" value="${cateDetail}"/>
                   <input type="text" name="writer" value="${sessUser.uid}"/>
 			      <input type="text" name="uLevel" value="${sessUser.level}"/>
@@ -21,12 +24,11 @@
                   <tr>
                     <td>문의유형</td>
                     <td>
-                      <select id="selectDetailView" name="${type}">
-                        <option value="0">선택</option>
-                        <option>가입</option>
-                        <option>탈퇴</option>
-                        <option>회원정보</option>
-                        <option>로그인</option>
+                      <select id="selectDetailView" name="selectDetailView">
+                     	  <option selected disabled>선택</option>
+	                      <c:forEach var="cate" items="${cateDto}">
+	                      	<option value="${cate.dName}">${cate.dName}</option>
+	                      </c:forEach>
                       </select>
                     </td>
                   </tr>
@@ -58,7 +60,7 @@
           </section>
         </div>
       </section>
-
+<script src="./js/csScript.js"></script>
       <footer>
         <ul>
           <li><a href="#">회사소개</a></li>

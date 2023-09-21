@@ -2,20 +2,23 @@
  * 
  */
 
- function selectCateDetail(){
+/* $('#selectDetailView').change(function (){
 	 
 	 const selectList = $('#cateDetail').val();
 	 
 	 const jsonData={
 		 "selectList" : selectList
 	 }
-	 
+ 
 	 $.ajax({
-		 url: '/Kmarket/cs/qna/write.do',
+		 url: '/Kmarket/cs/writeCate.do',
 		 type: 'GET',
 		 data: jsonData,
 		 dataType:'json',
 		 success: function(data){
+			 
+			 
+			 console.log("ajax성공");
 			 
 			 const selectDetailView = $('#selectDetailView');
 			 
@@ -31,7 +34,8 @@
 			 //db를 통한 데이터 옵션 생성
 			 $.each(data, function(index, item){
 				 selectDetailView.append($('<option>',{
-						value: item.aeName,
+					 
+						value: item.type,
                         text: item.dName 
 				 }));
 				 
@@ -41,5 +45,4 @@
 		 
 	 });
 	 
-	 
- }
+ })*/
