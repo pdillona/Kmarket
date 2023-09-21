@@ -51,18 +51,22 @@ public class LoginController extends HttpServlet{
 		MemberDTO dto = service.selectMember(uid, pass);
 		
 	
+		//회원일 경우
 		if (dto != null) {
 			
 			//현재 클라이언트 세션 구하기
 			HttpSession session = req.getSession();
             //로그인 성공 시 세션에 사용자 정보를 저장
             session.setAttribute("sessUser", dto);
+            logger.info("dto :" + dto);
             //자동로그인 처리(체크박스 체크했을 때)
 			if(auto != null) {
 				Cookie autoCookie = new Cookie("cid", dto.getUid());
 				autoCookie.setMaxAge(60*60*24*7); //일주일 (초, 분, 시, 일)
 				autoCookie.setPath("/");
 				resp.addCookie(autoCookie);
+				logger.info("autoC : " + autoCookie.getValue());
+				logger.info("autoC : " + autoCookie.getName());
 			}
             //로그인 성공 후 메인 페이지로 리다이렉트
             resp.sendRedirect("/Kmarket/index.do");

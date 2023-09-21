@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.Kmarket.dto.member.MemberDTO;
+
 
 /*
  * 로그인 여부 체크 필터 작성
@@ -35,7 +37,16 @@ public class CheckLoginFilter implements Filter {
 				HttpServletRequest httpRequest = (HttpServletRequest) request;
 				HttpSession session = httpRequest.getSession();
 				
-			
+				MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
+				
+				if(sessUser != null) {
+					logger.debug("here1...");
+					chain.doFilter(request, response);
+				}else {
+					// 다음 필터 호출, 필터 없으면 최종 자원 요청
+					logger.debug("here2...");
+					((HttpServletResponse)response).sendRedirect("/Kmarket/member/login.do?success=101");
+				}
 		
 		
 		}

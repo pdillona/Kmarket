@@ -275,6 +275,54 @@ public class MemberDAO extends DBHelper{
 		}
 		return dto;
 	}
+	public MemberDTO selectMember(String uid) {
+		MemberDTO dto = null;
+		SQL = "SELECT * FROM `km_member` WHERE `uid`=?";
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new MemberDTO();
+				dto.setUid(rs.getString(1));
+				dto.setLevel(rs.getInt(2));
+				dto.setPass(rs.getString(3));
+				dto.setName(rs.getString(4));
+				dto.setGender(rs.getInt(5));
+				dto.setHp(rs.getString(6));
+				dto.setEmail(rs.getString(7));
+				dto.setType(rs.getInt(8));
+				dto.setPoint(rs.getInt(9));
+				dto.setZip(rs.getString(10));
+				dto.setAddr1(rs.getString(11));
+				dto.setAddr2(rs.getString(12));
+				dto.setCompany(rs.getString(13));
+				dto.setCeo(rs.getString(14));
+				dto.setBizRegNum(rs.getString(15));
+				dto.setComRegNum(rs.getString(16));
+				dto.setTel(rs.getString(17));
+				dto.setManager(rs.getString(18));
+				dto.setManagerHp(rs.getString(19));
+				dto.setFax(rs.getString(20));
+				dto.setRegip(rs.getString(21));
+				dto.setWdate(rs.getString(22));
+				dto.setRdate(rs.getString(23));
+				dto.setEtc1(rs.getInt(24));
+				dto.setEtc2(rs.getInt(25));
+				dto.setEtc3(rs.getString(26));
+				dto.setEtc4(rs.getString(27));
+				dto.setEtc5(rs.getString(28));
+			}  
+			close();
+			
+			
+		}catch(Exception e) {
+			logger.error("selectMember error : " + e.getMessage());
+		}
+		return dto;
+	}
 	
 	//////////////////////////2차 개발////////////////////////////
 		//아이디 찾기
