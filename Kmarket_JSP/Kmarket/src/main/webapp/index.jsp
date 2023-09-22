@@ -44,7 +44,7 @@
       <h3><span>히트상품</span></h3>
       <c:forEach var="productshit" items="${productshit}">
       <article>
-        <a href="#">
+        <a href="${ctxPath}/product/view.do?prodCate1=${productshit.prodCate1}&prodCate2=${productshit.prodCate2}&prodNo=${productshit.prodNo}">
           <div class="thumb">
             <img src="/Kmarket/thumb/${productshit.prodCate1}/${productshit.prodCate2}/${productshit.thumb2}" alt="상품이미지" />
           </div>
@@ -78,7 +78,7 @@
       <h3><span>추천상품</span></h3>
       <c:forEach var="productsScore" items="${productsScore}">
       <article>
-        <a href="#">
+        <a href="${ctxPath}/product/view.do?prodCate1=${productsScore.prodCate1}&prodCate2=${productsScore.prodCate2}&prodNo=${productsScore.prodNo}">
           <div class="thumb">
             <img src="/Kmarket/thumb/${productsScore.prodCate1}/${productsScore.prodCate2}/${productsScore.thumb2}" alt="상품이미지" />
           </div>
@@ -112,7 +112,7 @@
       <h3><span>최신상품</span></h3>
       <c:forEach var="productsRdate" items="${productsRdate}">
       <article>
-        <a href="#">
+        <a href="${ctxPath}/product/view.do?prodCate1=${productsRdate.prodCate1}&prodCate2=${productsRdate.prodCate2}&prodNo=${productsRdate.prodNo}">
           <div class="thumb">
             <img src="/Kmarket/thumb/${productsRdate.prodCate1}/${productsRdate.prodCate2}/${productsRdate.thumb2}" alt="상품이미지" />
           </div>
@@ -146,7 +146,7 @@
       <h3><span>할인상품</span></h3>
      <c:forEach var="productsDiscount" items="${productsDiscount}">
       <article>
-        <a href="#">
+        <a href="${ctxPath}/product/view.do?prodCate1=${productsDiscount.prodCate1}&prodCate2=${productsDiscount.prodCate2}&prodNo=${productsDiscount.prodNo}">
           <div class="thumb">
             <img src="/Kmarket/thumb/${productsDiscount.prodCate1}/${productsDiscount.prodCate2}/${productsDiscount.thumb2}" alt="상품이미지" />
           </div>

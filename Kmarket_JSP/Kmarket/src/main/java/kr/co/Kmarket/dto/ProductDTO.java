@@ -249,8 +249,11 @@ public class ProductDTO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public String getRdate() {
+	public String getFullRdate() {
 		return rdate;
+	}
+	public String getRdate() {
+		return rdate.substring(2, 11);
 	}
 	public void setRdate(String rdate) {
 		this.rdate = rdate;

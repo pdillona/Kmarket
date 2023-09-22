@@ -102,6 +102,7 @@ public class ProductDAO extends DBHelper{
 				dto.setDescript(rs.getString(6));
 				dto.setCompany(rs.getString(7));
 				dto.setPrice(rs.getInt(8));
+				dto.setPriceWithComma(rs.getString(8));
 				dto.setDiscount(rs.getInt(9));
 				dto.setPoint(rs.getInt(10));
 				dto.setStock(rs.getInt(11));

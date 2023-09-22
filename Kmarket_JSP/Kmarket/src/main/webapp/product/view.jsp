@@ -12,40 +12,51 @@
     <section class="view">
 
         <!-- 제목, 페이지 네비게이션 -->
-        <nav>
-            <h1>상품보기</h1>
-            <p>
-                HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong>
-            </p>
-        </nav>
+        <jsp:include page="./_nav.jsp"/>
 
         <!-- 상품 전체 정보 내용 -->                
         <article class="info">
             <div class="image">
-                <img src="https://via.placeholder.com/460x460" alt="상품이미지"/>
+                <img src="${ctxPath}/thumb/${product.prodCate1}/${product.prodCate2}/${product.thumb3}" alt="상품이미지"/>
             </div>
             <div class="summary">
                 <nav>
-                    <h1>(주)판매자명</h1>
-                    <h2>상품번호&nbsp;:&nbsp;<span>10010118412</span></h2>
+                    <h1>${product.seller}</h1>
+                    <h2>상품번호&nbsp;:&nbsp;<span>${product.prodNo}</span></h2>
                 </nav>                        
                 <nav>
-                    <h3>상품명</h3>
-                    <p>상품설명 출력</p>
+                    <h3>${product.prodName}</h3>
+                    <p>${product.descript}</p>
                     <h5 class="rating star4"><a href="#">상품평보기</a></h5>
                 </nav>
                 <nav>
                     <div class="org_price">
-                        <del>30,000</del>
-                        <span>10%</span>
+                        <del>${product.priceWithComma}</del>
+                        <span>${product.discount}%</span>
                     </div>
                     <div class="dis_price">
-                        <ins>27,000</ins>
+                        <ins> <c:set var="discountedPrice" value="0" />
+					    <c:choose>
+					        <c:when test="${product.discount != 0}">
+					            <c:set var="discountedPrice" value="${product.price - (product.price * (product.discount / 100))}"/>
+					        </c:when>
+					        <c:otherwise>
+					            <c:set var="discountedPrice" value="${product.price}"/>
+					        </c:otherwise>
+					    </c:choose>
+					    <fmt:formatNumber value="${discountedPrice}"/></ins>
                     </div>
                 </nav>
                 <nav>
-                    <span class="delivery">무료배송</span>
-                    <span class="arrival">모레(금) 7/8 도착예정</span>
+                <c:choose>
+                	<c:when test="${product.delivery == 0}">
+                	 <span class="delivery">무료배송</span>
+                	</c:when>
+                	<c:otherwise>
+                	<span class="delivery">배송비 ${product.delivery}</span>
+                	</c:otherwise>
+                </c:choose>
+                    <span class="arrival">${product.rdate}</span>
                     <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                 </nav>
                 <nav>
@@ -81,9 +92,7 @@
                 <h1>상품정보</h1>
             </nav>
             <!-- 상품상세페이지 이미지 -->
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+            <img src="${ctxPath}/thumb/${product.prodCate1}/${product.prodCate2}/${product.detail}" alt="상세페이지1">
         </article>
 
         <!-- 상품 정보 제공 고시 내용 -->
