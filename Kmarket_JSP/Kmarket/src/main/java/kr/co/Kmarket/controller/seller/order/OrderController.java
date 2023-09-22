@@ -53,6 +53,7 @@ public class OrderController extends HttpServlet{
 				
 				// 전체 게시물 개수 조회
 				int total = orderService.selectCountTotal(searchDTO);
+				logger.debug("total : "+total);
 				
 				// 마지막 페이지 번호 계산
 				int lastPageNum = pageService.getLastPageNum(total);
@@ -64,9 +65,9 @@ public class OrderController extends HttpServlet{
 				int pageStartNum = pageService.getPageStartNum(total, currentPage);
 				
 				// 현재 페이지 게시물 조회
-				List<OrderDTO> products = orderService.selectOrders(start, searchDTO);
+				List<OrderDTO> orders = orderService.selectOrders(start, searchDTO);
 				
-				req.setAttribute("products", products);
+				req.setAttribute("orders", orders);
 				req.setAttribute("currentPage", currentPage);
 				req.setAttribute("lastPageNum", lastPageNum);
 				req.setAttribute("pageGroupStart", result[0]);

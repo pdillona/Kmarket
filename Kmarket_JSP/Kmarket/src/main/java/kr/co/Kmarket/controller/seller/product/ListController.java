@@ -58,7 +58,7 @@ public class ListController extends HttpServlet{
 		
 		// 전체 게시물 개수 조회
 		int total = productService.selectCountTotal(searchDTO);
-		
+		logger.debug("total : "+total);
 		// 마지막 페이지 번호 계산
 		int lastPageNum = pageService.getLastPageNum(total);
 		
