@@ -84,6 +84,9 @@ public enum CsArticleService {
 	}
 	
 	public void deleteArticle(String no) {
+		
+		logger.debug("delete service no값~@~@~@~~~"+no);
+		
 		dao.deleteArticle(no);
 	}
 

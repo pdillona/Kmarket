@@ -12,17 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.dto.cs.CsArticleDTO;
 import kr.co.Kmarket.service.CsArticleService;
 
-@WebServlet("/cs/view.do")
-public class CsViewController extends HttpServlet{
+@WebServlet("/cs/delete.do")
+public class CsDeleteController extends HttpServlet{
 
+	private final CsArticleService service = CsArticleService.INSTANCE;
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	
-	private final CsArticleService service = CsArticleService.INSTANCE; 
-	
-	private static final long serialVersionUID = 2008628929668163329L;
+	private static final long serialVersionUID = 4737195433797550951L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,17 +27,11 @@ public class CsViewController extends HttpServlet{
 		String ano = req.getParameter("aNo");
 		
 		
-		CsArticleDTO dto = service.selectArticle(ano);
+		service.deleteArticle(ano);
 		
-		req.setAttribute("dto", dto);
-	
-	
-		logger.debug("뷰 컨트롤러 aNO값~~"+dto.getaNo());
-		logger.debug("뷰 컨트롤러 타이틀값~~"+dto.getTitle());
-		logger.debug("뷰 컨트롤러 컨텐츠값~~"+dto.getContent());
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
-		dispatcher.forward(req, resp);
+		resp.sendRedirect("/Kmarket/cs/qna.do");
+	
 	}
 	
 }

@@ -121,8 +121,48 @@ public class CsArticleDAO extends DBHelper{
 	
 	
 	public CsArticleDTO selectArticle(String no) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		CsArticleDTO dto = new CsArticleDTO();
+		
+		logger.debug("delete no값~~~!@~~~"+no);
+		
+		SQL = "SELECT * FROM `km_cs_article` WHERE aNo = ? ";
+		
+		conn = getConnection();
+		
+		try {
+			
+			psmt= conn.prepareStatement(SQL);
+			psmt.setInt(1,Integer.parseInt(no));
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+			
+			dto.setaNo(rs.getInt("aNo"));
+			dto.setGroup(rs.getString("group"));
+			dto.setCateDetail(rs.getString("cateDetail"));
+			dto.setTitle(rs.getString("title"));
+			dto.setContent(rs.getString("content"));
+			dto.setFile(rs.getInt("file"));
+			dto.setWriter(rs.getString("writer"));
+			dto.setRegip(rs.getString("regip"));
+			dto.setRdate(rs.getString("rdate"));
+			dto.setType(rs.getInt("type"));
+			dto.setuLevel(rs.getInt("uLevel"));
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+		}
+		
+		
+		logger.debug("cs아티클dao view dto 값 확인 로거~~~"+ dto);
+		logger.debug("cs아티클dao view dto 값 확인 로거~~~"+ dto.getaNo());
+		logger.debug("cs아티클dao view dto 값 확인 로거~~~"+ dto.getTitle());
+		logger.debug("cs아티클dao view dto 값 확인 로거~~~"+ dto.getContent());
+		
+		return dto;
 	}
 
 	public List<CsArticleDTO> selectArticles(String cate, int start) {
@@ -136,7 +176,25 @@ public class CsArticleDAO extends DBHelper{
 	}
 
 	public void deleteArticle(String no) {
-		// TODO Auto-generated method stub
+
+		conn = getConnection();
+		
+		SQL = "DELETE FROM `km_cs_article` WHERE `aNO` = ?";
+		
+		try {
+			psmt = conn.prepareStatement(no);
+			psmt.setInt(1, Integer.parseInt(no));
+			psmt.executeUpdate();
+			
+			
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+		}
+		
+		
 		
 	}
 

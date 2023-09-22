@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+
       <section id="cs">
         <div class="qna">
           <nav>
@@ -8,30 +9,23 @@
             </div>
           </nav>
           <section class="view">
-            <aside>
-              <h2>문의하기</h2>
-              <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
-              </ul>
-            </aside>
+          <%@include file="../_aside.jsp" %>
             <article>
               <nav>
-                <h2 class="title">[가입] 가입 문의내용</h2>                
+                <h2 class="title">
+                ${dto.title}
+                </h2>                
                 <p>
-                  <span>chh***</span>
-                  <span>2022-11-21</span>
+                  <span>${dto.writer}</span>
+                  <span>${dto.rdate}</span>
                 </p>
               </nav>
 
               <div class="content">
                 <p>
-                  개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
+                ${dto.content}<br>
+                <br>
+                <br>
                 </p>
                 <p>
                   ※ 피싱 관련 피해신고<br /><br />
@@ -41,6 +35,11 @@
                   http://www.krcert.or.kr<br />
                   감사합니다.<br />
                 </p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <a href="${ctxPath}/cs/delete.do?aNo=${dto.aNo}"  class="btnWrite" >글 삭제</a>
               </div>
               <a href="./list.html" class="btnList">목록보기</a>
             </article>
