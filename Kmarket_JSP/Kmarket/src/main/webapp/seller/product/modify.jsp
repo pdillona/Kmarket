@@ -173,18 +173,18 @@ $(function(){
                                     <td>
                                         <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다. </span>
                                         <input type="file" name="thumb1"/>
-                                        <input type="text" name="oName1" value="${product.thumb1}"/>
-                                        <input type="text" name="oriThumb1" value="${product.newThumb1}"/>
+                                        <input type="hidden" name="oName1" value="${product.thumb1}"/>
+                                        <input type="hidden" name="oriThumb1" value="${product.newThumb1}"/>
 
                                         <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다. </span>
                                         <input type="file" name="thumb2"/>
-                                        <input type="text" name="oName2" value="${product.thumb2}"/>
-                                        <input type="text" name="oriThumb2" value="${product.newThumb2}"/>
+                                        <input type="hidden" name="oName2" value="${product.thumb2}"/>
+                                        <input type="hidden" name="oriThumb2" value="${product.newThumb2}"/>
 
                                         <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다. </span>
                                         <input type="file" name="thumb3"/>
-                                        <input type="text" name="oName3" value="${product.thumb3}"/>
-                                        <input type="text" name="oriThumb3" value="${product.newThumb3}"/>
+                                        <input type="hidden" name="oName3" value="${product.thumb3}"/>
+                                        <input type="hidden" name="oriThumb3" value="${product.newThumb3}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -192,8 +192,8 @@ $(function(){
                                     <td>
                                         <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
                                         <input type="file" name="detail"/>
-                                        <input type="text" name="oName4" value="${product.detail}"/>
-                                        <input type="text" name="oriDetail" value="${product.newDetail}"/>
+                                        <input type="hidden" name="oName4" value="${product.detail}"/>
+                                        <input type="hidden" name="oriDetail" value="${product.newDetail}"/>
                                     </td>
                                 </tr>
                             </table>                                

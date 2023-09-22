@@ -23,6 +23,10 @@ public class SearchDTO {
 	public void setCompany(String company) {
 		this.company = company;
 	}
+	@Override
+	public String toString() {
+		return "SearchDTO [search=" + search + ", search_text=" + search_text + ", company=" + company + "]";
+	}
 	
 	
 }
