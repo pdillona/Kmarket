@@ -30,29 +30,29 @@
           </section>
         
           <section class="faq">
-            <h1>자주 묻는 질문<a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20">전체보기</a>
+            <h1>자주 묻는 질문<a href="${ctxPath}/cs/faq.do?group=faq&aeName=all">전체보기</a>
             </h1>
             <ol>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=member&type=20"><span>회원</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=member"><span>회원</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=coupon&type=20"><span>쿠폰/이벤트</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=coupon&"><span>쿠폰/이벤트</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=order&type=20"><span>주문/결제</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=order"><span>주문/결제</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=delivery&type=20"><span>배송</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=delivery"><span>배송</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=cancle&type=20"><span>취소/반품/교환</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=cancle"><span>취소/반품/교환</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=travel&type=20"><span>여행/숙박/항공</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=travel"><span>여행/숙박/항공</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=safe&type=20"><span>안전거래</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=safe"><span>안전거래</span></a>
               </li>
             </ol>
           </section>

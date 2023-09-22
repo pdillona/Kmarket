@@ -2,6 +2,7 @@
        <aside>
               <h2>문의하기</h2>
               <ul>
+            	<li class="${cateDetail eq 'all'?'on':'off'}"><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=member&type=21">전체 보기</a></li>
             	<li class="${cateDetail eq 'member'?'on':'off'}"><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=member&type=20">회원</a></li>
                 <li class="${cateDetail eq 'event'?'on':'off'}"><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=event&type=20">쿠폰/이벤트</a></li>
                 <li class="${cateDetail eq 'order'?'on':'off'}"><a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=order&type=20">주문/결제</a></li>

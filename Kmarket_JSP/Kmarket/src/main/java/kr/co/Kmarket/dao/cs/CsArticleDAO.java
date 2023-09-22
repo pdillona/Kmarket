@@ -193,9 +193,11 @@ public class CsArticleDAO extends DBHelper{
 		
 		List<CsCateDetailDTO> cateList = new ArrayList<CsCateDetailDTO>();
 		
+		
+		logger.debug("카테디테일 데이터!!!!!!!##@!#@!#@!   "+cateDetail);
 		conn = getConnection();
 		
-		SQL = "SELECT dName FROM `km_cs_cate_detail` WHERE `TYPE`>=20 AND `aeName` = '?' ";
+		SQL = "SELECT * FROM `km_cs_cate_detail` WHERE `type`>=20 AND `aeName`=?";
 		
 		try {
 		
@@ -203,12 +205,11 @@ public class CsArticleDAO extends DBHelper{
 			psmt.setString(1, cateDetail);
 			rs = psmt.executeQuery();
 			
-			
 			while(rs.next()) {
 				CsCateDetailDTO dto = new CsCateDetailDTO();
-				dto.setAeName(rs.getString("aeName"));
-				dto.setType(rs.getInt("type"));
-				dto.setdName(rs.getString("dName"));
+				dto.setType(rs.getInt(1));
+				dto.setdName(rs.getString(2));
+				dto.setAeName(rs.getString(3));
 				
 				cateList.add(dto);
 			}

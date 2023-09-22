@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.cs;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,11 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 
 import kr.co.Kmarket.dto.FileDTO;
@@ -39,18 +40,27 @@ public class CsWriteController extends HttpServlet{
 		String cateDetail = req.getParameter("cateDetail");
 		
 		
-		aService.selectCsWriteCate(cateDetail);
+		
+		List<CsCateDetailDTO> cateDto = aService.selectCsWriteCate(cateDetail);
+		logger.debug("cateDto 값이 나왔다~~~~~");
+		
+		
 		
 		req.setAttribute("group", group);
 		req.setAttribute("type", type);
 		req.setAttribute("cateDetail", cateDetail);
+		req.setAttribute("cateDto", cateDto);
+		
+	
 		
 		
 		
 		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/write.jsp");
 		dispatcher.forward(req, resp);	
 		
+
 	}
 	
 	@Override
@@ -108,9 +118,18 @@ public class CsWriteController extends HttpServlet{
 			
 		}
 		
+		logger.debug("라이트 컨트롤러   group: " + group);
+		logger.debug("라이트 컨트롤러   cateDetail : " + cateDetail);
+		
+		
+		
+		
+		
+		
 
 		
+		
 		// 리다이렉트
-		resp.sendRedirect("/Kmarket/cs/qna/list.do?group="+group+"&cateDetail=all");
+		resp.sendRedirect("/Kmarket/cs/qna.do?group="+group+"&cateDetail="+cateDetail);
 	}
 }
