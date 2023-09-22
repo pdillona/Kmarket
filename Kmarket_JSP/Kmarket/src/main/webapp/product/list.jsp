@@ -24,7 +24,7 @@
       <c:forEach var="products" items="${products}">                
       <table border="0">
         <tr>
-          <td><a href="#" class="thumb"><img src="/Kmarket/thumb/${products.prodCate1}/${products.prodCate2}/${products.thumb1}" alt="상품이미지"/></a></td>
+          <td><a href="${ctxPath}/product/view.do?prodCate1=${prodCate1}&prodCate2=${prodCate2}&prodNo=${products.prodNo}" class="thumb"><img src="/Kmarket/thumb/${products.prodCate1}/${products.prodCate2}/${products.thumb1}" alt="상품이미지"/></a></td>
           <td>
             <h3 class="name">${products.prodName}</h3>
             <a href="#" class="desc">${products.descript}</a>
