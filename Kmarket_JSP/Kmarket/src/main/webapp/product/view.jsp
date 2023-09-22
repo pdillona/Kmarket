@@ -1,5 +1,64 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script>
+    const price = ${product.price - (product.price * (product.discount / 100))};
+    const delivery = ${product.delivery};
+    console.log(price);
+    console.log(delivery);
+    
+    
+    window.onload = function () {
+    	const inputNum = document.querySelector('input[name="num"]');
+        const inputCount = document.getElementsByClassName('increase')[0];
+        const inputCount2 = document.getElementsByClassName('decrease')[0];
+        const inputTotal = document.getElementsByName('total')[0];
+        const inputFinal = document.getElementsByName('final')[0];
+        const totalNode = document.getElementsByClassName('total')[0];
+        
+        inputCount.addEventListener('click', function () {
+            // 현재 값을 가져옴
+            let currentValue = parseInt(inputNum.value, 10);
+            
+         	// 값을 증가시킴
+            currentValue++;
+
+            // 변경된 값을 텍스트 필드에 설정
+            inputNum.value = currentValue;
+            
+            updateTotalAndFinal(currentValue);
+        });
+        
+        inputCount2.addEventListener('click', function () {
+            // 현재 값을 가져옴
+            let currentValue = parseInt(inputNum.value, 10);
+
+            // 값을 감소시킴 (1보다 작아지지 않도록 확인)
+            if (currentValue > 1) {
+                currentValue--;
+            }
+
+            // 변경된 값을 텍스트 필드에 설정
+            inputNum.value = currentValue;
+            
+            updateTotalAndFinal(currentValue);
+        });
+        
+        function updateTotalAndFinal(currentValue) {
+            let total = price * currentValue;
+            let finalPrice = total + delivery;
+            
+            console.log(finalPrice);
+
+            // id로 <span> 요소를 가져옵니다
+            const finalPriceSpan = document.getElementById('finalPriceSpan');
+
+            // <span> 요소의 내용을 finalPrice로 업데이트합니다
+            finalPriceSpan.textContent = finalPrice.toLocaleString();
+        }
+        
+        
+    };
+</script>
 <main id="product">
 <!-- 
 		날짜 : 2023/09/14
@@ -56,12 +115,12 @@
                 	<span class="delivery">배송비 ${product.delivery}</span>
                 	</c:otherwise>
                 </c:choose>
-                    <span class="arrival">${product.rdate}</span>
+                    <span class="arrival">${deliveryDate}</span>
                     <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                 </nav>
                 <nav>
-                    <span class="card cardfree"><i>아이콘</i>무이자할부</span>&nbsp;&nbsp;
-                    <span class="card cardadd"><i>아이콘</i>카드추가혜택</span>
+                    <span class="card cardfree"><i class="card cardfree"></i>무이자할부</span>&nbsp;&nbsp;
+                    <span class="card cardadd"><i class="card cardadd"></i>카드추가혜택</span>
                 </nav>
                 <nav>
                     <span class="origin">원산지-상세설명 참조</span>
@@ -75,7 +134,16 @@
                 </div>
                 
                 <div class="total">
-                    <span>35,000</span>
+                    <span id="finalPriceSpan"><c:set var="discountedPrice" value="0" />
+					    <c:choose>
+					        <c:when test="${product.discount != 0}">
+					            <c:set var="discountedPrice" value="${product.price - (product.price * (product.discount / 100))}"/>
+					        </c:when>
+					        <c:otherwise>
+					            <c:set var="discountedPrice" value="${product.price}"/>
+					        </c:otherwise>
+					    </c:choose>
+					    <fmt:formatNumber value="${discountedPrice}"/></span>
                     <em>총 상품금액</em>
                 </div>
 

@@ -1,8 +1,12 @@
 package kr.co.Kmarket.controller.product;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,6 +38,45 @@ public class viewController extends HttpServlet{
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	class DeliveryDate {
+	    public String calculateDeliveryDate(String rdate) {
+	        String result = "";
+
+
+	        String dateStr = rdate;
+
+	        // 날짜 문자열을 Date 객체로 변환
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	        Date date = null;
+	        try {
+	            date = dateFormat.parse(dateStr);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+
+	        if (date != null) {
+	            // 모레의 날짜 계산
+	            Calendar calendar = Calendar.getInstance();
+	            calendar.setTime(date);
+	            calendar.add(Calendar.DAY_OF_MONTH, 1);
+	            Date tomorrow = calendar.getTime();
+
+	            // 모레의 날짜에서 요일 계산
+	            SimpleDateFormat dayFormat = new SimpleDateFormat("E", Locale.KOREAN);
+	            String dayOfWeek = dayFormat.format(tomorrow);
+
+	            // 표시할 날짜 형식 설정
+	            SimpleDateFormat displayDateFormat = new SimpleDateFormat("M/d", Locale.KOREAN);
+	            String formattedDate = displayDateFormat.format(tomorrow);
+
+	            // 최종 표시 문자열 생성
+	            result = "모레 (" + dayOfWeek + ") " + formattedDate + " 도착예정";
+	        }
+
+	        return result;
+	    }
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -48,6 +91,16 @@ public class viewController extends HttpServlet{
 		
 		logger.debug(product.toString());
 		
+		// DeliveryDate 클래스의 인스턴스 생성
+	    DeliveryDate deliveryDateCalculator = new DeliveryDate();
+	    
+	    // product.rdate 값을 가져와서 예상 도착일 계산
+	    String rdate = product.getRdate();
+	    String deliveryDate = deliveryDateCalculator.calculateDeliveryDate(rdate);
+
+	    
+		
+		
 		
 		//aside 카테고리
 		
@@ -60,6 +113,10 @@ public class viewController extends HttpServlet{
 		req.setAttribute("categories", categories);
 		req.setAttribute("productsaside", productsaside);
 		req.setAttribute("product", product);
+		req.setAttribute("deliveryDate", deliveryDate);
+		logger.debug("deliveryDate : " + deliveryDate);
+		
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
 		dispatcher.forward(req, resp);
