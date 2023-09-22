@@ -182,7 +182,7 @@ public class CsArticleDAO extends DBHelper{
 		SQL = "DELETE FROM `km_cs_article` WHERE `aNO` = ?";
 		
 		try {
-			psmt = conn.prepareStatement(no);
+			psmt = conn.prepareStatement(SQL);
 			psmt.setInt(1, Integer.parseInt(no));
 			psmt.executeUpdate();
 			

@@ -18,6 +18,11 @@
                 <p>
                   <span>${dto.writer}</span>
                   <span>${dto.rdate}</span>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                   <a href="${ctxPath}/cs/delete.do?aNo=${dto.aNo}"  class="btnWrite" >글 삭제</a> <!-- 버튼사이즈 줄이기 -->
                 </p>
               </nav>
 
@@ -38,8 +43,18 @@
                 <br>
                 <br>
                 <br>
-                <br>
-                <a href="${ctxPath}/cs/delete.do?aNo=${dto.aNo}"  class="btnWrite" >글 삭제</a>
+                <br>1px solid #e9e9e9
+                <nav>
+					 <c:if test="${dto.file > 0}">
+				        <tr>
+				            <td>첨부파일</td>
+				            <td>
+								<a href="#">${dto.file}</a>&nbsp;
+			                	<span>${article.fileDto.download}</span>회 다운로드
+			                </td>
+				        </tr>
+			        </c:if>              
+                </nav>
               </div>
               <a href="./list.html" class="btnList">목록보기</a>
             </article>

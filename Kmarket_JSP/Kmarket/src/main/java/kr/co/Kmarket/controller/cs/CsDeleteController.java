@@ -24,10 +24,11 @@ public class CsDeleteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String ano = req.getParameter("aNo");
+		String aNo = req.getParameter("aNo");
 		
 		
-		service.deleteArticle(ano);
+		
+		service.deleteArticle(aNo);
 		
 		
 		resp.sendRedirect("/Kmarket/cs/qna.do");
