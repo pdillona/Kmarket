@@ -6,6 +6,13 @@ $(function(){
 	$('#btnSearch').click(function(){
 		$('#formSearch').submit();
 	});
+	$('#ordComplete').click(function(e){
+		e.preventDefault();
+		if(confirm('입금완료 확인하셨습니까?(주문)')){
+			$(this).submit();
+		}
+		});
+	}
 </script>
     <section id="seller-order-order">
         <nav>
@@ -41,6 +48,7 @@ $(function(){
                     <th>상품명</th>
                     <th>주문일자</th>
                     <th>입금상태</th>
+                    <th>주문상태</th>
                     <th>배송상태</th>
                 </tr>
 				<c:forEach var="order" items="${orders}">
@@ -50,17 +58,42 @@ $(function(){
 	                    <td>${order.productDTO.prodName}</td>
 	                    <td>${order.ordDate}</td>
 	                    <td>
-	                        <label><input type="checkbox">입금완료확인</label>
+							<c:choose>
+								<c:when test="${order.ordComplete eq 1}">
+									<span>입금완료</span>	
+								</c:when>
+								<c:otherwise>
+									<a id="ordComplete" href="/Kmarket/seller/order/ordComplete.do?ord">입금대기</a>	
+								</c:otherwise>
+							</c:choose>
 	                    </td>
 	                    <td>
-	                        <select name="deliveryStatus">
-	                            <option value="not">배송전</option>
-	                            <option value="ing">배송중</option>
-	                            <option value="success">배송완료</option>
-	                        </select>
-	                        <span>배송전</span>
-	                        <a href="#"><수정></a>
-	                    </td>
+                            <c:choose>
+                            	<c:when test="${order.ordStatus eq 'success'}">
+                            		<span>구매확정</span>	
+                            	</c:when>
+                            	<c:when test="${order.ordStatus eq 'cancel'}">
+                            		<span>취소</span>	
+                            	</c:when>
+                            	<c:when test="${order.ordStatus eq 'return'}">
+                            		<span>교환</span>	
+                            	</c:when>
+                            	<c:when test="${order.ordStatus eq 'excheange'}">
+                            		<span>반품</span>	
+                            	</c:when>
+                            	<c:otherwise>
+                            		<span>교환</span>
+                            	</c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>
+                        	<select name="ordStatus">
+                               <option value="success">구매확정</option>
+                               <option value="cancel">취소</option>
+                               <option value="return">반품</option>
+                               <option value="exchange">교환</option>
+                             </select>
+                        </td>
 	                </tr>
 				</c:forEach>
             </table>

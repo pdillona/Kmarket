@@ -36,6 +36,7 @@
                             <th>주문자</th>
                             <th>주문일자</th>
                             <th>주문상태</th>
+                            <th>배송상태</th>
                             <th>입금상태</th>
                         </tr>
                         <tr>
@@ -44,14 +45,24 @@
                             <td>hong1234</td>
                             <td>23-05-25</td>
                             <td>
-                                <select name="ordStatus">
-                                    <option value="success">구매확정</option>
-                                    <option value="cancel">취소</option>
-                                    <option value="return">반품</option>
-                                    <option value="exchange">교환</option>
-                                </select>
-                                <span>구매확정</span>
-                                <a href="#"><수정></a>
+                                <c:choose>
+		                        	<c:when test="${order.deliveryStatus ==  null || order.deliveryStatus eq 'yet'}">
+		                        		<span>배송전</span>
+		                        	</c:when>
+		                        	<c:when test="${order.deliveryStatus eq 'ing'}">
+		                        		<span>배송중</span>
+		                        	</c:when>
+		                        	<c:when test="${order.deliveryStatus eq 'success'}">
+		                        		<span>배송완료</span>
+		                        	</c:when>
+		                        </c:choose>
+                            </td>
+                            <td>
+                            	<select name="deliveryStatus">
+		                            <option value="yet">배송전</option>
+		                            <option value="ing">배송중</option>
+		                            <option value="success">배송완료</option>
+		                        </select>
                             </td>
                             <td>입금완료</td>
                         </tr>
@@ -61,14 +72,24 @@
                             <td>hong1234</td>
                             <td>23-05-25</td>
                             <td>
-                                <select name="ordStatus">
-                                    <option value="success">구매확정</option>
-                                    <option value="cancel">취소</option>
-                                    <option value="return">반품</option>
-                                    <option value="exchange">교환</option>
-                                </select>
-                                <span>구매확정</span>
-                                <a href="#"><수정></a>
+                                <c:choose>
+		                        	<c:when test="${order.deliveryStatus ==  null || order.deliveryStatus eq 'yet'}">
+		                        		<span>배송전</span>
+		                        	</c:when>
+		                        	<c:when test="${order.deliveryStatus eq 'ing'}">
+		                        		<span>배송중</span>
+		                        	</c:when>
+		                        	<c:when test="${order.deliveryStatus eq 'success'}">
+		                        		<span>배송완료</span>
+		                        	</c:when>
+		                        </c:choose>
+                            </td>
+                            <td>
+                            	<select name="deliveryStatus">
+		                            <option value="yet">배송전</option>
+		                            <option value="ing">배송중</option>
+		                            <option value="success">배송완료</option>
+		                        </select>
                             </td>
                             <td>입금완료</td>
                         </tr>
@@ -78,17 +99,28 @@
                             <td>hong1234</td>
                             <td>23-05-25</td>
                             <td>
-                                <select name="ordStatus">
-                                    <option value="success">구매확정</option>
-                                    <option value="cancel">취소</option>
-                                    <option value="return">반품</option>
-                                    <option value="exchange">교환</option>
-                                </select>
-                                <span>구매확정</span>
-                                <a href="#"><수정></a>
+                                <c:choose>
+		                        	<c:when test="${order.deliveryStatus ==  null || order.deliveryStatus eq 'yet'}">
+		                        		<span>배송전</span>
+		                        	</c:when>
+		                        	<c:when test="${order.deliveryStatus eq 'ing'}">
+		                        		<span>배송중</span>
+		                        	</c:when>
+		                        	<c:when test="${order.deliveryStatus eq 'success'}">
+		                        		<span>배송완료</span>
+		                        	</c:when>
+		                        </c:choose>
+                            </td>
+                            <td>
+                            	<select name="deliveryStatus">
+		                            <option value="yet">배송전</option>
+		                            <option value="ing">배송중</option>
+		                            <option value="success">배송완료</option>
+		                        </select>
                             </td>
                             <td>입금완료</td>
                         </tr>
+                        
                     </table>
 
                     <div class="paging">
