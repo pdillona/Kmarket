@@ -37,9 +37,9 @@ $(function(){
       </form>
             </div>
             <p class="sort">
-                <a href="#" class="on">전체&nbsp;|</a>
-                <a href="#" class="off">입금대기&nbsp;|</a>
-                <a href="#" class="off">주문량 많은 순&nbsp;|</a>
+                <a href="/Kmarket/seller/order/order.do?seller=${sessUser.company}&sort=0" class="${sort eq '0'?'on':''}">전체&nbsp;|</a>
+                <a href="/Kmarket/seller/order/order.do?seller=${sessUser.company}&sort=1" class="${sort eq '1'?'on':''}">입금대기&nbsp;|</a>
+                <a href="/Kmarket/seller/order/order.do?seller=${sessUser.company}&sort=2" class="${sort eq '2'?'on':''}">주문량 많은 순&nbsp;</a>
             </p>
             <table>
                 <tr>
@@ -59,7 +59,7 @@ $(function(){
 	                    <td>${order.ordDate}</td>
 	                    <td>
 							<c:choose>
-								<c:when test="${order.ordComplete eq 1}">
+								<c:when test="${order.ordComplete eq 2}">
 									<span>입금완료</span>	
 								</c:when>
 								<c:otherwise>
@@ -87,12 +87,11 @@ $(function(){
                             </c:choose>
                         </td>
                         <td>
-                        	<select name="ordStatus">
-                               <option value="success">구매확정</option>
-                               <option value="cancel">취소</option>
-                               <option value="return">반품</option>
-                               <option value="exchange">교환</option>
-                             </select>
+                          <select name="deliveryStatus">
+		                      <option value="yet">배송전</option>
+		                      <option value="ing">배송중</option>
+		                      <option value="success">배송완료</option>
+		                  </select>
                         </td>
 	                </tr>
 				</c:forEach>
@@ -101,21 +100,21 @@ $(function(){
             <div class="paging">
            	<c:if test="${pageGroupStart > 1}">
            		<span class="prev">
-           			<a href="/Kmarket/seller/order/order.do?pg=${pageGroupStart - 1}&search=${search}&search_text=${search_text}&seller=${sessUser.company}">
+           			<a href="/Kmarket/seller/order/order.do?pg=${pageGroupStart - 1}&search=${search}&search_text=${search_text}&seller=${sessUser.company}&sort=${sort}">
            			<&nbsp;이전
            			</a>
             	</span>
            	</c:if>
                <span class="num">
             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-            	<a href="/Kmarket/seller/order/order.do?pg=${i}&search=${search}&search_text=${search_text}&seller=${sessUser.company}" class="${currentPage == i? 'on':'off'}">${i}</a>
+            	<a href="/Kmarket/seller/order/order.do?pg=${i}&search=${search}&search_text=${search_text}&seller=${sessUser.company}&sort=${sort}" class="${currentPage == i? 'on':'off'}">${i}</a>
             </c:forEach>
                </span>
             <c:if test="${pageGroupEnd < lastPageNum}">
 	            <span class="next">
-	                   <a href="/Kmarket/seller/order/order.do?pg=${pageGroupEnd + 1}&search=${search}&search_text=${search_text}&seller=${sessUser.company}">
-	                   다음&nbsp;>
-	                   </a>
+                   <a href="/Kmarket/seller/order/order.do?pg=${pageGroupEnd + 1}&search=${search}&search_text=${search_text}&seller=${sessUser.company}&sort=${sort}">
+                   다음&nbsp;>
+                   </a>
 	            </span>
             </c:if>
                

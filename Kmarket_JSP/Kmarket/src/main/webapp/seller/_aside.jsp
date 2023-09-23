@@ -12,8 +12,8 @@
                     <li>
                         <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
                         <ol>
-                            <li><a href="/Kmarket/seller/order/order.do?seller=${sessUser.company}">주문현황</a></li>
-                            <li><a href="/Kmarket/seller/order/delivery.do?seller=${sessUser.company}">취소/반품/교환</a></li>
+                            <li><a href="/Kmarket/seller/order/order.do?seller=${sessUser.company}&sort=0">주문현황</a></li>
+                            <li><a href="/Kmarket/seller/order/delivery.do?seller=${sessUser.company}&sort=0">취소/반품/교환</a></li>
                         </ol>
                     </li>
                     <li>

@@ -4,7 +4,17 @@ public class SearchDTO {
 	private String search;
 	private String search_text;
 	private String company;
+	private int sort;
 	
+	public int getSort() {
+		return sort;
+	}
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+	public void setSort(String sort) {
+		this.sort = Integer.parseInt(sort);
+	}
 	public String getSearch() {
 		return search;
 	}
