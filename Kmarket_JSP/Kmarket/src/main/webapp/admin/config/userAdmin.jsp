@@ -47,18 +47,18 @@ $(function(){
         <!-- 상품목록 컨텐츠 시작 -->                                
         <section>
             <div>
-                <form id="formSearch" action="/Kmarket/admin/config/userAdmin.do" method="get">
-		      		<input type="hidden" name="seller" value="${sessUser.company}"/>
+                <form id="formSearch" action="/Kmarket/admin/config/userAdmin.do?" method="get">
+		      		<input type="hidden" name="type" value="3"/>
 			       	<select name="search">
-			              <option value="search1">상품명</option>
-			              <option value="search2">상품코드</option>                               
-			              <option value="search3">담당자명</option>                               
+			              <option value="search1">아이디</option>
+			              <option value="search2">이름</option>                               
 			       	</select>
 			       	<input type="text" name="search_text">
 			       	<button id="btnSearch">검색</button>
    				</form>
             </div>
             <form id="formCheck" action="/Kmarket/admin/config/delete.do" method="post">
+            	<input type="hidden" name="type" value="3"/>
 	            <table>
 	                <tr>
 	                    <th><input type="checkbox" name="all"/></th>
@@ -68,63 +68,46 @@ $(function(){
 	                    <th>휴대폰</th>
 	                    <th>관리</th>
 	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="chk"/></td>
-	                    <td>hong123</td>
-	                    <td>홍길동</td>
-	                    <td>hong@naver.com</td>
-	                    <td>010-2434-3243</td>
-	                    <td>
-	                        <a href="#">[삭제]</a>
-	                        <a href="#">[수정]</a>
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="아이디"/></td>
-	                    <td>hong123</td>
-	                    <td>홍길동</td>
-	                    <td>hong@naver.com</td>
-	                    <td>010-2434-3243</td>
-	                    <td>
-	                        <a href="#">[삭제]</a>
-	                        <a href="#">[수정]</a>
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="아이디"/></td>
-	                    <td>hong123</td>
-	                    <td>홍길동</td>
-	                    <td>hong@naver.com</td>
-	                    <td>010-2434-3243</td>
-	                    <td>
-	                        <a href="#">[삭제]</a>
-	                        <a href="#">[수정]</a>
-	                    </td>
-	                </tr>
+	                <c:forEach var="admin" items="${admins}">
+		                <tr>
+		                    <td><input type="checkbox" name="chk"/></td>
+		                    <td>${admin.uid}</td>
+		                    <td>${admin.name}</td>
+		                    <td>${admin.email}</td>
+		                    <td>${admin.hp}</td>
+		                    <td>
+		                        <a href="#">[삭제]</a>
+		                        <a href="#">[수정]</a>
+		                    </td>
+		                </tr>
+	                </c:forEach>
 	            </table>
 			</form>
             
             <input class="btnDelete" type="button" value="선택삭제" />                          
             <input class="btnRegister" type="button" value="관리자 등록" />                          
 
-
             <div class="paging">
-                <span class="prev">
-                    <a href="#"><&nbsp;이전</a>
-                </span>
-                <span class="num">
-                    <a href="#" class="on">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">7</a>
-                </span>
-                <span class="next">
-                    <a href="#">다음&nbsp;></a>
-                </span>
-                </div>
+           	<c:if test="${pageGroupStart > 1}">
+           		<span class="prev">
+           			<a href="/Kmarket/admin/config/userAdmin.do?pg=${pageGroupStart - 1}&search=${search}&search_text=${search_text}&type=3">
+           			<&nbsp;이전
+           			</a>
+            	</span>
+           	</c:if>
+               <span class="num">
+            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+            	<a href="/Kmarket/admin/config/userAdmin.do?pg=${i}&search=${search}&search_text=${search_text}&type=3" class="${currentPage == i? 'on':'off'}">${i}</a>
+            </c:forEach>
+               </span>
+            <c:if test="${pageGroupEnd < lastPageNum}">
+	            <span class="next">
+                   <a href="/Kmarket/admin/config/userAdmin.do?pg=${pageGroupEnd + 1}&search=${search}&search_text=${search_text}&type=3">
+                   다음&nbsp;>
+                   </a>
+	            </span>
+            </c:if>
+           </div>
 
         </section>                
 

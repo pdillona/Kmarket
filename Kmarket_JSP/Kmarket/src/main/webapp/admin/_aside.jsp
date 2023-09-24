@@ -6,7 +6,7 @@
                         <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
                         <ol>
                             <li><a href="${ctxPath}/admin/config/info.do">기본환경정보</a></li>
-                            <li><a href="${ctxPath}/admin/config/userAdmin.do">관리자</a></li>
+                            <li><a href="${ctxPath}/admin/config/userAdmin.do?type=3">관리자</a></li>
                             <li><a href="${ctxPath}/admin/config/banner.do">디자인관리</a></li>
                         </ol>
                     </li>
