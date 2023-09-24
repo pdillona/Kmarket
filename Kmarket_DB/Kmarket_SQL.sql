@@ -170,3 +170,5 @@ UPDATE `km_product_order` SET `ordStatus` = 'return' WHERE `ordNo`=1000038;
 UPDATE `km_product_order` SET `ordStatus` = 'exchange' WHERE `ordNo`=1000014;
 
 SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` FROM `km_product_order_item` AS a JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` JOIN `km_member` AS d ON c.`seller`=d.uid WHERE d.`company`='아무회사' ORDER BY b.`ordNo` DESC LIMIT 11, 10;
+
+SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` FROM `km_product_order_item` AS a JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` JOIN `km_member` AS d ON c.`seller`=d.uid WHERE d.`company`='아무회사' AND c.`prodName` LIKE '%여성%' ORDER BY b.`ordNo` DESC LIMIT 0, 10;

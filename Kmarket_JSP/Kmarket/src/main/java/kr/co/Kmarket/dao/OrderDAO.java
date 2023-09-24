@@ -112,15 +112,22 @@ public class OrderDAO extends DBHelper{
 				
 			}else {
 				if(searchDTO.getSearch().equals("search1")) {
+					logger.debug("search1...상품명");;
 					psmt = conn.prepareStatement(sql_search1);
+					logger.debug("psmt 생성...상품명");
 				}else if(searchDTO.getSearch().equals("search2")) {
+					logger.debug("search2...상품코드");
 					psmt = conn.prepareStatement(sql_search2);
+					logger.debug("search2...psmt 생성");
 				}else if(searchDTO.getSearch().equals("search3")) {
 					psmt = conn.prepareStatement(sql_search3);
 				}
 				psmt.setString(1, searchDTO.getCompany());
 				psmt.setString(2, "%"+searchDTO.getSearch_text()+"%");
 				psmt.setInt(3, start);
+				logger.debug("searchDTO.getCompany : "+searchDTO.getCompany());
+				logger.debug("searchDTO.getSearch_text() : "+searchDTO.getSearch_text());
+				logger.debug("start : "+start);
 			}
 			rs = psmt.executeQuery();
 			logger.debug("rs 생성...");

@@ -27,6 +27,7 @@ $(function(){
             <div>
                 <form id="formSearch" action="/Kmarket/seller/order/order.do" method="get">
       		<input type="hidden" name="seller" value="${sessUser.company}"/>
+      		<input type="hidden" name="sort" value="0"/>
        <select name="search">
               <option value="search1">상품명</option>
               <option value="search2">상품코드</option>
