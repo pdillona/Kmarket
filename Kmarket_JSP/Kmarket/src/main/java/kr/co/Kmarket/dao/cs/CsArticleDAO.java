@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
+import kr.co.Kmarket.dto.FileDTO;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
 import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 
@@ -18,8 +19,9 @@ public class CsArticleDAO extends DBHelper{
 	
 	String SQL = "";
 	String SQL2 = "";
+	String SQL3 = "";
 	
-	public int insertArticle(CsArticleDTO dto) {
+	public int insertArticle(CsArticleDTO dto,FileDTO fdto) {
 		
 		SQL = "INSERT INTO `km_cs_article` SET "
 				+ "`group`=?, "
@@ -33,11 +35,32 @@ public class CsArticleDAO extends DBHelper{
 				+ "`uLevel`=?, "
 				+ "`rdate`=NOW()";
 		
+		
+		SQL2= 	"SELECT aNo, rdate "
+				+ " FROM `km_cs_article` "
+				+ " ORDER BY aNo DESC "
+				+ " LIMIT 1 ";
+
+		//select LAST_INSERT_ID(aNo) FROM `km_cs_article`;
+		
+		SQL3= "INSERT INTO `km_file` SET "
+				+ " `aNo` = ?, "
+				+ " `oriName` = ?, "
+				+ " `newName` = ?, "
+				+ " `rdate` = ? ";
+		
+		
+		int maxAno = 0;
+		String maxRdate = "";
+		
 		conn = getConnection();
 		
 		try {
 			
-			psmt = conn.prepareStatement(SQL);
+			conn.setAutoCommit(false);  //transaction시작
+			
+			// article insert
+			psmt = conn.prepareStatement(SQL);  
 			psmt.setString(1, dto.getGroup());
 			psmt.setString(2, dto.getCateDetail());
 			psmt.setString(3, dto.getTitle());
@@ -49,7 +72,32 @@ public class CsArticleDAO extends DBHelper{
 			psmt.setInt(9, dto.getuLevel());
 			psmt.executeUpdate();
 	
-			close();
+			psmt.close();
+			
+			
+			// file max(aNo) select
+			psmt = conn.prepareStatement(SQL2);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				maxAno = rs.getInt(1);
+				maxRdate = rs.getString(2);
+			}
+			
+			psmt.close();
+			
+			
+			// file insert
+			psmt = conn.prepareStatement(SQL3);
+			psmt.setInt(1, maxAno);
+			psmt.setString(2, fdto.getOriname());
+			psmt.setString(3, fdto.getNewname());
+			psmt.setString(4, maxRdate);
+			psmt.executeUpdate();
+			
+			psmt.close();
+			
+			conn.commit();
+			
 		}catch(Exception e){
 			logger.debug(e.getMessage());
 		}
@@ -59,9 +107,33 @@ public class CsArticleDAO extends DBHelper{
 	}
 
 	
-	
-	
-	
+	/*
+	public void fileInsert(FileDTO dto) {
+		
+		SQL="INSERT INTO `km_file` SET "
+		  + " `aNo` =?, "
+		  + " `oriName`=?,"
+		  + " `newName`=? "
+		  + " `rdate`=? ";
+		
+		conn = getConnection();
+		
+		try {
+			
+			psmt = conn.prepareStatement(SQL);
+			psmt.setInt(1, dto.getAno());
+			psmt.setString(2, dto.getOriname());
+			psmt.setString(3, dto.getNewname());
+			psmt.setString(4, dto.getRdate());
+			
+			
+			
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+		}
+		
+	}
+	*/
 	
 	
 	

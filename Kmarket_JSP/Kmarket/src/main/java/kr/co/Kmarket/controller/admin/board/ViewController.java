@@ -1,4 +1,4 @@
-package kr.co.Kmarket.controller.cs;
+package kr.co.Kmarket.controller.admin.board;
 
 import java.io.IOException;
 
@@ -15,30 +15,33 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
 import kr.co.Kmarket.service.CsArticleService;
 
-@WebServlet("/cs/view.do")
-public class CsViewController extends HttpServlet{
+@WebServlet("/admin/board/view.do")
+public class ViewController extends HttpServlet{
 
+
+	private static final long serialVersionUID = 3156879656372401125L;
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	private final CsArticleService service = CsArticleService.INSTANCE; 
-	private static final long serialVersionUID = 2008628929668163329L;
-
+	private final CsArticleService service = CsArticleService.INSTANCE;
+	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		String ano = req.getParameter("aNo");
-		
 		
 		CsArticleDTO dto = service.selectArticle(ano);
 		
 		req.setAttribute("dto", dto);
 	
 	
-		logger.debug("뷰 컨트롤러 aNO값~~"+dto.getaNo());
-		logger.debug("뷰 컨트롤러 타이틀값~~"+dto.getTitle());
-		logger.debug("뷰 컨트롤러 컨텐츠값~~"+dto.getContent());
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/board/view.jsp");
 		dispatcher.forward(req, resp);
+		
+	
 	}
+	
+	
+	
 	
 }
