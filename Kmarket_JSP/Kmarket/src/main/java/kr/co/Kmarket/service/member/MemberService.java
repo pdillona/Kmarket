@@ -11,6 +11,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -147,6 +148,7 @@ public class MemberService {
 		Transport.send(message);
 		
 		status = 1;
+		
 	}catch(Exception e){
 		logger.debug("메일 발송 에러============="+e.getMessage());
 		status = 0;
