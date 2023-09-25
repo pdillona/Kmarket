@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<!-- 
 		날짜 : 2023/09/14
 		이름 : 김무현
@@ -50,17 +51,17 @@
               <span>${productsaside.discount}%</span>
             </div>
             <div class="dis_price">
-           	<ins>
-			    <c:set var="discountedPrice" value="0" />
-			    <c:choose>
-			        <c:when test="${productsaside.discount != 0}">
-			            <c:set var="discountedPrice" value="${productsaside.price - (productsaside.price * (productsaside.discount / 100))}"/>
-			        </c:when>
-			        <c:otherwise>
-			            <c:set var="discountedPrice" value="${productsaside.price}"/>
-			        </c:otherwise>
-			    </c:choose>
-			    <fmt:formatNumber value="${discountedPrice}"/>
+           <ins>
+            <c:set var="discountedPrice" value="0" />
+				<c:choose>
+				    <c:when test="${productsaside.discount != 0}">
+				        <c:set var="discountedPrice" value="${productsaside.price - (productsaside.price * (productsaside.discount / 100))}"/>
+				    </c:when>
+				    <c:otherwise>
+				        <c:set var="discountedPrice" value="${productsaside.price}" />
+				    </c:otherwise>
+				</c:choose>
+				<fmt:formatNumber value="${discountedPrice}"/>
 			</ins>
             </div>
           </a>

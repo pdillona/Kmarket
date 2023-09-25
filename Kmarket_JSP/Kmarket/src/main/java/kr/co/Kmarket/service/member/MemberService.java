@@ -1,5 +1,6 @@
 package kr.co.Kmarket.service.member;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dao.member.MemberDAO;
+import kr.co.Kmarket.dto.SearchDTO;
 import kr.co.Kmarket.dto.member.MemberDTO;
 
 public class MemberService {
@@ -162,8 +164,14 @@ public class MemberService {
 		return 0;
 		}
 	}
-	
-	
+	// 회원조회
+	public List<MemberDTO> selectMembers(int start, SearchDTO dto){
+		return dao.selectMembers(start, dto);
+	} 
+	// 페이지
+	public int selectCountTotal(SearchDTO dto) {
+		return dao.selectCountTotal(dto);
+	}
 	
 	
 }

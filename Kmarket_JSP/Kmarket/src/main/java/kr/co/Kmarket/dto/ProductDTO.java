@@ -252,6 +252,7 @@ public class ProductDTO {
 	public String getRdate() {
 		return rdate;
 	}
+	
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}

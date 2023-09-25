@@ -515,19 +515,18 @@ button[type=submit] {
     box-sizing: border-box;
 }
 #seller-order-order section > table  tr > td:nth-child(1) {width: 100px;}
-#seller-order-order section > table  tr > td:nth-child(2) {width: 80px;}
+#seller-order-order section > table  tr > td:nth-child(2) {width: 100px;}
 #seller-order-order section > table  tr > td:nth-child(3) {width: auto; text-align: left;}
-#seller-order-order section > table  tr > td:nth-child(4) {width: 200px;}
-#seller-order-order section > table  tr > td:nth-child(5) {width: 200px;}
-#seller-order-order section > table  tr > td:nth-child(6) {width: 250px;}
-#seller-order-order section > table  tr > td:nth-child(7) {width: 80px;}
+#seller-order-order section > table  tr > td:nth-child(4) {width: 150px;}
+#seller-order-order section > table  tr > td:nth-child(5) {width: 150px;}
+#seller-order-order section > table  tr > td:nth-child(6) {width: 150px;}
+#seller-order-order section > table  tr > td:nth-child(7) {width: 150px;}
 #seller-order-order section > table  tr > td:nth-child(8) {width: 80px;}
 #seller-order-order section > table  tr > td:nth-child(9) {width: 80px;}
 #seller-order-order section > table  tr > td:nth-child(10) {width: 80px;}
 #seller-order-order section > table  tr > td:nth-child(11) {width: 100px;}
 
 #seller-order-order section > table img {width: 60px;}
-#seller-order-order section > table select {display: none;}
 #seller-order-order section > table ul > li {line-height: 19px;}
 
 #seller-order-order section input[type=button] {
@@ -607,7 +606,6 @@ button[type=submit] {
 #seller-order-delivery section > table  tr > td:nth-child(11) {width: 100px;}
 
 #seller-order-delivery section > table img {width: 60px;}
-#seller-order-delivery section > table select {display: none;}
 #seller-order-delivery section > table ul > li {line-height: 19px;}
 
 #seller-order-delivery section input[type=button] {

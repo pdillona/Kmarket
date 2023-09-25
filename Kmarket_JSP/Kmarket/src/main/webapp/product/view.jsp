@@ -1,5 +1,64 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script>
+    const price = ${product.price - (product.price * (product.discount / 100))};
+    const delivery = ${product.delivery};
+    console.log(price);
+    console.log(delivery);
+    
+    
+    window.onload = function () {
+    	const inputNum = document.querySelector('input[name="num"]');
+        const inputCount = document.getElementsByClassName('increase')[0];
+        const inputCount2 = document.getElementsByClassName('decrease')[0];
+        const inputTotal = document.getElementsByName('total')[0];
+        const inputFinal = document.getElementsByName('final')[0];
+        const totalNode = document.getElementsByClassName('total')[0];
+        
+        inputCount.addEventListener('click', function () {
+            // 현재 값을 가져옴
+            let currentValue = parseInt(inputNum.value, 10);
+            
+         	// 값을 증가시킴
+            currentValue++;
+
+            // 변경된 값을 텍스트 필드에 설정
+            inputNum.value = currentValue;
+            
+            updateTotalAndFinal(currentValue);
+        });
+        
+        inputCount2.addEventListener('click', function () {
+            // 현재 값을 가져옴
+            let currentValue = parseInt(inputNum.value, 10);
+
+            // 값을 감소시킴 (1보다 작아지지 않도록 확인)
+            if (currentValue > 1) {
+                currentValue--;
+            }
+
+            // 변경된 값을 텍스트 필드에 설정
+            inputNum.value = currentValue;
+            
+            updateTotalAndFinal(currentValue);
+        });
+        
+        function updateTotalAndFinal(currentValue) {
+            let total = price * currentValue;
+            let finalPrice = total + delivery;
+            
+            console.log(finalPrice);
+
+            // id로 <span> 요소를 가져옵니다
+            const finalPriceSpan = document.getElementById('finalPriceSpan');
+
+            // <span> 요소의 내용을 finalPrice로 업데이트합니다
+            finalPriceSpan.textContent = finalPrice.toLocaleString();
+        }
+        
+        
+    };
+</script>
 <main id="product">
 <!-- 
 		날짜 : 2023/09/14
@@ -12,45 +71,56 @@
     <section class="view">
 
         <!-- 제목, 페이지 네비게이션 -->
-        <nav>
-            <h1>상품보기</h1>
-            <p>
-                HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong>
-            </p>
-        </nav>
+        <jsp:include page="./_nav.jsp"/>
 
         <!-- 상품 전체 정보 내용 -->                
         <article class="info">
             <div class="image">
-                <img src="https://via.placeholder.com/460x460" alt="상품이미지"/>
+                <img src="${ctxPath}/thumb/${product.prodCate1}/${product.prodCate2}/${product.thumb3}" alt="상품이미지"/>
             </div>
             <div class="summary">
                 <nav>
-                    <h1>(주)판매자명</h1>
-                    <h2>상품번호&nbsp;:&nbsp;<span>10010118412</span></h2>
+                    <h1>${product.seller}</h1>
+                    <h2>상품번호&nbsp;:&nbsp;<span>${product.prodNo}</span></h2>
                 </nav>                        
                 <nav>
-                    <h3>상품명</h3>
-                    <p>상품설명 출력</p>
+                    <h3>${product.prodName}</h3>
+                    <p>${product.descript}</p>
                     <h5 class="rating star4"><a href="#">상품평보기</a></h5>
                 </nav>
                 <nav>
                     <div class="org_price">
-                        <del>30,000</del>
-                        <span>10%</span>
+                        <del>${product.priceWithComma}</del>
+                        <span>${product.discount}%</span>
                     </div>
                     <div class="dis_price">
-                        <ins>27,000</ins>
+                        <ins> <c:set var="discountedPrice" value="0" />
+					    <c:choose>
+					        <c:when test="${product.discount != 0}">
+					            <c:set var="discountedPrice" value="${product.price - (product.price * (product.discount / 100))}"/>
+					        </c:when>
+					        <c:otherwise>
+					            <c:set var="discountedPrice" value="${product.price}"/>
+					        </c:otherwise>
+					    </c:choose>
+					    <fmt:formatNumber value="${discountedPrice}"/></ins>
                     </div>
                 </nav>
                 <nav>
-                    <span class="delivery">무료배송</span>
-                    <span class="arrival">모레(금) 7/8 도착예정</span>
+                <c:choose>
+                	<c:when test="${product.delivery == 0}">
+                	 <span class="delivery">무료배송</span>
+                	</c:when>
+                	<c:otherwise>
+                	<span class="delivery">배송비 ${product.delivery}</span>
+                	</c:otherwise>
+                </c:choose>
+                    <span class="arrival">${deliveryDate}</span>
                     <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                 </nav>
                 <nav>
-                    <span class="card cardfree"><i>아이콘</i>무이자할부</span>&nbsp;&nbsp;
-                    <span class="card cardadd"><i>아이콘</i>카드추가혜택</span>
+                    <span class="card cardfree"><i class="card cardfree"></i>무이자할부</span>&nbsp;&nbsp;
+                    <span class="card cardadd"><i class="card cardadd"></i>카드추가혜택</span>
                 </nav>
                 <nav>
                     <span class="origin">원산지-상세설명 참조</span>
@@ -64,7 +134,16 @@
                 </div>
                 
                 <div class="total">
-                    <span>35,000</span>
+                    <span id="finalPriceSpan"><c:set var="discountedPrice" value="0" />
+					    <c:choose>
+					        <c:when test="${product.discount != 0}">
+					            <c:set var="discountedPrice" value="${product.price - (product.price * (product.discount / 100))}"/>
+					        </c:when>
+					        <c:otherwise>
+					            <c:set var="discountedPrice" value="${product.price}"/>
+					        </c:otherwise>
+					    </c:choose>
+					    <fmt:formatNumber value="${discountedPrice}"/></span>
                     <em>총 상품금액</em>
                 </div>
 
@@ -81,9 +160,7 @@
                 <h1>상품정보</h1>
             </nav>
             <!-- 상품상세페이지 이미지 -->
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+            <img src="${ctxPath}/thumb/${product.prodCate1}/${product.prodCate2}/${product.detail}" alt="상세페이지1">
         </article>
 
         <!-- 상품 정보 제공 고시 내용 -->

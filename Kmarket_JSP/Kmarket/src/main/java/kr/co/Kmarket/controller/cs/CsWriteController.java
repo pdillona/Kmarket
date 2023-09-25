@@ -99,8 +99,8 @@ public class CsWriteController extends HttpServlet{
 		dto.setRegip(regip);
 		dto.setuLevel(Integer.parseInt(uLevel));
 
-		//글 Insert
-		int no = aService.insertArticle(dto);
+		
+		FileDTO fdto = null;
 		
 		//파일명 수정 및 파일 Insert
 		if(oriName != null) {
@@ -108,15 +108,19 @@ public class CsWriteController extends HttpServlet{
 			String sName = aService.renameToFile(req, path, oriName);
 			
 			// 파일 Insert
-			FileDTO fileDto = new FileDTO();
-			fileDto.setAno(no);
-			fileDto.setOriname(oriName);
-			fileDto.setNewname(sName);
+			fdto = new FileDTO();
 			
-			fService.insertFile(fileDto);
-			
-			
+			fdto.setOriname(oriName);
+			fdto.setNewname(sName);
+		
 		}
+		
+		
+		
+		//글 Insert, file
+		int no = aService.insertArticle(dto, fdto);
+		
+
 		
 		logger.debug("라이트 컨트롤러   group: " + group);
 		logger.debug("라이트 컨트롤러   cateDetail : " + cateDetail);

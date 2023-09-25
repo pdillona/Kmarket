@@ -25,7 +25,7 @@
 		              	</tr>
 		              	<c:forEach var="article" items="${articles}">
 		                <tr>
-		                  <td><a href="./view.html">[ ${article.dName}  ] ${article.title}  </a></td>
+		                  <td><a href="${ctxPath}/cs/view.do?aNo=${article.aNo }&">[ ${article.dName}  ] ${article.title} && ${article.aNo } </a></td>
 		                  <td>${article.writer}</td>
 		                  <td>${article.rdate}</td>
 		                </tr>
@@ -35,7 +35,7 @@
 	              <c:when test="${empty articles }">
 	              	  <table>
 		                <tr>
-		                  <td><a href="./view.html"> 게시글이 존재하지 않습니다.  </a></td>
+		                  <td><a href="#"> 게시글이 존재하지 않습니다.  </a></td>
 		                  <td> </td>
 		                  <td> </td>
 		                </tr>
