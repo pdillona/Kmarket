@@ -34,15 +34,18 @@ public class OrderController extends HttpServlet{
 		String search = req.getParameter("search");
 		String search_text = req.getParameter("search_text");
 		String seller = req.getParameter("seller");
+		String sort = req.getParameter("sort");
 		logger.debug("pg : "+pg);
 		logger.debug("search : "+search);
 		logger.debug("search_text : "+search_text);
 		logger.debug("seller : "+seller);
+		logger.debug("sort : "+sort);
 		
 		SearchDTO searchDTO = new SearchDTO();
 		searchDTO.setSearch(search);
 		searchDTO.setSearch_text(search_text);
 		searchDTO.setCompany(seller);
+		searchDTO.setSort(sort);
 		
 		
 		// 현재 페이지 계산
@@ -75,6 +78,7 @@ public class OrderController extends HttpServlet{
 				req.setAttribute("pageStartNum", pageStartNum+1);
 				req.setAttribute("search", search);
 				req.setAttribute("search_text", search_text);
+				req.setAttribute("sort", sort);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/seller/order/order.jsp");
 		dispatcher.forward(req, resp);

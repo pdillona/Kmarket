@@ -1,11 +1,13 @@
 package kr.co.Kmarket.dao.member;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
+import kr.co.Kmarket.dto.SearchDTO;
 import kr.co.Kmarket.dto.member.MemberDTO;
 
 
@@ -527,5 +529,184 @@ public class MemberDAO extends DBHelper{
 				logger.error("updateMember error : " + e.getMessage());
 			}
 		}
-	
+		
+		// 회원조회
+		public List<MemberDTO> selectMembers(int start, SearchDTO searchDTO){
+			List<MemberDTO> members = new ArrayList<MemberDTO>();
+			String sql_1 = "SELECT * FROM `km_member` WHERE `type`=1 ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_2 = "SELECT * FROM `km_member` WHERE `type`=2 ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_3 = "SELECT * FROM `km_member` WHERE `type`=3 ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_search1_1 = "SELECT * FROM `km_member` "
+								+ "WHERE `type`=1 AND `uid` LIKE ? "
+								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_search1_2 = "SELECT * FROM `km_member` "
+								+ "WHERE `type`=1 AND `name` LIKE ? "
+								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_search2_1 = "SELECT * FROM `km_member` "
+								+ "WHERE `type`=2 AND `uid` LIKE ? "
+								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_search2_2 = "SELECT * FROM `km_member` "
+								+ "WHERE `type`=2 AND `name` LIKE ? "
+								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_search3_1 = "SELECT * FROM `km_member` "
+								+ "WHERE `type`=3 AND `uid` LIKE ? "
+								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_search3_2 = "SELECT * FROM `km_member` "
+								+ "WHERE `type`=3 AND `name` LIKE ? "
+								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
+			conn = getConnection();
+			try {
+				if(searchDTO.getType() == 1) {
+					if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
+						psmt = conn.prepareStatement(sql_1);
+						psmt.setInt(1, start);
+					}else {
+						if(searchDTO.getSearch().equals("search1")) {
+							psmt = conn.prepareStatement(sql_search1_1);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+							psmt.setInt(2, start);
+						}else if(searchDTO.getSearch().equals("search2")) {
+							psmt = conn.prepareStatement(sql_search1_2);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+							psmt.setInt(2, start);
+						}
+					}
+				}else if(searchDTO.getType() == 2) {
+					if(searchDTO.getSearch() ==null || searchDTO.getSearch().equals("")) {
+						psmt = conn.prepareStatement(sql_2);
+						psmt.setInt(1, start);
+					}else {
+						if(searchDTO.getSearch().equals("search1")) {
+							psmt = conn.prepareStatement(sql_search2_1);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+							psmt.setInt(2, start);
+						}else if(searchDTO.getSearch().equals("search2")) {
+							psmt = conn.prepareStatement(sql_search2_2);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+							psmt.setInt(2, start);
+						}
+					}
+				}else if(searchDTO.getType() == 3) {
+					if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
+						psmt = conn.prepareStatement(sql_3);
+						psmt.setInt(1, start);
+					}else {
+						if(searchDTO.getSearch().equals("search1")) {
+							psmt = conn.prepareStatement(sql_search3_1);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+							psmt.setInt(2, start);
+						}else if(searchDTO.getSearch().equals("search2")) {
+							psmt = conn.prepareStatement(sql_search3_2);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+							psmt.setInt(2, start);
+						}
+					}
+				}
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					MemberDTO dto = new MemberDTO();
+					dto.setUid(rs.getString(1));
+					dto.setLevel(rs.getInt(2));
+					dto.setPass(rs.getString(3));
+					dto.setName(rs.getString(4));
+					dto.setGender(rs.getString(5));
+					dto.setHp(rs.getString(6));
+					dto.setEmail(rs.getString(7));
+					dto.setType(rs.getInt(8));
+					dto.setPoint(rs.getInt(9));
+					dto.setZip(rs.getString(10));;
+					dto.setAddr1(rs.getString(11));
+					dto.setAddr2(rs.getString(12));
+					dto.setCompany(rs.getString(13));
+					dto.setCeo(rs.getString(14));
+					dto.setBizRegNum(rs.getString(15));
+					dto.setComRegNum(rs.getString(16));
+					dto.setTel(rs.getString(17));
+					dto.setManager(rs.getString(18));;
+					dto.setManagerHp(rs.getString(19));
+					dto.setFax(rs.getString(20));
+					dto.setRegip(rs.getString(21));
+					dto.setWdate(rs.getString(22));
+					dto.setRdate(rs.getString(23));
+					dto.setEtc1(rs.getInt(24));
+					dto.setEtc2(rs.getInt(25));
+					dto.setEtc3(rs.getString(26));
+					dto.setEtc4(rs.getString(27));
+					dto.setEtc5(rs.getString(28));
+					members.add(dto);
+				}
+				close();
+			} catch (Exception e) {
+				logger.error("selectMembers error : "+e.getMessage());
+			}
+			
+			return members;
+		}
+		public int selectCountTotal(SearchDTO searchDTO) {
+			int total = 0;
+			String sql_1 = "SELECT COUNT(*) FROM `km_member` WHERE `type`=1";
+			String sql_2 = "SELECT COUNT(*) FROM `km_member` WHERE `type`=2";
+			String sql_3 = "SELECT COUNT(*) FROM `km_member` WHERE `type`=3";
+			String sql_search1_1 = "SELECT COUNT(*) FROM `km_member` "
+								+ "WHERE `type`=1 AND `uid` LIKE ? ";
+			String sql_search1_2 = "SELECT COUNT(*) FROM `km_member` "
+								+ "WHERE `type`=1 AND `name` LIKE ? ";
+			String sql_search2_1 = "SELECT COUNT(*) FROM `km_member` "
+								+ "WHERE `type`=2 AND `uid` LIKE ? ";
+			String sql_search2_2 = "SELECT COUNT(*) FROM `km_member` "
+								+ "WHERE `type`=2 AND `name` LIKE ? "
+								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_search3_1 = "SELECT COUNT(*) FROM `km_member` "
+								+ "WHERE `type`=3 AND `uid` LIKE ? ";
+			String sql_search3_2 = "SELECT COUNT(*) FROM `km_member` "
+								+ "WHERE `type`=3 AND `name` LIKE ? ";
+			conn = getConnection();
+			try {
+				if(searchDTO.getType() == 1) {
+					if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
+						psmt = conn.prepareStatement(sql_1);
+					}else {
+						if(searchDTO.getSearch().equals("search1")) {
+							psmt = conn.prepareStatement(sql_search1_1);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+						}else if(searchDTO.getSearch().equals("search2")) {
+							psmt = conn.prepareStatement(sql_search1_2);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+						}
+					}
+				}else if(searchDTO.getType() == 2) {
+					if(searchDTO.getSearch() ==null || searchDTO.getSearch().equals("")) {
+						psmt = conn.prepareStatement(sql_2);
+					}else {
+						if(searchDTO.getSearch().equals("search1")) {
+							psmt = conn.prepareStatement(sql_search2_1);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+						}else if(searchDTO.getSearch().equals("search2")) {
+							psmt = conn.prepareStatement(sql_search2_2);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+						}
+					}
+				}else if(searchDTO.getType() == 3) {
+					if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
+						psmt = conn.prepareStatement(sql_3);
+					}else {
+						if(searchDTO.getSearch().equals("search1")) {
+							psmt = conn.prepareStatement(sql_search3_1);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+						}else if(searchDTO.getSearch().equals("search2")) {
+							psmt = conn.prepareStatement(sql_search3_2);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+						}
+					}
+				}
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					total = rs.getInt(1);
+				}
+				close();
+			} catch (Exception e) {
+				logger.error("selectCountTotal : "+e.getMessage());
+			}
+			return total;
+		}
 }
