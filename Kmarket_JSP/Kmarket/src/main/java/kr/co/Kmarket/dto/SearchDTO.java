@@ -5,16 +5,16 @@ public class SearchDTO {
 	private String search_text;
 	private String company;
 	private int sort;
-	private int type;
+	private int level;
 	
-	public int getType() {
-		return type;
+	public int getLevel() {
+		return level;
 	}
-	public void setType(int type) {
-		this.type = type;
+	public void setLevel(int level) {
+		this.level = level;
 	}
-	public void setType(String type) {
-		this.type = Integer.parseInt(type);
+	public void setLevel(String level) {
+		this.level = Integer.parseInt(level);
 	}
 	public int getSort() {
 		return sort;
@@ -45,7 +45,8 @@ public class SearchDTO {
 	}
 	@Override
 	public String toString() {
-		return "SearchDTO [search=" + search + ", search_text=" + search_text + ", company=" + company + "]";
+		return "SearchDTO [search=" + search + ", search_text=" + search_text + ", company=" + company + ", sort="
+				+ sort + "]";
 	}
 	
 	

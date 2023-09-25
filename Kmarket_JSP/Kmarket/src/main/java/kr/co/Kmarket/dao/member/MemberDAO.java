@@ -531,11 +531,17 @@ public class MemberDAO extends DBHelper{
 		}
 		
 		// 회원조회
-		public List<MemberDTO> selectMembers(int start, SearchDTO searchDTO){
+		public List<MemberDTO> selectMembers(int start, SearchDTO searchDTO, String type){
 			List<MemberDTO> members = new ArrayList<MemberDTO>();
+			MemberDTO dto=null;
 			String sql_1 = "SELECT * FROM `km_member` WHERE `type`=1 ORDER BY `rdate` DESC LIMIT ?, 10";
 			String sql_2 = "SELECT * FROM `km_member` WHERE `type`=2 ORDER BY `rdate` DESC LIMIT ?, 10";
 			String sql_3 = "SELECT * FROM `km_member` WHERE `type`=3 ORDER BY `rdate` DESC LIMIT ?, 10";
+
+			String sql_level1 = "SELECT * FROM `km_member` WHERE `type`=1 AND `level`=1 ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_level2 = "SELECT * FROM `km_member` WHERE `type`=1 AND `level`=2 ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_level3 = "SELECT * FROM `km_member` WHERE `type`=1 AND `level`=3 ORDER BY `rdate` DESC LIMIT ?, 10";
+			
 			String sql_search1_1 = "SELECT * FROM `km_member` "
 								+ "WHERE `type`=1 AND `uid` LIKE ? "
 								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
@@ -546,7 +552,10 @@ public class MemberDAO extends DBHelper{
 								+ "WHERE `type`=2 AND `uid` LIKE ? "
 								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
 			String sql_search2_2 = "SELECT * FROM `km_member` "
-								+ "WHERE `type`=2 AND `name` LIKE ? "
+								+ "WHERE `type`=2 AND `manager` LIKE ? "
+								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_search2_3 = "SELECT * FROM `km_member` "
+								+ "WHERE `type`=2 AND `company` LIKE ? "
 								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
 			String sql_search3_1 = "SELECT * FROM `km_member` "
 								+ "WHERE `type`=3 AND `uid` LIKE ? "
@@ -556,11 +565,33 @@ public class MemberDAO extends DBHelper{
 								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
 			conn = getConnection();
 			try {
-				if(searchDTO.getType() == 1) {
-					if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
-						psmt = conn.prepareStatement(sql_1);
+				if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
+					if(type.equals("1")) {
+						if(searchDTO.getLevel() == 1) {
+							psmt = conn.prepareStatement(sql_level1);
+							psmt.setInt(1, start);
+						}else if(searchDTO.getLevel() == 2) {
+							psmt = conn.prepareStatement(sql_level2);
+							psmt.setInt(1, start);
+						}else if(searchDTO.getLevel() == 3) {
+							psmt = conn.prepareStatement(sql_level3);
+							psmt.setInt(1, start);
+						}else {
+							psmt = conn.prepareStatement(sql_1);
+							psmt.setInt(1, start);
+						}
+					}else if(type.equals("2")) {
+						psmt = conn.prepareStatement(sql_2);
 						psmt.setInt(1, start);
-					}else {
+					}else if(type.equals("3")) {
+						logger.debug("search는 null");
+						psmt = conn.prepareStatement(sql_3);
+						logger.debug("psmt 생성");
+						psmt.setInt(1, start);
+						logger.debug("start : "+start);
+					}
+				}else {
+					if(type.equals("1")) {
 						if(searchDTO.getSearch().equals("search1")) {
 							psmt = conn.prepareStatement(sql_search1_1);
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
@@ -570,12 +601,7 @@ public class MemberDAO extends DBHelper{
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
 							psmt.setInt(2, start);
 						}
-					}
-				}else if(searchDTO.getType() == 2) {
-					if(searchDTO.getSearch() ==null || searchDTO.getSearch().equals("")) {
-						psmt = conn.prepareStatement(sql_2);
-						psmt.setInt(1, start);
-					}else {
+					}else if(type.equals("2")) {
 						if(searchDTO.getSearch().equals("search1")) {
 							psmt = conn.prepareStatement(sql_search2_1);
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
@@ -584,13 +610,12 @@ public class MemberDAO extends DBHelper{
 							psmt = conn.prepareStatement(sql_search2_2);
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
 							psmt.setInt(2, start);
+						}else if(searchDTO.getSearch().equals("search3")) {
+							psmt = conn.prepareStatement(sql_search2_3);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+							psmt.setInt(2, start);
 						}
-					}
-				}else if(searchDTO.getType() == 3) {
-					if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
-						psmt = conn.prepareStatement(sql_3);
-						psmt.setInt(1, start);
-					}else {
+					}else if(type.equals("3")) {
 						if(searchDTO.getSearch().equals("search1")) {
 							psmt = conn.prepareStatement(sql_search3_1);
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
@@ -603,13 +628,14 @@ public class MemberDAO extends DBHelper{
 					}
 				}
 				rs = psmt.executeQuery();
+				logger.debug("rs 생성");
 				while(rs.next()) {
-					MemberDTO dto = new MemberDTO();
+					dto = new MemberDTO();
 					dto.setUid(rs.getString(1));
 					dto.setLevel(rs.getInt(2));
 					dto.setPass(rs.getString(3));
 					dto.setName(rs.getString(4));
-					dto.setGender(rs.getString(5));
+					dto.setGender(rs.getInt(5));
 					dto.setHp(rs.getString(6));
 					dto.setEmail(rs.getString(7));
 					dto.setType(rs.getInt(8));
@@ -634,19 +660,25 @@ public class MemberDAO extends DBHelper{
 					dto.setEtc4(rs.getString(27));
 					dto.setEtc5(rs.getString(28));
 					members.add(dto);
+					logger.debug("dto"+dto);
 				}
+				logger.debug("dto.getUid() : "+dto.getUid());
 				close();
 			} catch (Exception e) {
 				logger.error("selectMembers error : "+e.getMessage());
 			}
-			
 			return members;
 		}
-		public int selectCountTotal(SearchDTO searchDTO) {
+		public int selectCountTotal(SearchDTO searchDTO, String type) {
 			int total = 0;
 			String sql_1 = "SELECT COUNT(*) FROM `km_member` WHERE `type`=1";
 			String sql_2 = "SELECT COUNT(*) FROM `km_member` WHERE `type`=2";
 			String sql_3 = "SELECT COUNT(*) FROM `km_member` WHERE `type`=3";
+			
+			String sql_level1 = "SELECT COUNT(*) FROM `km_member` WHERE `type`=1 AND `level`=1";
+			String sql_level2 = "SELECT COUNT(*) FROM `km_member` WHERE `type`=1 AND `level`=2";
+			String sql_level3 = "SELECT COUNT(*) FROM `km_member` WHERE `type`=1 AND `level`=3";
+			
 			String sql_search1_1 = "SELECT COUNT(*) FROM `km_member` "
 								+ "WHERE `type`=1 AND `uid` LIKE ? ";
 			String sql_search1_2 = "SELECT COUNT(*) FROM `km_member` "
@@ -654,7 +686,10 @@ public class MemberDAO extends DBHelper{
 			String sql_search2_1 = "SELECT COUNT(*) FROM `km_member` "
 								+ "WHERE `type`=2 AND `uid` LIKE ? ";
 			String sql_search2_2 = "SELECT COUNT(*) FROM `km_member` "
-								+ "WHERE `type`=2 AND `name` LIKE ? "
+								+ "WHERE `type`=2 AND `manager` LIKE ? "
+								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
+			String sql_search2_3 = "SELECT COUNT(*) FROM `km_member` "
+								+ "WHERE `type`=2 AND `company` LIKE ? "
 								+ "ORDER BY `rdate` DESC LIMIT ?, 10";
 			String sql_search3_1 = "SELECT COUNT(*) FROM `km_member` "
 								+ "WHERE `type`=3 AND `uid` LIKE ? ";
@@ -662,10 +697,24 @@ public class MemberDAO extends DBHelper{
 								+ "WHERE `type`=3 AND `name` LIKE ? ";
 			conn = getConnection();
 			try {
-				if(searchDTO.getType() == 1) {
-					if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
-						psmt = conn.prepareStatement(sql_1);
-					}else {
+				if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
+					if(type.equals("1")) {
+						if(searchDTO.getLevel() == 1) {
+							psmt = conn.prepareStatement(sql_level1);
+						}else if(searchDTO.getLevel() == 2) {
+							psmt = conn.prepareStatement(sql_level2);
+						}else if(searchDTO.getLevel() == 3) {
+							psmt = conn.prepareStatement(sql_level3);
+						}else {
+							psmt = conn.prepareStatement(sql_1);
+						}
+					}else if(type.equals("2")) {
+						psmt = conn.prepareStatement(sql_2);
+					}else if(type.equals("3")) {
+						psmt = conn.prepareStatement(sql_3);
+					}
+				}else {
+					if(type.equals("1")) {
 						if(searchDTO.getSearch().equals("search1")) {
 							psmt = conn.prepareStatement(sql_search1_1);
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
@@ -673,23 +722,18 @@ public class MemberDAO extends DBHelper{
 							psmt = conn.prepareStatement(sql_search1_2);
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
 						}
-					}
-				}else if(searchDTO.getType() == 2) {
-					if(searchDTO.getSearch() ==null || searchDTO.getSearch().equals("")) {
-						psmt = conn.prepareStatement(sql_2);
-					}else {
+					}else if(type.equals("2")) {
 						if(searchDTO.getSearch().equals("search1")) {
 							psmt = conn.prepareStatement(sql_search2_1);
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
 						}else if(searchDTO.getSearch().equals("search2")) {
 							psmt = conn.prepareStatement(sql_search2_2);
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
+						}else if(searchDTO.getSearch().equals("search3")) {
+							psmt = conn.prepareStatement(sql_search2_3);
+							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");
 						}
-					}
-				}else if(searchDTO.getType() == 3) {
-					if(searchDTO.getSearch() == null || searchDTO.getSearch().equals("")) {
-						psmt = conn.prepareStatement(sql_3);
-					}else {
+					}else if(type.equals("3")) {
 						if(searchDTO.getSearch().equals("search1")) {
 							psmt = conn.prepareStatement(sql_search3_1);
 							psmt.setString(1, "%"+searchDTO.getSearch_text()+"%");

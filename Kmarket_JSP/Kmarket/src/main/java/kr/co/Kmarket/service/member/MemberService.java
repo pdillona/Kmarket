@@ -165,12 +165,12 @@ public class MemberService {
 		}
 	}
 	// 회원조회
-	public List<MemberDTO> selectMembers(int start, SearchDTO dto){
-		return dao.selectMembers(start, dto);
+	public List<MemberDTO> selectMembers(int start, SearchDTO dto, String type){
+		return dao.selectMembers(start, dto, type);
 	} 
 	// 페이지
-	public int selectCountTotal(SearchDTO dto) {
-		return dao.selectCountTotal(dto);
+	public int selectCountTotal(SearchDTO dto, String type) {
+		return dao.selectCountTotal(dto, type);
 	}
 	
 	

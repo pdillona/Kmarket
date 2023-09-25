@@ -6,13 +6,9 @@ $(function(){
 	$('#btnSearch').click(function(){
 		$('#formSearch').submit();
 	});
-	$('#ordComplete').click(function(e){
-		e.preventDefault();
-		if(confirm('입금완료 확인하셨습니까?(주문)')){
-			$(this).submit();
-		}
-		});
-	}
+	
+	//$('input[name=]');
+	});
 </script>
     <section id="seller-order-order">
         <nav>
@@ -54,7 +50,7 @@ $(function(){
                 </tr>
 				<c:forEach var="order" items="${orders}">
 					<tr>
-	                    <td>${order.ordNo}</td>
+	                    <td class="ordNum">${order.ordNo}</td>
 	                    <td><img src="/Kmarket/seller/img/${order.productDTO.newThumb1}" alt="${order.productDTO.prodName}"></td>
 	                    <td>${order.productDTO.prodName}</td>
 	                    <td>${order.ordDate}</td>
@@ -64,7 +60,7 @@ $(function(){
 									<span>입금완료</span>	
 								</c:when>
 								<c:otherwise>
-									<a id="ordComplete" href="/Kmarket/seller/order/ordComplete.do?ord">입금대기</a>	
+									<a id="ordComplete" href="#">입금대기</a>	
 								</c:otherwise>
 							</c:choose>
 	                    </td>

@@ -11,12 +11,11 @@
                 <!-- 상품관리 컨텐츠 시작 -->                                
                 <section>
                     <div>
-                        <form id="formSearch" action="/Kmarket/seller/product/list.do" method="get">
-			           		<input type="hidden" name="seller" value="${sessUser.company}"/>
+                        <form id="formSearch" action="/Kmarket/admin/store/list.do" method="get">
 				           	<select name="search">
 				                  <option value="search1">상품명</option>
 				                  <option value="search2">상품코드</option>                               
-				                  <option value="search3">담당자명</option>                               
+				                  <option value="search3">사업장명</option>                               
 				           </select>
 				           <input type="text" name="search_text">
 				           <button id="btnSearch">검색</button>
@@ -24,7 +23,6 @@
                     </div>
                     <table>
                         <tr>
-                            <th><input type="checkbox" name="all"/></th>
                             <th>이미지</th>
                             <th>상품코드</th>
                             <th>상품명</th>
@@ -36,79 +34,46 @@
                             <th>조회</th>
                             <th>관리</th>
                         </tr>
-
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"/></td>
-                            <td><img src="../img/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"/></td>
-                            <td><img src="../img/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"/></td>
-                            <td><img src="../img/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        
+						<c:forEach var="product" items="${products}">
+							<tr>
+	                            <td><img src="/Kmarket/thumb/${product.prodCate1}/${product.prodCate2}/${product.newThumb1}" class="thumb"></td>
+	                            <td>${product.prodNo}</td>
+	                            <td>${product.prodName}</td>
+	                            <td>${product.getPriceComma()}</td>
+	                            <td>${product.discount}</td>
+	                            <td>${product.point}</td>
+	                            <td>${product.stock}</td>
+	                            <td>${product.seller}</td>
+	                            <td>${product.hit}</td>
+	                            <td>
+	                                <a href="#">[판매중지]</a>
+	                            </td>
+	                        </tr>
+						</c:forEach>
                     </table>
 
-                    
-                    <input type="button" value="선택삭제" />                          
-
-
                     <div class="paging">
-                        <span class="prev">
-                            <a href="#"><&nbsp;이전</a>
-                        </span>
-                        <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
-                        </span>
-                        <span class="next">
-                            <a href="#">다음&nbsp;></a>
-                        </span>
-                        </div>
+		           	<c:if test="${pageGroupStart > 1}">
+		           		<span class="prev">
+		           			<a href="/Kmarket/admin/store/list.do?pg=${pageGroupStart - 1}&search=${search}&search_text=${search_text}">
+		           			<&nbsp;이전
+		           			</a>
+		            	</span>
+		           	</c:if>
+		               <span class="num">
+		            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+		            	<a href="/Kmarket/admin/store/list.do?pg=${i}&search=${search}&search_text=${search_text}" class="${currentPage == i? 'on':'off'}">${i}</a>
+		            </c:forEach>
+		               </span>
+		            <c:if test="${pageGroupEnd < lastPageNum}">
+			            <span class="next">
+			                   <a href="/Kmarket/admin/store/list.do?pg=${pageGroupEnd + 1}&search=${search}&search_text=${search_text}">
+			                   다음&nbsp;>
+			                   </a>
+			            </span>
+		            </c:if>
+		               
+		           </div>
 
                 </section>                
 

@@ -22,6 +22,9 @@ public class ProductService {
 	public List<ProductDTO> selectProducts(int start, SearchDTO search) {
 		return dao.selectProducts(start, search);
 	}
+	public List<ProductDTO> selectProductsAll(int start, SearchDTO search) {
+		return dao.selectProductsAll(start, search);
+	}
 	public ProductDTO selectImages(String prodNo) {
 		logger.debug(prodNo);
 		return dao.selectImages(prodNo);
@@ -35,6 +38,11 @@ public class ProductService {
 	public int selectCountTotal(SearchDTO dto) {
 		logger.debug("dto : "+dto);
 		return dao.selectCountTotal(dto);
+		
+	}
+	public int selectCountAll(SearchDTO dto) {
+		logger.debug("dto : "+dto);
+		return dao.selectCountAll(dto);
 		
 	}
 	
