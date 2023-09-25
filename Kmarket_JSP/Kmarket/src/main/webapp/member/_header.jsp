@@ -10,6 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> <!-- 비밀번호 보기,숨기기 눈모양 아이콘 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css"/>
     <link rel="stylesheet" href="${ctxPath}/member/css/member.css"/>

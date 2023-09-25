@@ -94,7 +94,7 @@ $(function(){
 				
 				console.log(data);
 				
-				if(data.result > 0){
+				if(data.result > 0 ){
 					$('.resultEmail').css('color', 'green').text('이메일 인증이 완료 되었습니다.');
 					$('.resultEmailForId').css('color', 'green').text('이메일 인증이 완료 되었습니다.');
 					$('.resultEmailForPass').css('color', 'green').text('이메일 인증이 완료 되었습니다.');
