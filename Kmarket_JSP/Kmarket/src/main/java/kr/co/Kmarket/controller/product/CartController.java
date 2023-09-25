@@ -16,14 +16,15 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.dto.ProductCartDTO;
 import kr.co.Kmarket.dto.ProductDTO;
 import kr.co.Kmarket.dto.seller.Cate2DTO;
+import kr.co.Kmarket.service.CartService;
 import kr.co.Kmarket.service.ProductService;
 import kr.co.Kmarket.service.seller.Cate2Service;
 
 
 /* 
-	날짜 : 2023/09/14
+	날짜 : 2023/09/24
 	이름 : 김무현
-	내용 : Controller 기본셋팅
+	내용 : 장바구니 구현
 */
 @WebServlet("/product/cart.do")
 public class CartController extends HttpServlet{
@@ -33,6 +34,8 @@ public class CartController extends HttpServlet{
 	
 	private ProductService pService = new ProductService();
 	
+	private CartService cService = new CartService();
+	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
@@ -40,6 +43,8 @@ public class CartController extends HttpServlet{
 		
 		
 		
+	
+	
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -66,6 +71,10 @@ public class CartController extends HttpServlet{
 	String finalPrice = req.getParameter("final");
 	String count = req.getParameter("count2");
 	
+	if(count.equals(count)) {
+		count = "1";
+	}
+	
 	
 	logger.debug("thumb1 : " + thumb1);
 	logger.debug("pName : " + pName);
@@ -78,6 +87,8 @@ public class CartController extends HttpServlet{
 	logger.debug("finalPrice : " + finalPrice);
 	logger.debug("count : " + count);
 	
+	String finalPriceWithDelivery = String.valueOf(Integer.parseInt(finalPrice) + Integer.parseInt(delivery));
+	
 	ProductCartDTO dto = new ProductCartDTO();
 	dto.setUid(uid);
 	dto.setProdNo(prodNo);
@@ -86,13 +97,15 @@ public class CartController extends HttpServlet{
 	dto.setDiscount(discount);
 	dto.setPoint(point);
 	dto.setDelivery(delivery);
-	dto.setFinalPrice(finalPrice);
-	
-	logger.debug(dto.toString());
-	
-	pService.insertProductCart(dto);
+	dto.setFinalPrice(finalPriceWithDelivery); // 수정된 finalPrice 값을 설정
+
 	
 	
+	cService.insertProductCart(dto);
+	
+	List<ProductCartDTO> carts = cService.selectCarts(uid);
+	
+	logger.debug(carts.toString());
 	
 	//aside 카테고리
 	
@@ -100,6 +113,8 @@ public class CartController extends HttpServlet{
 						
 	List<ProductDTO> productsaside = pService.selectProductBest();
 		
+	
+
 	
 	
 	req.setAttribute("thumb1",thumb1);
@@ -119,13 +134,7 @@ public class CartController extends HttpServlet{
 	req.setAttribute("prodCate2", prodCate2);
 	req.setAttribute("categories", categories);
 	req.setAttribute("productsaside", productsaside);
-	
-
-	logger.debug("prodCate1 : " + prodCate1);
-	logger.debug("prodCate2 : " + prodCate2);
-	
-	
-	
+	req.setAttribute("carts", carts);
 	
 
 	RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
