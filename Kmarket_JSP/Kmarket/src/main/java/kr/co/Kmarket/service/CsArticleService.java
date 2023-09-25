@@ -64,11 +64,11 @@ public enum CsArticleService {
 	 
 	 
 	 
-	public int insertArticle(CsArticleDTO dto) {
+	public int insertArticle(CsArticleDTO dto, FileDTO fdto) {
 
 		logger.debug("ArticleService dto: " + dto);
 		
-		return dao.insertArticle(dto);
+		return dao.insertArticle(dto, fdto);
 	}
 	
 	public CsArticleDTO selectArticle(String no) {
@@ -84,6 +84,9 @@ public enum CsArticleService {
 	}
 	
 	public void deleteArticle(String no) {
+		
+		logger.debug("delete service no값~@~@~@~~~"+no);
+		
 		dao.deleteArticle(no);
 	}
 

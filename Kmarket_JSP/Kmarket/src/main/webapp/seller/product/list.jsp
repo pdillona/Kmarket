@@ -100,19 +100,19 @@ $(function(){
            <div class="paging">
            	<c:if test="${pageGroupStart > 1}">
            		<span class="prev">
-           			<a href="/Kmarket/seller/product/list.do?pg=${pageGroupStart - 1}&search=${search}&search_text=${search_text}">
+           			<a href="/Kmarket/seller/product/list.do?pg=${pageGroupStart - 1}&search=${search}&search_text=${search_text}&seller=${sessUser.company}">
            			<&nbsp;이전
            			</a>
             	</span>
            	</c:if>
                <span class="num">
             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-            	<a href="/Kmarket/seller/product/list.do?pg=${i}&search=${search}&search_text=${search_text}" class="${currentPage == i? 'on':'off'}">${i}</a>
+            	<a href="/Kmarket/seller/product/list.do?pg=${i}&search=${search}&search_text=${search_text}&seller=${sessUser.company}" class="${currentPage == i? 'on':'off'}">${i}</a>
             </c:forEach>
                </span>
             <c:if test="${pageGroupEnd < lastPageNum}">
 	            <span class="next">
-	                   <a href="/Kmarket/seller/product/list.do?pg=${pageGroupEnd + 1}&search=${search}&search_text=${search_text}">
+	                   <a href="/Kmarket/seller/product/list.do?pg=${pageGroupEnd + 1}&search=${search}&search_text=${search_text}&seller=${sessUser.company}">
 	                   다음&nbsp;>
 	                   </a>
 	            </span>

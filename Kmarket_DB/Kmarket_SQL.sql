@@ -12,6 +12,8 @@ ALTER TABLE `km_product` ADD `newThumb1` VARCHAR(255) NOT NULL AFTER `thumb1`;
 ALTER TABLE `km_product` ADD `newThumb2` VARCHAR(255) NOT NULL AFTER `thumb2`;	
 ALTER TABLE `km_product` ADD `newThumb3` VARCHAR(255) NOT NULL AFTER `thumb3`;	
 ALTER TABLE `km_product` ADD `newDetail` VARCHAR(255) NOT NULL AFTER `detail`;	
+ALTER TABLE `km_product_order` ADD `ordStatus` VARCHAR(45) AFTER `recipAddr2`;	
+ALTER TABLE `km_product_order` ADD `deliveryStatus` VARCHAR(45) AFTER `ordComplete`;
 
 INSERT INTO `km_product_cate1` VALUES(10, '브랜드패션');
 INSERT INTO `km_product_cate1` VALUES(11, '패션의류·잡화·뷰티');
@@ -153,3 +155,20 @@ TRUNCATE TABLE `km_product`;
 SELECT * FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`='아무회사' ORDER BY `prodNo` DESC LIMIT 0, 10;
 
 SELECT COUNT(*) FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company=? AND `b.`manager` LIKE '길동홍';
+
+
+#주문목록 확인
+SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` FROM `km_product_order_item` AS a JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` JOIN `km_member` AS d ON c.`seller`=d.uid WHERE d.`company`='아무회사' ORDER BY b.`ordNo` DESC LIMIT 0, 10;
+
+SELECT COUNT(*) FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`='아무회사' AND a.`prodName` LIKE %여성%;
+
+UPDATE `km_product_order` SET `ordComplete` = 1 WHERE `ordNo`= 1000038;
+UPDATE `km_product_order` SET `deliveryStatus` = 'yet';
+UPDATE `km_product_order` SET `ordStatus` = 'success';
+UPDATE `km_product_order` SET `ordStatus` = 'cancel' WHERE `ordNo`=1000000;
+UPDATE `km_product_order` SET `ordStatus` = 'return' WHERE `ordNo`=1000038;
+UPDATE `km_product_order` SET `ordStatus` = 'exchange' WHERE `ordNo`=1000014;
+
+SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` FROM `km_product_order_item` AS a JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` JOIN `km_member` AS d ON c.`seller`=d.uid WHERE d.`company`='아무회사' ORDER BY b.`ordNo` DESC LIMIT 11, 10;
+
+SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` FROM `km_product_order_item` AS a JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` JOIN `km_member` AS d ON c.`seller`=d.uid WHERE d.`company`='아무회사' AND c.`prodName` LIKE '%여성%' ORDER BY b.`ordNo` DESC LIMIT 0, 10;

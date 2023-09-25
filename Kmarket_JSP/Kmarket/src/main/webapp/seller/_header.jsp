@@ -27,9 +27,9 @@
                 <a href="/Kmarket/seller" class="logo"><img src="/Kmarket/seller/img/admin_logo.png" alt="admin_logo"/></a>
                 <p>
                     <span>${sessUser.manager}님 반갑습니다.</span>
-                    <a href="#">HOME |</a>
-                    <a href="#">로그아웃 |</a>
-                    <a href="#">고객센터</a>
+                    <a href="/Kmarket">HOME |</a>
+                    <a href="/Kmarket/member/logout.do">로그아웃 |</a>
+                    <a href="/Kmarket/cs">고객센터</a>
                 </p>
             </div>
         </header>

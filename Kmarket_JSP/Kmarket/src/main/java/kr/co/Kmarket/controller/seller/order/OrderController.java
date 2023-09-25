@@ -34,15 +34,18 @@ public class OrderController extends HttpServlet{
 		String search = req.getParameter("search");
 		String search_text = req.getParameter("search_text");
 		String seller = req.getParameter("seller");
+		String sort = req.getParameter("sort");
 		logger.debug("pg : "+pg);
 		logger.debug("search : "+search);
 		logger.debug("search_text : "+search_text);
 		logger.debug("seller : "+seller);
+		logger.debug("sort : "+sort);
 		
 		SearchDTO searchDTO = new SearchDTO();
 		searchDTO.setSearch(search);
 		searchDTO.setSearch_text(search_text);
 		searchDTO.setCompany(seller);
+		searchDTO.setSort(sort);
 		
 		
 		// 현재 페이지 계산
@@ -53,6 +56,7 @@ public class OrderController extends HttpServlet{
 				
 				// 전체 게시물 개수 조회
 				int total = orderService.selectCountTotal(searchDTO);
+				logger.debug("total : "+total);
 				
 				// 마지막 페이지 번호 계산
 				int lastPageNum = pageService.getLastPageNum(total);
@@ -64,9 +68,9 @@ public class OrderController extends HttpServlet{
 				int pageStartNum = pageService.getPageStartNum(total, currentPage);
 				
 				// 현재 페이지 게시물 조회
-				List<OrderDTO> products = orderService.selectOrders(start, searchDTO);
+				List<OrderDTO> orders = orderService.selectOrders(start, searchDTO);
 				
-				req.setAttribute("products", products);
+				req.setAttribute("orders", orders);
 				req.setAttribute("currentPage", currentPage);
 				req.setAttribute("lastPageNum", lastPageNum);
 				req.setAttribute("pageGroupStart", result[0]);
@@ -74,6 +78,7 @@ public class OrderController extends HttpServlet{
 				req.setAttribute("pageStartNum", pageStartNum+1);
 				req.setAttribute("search", search);
 				req.setAttribute("search_text", search_text);
+				req.setAttribute("sort", sort);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/seller/order/order.jsp");
 		dispatcher.forward(req, resp);

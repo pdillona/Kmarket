@@ -33,7 +33,9 @@ public class ProductService {
 		dao.deleteProduct(prodNo);
 	}
 	public int selectCountTotal(SearchDTO dto) {
+		logger.debug("dto : "+dto);
 		return dao.selectCountTotal(dto);
+		
 	}
 	
 	//추가 무현 베스트 상품 5개
