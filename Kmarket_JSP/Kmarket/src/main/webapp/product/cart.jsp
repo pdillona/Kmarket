@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%@ include file="./_header.jsp" %>
+
 <main id="product">
 	<!-- 
 		날짜 : 2023/09/14
@@ -13,7 +15,7 @@
     <section class="cart">
       
       <!-- 제목, 페이지 네비게이션 -->
-      <nav>
+     <nav>
         <h1>장바구니</h1>
         <p>
           HOME > <span>패션·의류·뷰티</span> > <strong>장바구니</strong>
@@ -43,57 +45,27 @@
               <td><input type="checkbox" name=""></td>
               <td>
                 <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
+                  <a href="#"><img src="/Kmarket/thumb/${cate1}/${cate2}/${thumb1}" alt="상품이미지"></a>
                   <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
+                    <h2><a href="#">${pName}</a></h2>
+                    <p>${pDescript}</p>
                   </div>
                 </article>
               </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>5%</td>
-              <td>270</td>
-              <td>무료배송</td>
-              <td>27,000</td>
+              <td class="count">${count}</td>
+              <td>${price}</td>
+              <td>${discount}%</td>
+              <td>${point}</td>
+              <td> <c:choose>
+                	<c:when test="${delivery == 0}">
+                	 <span class="delivery">무료배송</span>
+                	</c:when>
+                	<c:otherwise>
+                	<span class="delivery">${delivery}원</span>
+                	</c:otherwise>
+                </c:choose></td>
+              <td class="finalPrice"><fmt:formatNumber value="${finalPrice}" pattern="#,###"/>원</td>
             </tr>
-            <tr>
-              <td><input type="checkbox" name=""></td>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>5%</td>
-              <td>270</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" name=""></td>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>5%</td>
-              <td>270</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            
           </tbody>
         </table>
         <input type="button" name="del" value="선택삭제">

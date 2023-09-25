@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dao.ProductDAO;
+import kr.co.Kmarket.dto.ProductCartDTO;
 import kr.co.Kmarket.dto.ProductDTO;
 import kr.co.Kmarket.dto.SearchDTO;
 
@@ -70,5 +71,11 @@ public class ProductService {
 	//게시판 총 갯수 카운트
 	public int selectCountTotalProdCate(String prodCate1, String prodCate2) {
 		return dao.selectCountTotalProdCate(prodCate1, prodCate2);
+	}
+	
+	//cart에 추가
+	public void insertProductCart(ProductCartDTO dto) {
+		dao.insertProductCart(dto);
+		
 	}
 }
