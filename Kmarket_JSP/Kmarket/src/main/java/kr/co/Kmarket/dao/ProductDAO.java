@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
+import kr.co.Kmarket.dto.ProductCartDTO;
 import kr.co.Kmarket.dto.ProductDTO;
 import kr.co.Kmarket.dto.SearchDTO;
 
@@ -879,6 +880,40 @@ public class ProductDAO extends DBHelper{
 		} catch (Exception e) {
 			logger.error("deleteProduct error : "+e.getMessage());
 		}
+	}
+	
+	public void insertProductCart (ProductCartDTO dto) {
+		conn = getConnection();
+		try {
+			
+			sql ="INSERT INTO `km_product_cart` SET "
+					+ "`uid`=?,"
+					+ "`prodNo`=?,"
+					+ "`count`=?,"
+					+ "`price`=?,"
+					+ "`discount`=?,"
+					+ "`point`=?,"
+					+ "`delivery`=?,"
+					+ "`finalPrice`=?,"
+					+ "`rdate`=NOW()";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getUid());
+			psmt.setInt(2, dto.getProdNo());
+			psmt.setInt(3, dto.getCount());
+			psmt.setInt(4, dto.getPrice());
+			psmt.setInt(5, dto.getDiscount());
+			psmt.setInt(6, dto.getPoint());
+			psmt.setInt(7, dto.getDelivery());
+			psmt.setInt(8, dto.getFinalPrice());
+			psmt.executeUpdate();
+			
+			close();
+			
+			
+		} catch (Exception e) {
+			logger.error("insertProductCart error : "+e.getMessage());
+		}
+		
 	}
 	
 }
