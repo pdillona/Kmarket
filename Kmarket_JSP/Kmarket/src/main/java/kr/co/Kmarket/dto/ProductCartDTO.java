@@ -13,6 +13,56 @@ public class ProductCartDTO {
 	private int finalPrice;
 	private String rdate;
 	
+	//추가필드 
+	
+	private int prodCate1;
+	private int prodCate2;
+	private String prodName;
+	private String descript;
+	private String thumb1;
+	
+	public int getProdCate1() {
+		return prodCate1;
+	}
+	public void setProdCate1(int prodCate1) {
+		this.prodCate1 = prodCate1;
+	}
+	
+	public void setProdCate1(String prodCate1) {
+		this.prodCate1 = Integer.parseInt(prodCate1);
+	}
+	public int getProdCate2() {
+		return prodCate2;
+	}
+	public void setProdCate2(int prodCate2) {
+		this.prodCate2 = prodCate2;
+	}
+	public void setProdCate2(String prodCate2) {
+		this.prodCate2 = Integer.parseInt(prodCate2);
+	}
+	
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public String getDescript() {
+		return descript;
+	}
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+	
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	
+	
+	
 	public int getCartNo() {
 		return cartNo;
 	}
@@ -96,14 +146,18 @@ public class ProductCartDTO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
-	
 	@Override
 	public String toString() {
-		return "PoductCartDTO [cartNo=" + cartNo + ", uid=" + uid + ", ProdNo=" + ProdNo + ", count=" + count
+		return "ProductCartDTO [cartNo=" + cartNo + ", uid=" + uid + ", ProdNo=" + ProdNo + ", count=" + count
 				+ ", price=" + price + ", discount=" + discount + ", point=" + point + ", delivery=" + delivery
-				+ ", finalPrice=" + finalPrice + ", rdate=" + rdate + "]";
+				+ ", finalPrice=" + finalPrice + ", rdate=" + rdate + ", prodCate1=" + prodCate1 + ", prodCate2="
+				+ prodCate2 + "]";
 	}
+	
+	
+	
+	
+	
 	
 	
 

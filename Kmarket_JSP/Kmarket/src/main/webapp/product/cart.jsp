@@ -41,31 +41,34 @@
             <tr class="empty">
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
+            <c:forEach var="carts" items="${carts}">
             <tr>
               <td><input type="checkbox" name=""></td>
               <td>
                 <article>
-                  <a href="#"><img src="/Kmarket/thumb/${cate1}/${cate2}/${thumb1}" alt="상품이미지"></a>
+                  <a href="#"><img src="/Kmarket/thumb/${carts.prodCate1}/${carts.prodCate2}/${carts.thumb1}" alt="상품이미지"></a>
                   <div>
-                    <h2><a href="#">${pName}</a></h2>
-                    <p>${pDescript}</p>
+                    <h2><a href="#">${carts.prodName}</a></h2>
+                    <p>${carts.descript}</p>
                   </div>
                 </article>
               </td>
-              <td class="count">${count}</td>
-              <td>${price}</td>
-              <td>${discount}%</td>
-              <td>${point}</td>
+              <td class="count">${carts.count}</td>
+              <td>${carts.price}</td>
+              <td>${carts.discount}%</td>
+              <td>${carts.point}</td>
               <td> <c:choose>
-                	<c:when test="${delivery == 0}">
+                	<c:when test="${carts.delivery == 0}">
                 	 <span class="delivery">무료배송</span>
                 	</c:when>
                 	<c:otherwise>
-                	<span class="delivery">${delivery}원</span>
+                	<span class="delivery">${carts.delivery}원</span>
                 	</c:otherwise>
                 </c:choose></td>
-              <td class="finalPrice"><fmt:formatNumber value="${finalPrice}" pattern="#,###"/>원</td>
+              <td class="finalPrice"><fmt:formatNumber value="${carts.finalPrice}" pattern="#,###"/>원</td>
             </tr>
+            </c:forEach>
+            <tr>
           </tbody>
         </table>
         <input type="button" name="del" value="선택삭제">
@@ -74,29 +77,61 @@
         <div class="total">
           <h2>전체합계</h2>
           <table border="0">
+        <c:set var="totalProductPrice" value="0" />
+		<c:set var="totalProductCount" value="0" />
+		<c:set var="totalDiscount" value="0" />
+		<c:set var="totalDelivery" value="0" />
+		<c:set var="totalPoints" value="0" />
+		<c:set var="alreadyCalculatedDelivery" value="false" />
+		
+		
+		
+		<c:forEach var="cart" items="${carts}">
+		    <c:set var="subtotal" value="${cart.price * cart.count}" />
+		    <c:set var="totalProductPrice" value="${totalProductPrice + subtotal}" />
+		    <c:set var="totalProductCount" value="${totalProductCount + cart.count}" />
+		    <c:set var="discountAmount" value="${cart.price * cart.count * cart.discount / 100}" />
+		    <c:set var="totalDiscount" value="${totalDiscount + discountAmount}" />
+		    <c:set var="totalPoints" value="${totalPoints + cart.point}" />
+		    <c:if test="${not alreadyCalculatedDelivery}">
+		    	<c:set var="totalDelivery" value="${totalDelivery + cart.delivery}" />
+        		<c:set var="alreadyCalculatedDelivery" value="true" />
+    		</c:if>
+    		<c:set var="totalOrderAmount" value="${totalProductPrice - totalDiscount + totalDelivery}" />
+		    <!-- 나머지 상품 정보 출력 코드 -->
+		</c:forEach>
             <tr>
               <td>상품수</td>
-              <td>1</td>
+              <td>${totalProductCount}</td>
             </tr>
             <tr>
               <td>상품금액</td>
-              <td>27,000</td>
+              <td><fmt:formatNumber value="${totalProductPrice}" pattern="#,###" /></td>
             </tr>
             <tr>
               <td>할인금액</td>
-              <td>-1,000</td>
+              <td><fmt:formatNumber value="${totalDiscount}" pattern="#,###" /></td>
             </tr>
             <tr>
               <td>배송비</td>
-              <td>0</td>
+              <td>
+		        <c:choose>
+		            <c:when test="${totalDelivery == 0}">
+		                <span class="delivery">무료배송</span>
+		            </c:when>
+		            <c:otherwise>
+		                <fmt:formatNumber value="${totalDelivery}" pattern="#,###" />원
+		            </c:otherwise>
+		        </c:choose>
+		    </td>
             </tr>              
             <tr>
               <td>포인트</td>
-              <td>260</td>
+              <td>${totalPoints}</td>
             </tr>
             <tr>
               <td>전체주문금액</td>
-              <td>26,000</td>
+              <td><fmt:formatNumber value="${totalOrderAmount}" pattern="#,###" /></td>
             </tr>
           </table>
           <input type="submit" name="" value="주문하기">    
