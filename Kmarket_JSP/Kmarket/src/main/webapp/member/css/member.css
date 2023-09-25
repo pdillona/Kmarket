@@ -130,6 +130,13 @@ header {
     box-sizing: border-box;
   }
   
+  #member > .login > form > table i {
+	position: absolute;
+	left: 30%;
+	top: 107px;
+	color: seagreen;
+  }
+  
   #member > .login > form > input[type="submit"] {
     float: left;
     width: 97px;
@@ -178,6 +185,8 @@ header {
     display: inline-block;
     width: 60px;
   }
+  
+  
   
   /* member > .join */
   #member > .join {
@@ -348,6 +357,17 @@ header {
     border: 1px solid #dfe5ed;
     vertical-align: middle;
   }
+  #member > .register table select {
+	padding: 0 8px;
+    height: 33px;
+    font-size: 14px;
+    border: 1px solid #dfe5ed;
+    vertical-align: middle;
+	width: 127px;
+	margin-right: 10px;
+	
+  }
+  
   #member > .register table label {
     display: inline-block;
     width: 60px;

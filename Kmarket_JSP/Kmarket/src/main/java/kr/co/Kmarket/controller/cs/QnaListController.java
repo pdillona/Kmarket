@@ -38,14 +38,27 @@ public class QnaListController extends HttpServlet{
 		
 		logger.debug("qnalistController group값: "+ group);
 		logger.debug("qnalistController line40번 pg값: "+ pg);
+		logger.debug("qnalistController line40번 cateDetail값: "+ cateDetail);
 		
 		// 현재 페이지 번호
 		int currentPage = ps.getCurrentPage(pg);
 		
 		logger.debug("qnalistController currentPage값: "+ currentPage);
 
+		int total = 0;
+		
 		// 전체 게시물 갯수 
-		int total = cas.selectCountTotal(group, type, cateDetail);
+		if(cateDetail.equals("all")) {
+			
+			total = cas.selectCountTotalCateAll(group, type, cateDetail);
+			
+		}else {
+			
+			total = cas.selectCountTotal(group, type, cateDetail);
+			
+		}
+		logger.debug("qnalistController total: "+ total);
+		
 		
 		// 마지막 페이지 번호
 		int lastPageNum = ps.getLastPageNum(total);
@@ -60,6 +73,7 @@ public class QnaListController extends HttpServlet{
 		int start = ps.getStartNum(currentPage);
 		
 		logger.debug("카테 디테일정보11======================="+ cateDetail);
+		logger.debug("카테 디테일정보11======================="+ start);
 		
 		// 현재 페이지 게시물 조회
 		List<CsArticleDTO> articles = cas.SelectQnaArticlesAll(group, start, cateDetail);

@@ -6,17 +6,33 @@
 <script src="${ctxPath}/js/checkMember.js"></script>
 <script src="${ctxPath}/js/authEmail.js"></script>
 <script>
-	const HpAutoHyphen = (target) => {
-		 target.value = target.value
-		   .replace(/[^0-9]/g, '') //숫자가 아닌 문자를 모두 제거
-		  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3") //자동(000-0000-0000) 하이픈 형식으로 변환
-		  .replace(/(\-{1,2})$/g, ""); //번호입력 시 자동 하이픈 반복에서 연속된 하이픈을 모두 제거 
-		}
+const HpAutoHyphen = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '') //숫자가 아닌 문자를 모두 제거
+	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3") //자동(000-0000-0000) 하이픈 형식으로 변환
+	  .replace(/(\-{1,2})$/g, ""); //번호입력 시 자동 하이픈 반복에서 연속된 하이픈을 모두 제거 
+}
 </script>
 <script>
-	$("input[name='km_gender']").change(function(){
-		var checked = $("input[name='km_gender']:checked").val();
-	});	
+$("input[name='km_gender']").change(function(){
+	var checked = $("input[name='km_gender']:checked").val();
+});	
+</script>
+<script>
+/* 이메일 입력방식 선택 */
+$('#selectEmail').change(function(){
+   $("#selectEmail option:selected").each(function () {
+		
+		if($(this).val()== '1'){ //직접입력일 경우
+			 $("#km_email2").val('');                        //값 초기화
+			 $("#km_email2").attr("disabled",false); //활성화
+		}else{ //직접입력이 아닐경우
+			 $("#km_email2").val($(this).text());      //선택값 입력
+			 $("#km_email2").attr("disabled",true); //비활성화
+		}
+   });
+});
+
 </script>
         <main id="member">
             <div class="register">
@@ -70,11 +86,28 @@
 							<tr>
 								<th><span class="essential">*</span>EMAIL</th>
 								<td>
-								<input type="email" name="km_email" placeholder="이메일 입력" required />
-								<button type="button" id="btnEmailCode"><img src="./img/chk_auth.gif" alt="인증번호 받기"/></button>
+								<input type="text" name="km_email" id="km_email" placeholder="이메일 입력" required />&nbsp;@
+								<input type="text" name="km_email" id="email_domain" disabled value="naver.com" />
+								<select name="selectEmail" id="selectEmail">
+									<option value="1">직접입력</option>
+									<option value="naver.com" selected>naver.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="hotmail.com">hotmail.com</option>
+									<option value="nate.com">nate.com</option>
+									<option value="yahoo.co.kr">yahoo.co.kr</option>
+									<option value="empas.com">empas.com</option>
+									<option value="dreamwiz.com">dreamwiz.com</option>
+									<option value="freechal.com">freechal.com</option>
+									<option value="lycos.co.kr">lycos.co.kr</option>
+									<option value="korea.com">korea.com</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="hanmir.com">hanmir.com</option>
+									<option value="paran.com">paran.com</option>
+								</select>
+								<button type="button" id="btnEmailCode"><img src="./img/chk_auth.gif" alt="인증번호 받기"/></button><br>
 								<span class="resultEmail"></span>
 								<div class="auth">
-                                    <input type="text" name="auth" placeholder="인증번호 입력"/>
+                                    <input type="text" name="auth" placeholder="인증번호 입력" required/>
                                     <button type="button" id="btnEmailAuth"><img src="./img/chk_confirm.gif" alt="확인"/></button>
                                 </div>
 								</td>

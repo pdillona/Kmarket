@@ -9,13 +9,14 @@
     
     window.onload = function () {
     	const inputNum = document.querySelector('input[name="num"]');
-        const inputCount = document.getElementsByClassName('increase')[0];
-        const inputCount2 = document.getElementsByClassName('decrease')[0];
+    	const inputCountIncrease = document.getElementsByClassName('increase')[0];
+    	const inputCount2 = document.querySelector('input[name="count2"]');
+    	const inputCountDecrease = document.getElementsByClassName('decrease')[0];
         const inputTotal = document.getElementsByName('total')[0];
         const inputFinal = document.getElementsByName('final')[0];
         const totalNode = document.getElementsByClassName('total')[0];
         
-        inputCount.addEventListener('click', function () {
+        inputCountIncrease.addEventListener('click', function () {
             // 현재 값을 가져옴
             let currentValue = parseInt(inputNum.value, 10);
             
@@ -24,11 +25,12 @@
 
             // 변경된 값을 텍스트 필드에 설정
             inputNum.value = currentValue;
+            inputCount2.value = currentValue; // count2의 값을 업데이트
             
             updateTotalAndFinal(currentValue);
         });
         
-        inputCount2.addEventListener('click', function () {
+        inputCountDecrease.addEventListener('click', function () {
             // 현재 값을 가져옴
             let currentValue = parseInt(inputNum.value, 10);
 
@@ -39,6 +41,7 @@
 
             // 변경된 값을 텍스트 필드에 설정
             inputNum.value = currentValue;
+            inputCount2.value = currentValue;
             
             updateTotalAndFinal(currentValue);
         });
@@ -47,15 +50,31 @@
             let total = price * currentValue;
             let finalPrice = total + delivery;
             
-            console.log(finalPrice);
+            console.log(total);
+            
+            inputFinal.value =total;
 
             // id로 <span> 요소를 가져옵니다
-            const finalPriceSpan = document.getElementById('finalPriceSpan');
+            const totalSpan = document.getElementById('totalSpan');
 
             // <span> 요소의 내용을 finalPrice로 업데이트합니다
-            finalPriceSpan.textContent = finalPrice.toLocaleString();
+            totalSpan.textContent = total.toLocaleString();
+          
         }
         
+        
+     // 장바구니 버튼을 클릭할 때 실행되는 함수
+        function addToCart() {
+            // 폼 요소를 가져옵니다.
+            const form = document.getElementById('formCart');
+            
+            // 폼을 서버로 제출합니다.
+            form.submit();
+        }
+
+        // 장바구니 버튼에 클릭 이벤트 리스너를 추가합니다.
+        const cartButton = document.querySelector('.cart');
+        cartButton.addEventListener('click', addToCart);
         
     };
 </script>
@@ -76,7 +95,7 @@
         <!-- 상품 전체 정보 내용 -->                
         <article class="info">
             <div class="image">
-                <img src="${ctxPath}/thumb/${product.prodCate1}/${product.prodCate2}/${product.thumb3}" alt="상품이미지"/>
+                <img src="${ctxPath}/thumb/${prodCate1}/${prodCate2}/${product.thumb3}" alt="상품이미지"/>
             </div>
             <div class="summary">
                 <nav>
@@ -134,7 +153,7 @@
                 </div>
                 
                 <div class="total">
-                    <span id="finalPriceSpan"><c:set var="discountedPrice" value="0" />
+                    <span id="totalSpan"><c:set var="discountedPrice" value="0" />
 					    <c:choose>
 					        <c:when test="${product.discount != 0}">
 					            <c:set var="discountedPrice" value="${product.price - (product.price * (product.discount / 100))}"/>
@@ -146,7 +165,23 @@
 					    <fmt:formatNumber value="${discountedPrice}"/></span>
                     <em>총 상품금액</em>
                 </div>
-
+				<form id=formCart action="${ctxPath}/product/cart.do" method="post">
+					<input type="text" name= "cate1" value="${product.prodCate1}">
+					<input type="text" name= "cate2" value="${product.prodCate2}">
+					<input type="text" name= "prodNo" value="${product.prodNo}">
+					<input type="text" name= "uid" value="${sessUser.uid}">
+					<input type="text" name= "thumb1" value="${product.thumb1}">
+					<input type="text" name= "pName" value="${product.prodName}">
+					<input type="text" name= "pDescript" value="${product.descript}">
+					<input type="text" name= "count" value="1">
+					<input type="text" name= "price" value="${product.price}">
+					<input type="text" name= "discount" value="${product.discount}">
+					<input type="text" name= "point" value="${product.point}">
+					<input type="text" name= "delivery" value="${product.delivery}">
+					<input type="text" name= "total" value="${product.price}">
+					<input type="text" name= "final" value="${product.price + product.delivery}">
+					<input type="text" name= "count2" value="count">
+				</form>
                 <div class="button">
                     <input type="button" class="cart"  value="장바구니"/>
                     <input type="button" class="order" value="구매하기"/>
@@ -172,31 +207,31 @@
             <table border="0">
                 <tr>
                     <td>상품번호</td>
-                    <td>10110125435</td>
+                    <td>${product.prodNo}</td>
                 </tr>
                 <tr>
                     <td>상품상태</td>
-                    <td>새상품</td>
+                    <td>${product.status}</td>
                 </tr>
                 <tr>
                     <td>부가세 면세여부</td>
-                    <td>과세상품</td>
+                    <td>${product.duty}</td>
                 </tr>
                 <tr>
                     <td>영수증발행</td>
-                    <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                    <td>${product.receipt}</td>
                 </tr>
                 <tr>
                     <td>사업자구분</td>
-                    <td>사업자 판매자</td>
+                    <td>${product.bizType}</td>
                 </tr>
                 <tr>
                     <td>브랜드</td>
-                    <td>블루포스</td>
+                    <td>${product.company}</td>
                 </tr>
                 <tr>
                     <td>원산지</td>
-                    <td>국내생산</td>
+                    <td>${product.origin}</td>
                 </tr>
             </table>
             <table border="0">

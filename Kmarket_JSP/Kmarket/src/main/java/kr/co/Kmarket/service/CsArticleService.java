@@ -47,7 +47,15 @@ public enum CsArticleService {
 		 logger.debug("qnalistController start값: "+ start);
 		 
 		 
-		 return dao.SelectQnaArticlesAll(group, start, cateDetail);
+		 if(cateDetail.equals("all")){
+			 
+			 return dao.SelectQnaArticlesAllcate(group, start, cateDetail);
+			 
+		 }else {
+			 
+			 return dao.SelectQnaArticlesAll(group, start, cateDetail);
+		 }
+		 
 	 }
 		
 	
@@ -93,6 +101,10 @@ public enum CsArticleService {
 	// 추가 
 	public int selectCountTotal(String group, String type, String cateDetail) {
 		return dao.selectCountTotal(group, type, cateDetail);
+	}
+	//all 페이징용
+	public int selectCountTotalCateAll(String group, String type, String cateDetail) {
+		return dao.selectCountTotalCateAll(group, type, cateDetail);
 	}
 	
 	public List<CsArticleDTO> selectComments(String parent) {
