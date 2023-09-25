@@ -24,10 +24,34 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="#">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                   <c:choose>
+	            <c:when test="${empty sessUser}">
+	            	<a href="${ctxPath}/member/login.do">로그인</a>
+		            <a href="${ctxPath}/member/join.do">회원가입</a>
+	            </c:when>
+	            <c:otherwise>
+		            <c:choose>
+		            	<c:when test="${sessUser.type eq 2}">
+		            		<span>${sessUser.manager}님 환영합니다.</span>
+		            		<a href="#">마이페이지</a>
+		            		<a href="${ctxPath}/seller/index.do">판매자</a>
+		            	</c:when>
+		            	<c:when test="${sessUser.type eq 3}">
+		            		<span>${sessUser.uid}님 환영합니다.</span>
+		            		<a href="#">마이페이지</a>
+		            		<a href="${ctxPath}/admin/index.do">관리자</a>
+		            	</c:when>
+		            	<c:otherwise>
+		            		<span>${sessUser.name}님 환영합니다.</span>
+		            		<a href="#">마이페이지</a>
+		            		<a href="#">
+		            		<i class="fa fa-shopping-cart" aria-hidden="true">
+		            		</i>&nbsp;장바구니</a>
+		            	</c:otherwise>
+	            	</c:choose>
+	            	<a href="${ctxPath}/member/logout.do">로그아웃</a>
+	            </c:otherwise>
+            </c:choose>
                 </div>
             </div>
             <div class="logo">
