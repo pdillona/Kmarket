@@ -21,6 +21,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.Kmarket.dao.cs.CsArticleDAO;
 import kr.co.Kmarket.dto.FileDTO;
+import kr.co.Kmarket.dto.cs.CommentDTO;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
 import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 
@@ -107,11 +108,11 @@ public enum CsArticleService {
 		return dao.selectCountTotalCateAll(group, type, cateDetail);
 	}
 	
-	public List<CsArticleDTO> selectComments(String parent) {
-		return dao.selectComments(parent);
+	public CommentDTO selectComments(String ano) {
+		return dao.selectComments(ano);
 	}
 	
-	public CsArticleDTO insertComment(CsArticleDTO dto) {
+	public CommentDTO insertComment(CommentDTO dto) {
 		return dao.insertComment(dto);
 	}
 	

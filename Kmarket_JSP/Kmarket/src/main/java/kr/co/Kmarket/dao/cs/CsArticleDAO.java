@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.dto.FileDTO;
+import kr.co.Kmarket.dto.cs.CommentDTO;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
 import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 
@@ -377,14 +378,101 @@ public class CsArticleDAO extends DBHelper{
 	}
 	
 	
-	public List<CsArticleDTO> selectComments(String parent) {
-		// TODO Auto-generated method stub
-		return null;
+	public CommentDTO selectComments(String ano) {
+		
+		SQL=" SELECT * FROM `km_admin_comment` "
+				+ " WHERE `aNo` = ? ";
+		
+		conn = getConnection();
+		
+		CommentDTO dto = null;
+		try {
+			
+			psmt = conn.prepareStatement(SQL);
+			psmt.setInt(1, Integer.parseInt(ano));
+			rs = psmt.executeQuery();
+			
+			dto = new CommentDTO();
+			
+			if(rs.next()) {
+				dto.setaNo(rs.getInt("aNo"));
+				dto.setrNo(rs.getInt("rNo"));
+				dto.setContent(rs.getString("content"));
+				dto.setWriter(rs.getString("writer"));
+				dto.setRdate(rs.getString("rdate"));
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+		}
+		
+		return dto;
 	}
 
-	public CsArticleDTO insertComment(CsArticleDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public CommentDTO insertComment(CommentDTO dto) {
+
+		SQL =" INSERT INTO `km_admin_comment` SET "
+				+ " `aNo` = ? "
+				+ " `writer` = ? "
+				+ " `content` = ? "
+				+ " `rdate` = NOW() ";
+		
+		SQL2=" UPDATE `km_cs_article` SET `aStatus` "
+				+ " = 1 WHERE `aNo` = ?";
+		
+		SQL3=" SELECT * FROM `km_admin_comment` "
+				+ " WHERE `aNo` = ? ";
+		
+		conn = getConnection();
+		
+		try {
+			
+			conn.setAutoCommit(false);
+			
+			psmt= conn.prepareStatement(SQL);
+			psmt.setInt(1, dto.getaNo());
+			psmt.setString(2, dto.getWriter());
+			psmt.setString(3, dto.getContent());
+			psmt.executeQuery();
+			
+			psmt.close();
+			
+			
+			psmt= conn.prepareStatement(SQL2);
+			psmt.setInt(1, dto.getaNo());
+			psmt.executeQuery();
+			psmt.close();
+			
+			psmt = conn.prepareStatement(SQL3);
+			psmt.setInt(1, dto.getaNo());
+			psmt.executeQuery(SQL3);
+			
+			psmt.close();
+			
+			
+			conn.commit();
+			
+			if(rs.next()) {
+				dto.setaNo(rs.getInt(1));
+				dto.setrNo(rs.getInt(2));
+				dto.setContent(rs.getString(3));
+				dto.setWriter(rs.getString(4));
+				dto.setRdate(rs.getString(5));
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+		}
+		
+		logger.debug("insertComment dto값 ~~ : " + dto.getaNo());
+		logger.debug("insertComment dto값 ~~ : " + dto.getrNo());
+		logger.debug("insertComment dto값 ~~ : " + dto.getWriter());
+		
+		return dto;
 	}
 
 	public int updateComment(String no, String content) {
