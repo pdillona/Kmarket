@@ -33,6 +33,6 @@ public class DeleteController extends HttpServlet {
 		
 		cService.deleteCart(cartNo);
 		
-		//resp.sendRedirect("/Kmarket/product/cart.do?uid="+uid);
+		resp.sendRedirect("/Kmarket/product/cart.do?uid="+uid);
 	}
 }
