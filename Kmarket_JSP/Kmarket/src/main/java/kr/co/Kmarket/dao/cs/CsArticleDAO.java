@@ -10,6 +10,7 @@ import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.dto.FileDTO;
 import kr.co.Kmarket.dto.cs.CommentDTO;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
+import kr.co.Kmarket.dto.cs.CsCateAsideDTO;
 import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 
 public class CsArticleDAO extends DBHelper{
@@ -54,10 +55,10 @@ public class CsArticleDAO extends DBHelper{
 		int maxAno = 0;
 		String maxRdate = "";
 		
-		conn = getConnection();
 		
 		try {
 			
+			conn = getConnection();
 			conn.setAutoCommit(false);  //transaction시작
 			
 			// article insert
@@ -100,6 +101,7 @@ public class CsArticleDAO extends DBHelper{
 			conn.commit();
 		
 			close();
+			
 		}catch(Exception e){
 			logger.debug(e.getMessage());
 		}
@@ -108,6 +110,55 @@ public class CsArticleDAO extends DBHelper{
 		return 0;
 	}
 
+	
+	
+	public void insertArticleFAQ(CsArticleDTO dto) {
+		
+		SQL = "INSERT INTO `km_cs_article` SET "
+				+ "`group`=?, "
+				+ "`cateDetail`=?, "
+				+ "`title`=?, "
+				+ "`content`=?, "
+				+ "`file`=0, "
+				+ "`writer`=?, "
+				+ "`regip`=?, "
+				+ "`type`=?, "
+				+ "`uLevel`=?, "
+				+ "`rdate`=NOW()";
+		
+		
+
+		
+		logger.debug("insertArticleFAQ toString: 확인중: "+dto.toString());
+		
+		
+		try {
+			
+		
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL);  
+			psmt.setString(1, dto.getGroup());
+			psmt.setString(2, dto.getCateDetail());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			psmt.setString(5, dto.getWriter());
+			psmt.setString(6, dto.getRegip());
+			psmt.setInt(7, dto.getType());
+			psmt.setInt(8, dto.getuLevel());
+			psmt.executeUpdate();
+			
+			close();
+			
+			
+
+			
+		}catch(Exception e){
+			logger.debug(e.getMessage());
+		}
+		
+		
+	}
+	
 	
 	/*
 	public void fileInsert(FileDTO dto) {
@@ -141,23 +192,41 @@ public class CsArticleDAO extends DBHelper{
 	
 //============qna================================================
 	
-    public List<CsArticleDTO> SelectQnaArticlesAll(String group, int start, String cateDetail) {
+    public List<CsArticleDTO> SelectQnaArticlesAll(String group, int start, String cateDetail, String type) {
     	 
     	logger.debug("SelectQnaArticlesAll 그룹 스타트 체크: "+group,start);
     	logger.debug("SelectQnaArticlesAll 스타트 체크: "+ start);
-    	conn = getConnection();
     	SQL = "SELECT DISTINCT * from `km_cs_article` AS a "
     			+ "JOIN `km_cs_cate_detail` AS c "
     			+ "ON a.`type` = c.`type` "
     			+ "WHERE a.`group` = ? AND  a.`type` >= 20 AND a.`cateDetail` = ? "
     			+ "ORDER BY `aNo` DESC "
     			+ "LIMIT ?, 10 ";
+    
+    	
+    	SQL2 = "SELECT DISTINCT * from `km_cs_article` AS a "
+    			+ "JOIN `km_cs_cate_detail` AS c "
+    			+ "ON a.`type` = c.`type` "
+    			+ "WHERE a.`group` = ? AND  a.`type` <=4 AND a.`cateDetail` = ? "
+    			+ "ORDER BY `aNo` DESC "
+    			+ "LIMIT ?, 10 ";
+    	
+ 
     	
     	
     	List<CsArticleDTO> articles = new ArrayList<>();
     	
     	try {
-			psmt = conn.prepareStatement(SQL);
+    		
+    		conn = getConnection();
+    		
+    		if(Integer.parseInt(type) <= 4) {
+    			psmt = conn.prepareStatement(SQL2);
+    		}else {
+    			psmt = conn.prepareStatement(SQL);
+    		}		
+    		
+    		
 			psmt.setString(1, group);
 			psmt.setString(2, cateDetail);
 			psmt.setInt(3, start);
@@ -169,9 +238,9 @@ public class CsArticleDAO extends DBHelper{
 				dto.setGroup(rs.getString("group"));
 				dto.setCateDetail(rs.getString("cateDetail"));
 				dto.setTitle(rs.getString("title"));
-				dto.setWriter(rs.getString("writer"));
-				dto.setRdate(rs.getString("rdate"));
-				dto.setAeName(rs.getString("aeName"));
+				dto.setMaskingWriter(rs.getString("writer"));
+				dto.setRdateYYMMDD(rs.getString("rdate"));
+				//dto.setAeName(rs.getString("aeName"));
 				dto.setuLevel(rs.getInt("uLevel"));
 				dto.setType(rs.getInt("type"));
 				dto.setdName(rs.getString("dName"));
@@ -192,11 +261,10 @@ public class CsArticleDAO extends DBHelper{
 	
 	
 	//서비스에서 카테고리 all로 들어올때 분기하기 위해 만든 메서드
-    public List<CsArticleDTO> SelectQnaArticlesAllcate(String group, int start, String cateDetail) {
+    public List<CsArticleDTO> SelectQnaArticlesAllcate(String group, int start, String cateDetail, String type) {
     	 
     	logger.debug("SelectQnaArticlesAll 그룹 스타트 체크: "+group,start);
     	logger.debug("SelectQnaArticlesAll 스타트 체크: "+ start);
-    	conn = getConnection();
     	SQL = "SELECT DISTINCT * from `km_cs_article` AS a " 
     			+" JOIN `km_cs_aside` AS b "
     			+" ON a.`cateDetail` = b.`aeName` "
@@ -206,11 +274,25 @@ public class CsArticleDAO extends DBHelper{
     			+" ORDER BY `aNo` DESC " 
     			+" LIMIT ?, 10 ";
     	
+    	//NoticeController 부분 type <=4이면 이 쿼리문 실행
+    	SQL2 ="SELECT DISTINCT * from `km_cs_article` AS a " 
+	    			+" JOIN `km_cs_aside` AS b "
+	    			+" ON a.`cateDetail` = b.`aeName` "
+	    			+" JOIN `km_cs_cate_detail` AS c "
+	    			+" ON a.`type` = c.`type` " 
+	    			+" WHERE a.`group` = ? AND  a.`type` <=4 AND  b.`aside_Num` > 1 " 
+	    			+" ORDER BY `aNo` DESC " 
+	    			+" LIMIT ?, 10 ";
     	
     	List<CsArticleDTO> articles = new ArrayList<>();
     	
     	try {
-			psmt = conn.prepareStatement(SQL);
+    		conn = getConnection();
+    		if(Integer.parseInt(type) <= 4) {
+    			psmt = conn.prepareStatement(SQL2);
+    		}else {
+    			psmt = conn.prepareStatement(SQL);
+    		}			
 			psmt.setString(1, group);
 			psmt.setInt(2, start);
 			rs = psmt.executeQuery();
@@ -221,9 +303,9 @@ public class CsArticleDAO extends DBHelper{
 				dto.setGroup(rs.getString("group"));
 				dto.setCateDetail(rs.getString("cateDetail"));
 				dto.setTitle(rs.getString("title"));
-				dto.setWriter(rs.getString("writer"));
-				dto.setRdate(rs.getString("rdate"));
-				dto.setAeName(rs.getString("aeName"));
+				dto.setMaskingWriter(rs.getString("writer"));
+				dto.setRdateYYMMDD(rs.getString("rdate"));
+				//dto.setAeName(rs.getString("aeName"));
 				dto.setuLevel(rs.getInt("uLevel"));
 				dto.setType(rs.getInt("type"));
 				dto.setdName(rs.getString("dName"));
@@ -252,10 +334,10 @@ public class CsArticleDAO extends DBHelper{
 		
 		SQL = "SELECT * FROM `km_cs_article` WHERE aNo = ? ";
 		
-		conn = getConnection();
 		
 		try {
 			
+			conn = getConnection();
 			psmt= conn.prepareStatement(SQL);
 			psmt.setInt(1,Integer.parseInt(no));
 			rs = psmt.executeQuery();
@@ -268,9 +350,9 @@ public class CsArticleDAO extends DBHelper{
 			dto.setTitle(rs.getString("title"));
 			dto.setContent(rs.getString("content"));
 			dto.setFile(rs.getInt("file"));
-			dto.setWriter(rs.getString("writer"));
+			dto.setMaskingWriter(rs.getString("writer"));
 			dto.setRegip(rs.getString("regip"));
-			dto.setRdate(rs.getString("rdate"));
+			dto.setRdateYYMMDD(rs.getString("rdate"));
 			dto.setType(rs.getInt("type"));
 			dto.setuLevel(rs.getInt("uLevel"));
 			}
@@ -289,11 +371,113 @@ public class CsArticleDAO extends DBHelper{
 		return dto;
 	}
 
+	
+	public List<CsArticleDTO> selectArticlesIndex(String group) {
+		SQL = "SELECT * FROM `km_cs_article` AS a JOIN `km_cs_cate_detail` AS b ON a.`type` = b. `type` "
+				+ "  WHERE `group` = ? ORDER BY `aNo` DESC LIMIT 5 ";
+		
+		conn = getConnection();
+		
+		List<CsArticleDTO> articles = new ArrayList<>();
+
+		try {
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, group);
+			rs = psmt.executeQuery();
+			
+			
+		while(rs.next()) {
+			
+			CsArticleDTO dto = new CsArticleDTO();
+			
+			dto.setaNo(rs.getInt("aNo"));
+			dto.setGroup(rs.getString("group"));
+			dto.setCateDetail(rs.getString("cateDetail"));
+			dto.setTitle(rs.getString("title"));
+			dto.setMaskingWriter(rs.getString("writer"));
+			dto.setRdateYYMMDD(rs.getString("rdate"));
+			//dto.setAeName(rs.getString("aeName"));
+			dto.setuLevel(rs.getInt("uLevel"));
+			dto.setType(rs.getInt("type"));
+			dto.setdName(rs.getString("dName"));
+			
+			articles.add(dto);
+			
+				
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+		}
+		
+		
+		logger.debug("selectArticlesFAQ 다오 faq 아티클스 데이터:  "+articles.toString());
+		
+		return articles;
+	}
+	
+	
+	
 	public List<CsArticleDTO> selectArticles(String cate, int start) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<CsArticleDTO> selectArticlesFAQ(String group, String cateDetail) {
 
+		SQL = "SELECT * FROM `km_cs_article` AS a "
+				+ " JOIN `km_cs_cate_detail` AS b "
+				+ " ON a.type = b.type "
+				+ " WHERE a.`group` = ? AND a.`cateDetail` = ? AND a.`type`>= 20 ";
+		
+		conn = getConnection();
+		
+		List<CsArticleDTO> articles = new ArrayList<>();
+
+		try {
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, group);
+			psmt.setString(2, cateDetail);
+			rs = psmt.executeQuery();
+			
+			
+		while(rs.next()) {
+			
+			CsArticleDTO dto = new CsArticleDTO();
+			
+			dto.setaNo(rs.getInt("aNo"));
+			dto.setGroup(rs.getString("group"));
+			dto.setCateDetail(rs.getString("cateDetail"));
+			dto.setTitle(rs.getString("title"));
+			dto.setMaskingWriter(rs.getString("writer"));
+			dto.setRdateYYMMDD(rs.getString("rdate"));
+			//dto.setAeName(rs.getString("aeName"));
+			dto.setuLevel(rs.getInt("uLevel"));
+			dto.setType(rs.getInt("type"));
+			dto.setdName(rs.getString("dName"));
+			
+			articles.add(dto);
+			
+				
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+		}
+		
+		
+		logger.debug("selectArticlesFAQ 다오 faq 아티클스 데이터:  "+articles);
+		return articles;
+	}
+
+	
+	
+	
+	
 	public void updateArticle(CsArticleDTO dto) {
 		// TODO Auto-generated method stub
 		
@@ -301,11 +485,11 @@ public class CsArticleDAO extends DBHelper{
 
 	public void deleteArticle(String no) {
 
-		conn = getConnection();
 		
 		SQL = "DELETE FROM `km_cs_article` WHERE `aNO` = ?";
 		
 		try {
+			conn = getConnection();
 			psmt = conn.prepareStatement(SQL);
 			psmt.setInt(1, Integer.parseInt(no));
 			psmt.executeUpdate();
@@ -349,7 +533,33 @@ public class CsArticleDAO extends DBHelper{
 		return total;
 	}
 
+
+	public int selectCountTotalFAQ(String group, String type) {
+
+		int total = 0;
+		
+		SQL= "SELECT COUNT(*) FROM `km_cs_article` WHERE `group`=? AND `type` >= ?";
 	
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, group);
+			psmt.setString(2, type);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		logger.debug("csarticleDAO selectTotalCout = "+total);
+		
+		return total;
+	}
+
 	public int selectCountTotalCateAll(String group, String type, String cateDetail) {
 
 		int total = 0;
@@ -398,8 +608,8 @@ public class CsArticleDAO extends DBHelper{
 				dto.setaNo(rs.getInt("aNo"));
 				dto.setrNo(rs.getInt("rNo"));
 				dto.setContent(rs.getString("content"));
-				dto.setWriter(rs.getString("writer"));
-				dto.setRdate(rs.getString("rdate"));
+				dto.setMaskingWriter(rs.getString("writer"));
+				dto.setRdateYYMMDD(rs.getString("rdate"));
 			}
 			
 			close();
@@ -458,8 +668,8 @@ public class CsArticleDAO extends DBHelper{
 				dto.setaNo(rs.getInt(1));
 				dto.setrNo(rs.getInt(2));
 				dto.setContent(rs.getString(3));
-				dto.setWriter(rs.getString(4));
-				dto.setRdate(rs.getString(5));
+				dto.setMaskingWriter(rs.getString(4));
+				dto.setRdateYYMMDD(rs.getString(5));
 			}
 			
 			close();
@@ -526,6 +736,80 @@ public class CsArticleDAO extends DBHelper{
 	}
 	
 	
+public List<CsCateAsideDTO> selectCsWriteCateFAQ(String cateDetail){
+		
+		List<CsCateAsideDTO> cateList = new ArrayList<CsCateAsideDTO>();
+		
+		
+		logger.debug("카테디테일 데이터!!!!!!!##@!#@!#@!   "+cateDetail);
+		conn = getConnection();
+		
+		SQL = "SELECT * FROM `km_cs_aside` WHERE `aside_num`> 1";
+		
+		try {
+		
+			psmt = conn.prepareStatement(SQL);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsCateAsideDTO dto = new CsCateAsideDTO();
+				dto.setAeName(rs.getString(1));
+				dto.setAkName(rs.getString(2));
+				dto.setAside_Num(rs.getInt(3));
+				
+				cateList.add(dto);
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.debug("selectCsWriteCateDAO 에러~~~"+ e.getMessage());
+		}
+		
+		
+		
+		logger.debug("selectCsWriteCateDAO cateList 정보~~~~~"+ cateList);
+		
+		
+		return cateList; 
+	}
+
+public List<CsCateDetailDTO> selectCsCateDetailFAQ(String cateDetail){
 	
+	List<CsCateDetailDTO> cateDetailList = new ArrayList<CsCateDetailDTO>();
+	
+	
+	logger.debug("카테디테일 데이터!!!!!!!##@!#@!#@!   "+cateDetail);
+	
+	conn = getConnection();
+	
+	SQL = "SELECT * FROM `km_cs_cate_detail` WHERE `type` >= 20  AND `aeName`= ?";
+	
+	try {
+		
+		psmt = conn.prepareStatement(SQL);
+		psmt.setString(1, cateDetail);
+		rs = psmt.executeQuery();
+		
+		while(rs.next()) {
+			CsCateDetailDTO dto = new CsCateDetailDTO();
+			dto.setType(rs.getInt(1));
+			dto.setdName(rs.getString(2));
+			dto.setAeName(rs.getString(3));
+			
+			cateDetailList.add(dto);
+		}
+		close();
+		
+	} catch (Exception e) {
+		logger.debug("selectCsWriteCateDAO 에러~~~"+ e.getMessage());
+	}
+	
+	
+	
+	logger.debug("selectCsWriteCateDAO cateList 정보~~~~~"+ cateDetailList);
+	
+	
+	return cateDetailList; 
+}
 	
 }

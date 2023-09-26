@@ -15,14 +15,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/Kmarket/admin/css/admin.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script>
+	const type = ${sessUser.getType()};
+	
+	if(type != 3){
+		location.href ="/Kmarket/index.do?success=606";
+	}
+</script>
 </head>
+
 <body>
     <div id="admin-wrapper">
         <header>
             <div>
                 <a href="${ctxPath}/admin" class="logo"><img src="/Kmarket/admin/img/admin_logo.png" alt="admin_logo"/></a>
                 <p>
-                    <span>홍길동님 반갑습니다.</span>
+                    <span>${sessUser.name}님 반갑습니다.</span>
                     <a href="${ctxPath}">HOME |</a>
                     <a href="${ctxPath}/member/logout.do">로그아웃 |</a>
                     <a href="${ctxPath}/cs/index.do">고객센터</a>

@@ -26,7 +26,7 @@ public class CsViewController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String ano = req.getParameter("aNo");
-		
+		String group = req.getParameter("group");
 		
 		CsArticleDTO dto = service.selectArticle(ano);
 		
@@ -36,6 +36,10 @@ public class CsViewController extends HttpServlet{
 		logger.debug("뷰 컨트롤러 aNO값~~"+dto.getaNo());
 		logger.debug("뷰 컨트롤러 타이틀값~~"+dto.getTitle());
 		logger.debug("뷰 컨트롤러 컨텐츠값~~"+dto.getContent());
+		
+		
+
+		req.setAttribute("group", group);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
 		dispatcher.forward(req, resp);

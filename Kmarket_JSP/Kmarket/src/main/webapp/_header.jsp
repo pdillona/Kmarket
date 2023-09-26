@@ -27,7 +27,13 @@
           $(this).closest('#bannerTop').removeClass('on');
         });
       });
-	
+      
+		const success = ${success};
+		if(success == 606){
+			alert('관리자 권한이 없습니다.');
+		}else if(success == 506) {
+			alert('판매자 권한이 없습니다.');
+		}
      
     </script>
 </head>
@@ -62,7 +68,7 @@
 		            	<c:otherwise>
 		            		<span>${sessUser.name}님 환영합니다.</span>
 		            		<a href="#">마이페이지</a>
-		            		<a href="#">
+		            		<a href="${ctxPath}/product/cart.do?uid=${sessUser.uid}">
 		            		<i class="fa fa-shopping-cart" aria-hidden="true">
 		            		</i>&nbsp;장바구니</a>
 		            	</c:otherwise>
@@ -94,7 +100,7 @@
               <li><a href="${ctxPath}/cs/notice.do?group=notice&aeName=all">공지사항</a></li>
               <li><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all">자주묻는질문</a></li>
               <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=all">문의하기</a></li>
-              <li><a href="${ctxPath}/cs/index.do">고객센터</a></li>
+              <li><a href="${ctxPath}/cs/index.do?group=notice&cateDetail=all&type=1">고객센터</a></li>
             </ul>
           </div>
         </div>

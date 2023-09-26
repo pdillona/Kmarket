@@ -46,7 +46,7 @@ public class ProductDAO extends DBHelper{
 					+ "`bizType`=?, "
 					+ "`origin`=?, "
 					+ "`ip`=?, "
-					+ "`rdate`=NOW()";
+					+ "`rdate`=NOW()" ;
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getSeller());
 			psmt.setInt(2, dto.getProdCate1());
@@ -87,7 +87,7 @@ public class ProductDAO extends DBHelper{
 				+ "ON a.`prodCate1`=b.`cate1` "
 				+ "JOIN `km_product_cate2` AS c "
 				+ "ON b.`cate1`=c.`cate1` AND a.`prodCate2`=c.cate2 "
-				+ "WHERE `prodNo`=?";
+				+ "WHERE a.`etc1`='n' AND `prodNo`=?";
 		conn = getConnection();
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -127,7 +127,7 @@ public class ProductDAO extends DBHelper{
 				dto.setOrigin(rs.getString(29));
 				dto.setIp(rs.getString(30));
 				dto.setRdate(rs.getString(31));
-				dto.setEtc1(rs.getInt(32));
+				dto.setEtc1(rs.getString(32));
 				dto.setEtc2(rs.getInt(33));
 				dto.setEtc3(rs.getString(34));
 				dto.setEtc4(rs.getString(35));
@@ -146,17 +146,17 @@ public class ProductDAO extends DBHelper{
 		sql = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`=? ORDER BY `prodNo` DESC LIMIT ?, 10";
 		String sql_search1 =  "SELECT * FROM `km_product` "
 							+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
-							+ "WHERE b.`company`=? AND `prodName` LIKE ? "
+							+ "WHERE b.`company`=? a.`etc1`='n' AND AND `prodName` LIKE ? "
 							+ "ORDER BY `prodNo` DESC "
 							+ "LIMIT ?, 10";
 		String sql_search2 =  "SELECT * FROM `km_product` "
 							+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
-							+ "WHERE b.`company`=? AND `prodNo` LIKE ? "
+							+ "WHERE b.`company`=? AND a.`etc1`='n' AND `prodNo` LIKE ? "
 							+ "ORDER BY `prodNo` DESC "
 							+ "LIMIT ?, 10";
 		String sql_search3 =  "SELECT * FROM `km_product` "
 								+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
-								+ "WHERE b.`company`=? AND b.`manager` LIKE ? "
+								+ "WHERE b.`company`=? AND a.`etc1`='n' AND b.`manager` LIKE ? "
 								+ "ORDER BY `prodNo` DESC "
 								+ "LIMIT ?, 10";
 		conn = getConnection();
@@ -211,7 +211,86 @@ public class ProductDAO extends DBHelper{
 				dto.setOrigin(rs.getString(29));
 				dto.setIp(rs.getString(30));
 				dto.setRdate(rs.getString(31));
-				dto.setEtc1(rs.getInt(32));
+				dto.setEtc1(rs.getString(32));
+				dto.setEtc2(rs.getInt(33));
+				dto.setEtc3(rs.getString(34));
+				dto.setEtc4(rs.getString(35));
+				dto.setEtc5(rs.getString(36));
+				products.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectProducts error : "+e.getMessage());
+		}
+		return products;
+	}
+	public List<ProductDTO> selectProductsAll(int start, SearchDTO search) {
+		List<ProductDTO> products = new ArrayList<ProductDTO>();
+		sql = "SELECT * FROM `km_product` WHERE `etc1`='n' ORDER BY `prodNo` DESC LIMIT ?, 10";
+		String sql_search1 =  "SELECT * FROM `km_product` "
+				+ "WHERE  `etc1`='n' AND `prodName` LIKE ? "
+				+ "ORDER BY `prodNo` DESC "
+				+ "LIMIT ?, 10";
+		String sql_search2 =  "SELECT * FROM `km_product` "
+				+ "WHERE  `etc1`='n' AND `prodNo` LIKE ? "
+				+ "ORDER BY `prodNo` DESC "
+				+ "LIMIT ?, 10";
+		String sql_search3 =  "SELECT * FROM `km_product` "
+				+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
+				+ "WHERE  a.`etc1`='n' AND b.`company` LIKE ? "
+				+ "ORDER BY `prodNo` DESC "
+				+ "LIMIT ?, 10";
+		conn = getConnection();
+		try {
+			if(search.getSearch() == null || search.getSearch().equals("")) {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, start);
+			}else {
+				if(search.getSearch().equals("search1")) {
+					psmt = conn.prepareStatement(sql_search1);
+				}else if(search.getSearch().equals("search2")) {
+					psmt = conn.prepareStatement(sql_search2);
+				}else if(search.getSearch().equals("search3")) {
+					psmt = conn.prepareStatement(sql_search3);
+				}
+				psmt.setString(1, "%"+search.getSearch_text()+"%");
+				psmt.setInt(2, start);
+			}
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getInt(1));
+				dto.setSeller(rs.getString(2));
+				dto.setProdCate1(rs.getInt(3));
+				dto.setProdCate2(rs.getInt(4));
+				dto.setProdName(rs.getString(5));
+				dto.setDescript(rs.getString(6));
+				dto.setCompany(rs.getString(7));
+				dto.setPrice(rs.getInt(8));
+				dto.setDiscount(rs.getInt(9));
+				dto.setPoint(rs.getInt(10));
+				dto.setStock(rs.getInt(11));
+				dto.setSold(rs.getInt(12));
+				dto.setDelivery(rs.getInt(13));
+				dto.setHit(rs.getInt(14));
+				dto.setScore(rs.getInt(15));
+				dto.setReview(rs.getInt(16));
+				dto.setThumb1(rs.getString(17));
+				dto.setNewThumb1(rs.getString(18));
+				dto.setThumb2(rs.getString(19));
+				dto.setNewThumb2(rs.getString(20));
+				dto.setThumb3(rs.getString(21));
+				dto.setNewThumb3(rs.getString(22));
+				dto.setDetail(rs.getString(23));
+				dto.setNewDetail(rs.getString(24));
+				dto.setStatus(rs.getString(25));
+				dto.setDuty(rs.getString(26));
+				dto.setReceipt(rs.getString(27));
+				dto.setBizType(rs.getString(28));
+				dto.setOrigin(rs.getString(29));
+				dto.setIp(rs.getString(30));
+				dto.setRdate(rs.getString(31));
+				dto.setEtc1(rs.getString(32));
 				dto.setEtc2(rs.getInt(33));
 				dto.setEtc3(rs.getString(34));
 				dto.setEtc4(rs.getString(35));
@@ -226,7 +305,7 @@ public class ProductDAO extends DBHelper{
 	}
 	public ProductDTO selectImages(String prodNo) {
 		ProductDTO dto=null;
-		sql = "SELECT `prodCate1`, `prodCate2`, `newThumb1`, `newThumb2`, `newThumb3`, `newDetail` FROM `km_product` WHERE `prodNo`=?";
+		sql = "SELECT `prodCate1`, `prodCate2`, `newThumb1`, `newThumb2`, `newThumb3`, `newDetail` FROM `km_product` WHERE `etc1`='n' AND `prodNo`=?";
 		conn = getConnection();
 		logger.debug("selectImages...");
 		try {
@@ -252,18 +331,18 @@ public class ProductDAO extends DBHelper{
 	}
 	public int selectCountTotal(SearchDTO dto) {
 		int total = 0;
-		sql = "SELECT COUNT(*) FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`=?";
+		sql = "SELECT COUNT(*) FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`=? AND a.`etc1`='n'";
 		String sql_search1 =  "SELECT COUNT(*) FROM `km_product` AS a "
 									+ " JOIN `km_member` AS b ON a.`seller`=b.`uid` "
-									+ " WHERE b.`company`=? AND a.`prodName` LIKE ?";
+									+ " WHERE b.`company`=? AND a.`etc1`='n' AND a.`prodName` LIKE ?";
 		
 		String sql_search2 = "SELECT COUNT(*) FROM `km_product` AS a "
 									+ " JOIN `km_member` AS b ON a.`seller`=b.`uid` "
-									+ " WHERE b.`company`=? AND a.`prodNo` LIKE ?";
+									+ " WHERE b.`company`=? AND a.`etc1`='n' AND a.`prodNo` LIKE ?";
 		
 		String sql_search3 =  "SELECT COUNT(*) FROM `km_product` AS a "
 									+ " JOIN `km_member` AS b ON a.`seller`=b.`uid` "
-									+ " WHERE b.`company`=? AND b.`manager` LIKE ?";
+									+ " WHERE b.`company`=? AND a.`etc1`='n' AND b.`manager` LIKE ?";
 		conn = getConnection();
 		try {
 			if(dto.getSearch() == null || dto.getSearch().equals("")) {
@@ -292,6 +371,44 @@ public class ProductDAO extends DBHelper{
 		}
 		return total;
 	}
+	public int selectCountAll(SearchDTO dto) {
+		int total = 0;
+		sql = "SELECT COUNT(*) FROM `km_product` AND `etc1`='n' ";
+		String sql_search1 =  "SELECT COUNT(*) FROM `km_product` "
+				+ " WHERE `etc1`='n' AND `prodName` LIKE ?";
+		
+		String sql_search2 = "SELECT COUNT(*) FROM `km_product` "
+				+ " WHERE `etc1`='n' AND `prodNo` LIKE ?";
+		
+		String sql_search3 =  "SELECT COUNT(*) FROM `km_product` AS a "
+				+ " JOIN `km_member` AS b ON a.`seller`=b.`uid` "
+				+ " WHERE a.`etc1`='n' AND b.`company` LIKE ?";
+		conn = getConnection();
+		try {
+			if(dto.getSearch() == null || dto.getSearch().equals("")) {
+				psmt = conn.prepareStatement(sql);
+			}else {
+				if(dto.getSearch().equals("search1")) {
+					logger.debug("dto.getSearch :"+dto.getSearch());
+					psmt = conn.prepareStatement(sql_search1);
+				}else if(dto.getSearch().equals("search2")) {
+					psmt = conn.prepareStatement(sql_search2);
+				}else if(dto.getSearch().equals("search3")) {
+					psmt = conn.prepareStatement(sql_search3);
+				}
+				psmt.setString(1, "%"+dto.getSearch_text()+"%");
+			}
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				logger.debug("rs : "+rs.toString());
+				total = rs.getInt(1);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectCountTotal : "+e.getMessage());
+		}
+		return total;
+	}
 	
 	//무현 추가 베스트 상품
 	
@@ -299,7 +416,7 @@ public class ProductDAO extends DBHelper{
 		List<ProductDTO> products = new ArrayList<>();
 		try {
 			conn = getConnection();
-			sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `sold` DESC LIMIT 5";
+			sql = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 ORDER BY `sold` DESC LIMIT 5";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			
@@ -337,7 +454,7 @@ public class ProductDAO extends DBHelper{
 				dto.setOrigin(rs.getString(29));
 				dto.setIp(rs.getString(30));
 				dto.setRdate(rs.getString(31));
-				dto.setEtc1(rs.getInt(32));
+				dto.setEtc1(rs.getString(32));
 				dto.setEtc2(rs.getInt(33));
 				dto.setEtc3(rs.getString(34));
 				dto.setEtc4(rs.getString(35));
@@ -359,7 +476,7 @@ public class ProductDAO extends DBHelper{
 		List<ProductDTO> products = new ArrayList<>();
 		try {
 			conn = getConnection();
-			sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `hit` DESC LIMIT 8";
+			sql = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 ORDER BY `hit` DESC LIMIT 8";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			
@@ -397,7 +514,7 @@ public class ProductDAO extends DBHelper{
 				dto.setOrigin(rs.getString(29));
 				dto.setIp(rs.getString(30));
 				dto.setRdate(rs.getString(31));
-				dto.setEtc1(rs.getInt(32));
+				dto.setEtc1(rs.getString(32));
 				dto.setEtc2(rs.getInt(33));
 				dto.setEtc3(rs.getString(34));
 				dto.setEtc4(rs.getString(35));
@@ -418,7 +535,7 @@ public class ProductDAO extends DBHelper{
 			List<ProductDTO> products = new ArrayList<>();
 			try {
 				conn = getConnection();
-				sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `score` DESC LIMIT 8";
+				sql = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 ORDER BY `score` DESC LIMIT 8";
 				stmt = conn.createStatement();
 				rs = stmt.executeQuery(sql);
 				
@@ -456,7 +573,7 @@ public class ProductDAO extends DBHelper{
 					dto.setOrigin(rs.getString(29));
 					dto.setIp(rs.getString(30));
 					dto.setRdate(rs.getString(31));
-					dto.setEtc1(rs.getInt(32));
+					dto.setEtc1(rs.getString(32));
 					dto.setEtc2(rs.getInt(33));
 					dto.setEtc3(rs.getString(34));
 					dto.setEtc4(rs.getString(35));
@@ -477,7 +594,7 @@ public class ProductDAO extends DBHelper{
 				List<ProductDTO> products = new ArrayList<>();
 				try {
 					conn = getConnection();
-					sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `rdate` DESC LIMIT 8";
+					sql = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 ORDER BY `rdate` DESC LIMIT 8";
 					stmt = conn.createStatement();
 					rs = stmt.executeQuery(sql);
 					
@@ -515,7 +632,7 @@ public class ProductDAO extends DBHelper{
 						dto.setOrigin(rs.getString(29));
 						dto.setIp(rs.getString(30));
 						dto.setRdate(rs.getString(31));
-						dto.setEtc1(rs.getInt(32));
+						dto.setEtc1(rs.getString(32));
 						dto.setEtc2(rs.getInt(33));
 						dto.setEtc3(rs.getString(34));
 						dto.setEtc4(rs.getString(35));
@@ -536,7 +653,7 @@ public class ProductDAO extends DBHelper{
 				List<ProductDTO> products = new ArrayList<>();
 				try {
 					conn = getConnection();
-					sql = "SELECT * FROM `km_product` WHERE `stock` > 0 ORDER BY `discount` DESC LIMIT 8";
+					sql = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 ORDER BY `discount` DESC LIMIT 8";
 					stmt = conn.createStatement();
 					rs = stmt.executeQuery(sql);
 					
@@ -574,7 +691,7 @@ public class ProductDAO extends DBHelper{
 						dto.setOrigin(rs.getString(29));
 						dto.setIp(rs.getString(30));
 						dto.setRdate(rs.getString(31));
-						dto.setEtc1(rs.getInt(32));
+						dto.setEtc1(rs.getString(32));
 						dto.setEtc2(rs.getInt(33));
 						dto.setEtc3(rs.getString(34));
 						dto.setEtc4(rs.getString(35));
@@ -597,25 +714,25 @@ public class ProductDAO extends DBHelper{
 		logger.debug("selectProductsAll==========================="+type);
 		
 		
-		String sql2 ="SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? LIMIT ?, 10";
+		String sql2 ="SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? LIMIT ?, 10";
 		
-		String sql3_sold = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `sold` DESC LIMIT ?, 10";
-		String sql3_sold2 = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `sold` DESC LIMIT ?, 10";
+		String sql3_sold = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? ORDER BY `sold` DESC LIMIT ?, 10";
+		String sql3_sold2 = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `sold` DESC LIMIT ?, 10";
 		
-		String sql3_pricedown= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `price` ASC LIMIT ?, 10";
-		String sql3_pricedown2= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` ASC LIMIT ?, 10";
+		String sql3_pricedown= "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? ORDER BY `price` ASC LIMIT ?, 10";
+		String sql3_pricedown2= "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` ASC LIMIT ?, 10";
 		
-		String sql3_price= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `price` DESC LIMIT ?, 10";
-		String sql3_price2= "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` DESC LIMIT ?, 10";
+		String sql3_price= "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? ORDER BY `price` DESC LIMIT ?, 10";
+		String sql3_price2= "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `price` DESC LIMIT ?, 10";
 		
-		String sql3_score = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `score` DESC LIMIT ?, 10";
-		String sql3_score2 = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `score` DESC LIMIT ?, 10";
+		String sql3_score = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? ORDER BY `score` DESC LIMIT ?, 10";
+		String sql3_score2 = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `score` DESC LIMIT ?, 10";
 		
-		String sql3_review = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `review` DESC LIMIT ?, 10";
-		String sql3_review2 = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `review` DESC LIMIT ?, 10";
+		String sql3_review = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? ORDER BY `review` DESC LIMIT ?, 10";
+		String sql3_review2 = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `review` DESC LIMIT ?, 10";
 		
-		String sql3_rdate = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? ORDER BY `rdate` DESC LIMIT ?, 10";
-		String sql3_rdate2 = "SELECT * FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `rdate` DESC LIMIT ?, 10";
+		String sql3_rdate = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? ORDER BY `rdate` DESC LIMIT ?, 10";
+		String sql3_rdate2 = "SELECT * FROM `km_product` WHERE `etc1`='n' AND `stock` > 0 AND `prodCate1`=? AND `prodCate2`=? ORDER BY `rdate` DESC LIMIT ?, 10";
 		
 	
 	
@@ -755,7 +872,7 @@ public class ProductDAO extends DBHelper{
 				dto.setOrigin(rs.getString(29));
 				dto.setIp(rs.getString(30));
 				dto.setRdate(rs.getString(31));
-				dto.setEtc1(rs.getInt(32));
+				dto.setEtc1(rs.getString(32));
 				dto.setEtc2(rs.getInt(33));
 				dto.setEtc3(rs.getString(34));
 				dto.setEtc4(rs.getString(35));
@@ -776,7 +893,7 @@ public class ProductDAO extends DBHelper{
 	    int total = 0;
 	    
 	    // 기본 SQL 쿼리
-	    String sql = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
+	    String sql = "SELECT COUNT(*) FROM `km_product` WHERE `etc1`='n' AND `stock` > 0";
 	    
 	    try {
 	        conn = getConnection();
@@ -870,7 +987,7 @@ public class ProductDAO extends DBHelper{
 		}
 	}
 	public void deleteProduct(String prodNo) {
-		sql = "DELETE FROM `km_product` WHERE `prodNo`=?";
+		sql = "UPDATE `km_product` SET `etc1`='y' WHERE `prodNo`=?";
 		conn = getConnection();
 		try {
 			psmt = conn.prepareStatement(sql);

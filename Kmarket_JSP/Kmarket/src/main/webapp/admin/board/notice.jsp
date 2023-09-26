@@ -27,6 +27,8 @@
                         <a href="#" class="off">판매자&nbsp;|</a>
                         <a href="#" class="off">구매자&nbsp;|</a>
                     </p>
+                    <c:choose>
+              	  <c:when test="${not empty articles }">
                     <table>
                         <tr>
                             <th><input type="checkbox" name="all"/></th>
@@ -36,68 +38,46 @@
                             <th>작성일자</th>
                             <th>관리</th>
                         </tr>
-
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>공지사항입니다.</td>
-                            <td>홍길동</td>
-                            <td>23-05-25</td>
-                            <td>
+						<c:forEach var="article" items="${articles}">
+		                <tr>
+		                  <th><input type="checkbox" name="all"/></th>
+		                  <td>${article.aNo}</td>
+		                  <td><a href="${ctxPath}/admin/board/view.do?aNo=${article.aNo}&"> ${article.title}  </a></td>
+		                  <td>${article.writer}</td>
+		                  <td>${article.rdate}</td>
+		                  <td>
                                 <a href="#">[삭제]</a>
                                 <a href="#">[수정]</a>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>공지사항입니다.</td>
-                            <td>홍길동</td>
-                            <td>23-05-25</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="chk"></td>
-                            <td>1</td>
-                            <td>공지사항입니다.</td>
-                            <td>홍길동</td>
-                            <td>23-05-25</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
+		                </tr>
+		               	</c:forEach> 
                     </table>
+	                  </c:when>
+		              	<c:when test="${empty articles }">
+		              	  <table>
+			                <tr>
+			                  <td> 게시글이 존재하지 않습니다. </td>
+			                </tr>
+			              </table>
+	               		</c:when>
+				 	</c:choose>
                     <input class="btnDelete" type="button" value="선택삭제" />
-                    <input class="btnWrite" type="button" value="글등록" />
-                    <div class="paging">
-                        <span class="prev">
-                            <a href="#"><&nbsp;이전</a>
-                        </span>
-                        <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
-                        </span>
-                        <span class="next">
-                            <a href="#">다음&nbsp;></a>
-                        </span>
-                        </div>
-
+                    <a href="${ctxPath}/admin/notice/write.do?group=notice"><input class="btnWrite" type="button" value="글등록" /></a>
+                	    <!-- 페이지 네비게이션 -->
+			        <div class="page">
+			        	<c:if test="${pageGroupStart > 1}">
+			            	<a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=${cateDetail}&type=1&pg=${pageGroupStart - 1}" class="prev">이전</a>
+			            </c:if>
+			            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+			            	<a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=${cateDetail}&type=1&pg=${i}&" class="num ${currentPage == i?'current':'off'}">${i}</a>
+			            </c:forEach>
+			            <c:if test="${pageGroupEnd < lastPageNum}">
+			            	<a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=${cateDetail}&type=1&pg=${pageGroupEnd + 1}" class="next">다음</a>
+			            </c:if>
+			        </div>
                 </section>                
 
                 
-                <p class="ico info">
-                    <strong>Tip!</strong>
-                    공지사항 등록 시 판매자와 구매자 구분 작성이 필요합니다.
-                </p>
 
                 
 

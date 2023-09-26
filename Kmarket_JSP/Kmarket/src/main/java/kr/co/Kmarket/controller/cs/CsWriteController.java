@@ -43,6 +43,7 @@ public class CsWriteController extends HttpServlet{
 		
 		List<CsCateDetailDTO> cateDto = aService.selectCsWriteCate(cateDetail);
 		logger.debug("cateDto 값이 나왔다~~~~~");
+		logger.debug("cateDto 값이 나왔다~~~~~");
 		
 		
 		
@@ -72,6 +73,7 @@ public class CsWriteController extends HttpServlet{
 		
 		// 폼 데이터 수신
 		String group   = mr.getParameter("group");
+		String selectDetailView   = mr.getParameter("selectDetailView");
 		String cateDetail   = mr.getParameter("cateDetail");
 		String type   = mr.getParameter("type");
 		String title   = mr.getParameter("title");
@@ -86,10 +88,39 @@ public class CsWriteController extends HttpServlet{
 		logger.debug("writer : " + writer);
 		logger.debug("oName : " + oriName);
 		logger.debug("regip : " + regip);
+		logger.debug("regip : " + regip);
+		logger.debug("selectDetailView : " + selectDetailView);
 				
+		
+	    if ("탈퇴".equals(selectDetailView) || "가입".equals(selectDetailView) || "회원정보".equals(selectDetailView)|| "로그인".equals(selectDetailView)) {
+	        selectDetailView = "member";
+	    } else if ("취소".equals(selectDetailView) || "반품".equals(selectDetailView) || "교환".equals(selectDetailView)) {
+	        selectDetailView = "cancle";
+	    } else if("이벤트".equals(selectDetailView)|| "발표".equals(selectDetailView)) {
+	        selectDetailView = "event"; 
+	    } else if("배송".equals(selectDetailView)) {
+	    	selectDetailView = "delivery"; 
+	    } else if("위해상품".equals(selectDetailView)) {
+	    	selectDetailView = "harzard"; 
+	    } else if("안내".equals(selectDetailView)|| "점검".equals(selectDetailView)) {
+	    	selectDetailView = "service"; 
+	    } else if("여행".equals(selectDetailView)|| "숙박".equals(selectDetailView)|| "항공".equals(selectDetailView)) {
+	    	selectDetailView = "travel"; 
+	    } else if("안전거래".equals(selectDetailView)) {
+	    	selectDetailView = "safe"; 
+	    } else if("주문".equals(selectDetailView)|| "결제".equals(selectDetailView)) {
+	    	selectDetailView = "order"; 
+	    } else if("쿠폰".equals(selectDetailView)) {
+	    	selectDetailView = "coupon"; 
+	    }
+	
+	
+	
+		
+		
 		//DTO생성
 		CsArticleDTO dto = new CsArticleDTO();
-		dto.setCateDetail(cateDetail);
+		dto.setCateDetail(selectDetailView);
 		dto.setType(type);
 		dto.setGroup(group);
 		dto.setTitle(title);

@@ -41,10 +41,31 @@ public class CartController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+
+		String prodCate1 = req.getParameter("prodCate1");
+		String prodCate2 = req.getParameter("prodCate2");	
+		String uid =req.getParameter("uid");
+		
+		logger.info("uid : "+ uid);
 		
 		
-	
-	
+		
+		List<ProductCartDTO> carts = cService.selectCarts(uid);
+		
+		logger.info("================================="+carts.toString());
+		
+		//aside 카테고리
+		
+		List<List<Cate2DTO>> categories = Ct2Service.selectCategories();
+							
+		List<ProductDTO> productsaside = pService.selectProductBest();
+		
+		req.setAttribute("prodCate1", prodCate1);
+		req.setAttribute("prodCate2", prodCate2);
+		req.setAttribute("categories", categories);
+		req.setAttribute("productsaside", productsaside);
+		req.setAttribute("carts", carts);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -53,8 +74,6 @@ public class CartController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 	
-	String prodCate1 = req.getParameter("prodCate1");
-	String prodCate2 = req.getParameter("prodCate2");	
 	String thumb1 = req.getParameter("thumb1");
 	
 	String cate1= req.getParameter("cate1");
@@ -102,21 +121,7 @@ public class CartController extends HttpServlet{
 	
 	
 	cService.insertProductCart(dto);
-	
-	List<ProductCartDTO> carts = cService.selectCarts(uid);
-	
-	logger.debug(carts.toString());
-	
-	//aside 카테고리
-	
-	List<List<Cate2DTO>> categories = Ct2Service.selectCategories();
-						
-	List<ProductDTO> productsaside = pService.selectProductBest();
-		
-	
 
-	
-	
 	req.setAttribute("thumb1",thumb1);
 	req.setAttribute("pName",pName);
 	req.setAttribute("pDescript",pDescript);
@@ -130,15 +135,10 @@ public class CartController extends HttpServlet{
 	req.setAttribute("cate1", cate1);
 	req.setAttribute("cate2", cate2);
 	
-	req.setAttribute("prodCate1", prodCate1);
-	req.setAttribute("prodCate2", prodCate2);
-	req.setAttribute("categories", categories);
-	req.setAttribute("productsaside", productsaside);
-	req.setAttribute("carts", carts);
+	
 	
 
-	RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
-	dispatcher.forward(req, resp);
+	resp.sendRedirect("/Kmarket/product/cart.do?uid="+uid); // PRG 패턴 적용
 	
 	}
 

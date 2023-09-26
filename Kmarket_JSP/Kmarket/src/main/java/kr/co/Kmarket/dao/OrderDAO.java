@@ -16,6 +16,53 @@ public class OrderDAO extends DBHelper{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	String sql;
 	public void insertOrder (OrderDTO dto) {
+		conn = getConnection();
+		
+		try {
+			sql="INSERT INTO `km_product_order` SET "
+					+ "`ordUid`=?,"
+					+ "`ordCount`=?,"
+					+ "`ordPrice`=?,"
+					+ "`ordDiscount`=?,"
+					+ "`ordDelivery`=?,"
+					+ "`savePoint`=?,"
+					+ "`usedPoint`=?,"
+					+ "`ordTotPrive`=?,"
+					+ "`recipName`=?,"
+					+ "`recipHp`=?,"
+					+ "`recipZip`=?,"
+					+ "`recipAddr1`=?,"
+					+ "`recipAddr2`=?,"
+					+ "`ordStatus`='success',"
+					+ "`ordPayment`=2,"
+					+ "`ordComplete`=1,"
+					+ "`deliveryStatus`='yet',"
+					+ "`ordDate`=NOW()";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getOrdUid());
+			psmt.setInt(2, dto.getOrdCount());
+			psmt.setInt(3, dto.getOrdPrice());
+			psmt.setInt(4, dto.getOrdDiscount());
+			psmt.setInt(5, dto.getOrdDelivery());
+			psmt.setInt(6, dto.getSavePoint());
+			psmt.setInt(7, dto.getUsedPoint());
+			psmt.setInt(8, dto.getOrdTotPrice());
+			psmt.setString(9, dto.getRecipName());
+			psmt.setString(10, dto.getRecipHp());
+			psmt.setString(11, dto.getRecipZip());
+			psmt.setString(12, dto.getRecipAddr1());
+			psmt.setString(13, dto.getRecipAddr2());
+			//psmt.setString(14, dto.getOrdStatus());
+			//psmt.setInt(15, dto.getOrdPayment());
+			//psmt.setInt(16, dto.getOrdComplete());
+			//psmt.setString(17, dto.getDeliveryStatus());
+			psmt.executeUpdate();
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("insertOrder error : "+e.getMessage());
+		}
 		
 	}
 	public OrderDTO selectOrder (String ordNo) {

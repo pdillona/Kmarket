@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.cs;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
+import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 import kr.co.Kmarket.service.CsArticleService;
 
 
@@ -31,13 +33,55 @@ public class FaqListController extends HttpServlet{
 
 		
 		String group = req.getParameter("group");
-		String cate  = req.getParameter("cate");
-		String pg    = req.getParameter("pg");
+		String cate  = req.getParameter("cate"); 			
+		String cateDetail  = req.getParameter("cateDetail"); // =aside
+		String atype  = req.getParameter("type"); 			// = asdie 하위 cate
 		
 
+		List<CsArticleDTO> articles = service.selectArticlesFAQ(group, cateDetail);
 		
 		
 		
+		req.setAttribute("group", group);
+		req.setAttribute("cate", cate);
+		req.setAttribute("type", atype);
+		req.setAttribute("cateDetail", cateDetail);
+		req.setAttribute("articles", articles);
+		
+		
+		
+		
+		
+		
+	
+		logger.debug("  " + articles);
+		List<CsArticleDTO> cates 
+		= service.selectArticlesFAQ(group, cateDetail);
+		logger.info("cates size : " + cates.size());
+		List<CsCateDetailDTO> types
+			=service.selectCsCateDetailFAQ(cateDetail);
+		
+		
+		
+		logger.debug("selectArticlesFAQ 컨트롤러 faq 아티클스 데이터:  "+ cates);
+		logger.debug("selectArticlesFAQ 컨트롤러 faq 타입 데이터:  "+ types);
+		
+		
+		// BoardTypeDTO에 있는 주석을 일단 봐
+		for(CsCateDetailDTO type : types) {
+			List<CsArticleDTO> csBoard = new ArrayList<>();
+			for(CsArticleDTO board : cates) {
+				if(type.getType() == board.getType()) {
+					csBoard.add(board);
+				}
+			}
+			type.setDto(csBoard);
+		}
+		
+		req.setAttribute("cs", cates);
+		logger.info("BoardList_get cate : " + cates);
+		req.setAttribute("types", types);
+		logger.info("BoardList_get types : " + types);
 	
 		
 		

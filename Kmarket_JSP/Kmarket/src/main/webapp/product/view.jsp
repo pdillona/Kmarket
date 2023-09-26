@@ -76,6 +76,15 @@
         const cartButton = document.querySelector('.cart');
         cartButton.addEventListener('click', addToCart);
         
+      // 구매하기 버튼 클릭
+      function addToOrder(){
+    	  const form =document.getElementById('formOrder');
+    	  
+    	  form.submit();
+      }
+      const orderButton = document.querySelector('.order');
+      orderButton.addEventListener('click', addToOrder);
+        
     };
 </script>
 <main id="product">
@@ -170,6 +179,27 @@
 					<input type="text" name= "cate2" value="${product.prodCate2}">
 					<input type="text" name= "prodNo" value="${product.prodNo}">
 					<input type="text" name= "uid" value="${sessUser.uid}">
+					<input type="text" name= "thumb1" value="${product.thumb1}">
+					<input type="text" name= "pName" value="${product.prodName}">
+					<input type="text" name= "pDescript" value="${product.descript}">
+					<input type="text" name= "count" value="1">
+					<input type="text" name= "price" value="${product.price}">
+					<input type="text" name= "discount" value="${product.discount}">
+					<input type="text" name= "point" value="${product.point}">
+					<input type="text" name= "delivery" value="${product.delivery}">
+					<input type="text" name= "total" value="${product.price}">
+					<input type="text" name= "final" value="${product.price + product.delivery}">
+					<input type="text" name= "count2" value="count">
+				</form>
+				<form id=formOrder action="${ctxPath}/product/order.do" method="post">
+					<input type="text" name= "prodNo" value="${product.prodNo}">
+					<input type="text" name= "orduid" value="${sessUser.uid}">
+					<input type="text" name= "recipName" value="${sessUser.name}">
+					<input type="text" name= "recipHp" value="${sessUser.hp}">
+					<input type="text" name= "recipZip" value="${sessUser.zip}">
+					<input type="text" name= "recipAddr1" value="${sessUser.addr1}">
+					<input type="text" name= "recipAddr2" value="${sessUser.addr2}">
+					<input type="text" name= "savePoint" value="${sessUser.point}">
 					<input type="text" name= "thumb1" value="${product.thumb1}">
 					<input type="text" name= "pName" value="${product.prodName}">
 					<input type="text" name= "pDescript" value="${product.descript}">

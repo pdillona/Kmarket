@@ -13,11 +13,10 @@ public class CsArticleDTO {
 	private String writer;
 	private String regip;
 	private String rdate;
-	private String akName;
-	private String aeName;
 	private int type;
-	private String dName;
 	private int uLevel;
+	private String dName;
+	private int aStatus;
 	
 	
 	private FileDTO fileDto;
@@ -25,6 +24,12 @@ public class CsArticleDTO {
 	
 	
 	
+	public String getdName() {
+		return dName;
+	}
+	public void setdName(String dName) {
+		this.dName = dName;
+	}
 	public int getType() {
 		return type;
 	}
@@ -97,6 +102,16 @@ public class CsArticleDTO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+	public void setMaskingWriter(String writer) {
+		if(writer != null && writer.length() >= 3) {
+			String newLength = writer.substring(0, writer.length() - 3) ;
+			
+			this.writer = newLength + "***"  ;
+		}else {
+			this.writer = writer;
+
+		}
+	}
 	public String getRegip() {
 		return regip;
 	}
@@ -112,44 +127,29 @@ public class CsArticleDTO {
 	public void setRdateYYMMDD(String rdate) {
 		this.rdate = rdate.substring(2, 10);
 	}
-	public String getAeName() {
-		return aeName;
-	}
-	public void setAeName(String aeName) {
-		this.aeName = aeName;
-	}
-	public String getAkName() {
-		return akName;
-	}
-	public void setAkName(String akName) {
-		this.akName = akName;
-	}
+
 	public int getdType() {
 		return type;
 	}
 	public void setdType(int type) {
 		this.type = type;
 	}
-	public String getdName() {
-		return dName;
+
+	public int getaStatus() {
+		return aStatus;
 	}
-	public void setdName(String dName) {
-		this.dName = dName;
+	public void setaStatus(int aStatus) {
+		this.aStatus = aStatus;
 	}
-	
-	
-	
 	
 	@Override
 	public String toString() {
 		return "CsArticleDTO [aNo=" + aNo + ", group=" + group + ", cateDetail=" + cateDetail + ", title=" + title
 				+ ", content=" + content + ", file=" + file + ", writer=" + writer + ", regip=" + regip + ", rdate="
-				+ rdate + ", aeName=" + aeName + ", akName=" + akName + ", type=" + type + ", dName=" + dName
-				+ "]";
+				+ rdate + ", type=" + type + ", uLevel=" + uLevel + ", dName=" + dName + ", aStatus=" + aStatus
+				+ ", fileDto=" + fileDto + "]";
 	}
-	
 
-	
-	
+
 	
 }

@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
-
-
-
       <section id="cs">
         <div class="qna">
           <nav>
@@ -25,7 +22,7 @@
                     <td>문의유형</td>
                     <td>
                       <select id="selectDetailView" name="selectDetailView">
-                     	  <option selected disabled>선택</option>
+                     	  <option  selected disabled>선택</option>
 	                      <c:forEach var="cate" items="${cateDto}">
 	                      	<option value="${cate.dName}">${cate.dName}</option>
 	                      </c:forEach>

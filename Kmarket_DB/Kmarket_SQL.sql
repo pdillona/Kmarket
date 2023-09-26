@@ -5,6 +5,7 @@ ALTER TABLE `km_product_order` AUTO_INCREMENT=1000000;
 
 ALTER TABLE `km_product` MODIFY COLUMN `seller` VARCHAR(20) AFTER `prodNo`;
 ALTER TABLE `km_product` MODIFY COLUMN `prodName` VARCHAR(100) AFTER `prodCate2`;
+ALTER TABLE `km_product` MODIFY COLUMN `etc1` CHAR(1) AFTER `rdate`;
 
 ALTER TABLE `km_cs_file` RENAME `km_file`;	
 
@@ -14,6 +15,7 @@ ALTER TABLE `km_product` ADD `newThumb3` VARCHAR(255) NOT NULL AFTER `thumb3`;
 ALTER TABLE `km_product` ADD `newDetail` VARCHAR(255) NOT NULL AFTER `detail`;	
 ALTER TABLE `km_product_order` ADD `ordStatus` VARCHAR(45) AFTER `recipAddr2`;	
 ALTER TABLE `km_product_order` ADD `deliveryStatus` VARCHAR(45) AFTER `ordComplete`;
+
 
 INSERT INTO `km_product_cate1` VALUES(10, '브랜드패션');
 INSERT INTO `km_product_cate1` VALUES(11, '패션의류·잡화·뷰티');
@@ -172,3 +174,5 @@ UPDATE `km_product_order` SET `ordStatus` = 'exchange' WHERE `ordNo`=1000014;
 SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` FROM `km_product_order_item` AS a JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` JOIN `km_member` AS d ON c.`seller`=d.uid WHERE d.`company`='아무회사' ORDER BY b.`ordNo` DESC LIMIT 11, 10;
 
 SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` FROM `km_product_order_item` AS a JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` JOIN `km_member` AS d ON c.`seller`=d.uid WHERE d.`company`='아무회사' AND c.`prodName` LIKE '%여성%' ORDER BY b.`ordNo` DESC LIMIT 0, 10;
+
+SELECT * FROM `km_member` WHERE `type`=1 ORDER BY `rdate` DESC LIMIT 0, 10;

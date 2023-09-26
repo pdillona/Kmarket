@@ -39,7 +39,7 @@ public class CheckLoginFilter implements Filter {
 				
 				MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
 				
-				if(sessUser != null) {
+				if(sessUser != null) { //회원이면
 					logger.debug("here1...");
 					chain.doFilter(request, response);
 				}else {
