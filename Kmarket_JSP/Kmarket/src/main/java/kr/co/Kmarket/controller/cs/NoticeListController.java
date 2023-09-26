@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.Kmarket.service.CsArticleService;
+
 
 @WebServlet("/cs/notice.do")
 public class NoticeListController extends HttpServlet {
@@ -21,6 +23,8 @@ public class NoticeListController extends HttpServlet {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	//private CsService service = CsService.instace;
 	private static final long serialVersionUID = 4872308842394693534L;
+	private CsArticleService service = CsArticleService.INSTANCE;
+	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,6 +48,8 @@ public class NoticeListController extends HttpServlet {
 
 		// 현재 페이지 게시물 조회 List<CsArticleDTO> articles =
 		// service.selectArticles(cate,start);
+		
+		
 
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);

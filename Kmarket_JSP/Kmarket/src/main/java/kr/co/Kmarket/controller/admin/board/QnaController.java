@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
-import kr.co.Kmarket.service.AdminBoardService;
 import kr.co.Kmarket.service.CsArticleService;
 import kr.co.Kmarket.service.PageService;
 
@@ -23,7 +22,6 @@ public class QnaController extends HttpServlet{
 
 	private static final long serialVersionUID = -8040723935264663405L;
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	private final AdminBoardService adminService = new AdminBoardService();
 	private final CsArticleService articleService = CsArticleService.INSTANCE;
 	private final PageService ps = new PageService();
 	
@@ -37,6 +35,13 @@ public class QnaController extends HttpServlet{
 		String type = req.getParameter("type");
 		String pg = req.getParameter("pg");
 		
+		logger.debug("QnaController 에서 에러나는데 이게맞냐? : "+cateDetail);
+		logger.debug("QnaController 에서 에러나는데 이게맞냐? : "+ pg);
+		logger.debug("QnaController 에서 에러나는데 이게맞냐? : "+ type);
+		logger.debug("QnaController 에서 에러나는데 이게맞냐? : "+ group);
+		
+		
+		logger.debug("cateDetail  : "+cateDetail);
 		
 		// 현재 페이지 번호
 		int currentPage = ps.getCurrentPage(pg);
@@ -44,7 +49,7 @@ public class QnaController extends HttpServlet{
 		logger.debug("qnalistController currentPage값: "+ currentPage);
 
 		// 전체 게시물 갯수 
-		int total = articleService.selectCountTotal(group, type, cateDetail);
+		int total = articleService.selectCountTotalFAQ(group, type);
 		
 		// 마지막 페이지 번호
 		int lastPageNum = ps.getLastPageNum(total);
@@ -60,7 +65,7 @@ public class QnaController extends HttpServlet{
 		
 		
 		// 현재 페이지 게시물 조회
-		List<CsArticleDTO> articles = articleService.SelectQnaArticlesAll(group, start, cateDetail);
+		List<CsArticleDTO> articles = articleService.SelectQnaArticlesAll(group, start, cateDetail, type);
 		
 		req.setAttribute("group", group);
 		req.setAttribute("type", type);
@@ -72,7 +77,9 @@ public class QnaController extends HttpServlet{
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("cateDetail", cateDetail);
 		
-		
+		logger.debug("카테디테일 ㄱㄱㄱㄱㄱㄱ "+cateDetail);
+		logger.debug("pageStartNum ㄱㄱㄱㄱㄱㄱ "+pageStartNum);
+		logger.debug("result[1] ㄱㄱㄱㄱㄱㄱ "+result[1]);
 		
 		
 		

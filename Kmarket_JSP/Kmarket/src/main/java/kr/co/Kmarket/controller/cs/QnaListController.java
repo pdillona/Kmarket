@@ -76,7 +76,7 @@ public class QnaListController extends HttpServlet{
 		logger.debug("카테 디테일정보11======================="+ start);
 		
 		// 현재 페이지 게시물 조회
-		List<CsArticleDTO> articles = cas.SelectQnaArticlesAll(group, start, cateDetail);
+		List<CsArticleDTO> articles = cas.SelectQnaArticlesAll(group, start, cateDetail, type);
 		
 		req.setAttribute("group", group);
 		req.setAttribute("type", type);

@@ -30,7 +30,7 @@
                         <ol>
                             <li><a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=all&type=1">공지사항</a></li>
                             <li><a href="${ctxPath}/admin/board/faq.do?group=faq&cateDetail=all&type=20">자주 묻는 질문</a></li>
-                            <li><a href="${ctxPath}/admin/board/qna.do?group=qna&cateDetail=event&type=23">고객 문의</a></li>
+                            <li><a href="${ctxPath}/admin/board/qna.do?group=qna&cateDetail=all&type=20">고객 문의</a></li>
                             <!-- all즉 모든 cateDEtail type에 구애 받지 않고 전부 다나오게 해야됨 -->
                         </ol>
                     </li>

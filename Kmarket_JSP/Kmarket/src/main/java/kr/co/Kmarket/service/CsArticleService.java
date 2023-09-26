@@ -23,6 +23,7 @@ import kr.co.Kmarket.dao.cs.CsArticleDAO;
 import kr.co.Kmarket.dto.FileDTO;
 import kr.co.Kmarket.dto.cs.CommentDTO;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
+import kr.co.Kmarket.dto.cs.CsCateAsideDTO;
 import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 
 
@@ -42,15 +43,16 @@ public enum CsArticleService {
 //===================  qna   ============================================
 	
 	
-	 public List<CsArticleDTO> SelectQnaArticlesAll(String group, int start, String cateDetail) {
+	 public List<CsArticleDTO> SelectQnaArticlesAll(String group, int start, String cateDetail, String type) {
 		 
 		 logger.debug("qnalistController group값: "+ group);
 		 logger.debug("qnalistController start값: "+ start);
+		 logger.debug("qnalistController start값: "+ cateDetail);
 		 
 		 
 		 if(cateDetail.equals("all")){
 			 
-			 return dao.SelectQnaArticlesAllcate(group, start, cateDetail);
+			 return dao.SelectQnaArticlesAllcate(group, start, cateDetail, type);
 			 
 		 }else {
 			 
@@ -58,12 +60,11 @@ public enum CsArticleService {
 		 }
 		 
 	 }
-		
 	
-	public List<CsCateDetailDTO> selectCsWriteCate(String cateDetail){
+	public List<CsCateAsideDTO> selectCsWriteCateFAQ(String cateDetail){
 		
 		
-		return dao.selectCsWriteCate(cateDetail);
+		return dao.selectCsWriteCateFAQ(cateDetail);
 	}
 
 	 
@@ -78,6 +79,14 @@ public enum CsArticleService {
 		logger.debug("ArticleService dto: " + dto);
 		
 		return dao.insertArticle(dto, fdto);
+	}
+	
+	public void insertArticleFAQ(CsArticleDTO dto) {
+		
+		logger.debug("ArticleService dto: " + dto);
+		
+		dao.insertArticleFAQ(dto);
+		
 	}
 	
 	public CsArticleDTO selectArticle(String no) {
@@ -102,6 +111,10 @@ public enum CsArticleService {
 	// 추가 
 	public int selectCountTotal(String group, String type, String cateDetail) {
 		return dao.selectCountTotal(group, type, cateDetail);
+	}
+
+	public int selectCountTotalFAQ(String group, String type) {
+		return dao.selectCountTotalFAQ(group, type);
 	}
 	//all 페이징용
 	public int selectCountTotalCateAll(String group, String type, String cateDetail) {

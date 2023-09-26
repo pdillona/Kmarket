@@ -12,9 +12,48 @@
      	<%@include file="../_aside.jsp" %>
             <article>
               <nav>
-                <h1>${cateDetail}</h1>
-                <h2>${cateDetail} 관련 문의 내용입니다.</h2>
-              </nav>
+				 <c:choose>
+			        <c:when test="${cateDetail == 'all'}">
+			            <h1>전체보기</h1>
+			            <h2>전체 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'member'}">
+			            <h1>회원</h1>
+			            <h2>회원 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'event' || cateDetail == 'coupon'}">
+			            <h1>이벤트/쿠폰</h1>
+			            <h2>이벤트/쿠폰 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'hazard'}">
+			            <h1>위해상품</h1>
+			            <h2>위해상품 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'order'}">
+			            <h1>주문/결제</h1>
+			            <h2>주문/결제 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'delivery'}">
+			            <h1>배송</h1>
+			            <h2>배송 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'cancle'}">
+			            <h1>취소/반품/교환</h1>
+			            <h2>취소/반품/교환 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'travel'}">
+			            <h1>여행/숙박/항공</h1>
+			            <h2>여행/숙박/항공 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'safe'}">
+			            <h1>안전거래</h1>
+			            <h2>안전거래 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:otherwise>
+			            <!-- 기본값 설정 또는 처리할 내용을 여기에 추가하세요. -->
+			        </c:otherwise>
+			    </c:choose>
+			 </nav>
               <c:choose>
               	  <c:when test="${not empty articles }">
 		              <table>

@@ -52,6 +52,7 @@
 		                </tr>
 		               	</c:forEach> 
                     </table>
+                      <input class="btnDelete" type="button" value="선택삭제" />
                   </c:when>
 	              <c:when test="${empty articles }">
 	              	  <table>
@@ -59,8 +60,6 @@
 		                  <td> 게시글이 존재하지 않습니다. </td>
 		                </tr>
 		              </table>
-                    <input class="btnDelete" type="button" value="선택삭제" />
-                    <input class="btnWrite" type="button" value="글등록" />
                </c:when>
 			 </c:choose>
          	    <!-- 페이지 네비게이션 -->
@@ -78,14 +77,6 @@
 			
                 </section>                
 				<!-- 페이징 css 구현 -->
-                
-                <p class="ico info">
-                    <strong>Tip!</strong>
-                    공지사항 등록 시 판매자와 구매자 구분 작성이 필요합니다.
-                </p>
-
-                
-
                 <!-- 공지사항 컨텐츠 끝 -->
             </section>
         </main>
