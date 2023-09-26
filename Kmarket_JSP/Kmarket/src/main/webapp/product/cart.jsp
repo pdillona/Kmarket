@@ -71,23 +71,70 @@
             finalTotal.textContent = (totalPriceValue - totalDiscountValue + totalDeliveryValue);
         }
 
+        const sessUser = { uid: '사용자 ID 값' }; // 세션 사용자 정보 초기화
+
         function deleteSelectedProducts() {
-        	 let cartNo = ''; // 초기화
+            const selectedCheckbox = document.querySelector('input[type="checkbox"].checkboxproduct:checked');
+            
+            if (!selectedCheckbox) {
+                console.log('선택된 체크박스가 없습니다.'); // 또는 사용자에게 알림을 표시
+                return; // 선택된 체크박스가 없을 경우 함수 종료
+            }
 
-        	    const selectedCheckbox = document.querySelector('input[type="checkbox"].checkboxproduct:checked');
+            const cartNo = selectedCheckbox.value;
 
-        	    if (selectedCheckbox) {
-        	        // 선택된 체크박스에서 data-cart-no 속성을 읽어옴
-        	        cartNo = selectedCheckbox.value;
-        	        
-        	        console.log(cartNo);
-
-        	        // GET 요청을 수행하고 선택된 상품을 서버로 전송
-        	        window.location.href = `/Kmarket/product/delete.do?cartNo=${cartNo}&uid=${sessUser.uid}`;
-        	        
-        	        
-        	    }
-        	}
+            // GET 요청을 수행하고 선택된 상품을 서버로 전송
+            window.location.href = '/Kmarket/product/delete.do?cartNo=' + cartNo + '&uid='+uid;
+        }
+        
+        function submitOrder() {
+            const form = document.getElementById('orderForm');
+            
+            // 선택된 체크박스를 찾습니다.
+            const selectedCheckbox = document.querySelector('input[type="checkbox"].checkboxproduct:checked');
+            
+            if (selectedCheckbox) {
+                // 선택된 체크박스의 값을 상품번호 필드에 설정합니다.
+                const prodNo = selectedCheckbox.value;
+                const row = selectedCheckbox.parentElement.parentElement;
+                const count = parseInt(row.querySelector('.count').textContent);
+                const price = parseFloat(row.querySelector('td:nth-child(4)').textContent);
+                const discount = parseFloat(row.querySelector('td:nth-child(5)').textContent);
+                const point = parseFloat(row.querySelector('td:nth-child(6)').textContent);
+                const delivery = parseFloat(row.querySelector('td:nth-child(7)').textContent);
+                const total = count * price;
+                const discountAmount = (total * discount) / 100;
+                const final = total - discountAmount + delivery;
+                const thumb1 = row.querySelector('img').getAttribute('src');
+                const pName = row.querySelector('h2 a').textContent;
+                const pDescript = row.querySelector('p').textContent;
+                
+                
+                form.querySelector('input[name="prodNo"]').value = prodNo;
+                form.querySelector('input[name="orduid"]').value = ${sessUser.uid};
+                form.querySelector('input[name="recipName"]').value = ${sessUser.name};
+                form.querySelector('input[name="recipHp"]').value = ${sessUser.hp};
+                form.querySelector('input[name="recipZip"]').value = ${sessUser.zip};
+                form.querySelector('input[name="recipAddr1"]').value = ${sessUser.addr1};
+                form.querySelector('input[name="recipAddr2"]').value = ${sessUser.addr2};
+                form.querySelector('input[name="savePoint"]').value = ${sessUser.point};
+                form.querySelector('input[name="count"]').value = count;
+                form.querySelector('input[name="price"]').value = price;
+                form.querySelector('input[name="discount"]').value = discount;
+                form.querySelector('input[name="point"]').value = point;
+                form.querySelector('input[name="delivery"]').value = delivery;
+                form.querySelector('input[name="total"]').value = total;
+                form.querySelector('input[name="final"]').value = final;
+                form.querySelector('input[name="thumb1"]').value = thumb1;
+                form.querySelector('input[name="pName"]').value = pName;
+                form.querySelector('input[name="pDescript"]').value = pDescript;
+                
+                // 주문 양식을 서버로 제출합니다.
+                form.submit();
+            } else {
+                console.log('선택된 상품이 없습니다.');
+            }
+        }
     };
 </script>
 
@@ -191,7 +238,27 @@
                       <td id="finalTotal">0</td>
                     </tr>
                   </table>
-                  <input type="submit" name="" value="주문하기">    
+                  <form id="orderForm" action="${ctxPath}/product/order.do" method="post">
+                  	<input type="text" name="prodNo" value="">
+       				<input type="text" name="orduid" value="">
+       				<input type="text" name= "recipName" value="">
+					<input type="text" name= "recipHp" value="">
+					<input type="text" name= "recipZip" value="">
+					<input type="text" name= "recipAddr1" value="">
+					<input type="text" name= "recipAddr2" value="">
+					<input type="text" name= "savePoint" value="">
+					<input type="text" name= "thumb1" value="">
+					<input type="text" name= "pName" value="">
+					<input type="text" name= "pDescript" value="">
+					<input type="text" name= "count" value="">
+					<input type="text" name= "price" value="">
+					<input type="text" name= "discount" value="}">
+					<input type="text" name= "point" value="">
+					<input type="text" name= "delivery" value="">
+					<input type="text" name= "total" value="">
+					<input type="text" name= "final" value="">
+                  	<input type="button" name="orderButton" value="주문하기" onclick="submitOrder()">
+                  </form>
                 </div>
 
               </form>
