@@ -79,4 +79,6 @@ public class ProductService {
 	public int selectCountTotalProdCate(String prodCate1, String prodCate2) {
 		return dao.selectCountTotalProdCate(prodCate1, prodCate2);
 	}
+	
+	
 }

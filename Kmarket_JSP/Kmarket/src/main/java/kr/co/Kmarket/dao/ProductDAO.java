@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
+import kr.co.Kmarket.dto.ProductCartDTO;
 import kr.co.Kmarket.dto.ProductDTO;
 import kr.co.Kmarket.dto.SearchDTO;
 
@@ -997,5 +998,7 @@ public class ProductDAO extends DBHelper{
 			logger.error("deleteProduct error : "+e.getMessage());
 		}
 	}
+	
+	
 	
 }

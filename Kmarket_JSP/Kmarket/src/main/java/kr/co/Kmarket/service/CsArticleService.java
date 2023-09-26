@@ -21,6 +21,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.Kmarket.dao.cs.CsArticleDAO;
 import kr.co.Kmarket.dto.FileDTO;
+import kr.co.Kmarket.dto.cs.CommentDTO;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
 import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 
@@ -47,7 +48,15 @@ public enum CsArticleService {
 		 logger.debug("qnalistController start값: "+ start);
 		 
 		 
-		 return dao.SelectQnaArticlesAll(group, start, cateDetail);
+		 if(cateDetail.equals("all")){
+			 
+			 return dao.SelectQnaArticlesAllcate(group, start, cateDetail);
+			 
+		 }else {
+			 
+			 return dao.SelectQnaArticlesAll(group, start, cateDetail);
+		 }
+		 
 	 }
 		
 	
@@ -94,12 +103,16 @@ public enum CsArticleService {
 	public int selectCountTotal(String group, String type, String cateDetail) {
 		return dao.selectCountTotal(group, type, cateDetail);
 	}
-	
-	public List<CsArticleDTO> selectComments(String parent) {
-		return dao.selectComments(parent);
+	//all 페이징용
+	public int selectCountTotalCateAll(String group, String type, String cateDetail) {
+		return dao.selectCountTotalCateAll(group, type, cateDetail);
 	}
 	
-	public CsArticleDTO insertComment(CsArticleDTO dto) {
+	public CommentDTO selectComments(String ano) {
+		return dao.selectComments(ano);
+	}
+	
+	public CommentDTO insertComment(CommentDTO dto) {
 		return dao.insertComment(dto);
 	}
 	

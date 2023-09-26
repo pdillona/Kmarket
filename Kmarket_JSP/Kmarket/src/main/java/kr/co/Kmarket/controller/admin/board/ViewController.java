@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.Kmarket.dto.cs.CommentDTO;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
 import kr.co.Kmarket.service.CsArticleService;
 
@@ -30,9 +31,12 @@ public class ViewController extends HttpServlet{
 		String ano = req.getParameter("aNo");
 		
 		CsArticleDTO dto = service.selectArticle(ano);
+		CommentDTO Cdto = service.selectComments(ano);
 		
 		req.setAttribute("dto", dto);
+		req.setAttribute("Cdto", Cdto);
 	
+		
 	
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/board/view.jsp");

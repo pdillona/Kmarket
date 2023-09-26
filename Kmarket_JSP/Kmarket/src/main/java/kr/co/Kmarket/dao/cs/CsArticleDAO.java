@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.dto.FileDTO;
+import kr.co.Kmarket.dto.cs.CommentDTO;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
 import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 
@@ -97,7 +98,8 @@ public class CsArticleDAO extends DBHelper{
 			psmt.close();
 			
 			conn.commit();
-			
+		
+			close();
 		}catch(Exception e){
 			logger.debug(e.getMessage());
 		}
@@ -151,6 +153,7 @@ public class CsArticleDAO extends DBHelper{
     			+ "ORDER BY `aNo` DESC "
     			+ "LIMIT ?, 10 ";
     	
+    	
     	List<CsArticleDTO> articles = new ArrayList<>();
     	
     	try {
@@ -188,7 +191,56 @@ public class CsArticleDAO extends DBHelper{
     }
 	
 	
-	
+	//서비스에서 카테고리 all로 들어올때 분기하기 위해 만든 메서드
+    public List<CsArticleDTO> SelectQnaArticlesAllcate(String group, int start, String cateDetail) {
+    	 
+    	logger.debug("SelectQnaArticlesAll 그룹 스타트 체크: "+group,start);
+    	logger.debug("SelectQnaArticlesAll 스타트 체크: "+ start);
+    	conn = getConnection();
+    	SQL = "SELECT DISTINCT * from `km_cs_article` AS a " 
+    			+" JOIN `km_cs_aside` AS b "
+    			+" ON a.`cateDetail` = b.`aeName` "
+    			+" JOIN `km_cs_cate_detail` AS c "
+    			+" ON a.`type` = c.`type` " 
+    			+" WHERE a.`group` = ? AND  a.`type` >= 20 AND  b.`aside_Num` > 1 " 
+    			+" ORDER BY `aNo` DESC " 
+    			+" LIMIT ?, 10 ";
+    	
+    	
+    	List<CsArticleDTO> articles = new ArrayList<>();
+    	
+    	try {
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, group);
+			psmt.setInt(2, start);
+			rs = psmt.executeQuery();
+    		
+			while(rs.next()) {
+				CsArticleDTO dto = new CsArticleDTO();
+				dto.setaNo(rs.getInt("aNo"));
+				dto.setGroup(rs.getString("group"));
+				dto.setCateDetail(rs.getString("cateDetail"));
+				dto.setTitle(rs.getString("title"));
+				dto.setWriter(rs.getString("writer"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setAeName(rs.getString("aeName"));
+				dto.setuLevel(rs.getInt("uLevel"));
+				dto.setType(rs.getInt("type"));
+				dto.setdName(rs.getString("dName"));
+				
+				articles.add(dto);
+			}
+			close();
+    		
+		} catch (Exception e) {
+			logger.debug("SelectQna: " + e.getMessage());
+		}
+    	
+    	
+    	logger.info("qnaSelects 아티클 찍었따 나와라 ㅡㅡ: "+ articles);
+    	
+    	return articles;
+    }
 	
 	
 	
@@ -297,14 +349,130 @@ public class CsArticleDAO extends DBHelper{
 		return total;
 	}
 
-	public List<CsArticleDTO> selectComments(String parent) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public int selectCountTotalCateAll(String group, String type, String cateDetail) {
+
+		int total = 0;
+		
+		SQL= "SELECT COUNT(*) FROM `km_cs_article` WHERE `group`=? AND `type` >= ? AND `cateDetail` != ?";
+	
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, group);
+			psmt.setString(2, type);
+			psmt.setString(3, cateDetail);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		logger.debug("csarticleDAO selectTotalCout = "+total);
+		
+		return total;
+	}
+	
+	
+	public CommentDTO selectComments(String ano) {
+		
+		SQL=" SELECT * FROM `km_admin_comment` "
+				+ " WHERE `aNo` = ? ";
+		
+		conn = getConnection();
+		
+		CommentDTO dto = null;
+		try {
+			
+			psmt = conn.prepareStatement(SQL);
+			psmt.setInt(1, Integer.parseInt(ano));
+			rs = psmt.executeQuery();
+			
+			dto = new CommentDTO();
+			
+			if(rs.next()) {
+				dto.setaNo(rs.getInt("aNo"));
+				dto.setrNo(rs.getInt("rNo"));
+				dto.setContent(rs.getString("content"));
+				dto.setWriter(rs.getString("writer"));
+				dto.setRdate(rs.getString("rdate"));
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+		}
+		
+		return dto;
 	}
 
-	public CsArticleDTO insertComment(CsArticleDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public CommentDTO insertComment(CommentDTO dto) {
+
+		SQL =" INSERT INTO `km_admin_comment` SET "
+				+ " `aNo` = ? "
+				+ " `writer` = ? "
+				+ " `content` = ? "
+				+ " `rdate` = NOW() ";
+		
+		SQL2=" UPDATE `km_cs_article` SET `aStatus` "
+				+ " = 1 WHERE `aNo` = ?";
+		
+		SQL3=" SELECT * FROM `km_admin_comment` "
+				+ " WHERE `aNo` = ? ";
+		
+		conn = getConnection();
+		
+		try {
+			
+			conn.setAutoCommit(false);
+			
+			psmt= conn.prepareStatement(SQL);
+			psmt.setInt(1, dto.getaNo());
+			psmt.setString(2, dto.getWriter());
+			psmt.setString(3, dto.getContent());
+			psmt.executeQuery();
+			
+			psmt.close();
+			
+			
+			psmt= conn.prepareStatement(SQL2);
+			psmt.setInt(1, dto.getaNo());
+			psmt.executeQuery();
+			psmt.close();
+			
+			psmt = conn.prepareStatement(SQL3);
+			psmt.setInt(1, dto.getaNo());
+			psmt.executeQuery(SQL3);
+			
+			psmt.close();
+			
+			
+			conn.commit();
+			
+			if(rs.next()) {
+				dto.setaNo(rs.getInt(1));
+				dto.setrNo(rs.getInt(2));
+				dto.setContent(rs.getString(3));
+				dto.setWriter(rs.getString(4));
+				dto.setRdate(rs.getString(5));
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+		}
+		
+		logger.debug("insertComment dto값 ~~ : " + dto.getaNo());
+		logger.debug("insertComment dto값 ~~ : " + dto.getrNo());
+		logger.debug("insertComment dto값 ~~ : " + dto.getWriter());
+		
+		return dto;
 	}
 
 	public int updateComment(String no, String content) {

@@ -1,6 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script>
+/* 비밀번호 보기,숨기기 */
+$(document).ready(function(){
+    $('i').on('click',function(){
+        $('input').toggleClass('active');
+        if($('input').hasClass('active')){
+            $(this).attr('class',"fa fa-eye-slash fa-lg") //눈모양+슬래시 추가
+            .prev('input').attr('type',"text"); //비밀번호 그대로 노출
+        }else{
+            $(this).attr('class',"fa fa-eye fa-lg")
+            .prev('input').attr('type','password');
+        }
+    });
+});
 
+</script>
         <main id="member">
             <div class="login">
                 <nav>
@@ -16,7 +31,10 @@
                         </tr>
                         <tr>
                             <td>비밀번호</td>
-                            <td><input type="password" name="pass" placeholder="비밀번호 입력"></td>
+                            <td>
+                            <input type="password" name="pass" placeholder="비밀번호 입력">
+                            <i class="fa fa-eye fa-lg"></i>
+                            </td>
                         </tr>
                     </table>					
 					<input type="submit" value="로그인" />

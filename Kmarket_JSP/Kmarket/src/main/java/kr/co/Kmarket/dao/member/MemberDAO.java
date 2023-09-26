@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import kr.co.Kmarket.db.DBHelper;
 import kr.co.Kmarket.dto.SearchDTO;
 import kr.co.Kmarket.dto.member.MemberDTO;
@@ -533,7 +534,9 @@ public class MemberDAO extends DBHelper{
 		// 회원조회
 		public List<MemberDTO> selectMembers(int start, SearchDTO searchDTO, String type){
 			List<MemberDTO> members = new ArrayList<MemberDTO>();
+
 			MemberDTO dto=null;
+
 			String sql_1 = "SELECT * FROM `km_member` WHERE `type`=1 ORDER BY `rdate` DESC LIMIT ?, 10";
 			String sql_2 = "SELECT * FROM `km_member` WHERE `type`=2 ORDER BY `rdate` DESC LIMIT ?, 10";
 			String sql_3 = "SELECT * FROM `km_member` WHERE `type`=3 ORDER BY `rdate` DESC LIMIT ?, 10";

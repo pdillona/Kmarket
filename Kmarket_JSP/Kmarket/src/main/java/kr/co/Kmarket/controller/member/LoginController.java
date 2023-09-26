@@ -61,12 +61,13 @@ public class LoginController extends HttpServlet{
             logger.info("dto :" + dto);
             //자동로그인 처리(체크박스 체크했을 때)
 			if(auto != null) {
-				Cookie autoCookie = new Cookie("cid", dto.getUid());
-				autoCookie.setMaxAge(60*60*24*7); //일주일 (초, 분, 시, 일)
-				autoCookie.setPath("/");
+				Cookie autoCookie = new Cookie("cid", dto.getUid()); 
+				autoCookie.setMaxAge(60*60*24*7); //7일 (초, 분, 시, 일) (브라우저 종료와 관계없이 - 쿠키니깐!)
+				autoCookie.setPath("/"); //contextPath 이하 모든 요청에 대해 쿠키를 전송할 수 있음
 				resp.addCookie(autoCookie);
-				logger.info("autoC : " + autoCookie.getValue());
 				logger.info("autoC : " + autoCookie.getName());
+				logger.info("autoC : " + autoCookie.getValue());
+
 			}
             //로그인 성공 후 메인 페이지로 리다이렉트
             resp.sendRedirect("/Kmarket/index.do");
