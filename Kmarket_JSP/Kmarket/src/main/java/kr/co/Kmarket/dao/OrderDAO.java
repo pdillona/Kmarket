@@ -27,7 +27,7 @@ public class OrderDAO extends DBHelper{
 					+ "`ordDelivery`=?,"
 					+ "`savePoint`=?,"
 					+ "`usedPoint`=?,"
-					+ "`ordTotPrive`=?,"
+					+ "`ordTotPrice`=?,"
 					+ "`recipName`=?,"
 					+ "`recipHp`=?,"
 					+ "`recipZip`=?,"
@@ -319,4 +319,46 @@ public class OrderDAO extends DBHelper{
 		}
 		return total;
 	}
+	
+	//추가
+	public List<OrderDTO> ordersSelect(String orduid) {
+		List<OrderDTO> orders = new ArrayList<>();
+		conn = getConnection();
+		try {
+			sql= "SELECT * FROM `km_product_order` WHERE `ordUid`=?";
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, orduid);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				OrderDTO dto = new OrderDTO();
+				dto.setOrdNo(rs.getInt(1));
+				dto.setOrdUid(rs.getString(2));
+				dto.setOrdCount(rs.getInt(3));
+				dto.setOrdPrice(rs.getInt(4));
+				dto.setOrdDiscount(rs.getInt(5));
+				dto.setOrdDelivery(rs.getInt(6));
+				dto.setSavePoint(rs.getInt(7));
+				dto.setUsedPoint(rs.getInt(8));
+				dto.setOrdTotPrice(rs.getInt(9));
+				dto.setRecipName(rs.getString(10));
+				dto.setRecipHp(rs.getString(11));
+				dto.setRecipZip(rs.getString(12));
+				dto.setRecipAddr1(rs.getString(13));
+				dto.setRecipAddr2(rs.getString(14));
+				dto.setOrdStatus(rs.getString(15));
+				dto.setOrdPayment(rs.getInt(16));
+				dto.setOrdComplete(rs.getInt(17));
+				dto.setDeliveryStatus(rs.getString(18));
+				dto.setOrdDate(rs.getString(19));
+				orders.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("ordersSelect : "+e.getMessage());
+		}
+		return orders;
+		
+	}
+	
 }

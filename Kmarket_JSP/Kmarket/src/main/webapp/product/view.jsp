@@ -10,48 +10,59 @@
     window.onload = function () {
     	const inputNum = document.querySelector('input[name="num"]');
     	const inputCountIncrease = document.getElementsByClassName('increase')[0];
-    	const inputCount2 = document.querySelector('input[name="count2"]');
+    	const inputCount = document.getElementsByName('count')[0];
     	const inputCountDecrease = document.getElementsByClassName('decrease')[0];
-        const inputTotal = document.getElementsByName('total')[0];
-        const inputFinal = document.getElementsByName('final')[0];
-        const totalNode = document.getElementsByClassName('total')[0];
-        
-        inputCountIncrease.addEventListener('click', function () {
-            // 현재 값을 가져옴
-            let currentValue = parseInt(inputNum.value, 10);
-            
-         	// 값을 증가시킴
-            currentValue++;
+    	const inputTotal = document.getElementsByName('total')[0];
+    	const inputFinal = document.getElementsByName('final')[0];
+    	const formCart = document.getElementById('formCart');
+    	const formOrder = document.getElementById('formOrder');
 
-            // 변경된 값을 텍스트 필드에 설정
-            inputNum.value = currentValue;
-            inputCount2.value = currentValue; // count2의 값을 업데이트
-            
-            updateTotalAndFinal(currentValue);
-        });
-        
-        inputCountDecrease.addEventListener('click', function () {
-            // 현재 값을 가져옴
-            let currentValue = parseInt(inputNum.value, 10);
+    	// 이벤트 리스너에서 'count' 입력 필드의 값을 업데이트합니다.
+    	inputCountIncrease.addEventListener('click', function () {
+    	    // 현재 값을 가져옴
+    	    let currentValue = parseInt(inputNum.value, 10);
 
-            // 값을 감소시킴 (1보다 작아지지 않도록 확인)
-            if (currentValue > 1) {
-                currentValue--;
-            }
+    	    // 값을 증가시킴
+    	    currentValue++;
 
-            // 변경된 값을 텍스트 필드에 설정
-            inputNum.value = currentValue;
-            inputCount2.value = currentValue;
-            
-            updateTotalAndFinal(currentValue);
-        });
+    	    // 변경된 값을 텍스트 필드에 설정
+    	    inputNum.value = currentValue;
+    	    inputCount.value = currentValue; // 'count' 입력 필드 업데이트
+
+    	    updateTotalAndFinal(currentValue);
+    	});
+
+    	inputCountDecrease.addEventListener('click', function () {
+    	    // 현재 값을 가져옴
+    	    let currentValue = parseInt(inputNum.value, 10);
+
+    	    // 값을 감소시킴 (1보다 작아지지 않도록 확인)
+    	    if (currentValue > 1) {
+    	        currentValue--;
+    	    }
+
+    	    // 변경된 값을 텍스트 필드에 설정
+    	    inputNum.value = currentValue;
+    	    inputCount.value = currentValue; // 'count' 입력 필드 업데이트
+
+    	    updateTotalAndFinal(currentValue);
+    	});
         
         function updateTotalAndFinal(currentValue) {
+        	let count = currentValue;
             let total = price * currentValue;
             let finalPrice = total + delivery;
             
-            console.log(total);
             
+
+            formCart.elements['count'].value = currentValue;
+            formCart.elements['final'].value = finalPrice;
+
+            formOrder.elements['count'].value = currentValue;
+            formOrder.elements['final'].value = finalPrice;
+            
+            console.log(total);
+            console.log(count);
             inputFinal.value =total;
 
             // id로 <span> 요소를 가져옵니다
@@ -67,7 +78,7 @@
         function addToCart() {
             // 폼 요소를 가져옵니다.
             const form = document.getElementById('formCart');
-            
+
             // 폼을 서버로 제출합니다.
             form.submit();
         }
@@ -75,15 +86,15 @@
         // 장바구니 버튼에 클릭 이벤트 리스너를 추가합니다.
         const cartButton = document.querySelector('.cart');
         cartButton.addEventListener('click', addToCart);
-        
-      // 구매하기 버튼 클릭
-      function addToOrder(){
-    	  const form =document.getElementById('formOrder');
-    	  
-    	  form.submit();
-      }
-      const orderButton = document.querySelector('.order');
-      orderButton.addEventListener('click', addToOrder);
+
+        // 구매하기 버튼 클릭
+        function addToOrder() {
+            const form = document.getElementById('formOrder');
+
+            form.submit();
+        }
+        const orderButton = document.querySelector('.order');
+        orderButton.addEventListener('click', addToOrder);
         
     };
 </script>
@@ -189,7 +200,6 @@
 					<input type="text" name= "delivery" value="${product.delivery}">
 					<input type="text" name= "total" value="${product.price}">
 					<input type="text" name= "final" value="${product.price + product.delivery}">
-					<input type="text" name= "count2" value="count">
 				</form>
 				<form id=formOrder action="${ctxPath}/product/order.do" method="post">
 					<input type="text" name= "prodNo" value="${product.prodNo}">
@@ -210,7 +220,6 @@
 					<input type="text" name= "delivery" value="${product.delivery}">
 					<input type="text" name= "total" value="${product.price}">
 					<input type="text" name= "final" value="${product.price + product.delivery}">
-					<input type="text" name= "count2" value="count">
 				</form>
                 <div class="button">
                     <input type="button" class="cart"  value="장바구니"/>
