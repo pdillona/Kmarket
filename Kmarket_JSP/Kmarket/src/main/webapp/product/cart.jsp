@@ -2,6 +2,95 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%@ include file="./_header.jsp" %>
 
+<script>
+    window.onload = function () {
+        const cartTable = document.getElementById('cartTable');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"].checkboxproduct');
+        const totalCount = document.getElementById('totalCount');
+        const totalPrice = document.getElementById('totalPrice');
+        const totalDiscount = document.getElementById('totalDiscount');
+        const totalDelivery = document.getElementById('totalDelivery');
+        const totalPoints = document.getElementById('totalPoints');
+        const finalTotal = document.getElementById('finalTotal');
+        const deleteButton = document.getElementById('deleteButton');
+        const uid = "${sessUser.uid}"
+        
+        console.log(uid);
+        
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateCart);
+        });
+
+        deleteButton.addEventListener('click', deleteSelectedProducts);
+
+        function updateCart() {
+            let selectedProducts = [];
+            let totalCountValue = 0;
+            let totalPriceValue = 0;
+            let totalDiscountValue = 0;
+            let totalDeliveryValue = 0;
+            let totalPointsValue = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const row = checkbox.parentElement.parentElement;
+                    const count = parseInt(row.querySelector('.count').textContent);
+                    const originalPrice = parseFloat(row.querySelector('td:nth-child(4)').textContent);
+                    const discountPercent = parseFloat(row.querySelector('td:nth-child(5)').textContent);
+                    let delivery = parseFloat(row.querySelector('td:nth-child(7)').textContent);
+                    const points = parseFloat(row.querySelector('td:nth-child(6)').textContent);
+                    // 할인 금액 계산
+                    const discountAmount = (originalPrice * discountPercent) / 100;
+
+                    selectedProducts.push({
+                        count: count,
+                        originalPrice: originalPrice,
+                        discountPercent: discountPercent,
+                        discountAmount: discountAmount,
+                        delivery: delivery,
+                        points: points
+                    });
+                    console.log(delivery);
+                    totalCountValue += count;
+                    totalPriceValue += originalPrice * count;
+                    totalDiscountValue += discountAmount * count;
+                    if (isNaN(delivery)) {
+                        delivery = 0;
+                    }
+                    totalDeliveryValue += delivery;
+                    totalPointsValue += points * count;
+                }
+            });
+
+            totalCount.textContent = totalCountValue;
+            totalPrice.textContent = totalPriceValue;
+            totalDiscount.textContent = totalDiscountValue;
+            totalDelivery.textContent = totalDeliveryValue;
+            totalPoints.textContent = totalPointsValue;
+            finalTotal.textContent = (totalPriceValue - totalDiscountValue + totalDeliveryValue);
+        }
+
+        function deleteSelectedProducts() {
+        	 let cartNo = ''; // 초기화
+
+        	    const selectedCheckbox = document.querySelector('input[type="checkbox"].checkboxproduct:checked');
+
+        	    if (selectedCheckbox) {
+        	        // 선택된 체크박스에서 data-cart-no 속성을 읽어옴
+        	        cartNo = selectedCheckbox.value;
+        	        
+        	        console.log(cartNo);
+
+        	        // GET 요청을 수행하고 선택된 상품을 서버로 전송
+        	        window.location.href = `/Kmarket/product/delete.do?cartNo=${cartNo}&uid=${sessUser.uid}`;
+        	        
+        	        
+        	    }
+        	}
+    };
+</script>
+
 <main id="product">
 	<!-- 
 		날짜 : 2023/09/14
@@ -24,7 +113,7 @@
                     
       <form action="#">
         <!-- 장바구니 목록 -->
-        <table>
+        <table id="cartTable">
           <thead>
             <tr>
               <th><input type="checkbox" name="all"></th>
@@ -43,7 +132,7 @@
             </tr>
             <c:forEach var="carts" items="${carts}">
             <tr>
-              <td><input type="checkbox" name=""></td>
+              <td><input type="checkbox" name="" class="checkboxproduct" value="${carts.cartNo}"></td>
               <td>
                 <article>
                   <a href="#"><img src="/Kmarket/thumb/${carts.prodCate1}/${carts.prodCate2}/${carts.thumb1}" alt="상품이미지"></a>
@@ -51,7 +140,7 @@
                     <h2><a href="#">${carts.prodName}</a></h2>
                     <p>${carts.descript}</p>
                   </div>
-                </article>
+                </article>	
               </td>
               <td class="count">${carts.count}</td>
               <td>${carts.price}</td>
@@ -71,75 +160,43 @@
             <tr>
           </tbody>
         </table>
-        <input type="button" name="del" value="선택삭제">
+        <input type="button" name="del" id="deleteButton" value="선택삭제"/>
 
         <!-- 장바구니 전체합계 -->
-        <div class="total">
-          <h2>전체합계</h2>
-          <table border="0">
-        <c:set var="totalProductPrice" value="0" />
-		<c:set var="totalProductCount" value="0" />
-		<c:set var="totalDiscount" value="0" />
-		<c:set var="totalDelivery" value="0" />
-		<c:set var="totalPoints" value="0" />
-		<c:set var="alreadyCalculatedDelivery" value="false" />
-		
-		
-		
-		<c:forEach var="cart" items="${carts}">
-		    <c:set var="subtotal" value="${cart.price * cart.count}" />
-		    <c:set var="totalProductPrice" value="${totalProductPrice + subtotal}" />
-		    <c:set var="totalProductCount" value="${totalProductCount + cart.count}" />
-		    <c:set var="discountAmount" value="${cart.price * cart.count * cart.discount / 100}" />
-		    <c:set var="totalDiscount" value="${totalDiscount + discountAmount}" />
-		    <c:set var="totalPoints" value="${totalPoints + cart.point}" />
-		    <c:if test="${not alreadyCalculatedDelivery}">
-		    	<c:set var="totalDelivery" value="${totalDelivery + cart.delivery}" />
-        		<c:set var="alreadyCalculatedDelivery" value="true" />
-    		</c:if>
-    		<c:set var="totalOrderAmount" value="${totalProductPrice - totalDiscount + totalDelivery}" />
-		    <!-- 나머지 상품 정보 출력 코드 -->
-		</c:forEach>
-            <tr>
-              <td>상품수</td>
-              <td>${totalProductCount}</td>
-            </tr>
-            <tr>
-              <td>상품금액</td>
-              <td><fmt:formatNumber value="${totalProductPrice}" pattern="#,###" /></td>
-            </tr>
-            <tr>
-              <td>할인금액</td>
-              <td><fmt:formatNumber value="${totalDiscount}" pattern="#,###" /></td>
-            </tr>
-            <tr>
-              <td>배송비</td>
-              <td>
-		        <c:choose>
-		            <c:when test="${totalDelivery == 0}">
-		                <span class="delivery">무료배송</span>
-		            </c:when>
-		            <c:otherwise>
-		                <fmt:formatNumber value="${totalDelivery}" pattern="#,###" />원
-		            </c:otherwise>
-		        </c:choose>
-		    </td>
-            </tr>              
-            <tr>
-              <td>포인트</td>
-              <td>${totalPoints}</td>
-            </tr>
-            <tr>
-              <td>전체주문금액</td>
-              <td><fmt:formatNumber value="${totalOrderAmount}" pattern="#,###" /></td>
-            </tr>
-          </table>
-          <input type="submit" name="" value="주문하기">    
-        </div>
+                <div class="total">
+                  <h2>전체합계</h2>
+                  <table border="0">
+                    <tr>
+                      <td>상품수</td>
+                      <td id="totalCount">0</td>
+                    </tr>
+                    <tr>
+                      <td>상품금액</td>
+                      <td id="totalPrice">0</td>
+                    </tr>
+                    <tr>
+                      <td>할인금액</td>
+                      <td id="totalDiscount">0</td>
+                    </tr>
+                    <tr>
+                      <td>배송비</td>
+                      <td id="totalDelivery">0</td>
+                    </tr>              
+                    <tr>
+                      <td>포인트</td>
+                      <td id="totalPoints">0</td>
+                    </tr>
+                    <tr>
+                      <td>전체주문금액</td>
+                      <td id="finalTotal">0</td>
+                    </tr>
+                  </table>
+                  <input type="submit" name="" value="주문하기">    
+                </div>
 
-      </form>
+              </form>
 
-    </section>
-    <!-- 장바구니 페이지 끝 -->
+            </section>
+            <!-- 장바구니 페이지 끝 -->
 </main>
 <%@ include file="../_footer.jsp" %>   

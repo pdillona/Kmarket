@@ -22,5 +22,9 @@ public class CartService {
 		public List<ProductCartDTO> selectCarts(String uid){
 			return dao.selectCarts(uid);
 		}
+		
+		public void deleteCart(String cartNo) {
+			dao.deleteCart(cartNo);
+		}
 
 }
