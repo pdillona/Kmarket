@@ -100,6 +100,12 @@ INSERT INTO `km_product_cate2` VALUES(14, '상품권', 18);
 INSERT INTO `km_product` (`seller`, `prodCate1`, `prodCate2`, `prodName`, `descript`,`company`, `price`, `discount`, `point`, `stock`, `delivery`, `thumb1`, `newThumb1`, `thumb2`, `newThumb2`, `thumb3`, `newThumb3`, `detail`, `newDetail`, `ip`, `rdate`) 
 SELECT `seller`, `prodCate1`, `prodCate2`, `prodName`, `descript`,`company`, `price`, `discount`, `point`, `stock`, `delivery`, `thumb1`, `newThumb1`, `thumb2`, `newThumb2`, `thumb3`, `newThumb3`, `detail`, `newDetail`, `ip`, `rdate` FROM `km_product`;
 
+INSERT INTO `km_product_order` (`ordUid`, `ordCount`, `ordPrice`, `ordDiscount`, `ordDelivery`,`savePoint`, `usedPoint`, `ordTotPrice`, `recipName`, `recipHp`, `recipZip`, `recipAddr1`, `recipAddr2`, `ordStatus`, `ordPayment`, `ordComplete`, `deliveryStatus`, `ordDate`) 
+SELECT `ordUid`, `ordCount`, `ordPrice`, `ordDiscount`, `ordDelivery`,`savePoint`, `usedPoint`, `ordTotPrice`, `recipName`, `recipHp`, `recipZip`, `recipAddr1`, `recipAddr2`, `ordStatus`, `ordPayment`, `ordComplete`, `deliveryStatus`, `ordDate` FROM `km_product_order`;
+
+INSERT INTO `km_product_order_item` (`ordNo`, `prodNo`, `count`, `price`, `discount`, `point`, `delivery`, `total`) 
+SELECT `ordNo`, `prodNo`, `count`, `price`, `discount`, `point`, `delivery`, `total` FROM `km_product_order_item`;
+
 update `km_product` set `sold`=CEILING(RAND()*100);
 update `km_product` set `hit`=CEILING(RAND()*100);
 update `km_product` set `score`=CEILING(RAND()*5);
@@ -176,3 +182,30 @@ SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` FROM `km_product_order_item`
 SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` FROM `km_product_order_item` AS a JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` JOIN `km_member` AS d ON c.`seller`=d.uid WHERE d.`company`='아무회사' AND c.`prodName` LIKE '%여성%' ORDER BY b.`ordNo` DESC LIMIT 0, 10;
 
 SELECT * FROM `km_member` WHERE `type`=1 ORDER BY `rdate` DESC LIMIT 0, 10;
+
+#주문목록
+INSERT INTO `km_product_order` SET `ordUid`='user', 
+		`ordCount`=10, 
+		`ordPrice`=500000, 
+		`ordDiscount`=100000, 
+		`ordDelivery`=0, 
+		`savePoint`=100, 
+		`usedPoint`=1000, 
+		`ordTotPrice`=309000, 
+		`recipName`='user', 
+		`recipHp`='010-1234-3234', 
+		`recipZip`='2134', 
+		`recipAddr1`='아무광역시', 
+		`recipAddr2`='아무아파트', 
+		`ordStatus`='success', 
+		`ordPayment`=1, 
+		`ordComplete`=0, 
+		`deliveryStatus`='yet', 
+		`ordDate`=NOW();
+INSERT INTO `km_product_order_item` VALUES(1000002, 1000000, 50, 500000, 100, 100, 0, 309000);
+UPDATE `km_product_order` SET `ordComplete`=1;
+UPDATE `km_product_order` SET `ordComplete`=2 WHERE `ordNo`=1000000;
+UPDATE `km_product_order` SET `ordStatus`='success' WHERE `ordNo`=1000000;
+UPDATE `km_product_order` SET `ordStatus`='cancel' WHERE `ordNo`=1000001;
+UPDATE `km_product_order` SET `ordStatus`='return' WHERE `ordNo`=1000002;
+UPDATE `km_product_order` SET `ordStatus`='exchange' WHERE `ordNo`=1000000;

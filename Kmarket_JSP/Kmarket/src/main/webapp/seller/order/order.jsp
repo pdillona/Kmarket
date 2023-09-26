@@ -51,7 +51,7 @@ $(function(){
 				<c:forEach var="order" items="${orders}">
 					<tr>
 	                    <td class="ordNum">${order.ordNo}</td>
-	                    <td><img src="/Kmarket/seller/img/${order.productDTO.newThumb1}" alt="${order.productDTO.prodName}"></td>
+	                    <td><img src="/Kmarket/thumb/${order.productDTO.prodCate1}/${order.productDTO.prodCate2}/${order.productDTO.newThumb1}" alt="${order.productDTO.prodName}"></td>
 	                    <td>${order.productDTO.prodName}</td>
 	                    <td>${order.ordDate}</td>
 	                    <td>

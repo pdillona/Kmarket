@@ -143,7 +143,7 @@ public class ProductDAO extends DBHelper{
 	}
 	public List<ProductDTO> selectProducts(int start, SearchDTO search) {
 		List<ProductDTO> products = new ArrayList<ProductDTO>();
-		sql = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`=? ORDER BY `prodNo` DESC LIMIT ?, 10";
+		sql = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE a.`etc1`='n' AND b.`company`=? ORDER BY `prodNo` DESC LIMIT ?, 10";
 		String sql_search1 =  "SELECT * FROM `km_product` "
 							+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
 							+ "WHERE b.`company`=? a.`etc1`='n' AND AND `prodName` LIKE ? "
