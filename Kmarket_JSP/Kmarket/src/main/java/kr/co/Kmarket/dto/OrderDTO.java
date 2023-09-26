@@ -55,11 +55,17 @@ public class OrderDTO {
 	public void setOrdCount(int ordCount) {
 		this.ordCount = ordCount;
 	}
+	public void setOrdCount(String ordCount) {
+		this.ordCount = Integer.parseInt(ordCount);
+	}
 	public int getOrdPrice() {
 		return ordPrice;
 	}
 	public void setOrdPrice(int ordPrice) {
 		this.ordPrice = ordPrice;
+	}
+	public void setOrdPrice(String ordPrice) {
+		this.ordPrice = Integer.parseInt(ordPrice);
 	}
 	public int getOrdDiscount() {
 		return ordDiscount;
@@ -67,11 +73,17 @@ public class OrderDTO {
 	public void setOrdDiscount(int ordDiscount) {
 		this.ordDiscount = ordDiscount;
 	}
+	public void setOrdDiscount(String ordDiscount) {
+		this.ordDiscount = Integer.parseInt(ordDiscount);
+	}
 	public int getOrdDelivery() {
 		return ordDelivery;
 	}
 	public void setOrdDelivery(int ordDelivery) {
 		this.ordDelivery = ordDelivery;
+	}
+	public void setOrdDelivery(String ordDelivery) {
+		this.ordDelivery = Integer.parseInt(ordDelivery);
 	}
 	public int getSavePoint() {
 		return savePoint;
@@ -79,17 +91,26 @@ public class OrderDTO {
 	public void setSavePoint(int savePoint) {
 		this.savePoint = savePoint;
 	}
+	public void setSavePoint(String savePoint) {
+		this.savePoint = Integer.parseInt(savePoint);
+	}
 	public int getUsedPoint() {
 		return usedPoint;
 	}
 	public void setUsedPoint(int usedPoint) {
 		this.usedPoint = usedPoint;
 	}
+	public void setUsedPoint(String usedPoint) {
+		this.usedPoint = Integer.parseInt(usedPoint);
+	}
 	public int getOrdTotPrice() {
 		return ordTotPrice;
 	}
 	public void setOrdTotPrice(int ordTotPrice) {
 		this.ordTotPrice = ordTotPrice;
+	}
+	public void setOrdTotPrice(String ordTotPrice) {
+		this.ordTotPrice = Integer.parseInt(ordTotPrice);
 	}
 	public String getRecipName() {
 		return recipName;
