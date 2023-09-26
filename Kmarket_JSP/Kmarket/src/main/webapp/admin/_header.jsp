@@ -15,7 +15,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/Kmarket/admin/css/admin.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script>
+	const type = ${sessUser.getType()};
+	
+	if(type != 3){
+		location.href ="/Kmarket/index.do?success=606";
+	}
+</script>
 </head>
+
 <body>
     <div id="admin-wrapper">
         <header>

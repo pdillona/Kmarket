@@ -11,7 +11,7 @@ $(function(){
 		const division  = $('input[name=division]').val();
 		const uid   = $('input[name=uid]').val();
 		const name  = $('input[name=name]').val();
-		const email = $('input[name=km_email], input[name=kms_email]').val();
+		const email = $('input[name=km_email], input[name=kms_email]').val() + '@' +$('input[name=km_email2]').val();
 		
 		console.log('division : ' + division);
 		console.log('uid : ' + uid);

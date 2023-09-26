@@ -19,20 +19,18 @@ $("input[name='km_gender']").change(function(){
 });	
 </script>
 <script>
-/* 이메일 입력방식 선택 */
-$('#selectEmail').change(function(){
-   $("#selectEmail option:selected").each(function () {
-		
-		if($(this).val()== '1'){ //직접입력일 경우
-			 $("#km_email2").val('');                        //값 초기화
-			 $("#km_email2").attr("disabled",false); //활성화
-		}else{ //직접입력이 아닐경우
-			 $("#km_email2").val($(this).text());      //선택값 입력
-			 $("#km_email2").attr("disabled",true); //비활성화
-		}
-   });
-});
+$(document).ready(function() {
+    // 이메일 입력방식 선택
+    $('#selectEmail').change(function() {
+        var selectedOption = $("#selectEmail option:selected").val();
 
+        if (selectedOption === '1') { // 직접입력일 경우
+            $("#km_email2").prop("disabled", false).val('');
+        } else { // 직접입력이 아닐 경우
+            $("#km_email2").prop("disabled", true).val(selectedOption);
+        }
+    });
+});
 </script>
         <main id="member">
             <div class="register">
@@ -86,11 +84,11 @@ $('#selectEmail').change(function(){
 							<tr>
 								<th><span class="essential">*</span>EMAIL</th>
 								<td>
-								<input type="text" name="km_email" id="km_email" placeholder="이메일 입력" required />&nbsp;@
-								<input type="text" name="km_email" id="email_domain" disabled value="naver.com" />
+								 <input type="text" name="km_email" id="km_email" placeholder="이메일 입력" required />&nbsp;@
+                            	 <input type="text" name="km_email2" id="km_email2" placeholder="도메인 입력" required />
 								<select name="selectEmail" id="selectEmail">
-									<option value="1">직접입력</option>
-									<option value="naver.com" selected>naver.com</option>
+									<option value="1" selected>직접입력</option>
+									<option value="naver.com">naver.com</option>
 									<option value="daum.net">daum.net</option>
 									<option value="hotmail.com">hotmail.com</option>
 									<option value="nate.com">nate.com</option>
