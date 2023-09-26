@@ -61,6 +61,12 @@ public enum CsArticleService {
 		 
 	 }
 	
+	 public List<CsCateDetailDTO> selectCsWriteCate(String cateDetail){
+		 
+		 
+		 return dao.selectCsWriteCate(cateDetail);
+		 
+	 }
 	public List<CsCateAsideDTO> selectCsWriteCateFAQ(String cateDetail){
 		
 		
