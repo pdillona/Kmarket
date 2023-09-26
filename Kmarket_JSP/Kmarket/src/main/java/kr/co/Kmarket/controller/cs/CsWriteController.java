@@ -43,6 +43,7 @@ public class CsWriteController extends HttpServlet{
 		
 		List<CsCateDetailDTO> cateDto = aService.selectCsWriteCate(cateDetail);
 		logger.debug("cateDto 값이 나왔다~~~~~");
+		logger.debug("cateDto 값이 나왔다~~~~~");
 		
 		
 		
