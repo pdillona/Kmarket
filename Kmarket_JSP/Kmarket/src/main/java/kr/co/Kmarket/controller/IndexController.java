@@ -63,6 +63,11 @@ public class IndexController extends HttpServlet{
 		logger.debug("productsRdate : "+ productsRdate);
 		logger.debug("productsDiscount : "+ productsDiscount);
 		
+		//로그인 필터
+		String success = req.getParameter("success");
+		
+		req.setAttribute("success", success);
+		
 		req.setAttribute("categories", categories);
 		req.setAttribute("productsaside", productsaside);
 		req.setAttribute("productshit", productshit);
