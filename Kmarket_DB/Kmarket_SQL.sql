@@ -5,6 +5,7 @@ ALTER TABLE `km_product_order` AUTO_INCREMENT=1000000;
 
 ALTER TABLE `km_product` MODIFY COLUMN `seller` VARCHAR(20) AFTER `prodNo`;
 ALTER TABLE `km_product` MODIFY COLUMN `prodName` VARCHAR(100) AFTER `prodCate2`;
+ALTER TABLE `km_product` MODIFY COLUMN `etc1` CHAR(1) AFTER `rdate`;
 
 ALTER TABLE `km_cs_file` RENAME `km_file`;	
 
@@ -14,6 +15,7 @@ ALTER TABLE `km_product` ADD `newThumb3` VARCHAR(255) NOT NULL AFTER `thumb3`;
 ALTER TABLE `km_product` ADD `newDetail` VARCHAR(255) NOT NULL AFTER `detail`;	
 ALTER TABLE `km_product_order` ADD `ordStatus` VARCHAR(45) AFTER `recipAddr2`;	
 ALTER TABLE `km_product_order` ADD `deliveryStatus` VARCHAR(45) AFTER `ordComplete`;
+
 
 INSERT INTO `km_product_cate1` VALUES(10, '브랜드패션');
 INSERT INTO `km_product_cate1` VALUES(11, '패션의류·잡화·뷰티');

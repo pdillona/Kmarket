@@ -36,7 +36,7 @@ public class ProductDTO {
 	private String origin;
 	private String ip;
 	private String rdate;
-	private int etc1;
+	private String etc1;
 	private int etc2;
 	private String etc3;
 	private String etc4;
@@ -256,10 +256,10 @@ public class ProductDTO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	public int getEtc1() {
+	public String getEtc1() {
 		return etc1;
 	}
-	public void setEtc1(int etc1) {
+	public void setEtc1(String etc1) {
 		this.etc1 = etc1;
 	}
 	public int getEtc2() {
