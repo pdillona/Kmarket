@@ -50,7 +50,6 @@
 			            <h2>안전거래 관련 문의 내용입니다.</h2>
 			        </c:when>
 			        <c:otherwise>
-			            <!-- 기본값 설정 또는 처리할 내용을 여기에 추가하세요. -->
 			        </c:otherwise>
 			    </c:choose>
 			 </nav>

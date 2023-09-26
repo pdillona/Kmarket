@@ -39,6 +39,11 @@ public class NoticeController extends HttpServlet{
 		logger.debug("type : "+type);
 		logger.debug("pg : "+pg);
 		
+		logger.debug("SelectQnaArticlesAll에서 에러나는데 이게맞냐? : "+cateDetail);
+		logger.debug("SelectQnaArticlesAll에서 에러나는데 이게맞냐? : "+ pg);
+		logger.debug("SelectQnaArticlesAll에서 에러나는데 이게맞냐? : "+ type);
+		logger.debug("SelectQnaArticlesAll에서 에러나는데 이게맞냐? : "+ group);
+		
 		// 현재 페이지 번호
 		int currentPage = ps.getCurrentPage(pg);
 		
@@ -59,9 +64,13 @@ public class NoticeController extends HttpServlet{
 		// 시작 인덱스
 		int start = ps.getStartNum(currentPage);
 		
+		logger.debug("start epdlxj: "+ start);
 		
 		// 현재 페이지 게시물 조회
 		List<CsArticleDTO> articles = articleService.SelectQnaArticlesAll(group, start, cateDetail, type);
+		
+		logger.debug("articles데이터 투스트링: "+articles.toString());
+		
 		
 		req.setAttribute("group", group);
 		req.setAttribute("type", type);
@@ -72,6 +81,7 @@ public class NoticeController extends HttpServlet{
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("cateDetail", cateDetail);
+		
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/board/notice.jsp");

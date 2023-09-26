@@ -100,7 +100,7 @@
               <li><a href="${ctxPath}/cs/notice.do?group=notice&aeName=all">공지사항</a></li>
               <li><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all">자주묻는질문</a></li>
               <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=all">문의하기</a></li>
-              <li><a href="${ctxPath}/cs/index.do">고객센터</a></li>
+              <li><a href="${ctxPath}/cs/index.do?group=notice&cateDetail=all&type=1">고객센터</a></li>
             </ul>
           </div>
         </div>

@@ -43,8 +43,8 @@ public class FaqWriterController extends HttpServlet{
 		
 		
 		req.setAttribute("group", group);
-		req.setAttribute("type", type);
-		req.setAttribute("cateDetail", cateDetail);
+		req.setAttribute("type", type);				
+		req.setAttribute("cateDetail", cateDetail); 
 		req.setAttribute("cateDto", cateDto);
 		
 		

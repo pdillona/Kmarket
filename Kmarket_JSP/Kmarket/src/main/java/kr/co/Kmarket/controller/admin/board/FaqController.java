@@ -59,7 +59,7 @@ public class FaqController extends HttpServlet{
 		// 시작 인덱스
 		int start = ps.getStartNum(currentPage);
 		
-		
+		logger.debug("start epdlxj: "+ start);
 		// 현재 페이지 게시물 조회
 		List<CsArticleDTO> articles = articleService.SelectQnaArticlesAll(group, start, cateDetail,type);
 		

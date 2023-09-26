@@ -66,13 +66,13 @@
                 	    <!-- 페이지 네비게이션 -->
 			        <div class="page">
 			        	<c:if test="${pageGroupStart > 1}">
-			            	<a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=${cateDetail}&type=20&pg=${pageGroupStart - 1}" class="prev">이전</a>
+			            	<a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=${cateDetail}&type=1&pg=${pageGroupStart - 1}" class="prev">이전</a>
 			            </c:if>
 			            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-			            	<a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=${cateDetail}&type=20&pg=${i}&" class="num ${currentPage == i?'current':'off'}">${i}</a>
+			            	<a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=${cateDetail}&type=1&pg=${i}&" class="num ${currentPage == i?'current':'off'}">${i}</a>
 			            </c:forEach>
 			            <c:if test="${pageGroupEnd < lastPageNum}">
-			            	<a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=${cateDetail}&type=20&pg=${pageGroupEnd + 1}" class="next">다음</a>
+			            	<a href="${ctxPath}/admin/board/notice.do?group=notice&cateDetail=${cateDetail}&type=1&pg=${pageGroupEnd + 1}" class="next">다음</a>
 			            </c:if>
 			        </div>
                 </section>                

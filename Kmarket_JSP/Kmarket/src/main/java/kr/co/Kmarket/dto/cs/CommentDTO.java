@@ -34,13 +34,25 @@ public class CommentDTO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+	public void setMaskingWriter(String writer) {
+		if(writer != null && writer.length() >= 3) {
+			String newLength = writer.substring(0, writer.length() - 3) ;
+			
+			this.writer = newLength + "***"  ;
+		}else {
+			this.writer = writer;
+
+		}
+	}
 	public String getRdate() {
 		return rdate;
 	}
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
+	public void setRdateYYMMDD(String rdate) {
+		this.rdate = rdate.substring(2, 10);
+	}
 	
 	
 	

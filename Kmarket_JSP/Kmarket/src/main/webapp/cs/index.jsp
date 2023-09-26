@@ -4,55 +4,52 @@
         <div class="main">
           <h1 class="title"><strong>케이마켓</strong>이 도와드릴게요!</h1>              
           <section class="notice">
-            <h1>공지사항<a href="${ctxPath}/cs/notice.do?group=notice&aeName=all&type=1">전체보기</a></h1>
-            <ul>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-            </ul>
+            <h1>공지사항<a href="${ctxPath}/cs/notice.do?group=notice&cate=all&cateDetail=all&type=1">전체보기</a></h1>
+             <c:choose>
+                <c:when test="${!empty notice }">
+	                <c:forEach var="notice" items="${notice}">
+	                <ul>
+	                    <li>
+	                        <a href="${ctxPath }/cs/view.do?group=notice&cate=All&aNo=${notice.aNo}" class="title">
+	                        	[${notice.dName}] ${notice.title}
+	                        </a>
+	                        <span class="date">${notice.rdate}</span>
+	                    </li>
+	                </ul>
+	                </c:forEach>
+                </c:when>
+                <c:otherwise>
+           			<ul>
+						<li>등록된 게시물이 없습니다.</li>
+					</ul>
+        		</c:otherwise>
+        		</c:choose>
           </section>
         
-          <section class="faq">
-            <h1>자주 묻는 질문<a href="${ctxPath}/cs/faq.do?group=faq&aeName=all">전체보기</a>
+          <section class="faq"><!-- aename제거 -->
+            <h1>자주 묻는 질문<a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=member">전체보기</a>
             </h1>
             <ol>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=member"><span>회원</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=member"><span>회원</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=coupon&"><span>쿠폰/이벤트</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=coupon"><span>쿠폰/이벤트</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=order"><span>주문/결제</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=order"><span>주문/결제</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=delivery"><span>배송</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=delivery"><span>배송</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=cancle"><span>취소/반품/교환</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=cancle"><span>취소/반품/교환</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=travel"><span>여행/숙박/항공</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=travel"><span>여행/숙박/항공</span></a>
               </li>
               <li>
-                <a href="${ctxPath}/cs/faq.do?group=qna&aeName=safe"><span>안전거래</span></a>
+                <a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=safe"><span>안전거래</span></a>
               </li>
             </ol>
           </section>
@@ -63,43 +60,25 @@
               <a href="${ctxPath}/cs/qna.do?group=qna&cateDetail=all&type=20">전체보기</a>
             </h1>
             <ul>
-              <li>
-                <a href="${ctxPath}/qna/list.do" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-              <li>
-                <a href="#" class="title">[쿠폰/이벤트] 스마일포인트는 어디에 사용하나요?</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-              <li>
-                <a href="#" class="title">[주문/결제] 신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-              <li>
-                <a href="#" class="title">[배송] 주문한 상품은 언제 배송되나요?</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-              <li>
-                <a href="#" class="title">[취소/반품/교환] 주문을 취소하고 싶어요.</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-            </ul>
-            <a href="#" class="ask">문의글 작성 ></a>
+                       <c:choose>
+                <c:when test="${!empty qna }">
+	                <c:forEach var="qna" items="${qna}">
+	                <ul>
+	                    <li>
+	                        <a href="${ctxPath }/cs/view.do?group=qna&cate=All&aNo=${qna.aNo}" class="title">
+	                        	[${qna.dName}] ${qna.title}
+	                        </a>
+	                        <span class="date">${qna.rdate}</span>
+	                    </li>
+	                </ul>
+	                </c:forEach>
+                </c:when>
+                <c:otherwise>
+           			<ul>
+						<li>등록된 게시물이 없습니다.</li>
+					</ul>
+        		</c:otherwise>
+        		</c:choose>
           </section>
 
           <section class="tel">

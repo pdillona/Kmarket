@@ -1,12 +1,24 @@
 package kr.co.Kmarket.dto.cs;
 
+import java.util.List;
+
 public class CsCateDetailDTO {
 
 	private String aeName;
 	private int type;
 	private String dName;
 	
+	private List<CsArticleDTO> dto;
 	
+	
+	
+	
+	public List<CsArticleDTO> getDto() {
+		return dto;
+	}
+	public void setDto(List<CsArticleDTO> dto) {
+		this.dto = dto;
+	}
 	public String getAeName() {
 		return aeName;
 	}

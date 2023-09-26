@@ -102,6 +102,16 @@ public class CsArticleDTO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+	public void setMaskingWriter(String writer) {
+		if(writer != null && writer.length() >= 3) {
+			String newLength = writer.substring(0, writer.length() - 3) ;
+			
+			this.writer = newLength + "***"  ;
+		}else {
+			this.writer = writer;
+
+		}
+	}
 	public String getRegip() {
 		return regip;
 	}
@@ -136,8 +146,8 @@ public class CsArticleDTO {
 	public String toString() {
 		return "CsArticleDTO [aNo=" + aNo + ", group=" + group + ", cateDetail=" + cateDetail + ", title=" + title
 				+ ", content=" + content + ", file=" + file + ", writer=" + writer + ", regip=" + regip + ", rdate="
-				+ rdate + ", type=" + type + ", uLevel=" + uLevel + ", aStatus=" + aStatus + ", fileDto=" + fileDto
-				+ "]";
+				+ rdate + ", type=" + type + ", uLevel=" + uLevel + ", dName=" + dName + ", aStatus=" + aStatus
+				+ ", fileDto=" + fileDto + "]";
 	}
 
 

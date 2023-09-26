@@ -1,26 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
-<script>
-  $(function(){
-    $('.more').click(function(e){
-      e.preventDefault();
-      
-      /*
-      let item = $(this).parent().find('> li:nth-child(n+4)');
-      let isVisible = item.is(':visible');
-
-      console.log('isVisible : ' + isVisible);
-
-      if(isVisible){
-        item.slideUp(100);
-      }else{
-        item.slideDown(100);
-      }
-      */
-
-    });
-  });
-</script>
       <section id="cs">
         <div class="faq">
           <nav>
@@ -32,71 +11,96 @@
             <aside>
               <h2>자주묻는 질문</h2>
               <ul>
-      			<li class="on"><a href="${ctxPath}/cs/qna.do?group=qna&aeName=member&type=20">회원</a></li>
-                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=coupon&type=20">쿠폰/이벤트</a></li>
-                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=order&type=20">주문/결제</a></li>
-                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=delivery&type=20">배송</a></li>
-                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=cancle&type=20">취소/반품/교환</a></li>
-                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=travel&type=20">여행/숙박/항공</a></li>
-                <li><a href="${ctxPath}/cs/qna.do?group=qna&aeName=safe&type=20">안전거래</a></li>
+      			<li class="${cateDetail eq 'member'?'on':'off'}"><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=member">회원</a></li>
+                <li class="${cateDetail eq 'coupon' || cateDetail eq 'event' ?'on':'off'}"><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=coupon">쿠폰/이벤트</a></li>
+                <li class="${cateDetail eq 'order'?'on':'off'}"><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=order">주문/결제</a></li>
+                <li class="${cateDetail eq 'delivery'?'on':'off'}"><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=delivery">배송</a></li>
+                <li class="${cateDetail eq 'cancle'?'on':'off'}"><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=cancle">취소/반품/교환</a></li>
+                <li class="${cateDetail eq 'travel'?'on':'off'}"><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=travel">여행/숙박/항공</a></li>
+                <li class="${cateDetail eq 'safe'?'on':'off'}"><a href="${ctxPath}/cs/faq.do?group=faq&aeName=all&type=20&cateDetail=safe">안전거래</a></li>
               </ul>
             </aside>
-            <article>              
-              <nav>
-                <h1>회원</h1>
-                <h2>가장 자주 묻는 질문입니다.</h2>
-              </nav>
-
-              <div>
-                <h3>가입</h3>
-                <ul>
-                  <li><a href="./view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>탈퇴</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>회원정보</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>로그인</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-
+			<article>
+				<nav>
+				<c:choose>
+			        <c:when test="${cateDetail == 'all'}">
+			            <h1>전체보기</h1>
+			            <h2>전체 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'member'}">
+			            <h1>회원</h1>
+			            <h2>회원 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'event' || cateDetail == 'coupon'}">
+			            <h1>이벤트/쿠폰</h1>
+			            <h2>이벤트/쿠폰 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'hazard'}">
+			            <h1>위해상품</h1>
+			            <h2>위해상품 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'order'}">
+			            <h1>주문/결제</h1>
+			            <h2>주문/결제 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'delivery'}">
+			            <h1>배송</h1>
+			            <h2>배송 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'cancle'}">
+			            <h1>취소/반품/교환</h1>
+			            <h2>취소/반품/교환 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'travel'}">
+			            <h1>여행/숙박/항공</h1>
+			            <h2>여행/숙박/항공 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:when test="${cateDetail == 'safe'}">
+			            <h1>안전거래</h1>
+			            <h2>안전거래 관련 문의 내용입니다.</h2>
+			        </c:when>
+			        <c:otherwise>
+			            <!-- 기본값 설정 또는 처리할 내용을 여기에 추가하세요. -->
+			        </c:otherwise>
+			    </c:choose>
+				</nav>
+				
+				<c:choose>
+					<c:when test="${!empty cs }">
+						<c:forEach var="type" items="${types}">
+			                <div>
+			                    <h3>${type.dName }</h3>
+			                    <ul>
+			                    	<!-- varStatus : 상태용 변수(참고 링크 : https://jetalog.net/20) -->
+									<c:forEach var="board" items="${type.dto}" varStatus="status">
+										<c:if test="${board.cateDetail eq type.cateDetail}">
+					                        <li class="${status.index ge 3 
+					                        	&& status.index le 9 ? board.type : '' }">
+					                            <a href="${path }/cs/faqBoard/view.do?group=faq&cate=${cate}&bno=${board.bno}">
+					                                <span>Q.</span>${board.title }
+					                            </a>
+					                        </li>
+				                        </c:if>
+			                        </c:forEach>
+			                        <li class="more">
+			                            <a class="moreAteg ${type.type }" href="#">더보기</a>
+			                            <a class="lessAteg ${type.type }" style="display: none" href="#">간단히보기</a>
+			                        </li>
+			                    </ul>
+			                </div>
+	                	</c:forEach>
+	                </c:when>
+	                <c:otherwise>
+		                <ul>
+							<li>등록된 게시물이 없습니다.</li>
+						</ul>
+	                </c:otherwise>
+                </c:choose>
             </article>
-          </section>
-        </div>
-      </section>
-
+        </section>
+    </div>
+</section>
+<script src="${ctxPath}/cs/js/csScript.js"></script>
       <footer>
         <ul>
           <li><a href="#">회사소개</a></li>
@@ -122,6 +126,5 @@
           </p>
         </div>
       </footer>
-    </div>
   </body>
 </html>

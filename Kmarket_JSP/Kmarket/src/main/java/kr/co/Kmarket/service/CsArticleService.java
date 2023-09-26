@@ -56,7 +56,7 @@ public enum CsArticleService {
 			 
 		 }else {
 			 
-			 return dao.SelectQnaArticlesAll(group, start, cateDetail);
+			 return dao.SelectQnaArticlesAll(group, start, cateDetail, type);
 		 }
 		 
 	 }
@@ -74,9 +74,12 @@ public enum CsArticleService {
 	}
 
 	 
+	public List<CsCateDetailDTO> selectCsCateDetailFAQ(String cateDetail){
+		
+		
+		return dao.selectCsCateDetailFAQ(cateDetail);
+	}
 	 
-	 
-//================ qna end======================================================
 	 
 	 
 	 
@@ -101,6 +104,14 @@ public enum CsArticleService {
 	
 	public List<CsArticleDTO> selectArticles(String cate, int start) {
 		return dao.selectArticles(cate, start);
+	}
+	
+	public List<CsArticleDTO> selectArticlesIndex(String group) {
+		return dao.selectArticlesIndex(group);
+	}
+	
+	public List<CsArticleDTO> selectArticlesFAQ(String group, String cateDetail) {
+		return dao.selectArticlesFAQ(group, cateDetail);
 	}
 	
 	public void updateArticle(CsArticleDTO dto) {

@@ -24,7 +24,7 @@
 			</div>
 			<div class="logo">
 				<div>
-					<a href="${ctxPath}/cs/index.do"><img src="./images/logo.png" alt="로고" />고객센터</a>
+					<a href="${ctxPath}/cs/index.do?group=qna&cateDetail=all&type=20"><img src="./images/logo.png" alt="로고" />고객센터</a>
 				</div>
 			</div>
 		</header>
