@@ -41,16 +41,19 @@ public class UserAdminController extends HttpServlet{
 		SearchDTO searchDTO = new SearchDTO();
 		searchDTO.setSearch(search);
 		searchDTO.setSearch_text(search_text);
-		searchDTO.setType(type);
+		
+		logger.debug("searchDTO : "+searchDTO);
 		
 		// 현재 페이지 계산
 		int currentPage = pageService.getCurrentPage(pg);
+		logger.debug("currentPage : "+currentPage);
 		
 		// Limit 시작값 계산
 		int start = pageService.getStartNum(currentPage);
+		logger.debug("start : "+start);
 		
 		// 전체 게시물 개수 조회
-		int total = memberService.selectCountTotal(searchDTO);
+		int total = memberService.selectCountTotal(searchDTO, type);
 		logger.debug("total : "+total);
 		
 		// 마지막 페이지 번호 계산
@@ -62,7 +65,7 @@ public class UserAdminController extends HttpServlet{
 		// 페이지 시작번호 계산
 		int pageStartNum = pageService.getPageStartNum(total, currentPage);
 		
-		List<MemberDTO> admins = memberService.selectMembers(start, searchDTO);
+		List<MemberDTO> admins = memberService.selectMembers(start, searchDTO, type);
 		
 		req.setAttribute("admins", admins);
 		req.setAttribute("currentPage", currentPage);
