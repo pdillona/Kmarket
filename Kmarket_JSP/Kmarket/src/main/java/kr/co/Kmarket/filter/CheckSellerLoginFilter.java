@@ -23,7 +23,7 @@ import kr.co.Kmarket.dto.member.MemberDTO;
  * 
  * */
 
-public class CheckLoginFilter implements Filter {
+public class CheckSellerLoginFilter implements Filter {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -39,13 +39,13 @@ public class CheckLoginFilter implements Filter {
 				
 				MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
 				
-				if(sessUser != null) { //회원이면
+				if(sessUser.getType() == 2) { //판매자면
 					logger.debug("here1...");
 					chain.doFilter(request, response);
 				}else {
 					// 다음 필터 호출, 필터 없으면 최종 자원 요청
 					logger.debug("here2...");
-					((HttpServletResponse)response).sendRedirect("/Kmarket/member/login.do?success=101");
+					((HttpServletResponse)response).sendRedirect("/Kmarket/index.do?success=506");
 				}
 		
 		

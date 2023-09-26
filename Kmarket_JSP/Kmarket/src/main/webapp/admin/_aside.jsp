@@ -13,14 +13,14 @@
                     <li>
                         <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
                         <ol>
-                            <li><a href="${ctxPath}/admin/store/userSeller.do">판매자관리</a></li>
-                            <li><a href="${ctxPath}/admin/store/userSeller.do">상품관리</a></li>
+                            <li><a href="${ctxPath}/admin/store/userSeller.do?type=2">판매자관리</a></li>
+                            <li><a href="${ctxPath}/admin/store/list.do">상품관리</a></li>
                         </ol>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
                         <ol>
-                            <li><a href="${ctxPath}/admin/user/user.do">회원정보관리</a></li>
+                            <li><a href="${ctxPath}/admin/user/user.do?type=1&level=0">회원정보관리</a></li>
                             <li><a href="${ctxPath}/admin/user/point.do">포인트관리</a></li>
                             <li><a href="${ctxPath}/admin/user/accessorTotal.do">접속자집계</a></li>
                         </ol>

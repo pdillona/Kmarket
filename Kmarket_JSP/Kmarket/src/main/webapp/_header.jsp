@@ -27,7 +27,13 @@
           $(this).closest('#bannerTop').removeClass('on');
         });
       });
-	
+      
+		const success = ${success};
+		if(success == 606){
+			alert('관리자 권한이 없습니다.');
+		}else if(success == 506) {
+			alert('판매자 권한이 없습니다.');
+		}
      
     </script>
 </head>
