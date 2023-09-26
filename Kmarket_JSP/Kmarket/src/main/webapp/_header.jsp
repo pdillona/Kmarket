@@ -68,7 +68,7 @@
 		            	<c:otherwise>
 		            		<span>${sessUser.name}님 환영합니다.</span>
 		            		<a href="#">마이페이지</a>
-		            		<a href="#">
+		            		<a href="${ctxPath}/product/cart.do?uid=${sessUser.uid}">
 		            		<i class="fa fa-shopping-cart" aria-hidden="true">
 		            		</i>&nbsp;장바구니</a>
 		            	</c:otherwise>
