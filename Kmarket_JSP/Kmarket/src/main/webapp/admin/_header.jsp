@@ -30,7 +30,7 @@
             <div>
                 <a href="${ctxPath}/admin" class="logo"><img src="/Kmarket/admin/img/admin_logo.png" alt="admin_logo"/></a>
                 <p>
-                    <span>홍길동님 반갑습니다.</span>
+                    <span>${sessUser.name}님 반갑습니다.</span>
                     <a href="${ctxPath}">HOME |</a>
                     <a href="${ctxPath}/member/logout.do">로그아웃 |</a>
                     <a href="${ctxPath}/cs/index.do">고객센터</a>
