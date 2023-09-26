@@ -38,19 +38,8 @@ public class CsViewController extends HttpServlet{
 		logger.debug("뷰 컨트롤러 컨텐츠값~~"+dto.getContent());
 		
 		
-		/*
-		 * String url = "";
-		 * 
-		 * if(group.equals("notice")) {
-		 * 
-		 * url = "/cs/qna/view.jsp";
-		 * 
-		 * }else if(group.equals("faq")) {
-		 * 
-		 * 
-		 * }else { url = "/cs/qna/view.jsp"; }
-		 */
-		req.setAttribute(group, "group");
+
+		req.setAttribute("group", group);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
 		dispatcher.forward(req, resp);
