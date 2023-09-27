@@ -15,10 +15,12 @@ import kr.co.Kmarket.dto.SearchDTO;
 public class OrderDAO extends DBHelper{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	String sql;
-	public void insertOrder (OrderDTO dto) {
+	public int insertOrder (OrderDTO dto) {
+		int ordNo=0;
 		conn = getConnection();
 		
 		try {
+			conn.setAutoCommit(false);
 			sql="INSERT INTO `km_product_order` SET "
 					+ "`ordUid`=?,"
 					+ "`ordCount`=?,"
@@ -38,6 +40,7 @@ public class OrderDAO extends DBHelper{
 					+ "`ordComplete`=1,"
 					+ "`deliveryStatus`='yet',"
 					+ "`ordDate`=NOW()";
+			stmt = conn.createStatement();
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getOrdUid());
 			psmt.setInt(2, dto.getOrdCount());
@@ -57,12 +60,17 @@ public class OrderDAO extends DBHelper{
 			//psmt.setInt(16, dto.getOrdComplete());
 			//psmt.setString(17, dto.getDeliveryStatus());
 			psmt.executeUpdate();
-			
+			rs = stmt.executeQuery("SELECT MAX(`ordNo`) FROM `km_product_order`");
+			conn.commit();
+			if(rs.next()) {
+				ordNo = rs.getInt(1);
+			}
 			close();
 			
 		} catch (Exception e) {
 			logger.error("insertOrder error : "+e.getMessage());
 		}
+		return ordNo;
 		
 	}
 	public OrderDTO selectOrder (String ordNo) {
@@ -327,32 +335,39 @@ public class OrderDAO extends DBHelper{
 		List<OrderDTO> orders = new ArrayList<>();
 		conn = getConnection();
 		try {
-			sql= "SELECT * FROM `km_product_order` WHERE `ordUid`=?";
+			sql= "SELECT * FROM `km_product_order` AS a JOIN `km_product_order_item` AS b ON a.`ordNo` = b.`ordNo` "
+					+ "JOIN `km_product` AS c ON b.`prodNo`= c.`prodNo` "
+					+ "WHERE `ordUid`=?";
 			psmt=conn.prepareStatement(sql);
 			psmt.setString(1, orduid);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
 				OrderDTO dto = new OrderDTO();
-				dto.setOrdNo(rs.getInt(1));
-				dto.setOrdUid(rs.getString(2));
-				dto.setOrdCount(rs.getInt(3));
-				dto.setOrdPrice(rs.getInt(4));
-				dto.setOrdDiscount(rs.getInt(5));
-				dto.setOrdDelivery(rs.getInt(6));
-				dto.setSavePoint(rs.getInt(7));
-				dto.setUsedPoint(rs.getInt(8));
-				dto.setOrdTotPrice(rs.getInt(9));
-				dto.setRecipName(rs.getString(10));
-				dto.setRecipHp(rs.getString(11));
-				dto.setRecipZip(rs.getString(12));
-				dto.setRecipAddr1(rs.getString(13));
-				dto.setRecipAddr2(rs.getString(14));
-				dto.setOrdStatus(rs.getString(15));
-				dto.setOrdPayment(rs.getInt(16));
-				dto.setOrdComplete(rs.getInt(17));
-				dto.setDeliveryStatus(rs.getString(18));
-				dto.setOrdDate(rs.getString(19));
+				dto.setOrdNo(rs.getInt("ordNo"));
+				dto.setOrdUid(rs.getString("ordUid"));
+				dto.setOrdCount(rs.getInt("ordCount"));
+				dto.setOrdPrice(rs.getInt("ordPrice"));
+				dto.setOrdDiscount(rs.getInt("ordDiscount"));
+				dto.setOrdDelivery(rs.getInt("ordDelivery"));
+				dto.setSavePoint(rs.getInt("savePoint"));
+				dto.setUsedPoint(rs.getInt("usedPoint"));
+				dto.setOrdTotPrice(rs.getInt("ordTotPrice"));
+				dto.setRecipName(rs.getString("recipName"));
+				dto.setRecipHp(rs.getString("recipHp"));
+				dto.setRecipZip(rs.getString("recipZip"));
+				dto.setRecipAddr1(rs.getString("recipAddr1"));
+				dto.setRecipAddr2(rs.getString("recipAddr2"));
+				dto.setOrdStatus(rs.getString("ordStatus"));
+				dto.setOrdPayment(rs.getInt("ordPayment"));
+				dto.setOrdComplete(rs.getInt("ordComplete"));
+				dto.setDeliveryStatus(rs.getString("deliveryStatus"));
+				dto.setOrdDate(rs.getString("ordDate"));
+				dto.setProdCate1(rs.getInt("prodCate1"));
+				dto.setProdCate2(rs.getInt("prodCate2"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
 				orders.add(dto);
 			}
 			close();

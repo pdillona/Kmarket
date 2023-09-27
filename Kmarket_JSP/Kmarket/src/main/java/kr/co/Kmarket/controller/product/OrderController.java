@@ -136,11 +136,12 @@ public class OrderController extends HttpServlet{
 		//dto.setOrdComplete(2);
 		//dto.setDeliveryStatus("yet");
 		
-		oService.insertOrder(dto);
+		int ordNo = oService.insertOrder(dto);
+		
 		
 		logger.info("...insertOrder......."+dto.toString());
 		OrderItemDTO dto2 = new OrderItemDTO();
-		dto2.setOrdNo(dto.getOrdNo());
+		dto2.setOrdNo(ordNo);
 		dto2.setProdNo(prodNo);
 		dto2.setCount(count);
 		dto2.setPrice(price);
@@ -148,6 +149,7 @@ public class OrderController extends HttpServlet{
 		dto2.setPoint(point);
 		dto2.setDelivery(delivery);
 		dto2.setTotal(finalPriceWithDelivery);
+		
 		
 		otService.insertOrderItem(dto2);
 		

@@ -10,8 +10,8 @@ import kr.co.Kmarket.dto.SearchDTO;
 public class OrderService {
 	OrderDAO dao = new OrderDAO();
 	
-	public void insertOrder (OrderDTO dto) {
-		dao.insertOrder(dto);
+	public int insertOrder (OrderDTO dto) {
+		return dao.insertOrder(dto);
 	}
 	public OrderDTO selectOrder (String ordNo) {
 		return dao.selectOrder(ordNo);
