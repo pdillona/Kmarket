@@ -88,11 +88,9 @@ public class CartController extends HttpServlet{
 	String delivery = req.getParameter("delivery");
 	String total = req.getParameter("total");
 	String finalPrice = req.getParameter("final");
-	String count = req.getParameter("count2");
+	String count = req.getParameter("count");
 	
-	if(count.equals(count)) {
-		count = "1";
-	}
+	
 	
 	
 	logger.debug("thumb1 : " + thumb1);
