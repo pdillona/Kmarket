@@ -239,25 +239,25 @@
                     </tr>
                   </table>
                   <form id="orderForm" action="${ctxPath}/product/order.do" method="post">
-                  	<input type="text" name="prodNo" value="">
-       				<input type="text" name="orduid" value="">
-       				<input type="text" name= "recipName" value="">
-					<input type="text" name= "recipHp" value="">
-					<input type="text" name= "recipZip" value="">
-					<input type="text" name= "recipAddr1" value="">
-					<input type="text" name= "recipAddr2" value="">
-					<input type="text" name= "savePoint" value="">
-					<input type="text" name= "thumb1" value="">
-					<input type="text" name= "pName" value="">
-					<input type="text" name= "pDescript" value="">
-					<input type="text" name= "count" value="">
-					<input type="text" name= "price" value="">
-					<input type="text" name= "discount" value="}">
-					<input type="text" name= "point" value="">
-					<input type="text" name= "delivery" value="">
-					<input type="text" name= "total" value="">
-					<input type="text" name= "final" value="">
-                  	<input type="button" name="orderButton" value="주문하기" onclick="submitOrder()">
+                  	<input type="hidden" name="prodNo" value="">
+       				<input type="hidden" name="orduid" value="">
+       				<input type="hidden" name= "recipName" value="">
+					<input type="hidden" name= "recipHp" value="">
+					<input type="hidden" name= "recipZip" value="">
+					<input type="hidden" name= "recipAddr1" value="">
+					<input type="hidden" name= "recipAddr2" value="">
+					<input type="hidden" name= "savePoint" value="">
+					<input type="hidden" name= "thumb1" value="">
+					<input type="hidden" name= "pName" value="">
+					<input type="hidden" name= "pDescript" value="">
+					<input type="hidden" name= "count" value="">
+					<input type="hidden" name= "price" value="">
+					<input type="hidden" name= "discount" value="}">
+					<input type="hidden" name= "point" value="">
+					<input type="hidden" name= "delivery" value="">
+					<input type="hidden" name= "total" value="">
+					<input type="hidden" name= "final" value="">
+                  	<input type="submit" name="" value="주문하기" onclick="submitOrder()">
                   </form>
                 </div>
 
