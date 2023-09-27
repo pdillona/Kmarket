@@ -44,7 +44,7 @@
           <a href="${ctxPath}/product/view.do?prodCate1=${productsaside.prodCate1}&prodCate2=${productsaside.prodCate2}&prodNo=${productsaside.prodNo}" >
             <div class="thumb">
               <i>${loop.index + 1}</i>
-              <img src="${ctxPath}/thumb/${productsaside.prodCate1}/${productsaside.prodCate2}/${productsaside.thumb1}" alt="상품 이미지">
+              <img src="${ctxPath}/thumb/${productsaside.prodCate1}/${productsaside.prodCate2}/${productsaside.newThumb1}" alt="상품 이미지">
             </div>
             <h2>${productsaside.prodName}</h2>
             <div class="org_price">

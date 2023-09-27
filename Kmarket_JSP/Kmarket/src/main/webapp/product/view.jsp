@@ -115,7 +115,7 @@
         <!-- 상품 전체 정보 내용 -->                
         <article class="info">
             <div class="image">
-                <img src="${ctxPath}/thumb/${prodCate1}/${prodCate2}/${product.thumb3}" alt="상품이미지"/>
+                <img src="${ctxPath}/thumb/${prodCate1}/${prodCate2}/${product.newThumb3}" alt="상품이미지"/>
             </div>
             <div class="summary">
                 <nav>
@@ -234,7 +234,7 @@
                 <h1>상품정보</h1>
             </nav>
             <!-- 상품상세페이지 이미지 -->
-            <img src="${ctxPath}/thumb/${product.prodCate1}/${product.prodCate2}/${product.detail}" alt="상세페이지1">
+            <img src="${ctxPath}/thumb/${product.prodCate1}/${product.prodCate2}/${product.newDetail}" alt="상세페이지1">
         </article>
 
         <!-- 상품 정보 제공 고시 내용 -->

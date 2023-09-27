@@ -182,7 +182,7 @@
               <td><input type="checkbox" name="" class="checkboxproduct" value="${carts.cartNo}"></td>
               <td>
                 <article>
-                  <a href="#"><img src="/Kmarket/thumb/${carts.prodCate1}/${carts.prodCate2}/${carts.thumb1}" alt="상품이미지"></a>
+                  <a href="#"><img src="/Kmarket/thumb/${carts.prodCate1}/${carts.prodCate2}/${carts.newThumb1}" alt="상품이미지"></a>
                   <div>
                     <h2><a href="#">${carts.prodName}</a></h2>
                     <p>${carts.descript}</p>
