@@ -74,7 +74,7 @@ public class CartController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 	
-	String thumb1 = req.getParameter("thumb1");
+	String newThumb1 = req.getParameter("newThumb1");
 	
 	String cate1= req.getParameter("cate1");
 	String cate2= req.getParameter("cate2");
@@ -93,7 +93,6 @@ public class CartController extends HttpServlet{
 	
 	
 	
-	logger.debug("thumb1 : " + thumb1);
 	logger.debug("pName : " + pName);
 	logger.debug("pDescript : " + pDescript);
 	logger.debug("price : " + price);
@@ -120,7 +119,7 @@ public class CartController extends HttpServlet{
 	
 	cService.insertProductCart(dto);
 
-	req.setAttribute("thumb1",thumb1);
+	req.setAttribute("newThumb1",newThumb1);
 	req.setAttribute("pName",pName);
 	req.setAttribute("pDescript",pDescript);
 	req.setAttribute("price",price);

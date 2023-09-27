@@ -71,7 +71,7 @@ public class CartDAO extends DBHelper {
 				dto.setFinalPrice(rs.getInt("finalPrice"));
 				dto.setProdCate1(rs.getInt("prodCate1"));
 				dto.setProdCate2(rs.getInt("prodCate2"));
-				dto.setThumb1(rs.getString("thumb1"));
+				dto.setNewThumb1(rs.getString("newThumb1"));
 				dto.setProdName(rs.getString("prodName"));
 				dto.setDescript(rs.getString("descript"));
 				carts.add(dto);

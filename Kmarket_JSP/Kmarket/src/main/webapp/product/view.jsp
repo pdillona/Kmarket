@@ -190,7 +190,7 @@
 					<input type="hidden" name= "cate2" value="${product.prodCate2}">
 					<input type="hidden" name= "prodNo" value="${product.prodNo}">
 					<input type="hidden" name= "uid" value="${sessUser.uid}">
-					<input type="hidden" name= "thumb1" value="${product.thumb1}">
+					<input type="hidden" name= "newThumb1" value="${product.newThumb1}">
 					<input type="hidden" name= "pName" value="${product.prodName}">
 					<input type="hidden" name= "pDescript" value="${product.descript}">
 					<input type="hidden" name= "count" value="1">
@@ -210,7 +210,7 @@
 					<input type="hidden" name= "recipAddr1" value="${sessUser.addr1}">
 					<input type="hidden" name= "recipAddr2" value="${sessUser.addr2}">
 					<input type="hidden" name= "savePoint" value="${sessUser.point}">
-					<input type="hidden" name= "thumb1" value="${product.thumb1}">
+					<input type="hidden" name= "newThumb1" value="${product.newThumb1}">
 					<input type="hidden" name= "pName" value="${product.prodName}">
 					<input type="hidden" name= "pDescript" value="${product.descript}">
 					<input type="hidden" name= "count" value="1">

@@ -19,7 +19,7 @@ public class ProductCartDTO {
 	private int prodCate2;
 	private String prodName;
 	private String descript;
-	private String thumb1;
+	private String newThumb1;
 	
 	public int getProdCate1() {
 		return prodCate1;
@@ -54,11 +54,11 @@ public class ProductCartDTO {
 		this.descript = descript;
 	}
 	
-	public String getThumb1() {
-		return thumb1;
+	public String getNewThumb1() {
+		return newThumb1;
 	}
-	public void setThumb1(String thumb1) {
-		this.thumb1 = thumb1;
+	public void setNewThumb1(String newThumb1) {
+		this.newThumb1 = newThumb1;
 	}
 	
 	
