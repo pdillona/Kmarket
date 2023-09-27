@@ -68,9 +68,9 @@ $(function(){
 </script>
             <section id="seller-product-register">
                 <nav>
-                    <h3>상품등록</h3>
+                    <h3>상품수정</h3>
                     <p>
-                        HOME > 상품관리 > <strong>상품등록</strong>
+                        HOME > 상품관리 > <strong>상품수정</strong>
                     </p>
                 </nav>
                 <!-- 상품등록 컨텐츠 시작 -->
