@@ -67,19 +67,33 @@ public enum CsArticleService {
 		 return dao.selectCsWriteCate(cateDetail);
 		 
 	 }
-	public List<CsCateAsideDTO> selectCsWriteCateFAQ(String cateDetail){
+	public List<CsCateAsideDTO> selectCsWriteCateFAQ(){
 		
 		
-		return dao.selectCsWriteCateFAQ(cateDetail);
+		return dao.selectCsWriteCateFAQ();
 	}
 
 	 
-	public List<CsCateDetailDTO> selectCsCateDetailFAQ(String cateDetail){
+	public List<CsCateDetailDTO> selectCsCateDetailFAQ(String cateDetail ){
 		
 		
 		return dao.selectCsCateDetailFAQ(cateDetail);
 	}
 	 
+	
+	
+	public List<CsCateAsideDTO> selectCsWriteCateNotice(){
+		
+		
+		return dao.selectCsWriteCateNotice();
+	}
+	
+	public List<CsCateDetailDTO> selectCsWriteCateDeNotice(){
+		
+		
+		return dao.selectCsWriteCateDeNotice();
+	}
+	
 	 
 	 
 	 
@@ -118,13 +132,28 @@ public enum CsArticleService {
 		dao.updateArticle(dto);
 	}
 	
-	public void deleteArticle(String no) {
+	public void deleteArticle(String aNo) {
 		
-		logger.debug("delete service no값~@~@~@~~~"+no);
+		logger.debug("delete service no값~@~@~@~~~"+aNo);
 		
-		dao.deleteArticle(no);
+		dao.deleteArticle(aNo);
 	}
 
+	public void deletefile(String aNo) {
+		
+		logger.debug("delete service no값~@~@~@~~~"+aNo);
+		
+		dao.deletefile(aNo);
+	}
+
+	// 파일삭제
+	public List<String> deleteFile(String ano) {
+		return dao.deleteFile(ano);
+	}
+	
+	
+	
+	
 	// 추가 
 	public int selectCountTotal(String group, String type, String cateDetail) {
 		return dao.selectCountTotal(group, type, cateDetail);

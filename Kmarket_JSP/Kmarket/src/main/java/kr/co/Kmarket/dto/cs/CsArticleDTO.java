@@ -104,9 +104,9 @@ public class CsArticleDTO {
 	}
 	public void setMaskingWriter(String writer) {
 		if(writer != null && writer.length() >= 3) {
-			String newLength = writer.substring(0, writer.length() - 3) ;
+			String newLength = writer.substring(0, writer.length() - 2) ;
 			
-			this.writer = newLength + "***"  ;
+			this.writer = newLength + "**"  ;
 		}else {
 			this.writer = writer;
 

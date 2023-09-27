@@ -4,21 +4,18 @@ import java.util.List;
 
 public class CsCateDetailDTO {
 
-	private String aeName;
 	private int type;
 	private String dName;
+	private String aeName;
 	
 	private List<CsArticleDTO> dto;
-	
-	
-	
-	
 	public List<CsArticleDTO> getDto() {
 		return dto;
 	}
 	public void setDto(List<CsArticleDTO> dto) {
 		this.dto = dto;
 	}
+	
 	public String getAeName() {
 		return aeName;
 	}
@@ -41,7 +38,10 @@ public class CsCateDetailDTO {
 		this.dName = dName;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "CsCateDetailDTO [aeName=" + aeName + ", type=" + type + ", dName=" + dName + "]";
+	}
 	
 	
 }

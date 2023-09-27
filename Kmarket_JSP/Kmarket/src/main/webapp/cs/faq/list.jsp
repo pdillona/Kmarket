@@ -64,7 +64,6 @@
 			        </c:otherwise>
 			    </c:choose>
 				</nav>
-				
 				<c:choose>
 					<c:when test="${!empty cs }">
 						<c:forEach var="type" items="${types}">
@@ -73,10 +72,10 @@
 			                    <ul>
 			                    	<!-- varStatus : 상태용 변수(참고 링크 : https://jetalog.net/20) -->
 									<c:forEach var="board" items="${type.dto}" varStatus="status">
-										<c:if test="${board.cateDetail eq type.cateDetail}">
-					                        <li class="${status.index ge 3 
+										<c:if test="${board.type eq type.type}">
+					                        <li class="${status.index ge 1 
 					                        	&& status.index le 9 ? board.type : '' }">
-					                            <a href="${path }/cs/faqBoard/view.do?group=faq&cate=${cate}&bno=${board.bno}">
+					                            <a href="${ctxpath}/cs/faqBoard/view.do?group=faq&cateDetail=${cateDetail}&aNo=${board.aNo}">
 					                                <span>Q.</span>${board.title }
 					                            </a>
 					                        </li>

@@ -12,12 +12,14 @@ import kr.co.Kmarket.dto.cs.CommentDTO;
 import kr.co.Kmarket.dto.cs.CsArticleDTO;
 import kr.co.Kmarket.dto.cs.CsCateAsideDTO;
 import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
+import kr.co.Kmarket.service.FileService;
 
 public class CsArticleDAO extends DBHelper{
 
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	private final CsArticleDTO dto =  new CsArticleDTO();
+	private FileService fService = new FileService();
 	
 	String SQL = "";
 	String SQL2 = "";
@@ -483,17 +485,16 @@ public class CsArticleDAO extends DBHelper{
 		
 	}
 
-	public void deleteArticle(String no) {
+	public void deleteArticle(String aNo) {
 
 		
-		SQL = "DELETE FROM `km_cs_article` WHERE `aNO` = ?";
+		SQL = "DELETE FROM `km_cs_article` WHERE `aNo` = ?";
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL);
-			psmt.setInt(1, Integer.parseInt(no));
+			psmt.setInt(1, Integer.parseInt(aNo));
 			psmt.executeUpdate();
-			
 			
 			
 			close();
@@ -506,6 +507,39 @@ public class CsArticleDAO extends DBHelper{
 		
 	}
 
+	
+	public List<String> deleteFile(String ano) {
+		List<String> snames = new ArrayList<String>();
+		
+		SQL = "SELECT `sfile` FROM `File` WHERE `ano`=?";
+		SQL2 = "DELETE FROM `File` WHERE `ano`=? ";
+		
+		try {
+			conn = getConnection(); 
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, ano);
+			
+			
+			psmt1 = conn.prepareStatement(SQL2);
+			psmt1.setString(1, ano);
+			
+			rs = psmt.executeQuery();
+			psmt1.executeUpdate();
+			psmt1.close();
+			while(rs.next()) {
+				snames.add(rs.getString(1));
+			}
+			
+			close();
+		}catch (Exception e) {
+			logger.error("deleteFile - " + e.getMessage());
+		}
+		
+		return snames;
+	}
+	
+	
+	
 	public int selectCountTotal(String group, String type, String cateDetail) {
 
 		int total = 0;
@@ -736,12 +770,11 @@ public class CsArticleDAO extends DBHelper{
 	}
 	
 	
-public List<CsCateAsideDTO> selectCsWriteCateFAQ(String cateDetail){
+public List<CsCateAsideDTO> selectCsWriteCateFAQ(){
 		
 		List<CsCateAsideDTO> cateList = new ArrayList<CsCateAsideDTO>();
 		
 		
-		logger.debug("카테디테일 데이터!!!!!!!##@!#@!#@!   "+cateDetail);
 		conn = getConnection();
 		
 		SQL = "SELECT * FROM `km_cs_aside` WHERE `aside_num`> 1";
@@ -772,6 +805,80 @@ public List<CsCateAsideDTO> selectCsWriteCateFAQ(String cateDetail){
 		
 		return cateList; 
 	}
+
+
+public List<CsCateAsideDTO> selectCsWriteCateNotice(){
+	
+	List<CsCateAsideDTO> cateList = new ArrayList<CsCateAsideDTO>();
+	
+	
+	conn = getConnection();
+	
+	SQL = "SELECT * FROM `km_cs_aside` WHERE `aside_num`> 1";
+	
+	try {
+		
+		psmt = conn.prepareStatement(SQL);
+		rs = psmt.executeQuery();
+		
+		while(rs.next()) {
+			CsCateAsideDTO dto = new CsCateAsideDTO();
+			dto.setAeName(rs.getString(1));
+			dto.setAkName(rs.getString(2));
+			dto.setAside_Num(rs.getInt(3));
+			
+			cateList.add(dto);
+		}
+		close();
+		
+	} catch (Exception e) {
+		logger.debug("selectCsWriteCateDAO 에러~~~"+ e.getMessage());
+	}
+	
+	
+	
+	logger.debug("selectCsWriteCateDAO cateList 정보~~~~~"+ cateList);
+	
+	
+	return cateList; 
+}
+
+public List<CsCateDetailDTO> selectCsWriteCateDeNotice(){
+	
+	List<CsCateDetailDTO> cateDetailList = new ArrayList<CsCateDetailDTO>();
+	
+	
+	conn = getConnection();
+	
+	SQL = "SELECT * FROM `km_cs_cate_detail` WHERE `type`> 20";
+	
+	try {
+		
+		psmt = conn.prepareStatement(SQL);
+		rs = psmt.executeQuery();
+		
+		while(rs.next()) {
+			CsCateDetailDTO dto = new CsCateDetailDTO();
+			dto.setAeName(rs.getString(1));
+			dto.setType(rs.getInt(2));
+			dto.setdName(rs.getString(3));
+			
+			cateDetailList.add(dto);
+		}
+		close();
+		
+	} catch (Exception e) {
+		logger.debug("selectCsWriteCateDAO 에러~~~"+ e.getMessage());
+	}
+	
+	
+	
+	logger.debug("selectCsWriteCateDAO cateList 정보~~~~~"+ cateDetailList);
+	
+	
+	return cateDetailList; 
+}
+
 
 public List<CsCateDetailDTO> selectCsCateDetailFAQ(String cateDetail){
 	
@@ -810,6 +917,13 @@ public List<CsCateDetailDTO> selectCsCateDetailFAQ(String cateDetail){
 	
 	
 	return cateDetailList; 
+}
+
+
+
+public void deletefile(String aNo) {
+	// TODO Auto-generated method stub
+	
 }
 	
 }
