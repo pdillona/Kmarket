@@ -39,7 +39,7 @@
             <tr>
               <td>
                 <article>
-                  <a href="#"><img src="${ctxPath}/thumb/${orders.prodCate1}/${orders.prodCate2}/${orders.thumb1}" alt=""></a>
+                  <a href="#"><img src="${ctxPath}/thumb/${orders.prodCate1}/${orders.prodCate2}/${orders.newThumb1}" alt=""></a>
                   <div>
                     <h2><a href="#">${orders.prodName}</a></h2>
                     <p>${orders.descript}</p>
