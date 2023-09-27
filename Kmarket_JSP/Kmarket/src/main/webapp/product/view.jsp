@@ -10,48 +10,59 @@
     window.onload = function () {
     	const inputNum = document.querySelector('input[name="num"]');
     	const inputCountIncrease = document.getElementsByClassName('increase')[0];
-    	const inputCount2 = document.querySelector('input[name="count2"]');
+    	const inputCount = document.getElementsByName('count')[0];
     	const inputCountDecrease = document.getElementsByClassName('decrease')[0];
-        const inputTotal = document.getElementsByName('total')[0];
-        const inputFinal = document.getElementsByName('final')[0];
-        const totalNode = document.getElementsByClassName('total')[0];
-        
-        inputCountIncrease.addEventListener('click', function () {
-            // 현재 값을 가져옴
-            let currentValue = parseInt(inputNum.value, 10);
-            
-         	// 값을 증가시킴
-            currentValue++;
+    	const inputTotal = document.getElementsByName('total')[0];
+    	const inputFinal = document.getElementsByName('final')[0];
+    	const formCart = document.getElementById('formCart');
+    	const formOrder = document.getElementById('formOrder');
 
-            // 변경된 값을 텍스트 필드에 설정
-            inputNum.value = currentValue;
-            inputCount2.value = currentValue; // count2의 값을 업데이트
-            
-            updateTotalAndFinal(currentValue);
-        });
-        
-        inputCountDecrease.addEventListener('click', function () {
-            // 현재 값을 가져옴
-            let currentValue = parseInt(inputNum.value, 10);
+    	// 이벤트 리스너에서 'count' 입력 필드의 값을 업데이트합니다.
+    	inputCountIncrease.addEventListener('click', function () {
+    	    // 현재 값을 가져옴
+    	    let currentValue = parseInt(inputNum.value, 10);
 
-            // 값을 감소시킴 (1보다 작아지지 않도록 확인)
-            if (currentValue > 1) {
-                currentValue--;
-            }
+    	    // 값을 증가시킴
+    	    currentValue++;
 
-            // 변경된 값을 텍스트 필드에 설정
-            inputNum.value = currentValue;
-            inputCount2.value = currentValue;
-            
-            updateTotalAndFinal(currentValue);
-        });
+    	    // 변경된 값을 텍스트 필드에 설정
+    	    inputNum.value = currentValue;
+    	    inputCount.value = currentValue; // 'count' 입력 필드 업데이트
+
+    	    updateTotalAndFinal(currentValue);
+    	});
+
+    	inputCountDecrease.addEventListener('click', function () {
+    	    // 현재 값을 가져옴
+    	    let currentValue = parseInt(inputNum.value, 10);
+
+    	    // 값을 감소시킴 (1보다 작아지지 않도록 확인)
+    	    if (currentValue > 1) {
+    	        currentValue--;
+    	    }
+
+    	    // 변경된 값을 텍스트 필드에 설정
+    	    inputNum.value = currentValue;
+    	    inputCount.value = currentValue; // 'count' 입력 필드 업데이트
+
+    	    updateTotalAndFinal(currentValue);
+    	});
         
         function updateTotalAndFinal(currentValue) {
+        	let count = currentValue;
             let total = price * currentValue;
             let finalPrice = total + delivery;
             
-            console.log(total);
             
+
+            formCart.elements['count'].value = currentValue;
+            formCart.elements['final'].value = finalPrice;
+
+            formOrder.elements['count'].value = currentValue;
+            formOrder.elements['final'].value = finalPrice;
+            
+            console.log(total);
+            console.log(count);
             inputFinal.value =total;
 
             // id로 <span> 요소를 가져옵니다
@@ -67,7 +78,7 @@
         function addToCart() {
             // 폼 요소를 가져옵니다.
             const form = document.getElementById('formCart');
-            
+
             // 폼을 서버로 제출합니다.
             form.submit();
         }
@@ -75,15 +86,15 @@
         // 장바구니 버튼에 클릭 이벤트 리스너를 추가합니다.
         const cartButton = document.querySelector('.cart');
         cartButton.addEventListener('click', addToCart);
-        
-      // 구매하기 버튼 클릭
-      function addToOrder(){
-    	  const form =document.getElementById('formOrder');
-    	  
-    	  form.submit();
-      }
-      const orderButton = document.querySelector('.order');
-      orderButton.addEventListener('click', addToOrder);
+
+        // 구매하기 버튼 클릭
+        function addToOrder() {
+            const form = document.getElementById('formOrder');
+
+            form.submit();
+        }
+        const orderButton = document.querySelector('.order');
+        orderButton.addEventListener('click', addToOrder);
         
     };
 </script>
@@ -175,42 +186,40 @@
                     <em>총 상품금액</em>
                 </div>
 				<form id=formCart action="${ctxPath}/product/cart.do" method="post">
-					<input type="text" name= "cate1" value="${product.prodCate1}">
-					<input type="text" name= "cate2" value="${product.prodCate2}">
-					<input type="text" name= "prodNo" value="${product.prodNo}">
-					<input type="text" name= "uid" value="${sessUser.uid}">
-					<input type="text" name= "thumb1" value="${product.thumb1}">
-					<input type="text" name= "pName" value="${product.prodName}">
-					<input type="text" name= "pDescript" value="${product.descript}">
-					<input type="text" name= "count" value="1">
-					<input type="text" name= "price" value="${product.price}">
-					<input type="text" name= "discount" value="${product.discount}">
-					<input type="text" name= "point" value="${product.point}">
-					<input type="text" name= "delivery" value="${product.delivery}">
-					<input type="text" name= "total" value="${product.price}">
-					<input type="text" name= "final" value="${product.price + product.delivery}">
-					<input type="text" name= "count2" value="count">
+					<input type="hidden" name= "cate1" value="${product.prodCate1}">
+					<input type="hidden" name= "cate2" value="${product.prodCate2}">
+					<input type="hidden" name= "prodNo" value="${product.prodNo}">
+					<input type="hidden" name= "uid" value="${sessUser.uid}">
+					<input type="hidden" name= "thumb1" value="${product.thumb1}">
+					<input type="hidden" name= "pName" value="${product.prodName}">
+					<input type="hidden" name= "pDescript" value="${product.descript}">
+					<input type="hidden" name= "count" value="1">
+					<input type="hidden" name= "price" value="${product.price}">
+					<input type="hidden" name= "discount" value="${product.discount}">
+					<input type="hidden" name= "point" value="${product.point}">
+					<input type="hidden" name= "delivery" value="${product.delivery}">
+					<input type="hidden" name= "total" value="${product.price}">
+					<input type="hidden" name= "final" value="${product.price + product.delivery}">
 				</form>
 				<form id=formOrder action="${ctxPath}/product/order.do" method="post">
-					<input type="text" name= "prodNo" value="${product.prodNo}">
-					<input type="text" name= "orduid" value="${sessUser.uid}">
-					<input type="text" name= "recipName" value="${sessUser.name}">
-					<input type="text" name= "recipHp" value="${sessUser.hp}">
-					<input type="text" name= "recipZip" value="${sessUser.zip}">
-					<input type="text" name= "recipAddr1" value="${sessUser.addr1}">
-					<input type="text" name= "recipAddr2" value="${sessUser.addr2}">
-					<input type="text" name= "savePoint" value="${sessUser.point}">
-					<input type="text" name= "thumb1" value="${product.thumb1}">
-					<input type="text" name= "pName" value="${product.prodName}">
-					<input type="text" name= "pDescript" value="${product.descript}">
-					<input type="text" name= "count" value="1">
-					<input type="text" name= "price" value="${product.price}">
-					<input type="text" name= "discount" value="${product.discount}">
-					<input type="text" name= "point" value="${product.point}">
-					<input type="text" name= "delivery" value="${product.delivery}">
-					<input type="text" name= "total" value="${product.price}">
-					<input type="text" name= "final" value="${product.price + product.delivery}">
-					<input type="text" name= "count2" value="count">
+					<input type="hidden" name= "prodNo" value="${product.prodNo}">
+					<input type="hidden" name= "orduid" value="${sessUser.uid}">
+					<input type="hidden" name= "recipName" value="${sessUser.name}">
+					<input type="hidden" name= "recipHp" value="${sessUser.hp}">
+					<input type="hidden" name= "recipZip" value="${sessUser.zip}">
+					<input type="hidden" name= "recipAddr1" value="${sessUser.addr1}">
+					<input type="hidden" name= "recipAddr2" value="${sessUser.addr2}">
+					<input type="hidden" name= "savePoint" value="${sessUser.point}">
+					<input type="hidden" name= "thumb1" value="${product.thumb1}">
+					<input type="hidden" name= "pName" value="${product.prodName}">
+					<input type="hidden" name= "pDescript" value="${product.descript}">
+					<input type="hidden" name= "count" value="1">
+					<input type="hidden" name= "price" value="${product.price}">
+					<input type="hidden" name= "discount" value="${product.discount}">
+					<input type="hidden" name= "point" value="${product.point}">
+					<input type="hidden" name= "delivery" value="${product.delivery}">
+					<input type="hidden" name= "total" value="${product.price}">
+					<input type="hidden" name= "final" value="${product.price + product.delivery}">
 				</form>
                 <div class="button">
                     <input type="button" class="cart"  value="장바구니"/>

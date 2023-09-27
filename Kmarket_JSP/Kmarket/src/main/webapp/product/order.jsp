@@ -35,51 +35,23 @@
             <tr class="empty">
               <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
+            <c:forEach var="orders" items="${orders}">
             <tr>
               <td>
                 <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
+                  <a href="#"><img src="${ctxPath}/thumb/${orders.prodCate1}/${orders.prodCate2}/${orders.thumb1}" alt=""></a>
                   <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
+                    <h2><a href="#">${orders.prodName}</a></h2>
+                    <p>${orders.descript}</p>
                   </div>
                 </article>
               </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>무료배송</td>
-              <td>27,000</td>
+              <td>${orders.ordCount}</td>
+              <td>${orders.ordPrice}</td>
+              <td>${orders.ordDelivery}</td>
+              <td>${orders.ordTotPrice}</td>
             </tr>
-            <tr>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>
-            <tr>
-              <td>
-                <article>
-                  <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                  <div>
-                    <h2><a href="#">상품명</a></h2>
-                    <p>상품설명</p>
-                  </div>
-                </article>
-              </td>
-              <td>1</td>
-              <td>27,000</td>
-              <td>무료배송</td>
-              <td>27,000</td>
-            </tr>                    
+            </c:forEach>
           </tbody>
         </table>                 
         
@@ -89,7 +61,7 @@
           <table border="0">
             <tr>
               <td>총</td>
-              <td>2 건</td>
+              <td>1건</td>
             </tr>
             <tr>
               <td>상품금액</td>
@@ -121,32 +93,32 @@
           <table>
             <tr>
               <td>주문자</td>
-              <td><input type="text" name="orderer" /></td>
+              <td><input type="text" name="orderer" value="${orders[0].recipName}"/></td>
             </tr>
             <tr>
               <td>휴대폰</td>
               <td>
-                <input type="text" name="hp" />
-                <span>- 포함 입력</span>
+                <input type="text" name="hp" value="${orders[0].recipHp}" />
+                <span></span>
               </td>
             </tr>
             <tr>
               <td>우편번호</td>
               <td>
-                <input type="text" name="zip"/>
+                <input type="text" name="zip" value="${orders[0].recipZip}"/>
                 <input type="button" value="검색"/>
               </td>
             </tr>
             <tr>
               <td>기본주소</td>
               <td>
-                <input type="text" name="addr1"/>
+                <input type="text" name="addr1" value="${orders[0].recipAddr1}"/>
               </td>
             </tr>
             <tr>
               <td>상세주소</td>
               <td>
-                <input type="text" name="addr2"/>
+                <input type="text" name="addr2" value="${orders[0].recipAddr2}"/>
               </td>
             </tr>
           </table>

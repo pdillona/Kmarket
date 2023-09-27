@@ -20,6 +20,11 @@ public class OrderDTO {
 	 private int ordComplete;
 	 private String deliveryStatus;
 	 private String ordDate;
+	 private int prodCate1;
+	 private int prodCate2;
+	 private String thumb1;
+	 private String prodName;
+	 private String descript;
 	 private OrderItemDTO orderItemDTO = new OrderItemDTO();
 	 private ProductDTO productDTO = new ProductDTO();
 	 
@@ -163,6 +168,40 @@ public class OrderDTO {
 	public void setOrdDate(String ordDate) {
 		this.ordDate = ordDate;
 	}
+	
+	public int getProdCate1() {
+		return prodCate1;
+	}
+	public void setProdCate1(int prodCate1) {
+		this.prodCate1 = prodCate1;
+	}
+	public int getProdCate2() {
+		return prodCate2;
+	}
+	public void setProdCate2(int prodCate2) {
+		this.prodCate2 = prodCate2;
+	}
+	
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public String getDescript() {
+		return descript;
+	}
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+	
 	public String getOrdStatus() {
 		return ordStatus;
 	}
@@ -182,9 +221,15 @@ public class OrderDTO {
 				+ ", usedPoint=" + usedPoint + ", ordTotPrice=" + ordTotPrice + ", recipName=" + recipName
 				+ ", recipHp=" + recipHp + ", recipZip=" + recipZip + ", recipAddr1=" + recipAddr1 + ", recipAddr2="
 				+ recipAddr2 + ", ordStatus=" + ordStatus + ", ordPayment=" + ordPayment + ", ordComplete="
-				+ ordComplete + ", deliveryStatus=" + deliveryStatus + ", ordDate=" + ordDate + ", orderItemDTO="
-				+ orderItemDTO + "]";
+				+ ordComplete + ", deliveryStatus=" + deliveryStatus + ", ordDate=" + ordDate + ", prodCate1="
+				+ prodCate1 + ", prodCate2=" + prodCate2 + ", thumb1=" + thumb1 + ", prodName=" + prodName
+				+ ", descript=" + descript + ", orderItemDTO=" + orderItemDTO + ", productDTO=" + productDTO + "]";
 	}
+	
+	
+	
+
+	
 	 
 	 
 }

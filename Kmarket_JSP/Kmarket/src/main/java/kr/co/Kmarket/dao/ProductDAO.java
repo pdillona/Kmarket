@@ -143,10 +143,10 @@ public class ProductDAO extends DBHelper{
 	}
 	public List<ProductDTO> selectProducts(int start, SearchDTO search) {
 		List<ProductDTO> products = new ArrayList<ProductDTO>();
-		sql = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE b.`company`=? ORDER BY `prodNo` DESC LIMIT ?, 10";
+		sql = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE a.`etc1`='n' AND b.`company`=? ORDER BY `prodNo` DESC LIMIT ?, 10";
 		String sql_search1 =  "SELECT * FROM `km_product` "
 							+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
-							+ "WHERE b.`company`=? a.`etc1`='n' AND AND `prodName` LIKE ? "
+							+ "WHERE b.`company`=? a.`etc1`='n' AND `prodName` LIKE ? "
 							+ "ORDER BY `prodNo` DESC "
 							+ "LIMIT ?, 10";
 		String sql_search2 =  "SELECT * FROM `km_product` "
@@ -373,7 +373,7 @@ public class ProductDAO extends DBHelper{
 	}
 	public int selectCountAll(SearchDTO dto) {
 		int total = 0;
-		sql = "SELECT COUNT(*) FROM `km_product` AND `etc1`='n' ";
+		sql = "SELECT COUNT(*) FROM `km_product` WHERE `etc1`='n' ";
 		String sql_search1 =  "SELECT COUNT(*) FROM `km_product` "
 				+ " WHERE `etc1`='n' AND `prodName` LIKE ?";
 		

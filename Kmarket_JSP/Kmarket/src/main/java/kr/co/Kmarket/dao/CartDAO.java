@@ -50,9 +50,9 @@ public class CartDAO extends DBHelper {
 	
 	public List<ProductCartDTO> selectCarts(String uid) {
 		List<ProductCartDTO> carts = new ArrayList<>();
-		
-		try {
 			conn = getConnection();
+		try {
+			
 			sql = "SELECT * FROM `km_product_cart` AS a JOIN `km_product` AS b ON a.`prodNo` = b.`prodNo` WHERE `uid`=?";
 			psmt=conn.prepareStatement(sql);
 			psmt.setString(1, uid);

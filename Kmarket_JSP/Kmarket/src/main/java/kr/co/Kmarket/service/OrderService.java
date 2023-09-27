@@ -4,13 +4,14 @@ import java.util.List;
 
 import kr.co.Kmarket.dao.OrderDAO;
 import kr.co.Kmarket.dto.OrderDTO;
+import kr.co.Kmarket.dto.OrderItemDTO;
 import kr.co.Kmarket.dto.SearchDTO;
 
 public class OrderService {
 	OrderDAO dao = new OrderDAO();
 	
-	public void insertOrder (OrderDTO dto) {
-		dao.insertOrder(dto);
+	public int insertOrder (OrderDTO dto) {
+		return dao.insertOrder(dto);
 	}
 	public OrderDTO selectOrder (String ordNo) {
 		return dao.selectOrder(ordNo);
@@ -27,4 +28,12 @@ public class OrderService {
 	public int selectCountTotal(SearchDTO dto) {
 		return dao.selectCountTotal(dto);
 	}
+	
+	//추가 
+	
+	public List<OrderDTO> ordersSelect (String orduid){
+		return dao.ordersSelect(orduid);
+	}
+	
+
 }
