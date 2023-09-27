@@ -122,7 +122,7 @@ $(function(){
 		               
 		           </div>
            	</c:when>
-           	<c:when test="${empty articles }">
+           	<c:when test="${empty products }">
          	  <table>
             	<tr>
               		<td> 상품이 존재하지 않습니다. </td>
