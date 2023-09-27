@@ -146,7 +146,7 @@ public class ProductDAO extends DBHelper{
 		sql = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` WHERE a.`etc1`='n' AND b.`company`=? ORDER BY `prodNo` DESC LIMIT ?, 10";
 		String sql_search1 =  "SELECT * FROM `km_product` "
 							+ "AS a JOIN `km_member` AS b ON a.`seller`=b.`uid` "
-							+ "WHERE b.`company`=? a.`etc1`='n' AND AND `prodName` LIKE ? "
+							+ "WHERE b.`company`=? a.`etc1`='n' AND `prodName` LIKE ? "
 							+ "ORDER BY `prodNo` DESC "
 							+ "LIMIT ?, 10";
 		String sql_search2 =  "SELECT * FROM `km_product` "
