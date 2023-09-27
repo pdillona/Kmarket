@@ -373,7 +373,7 @@ public class ProductDAO extends DBHelper{
 	}
 	public int selectCountAll(SearchDTO dto) {
 		int total = 0;
-		sql = "SELECT COUNT(*) FROM `km_product` AND `etc1`='n' ";
+		sql = "SELECT COUNT(*) FROM `km_product` WHERE `etc1`='n' ";
 		String sql_search1 =  "SELECT COUNT(*) FROM `km_product` "
 				+ " WHERE `etc1`='n' AND `prodName` LIKE ?";
 		
