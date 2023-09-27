@@ -27,7 +27,7 @@ public class OrderDAO extends DBHelper{
 					+ "`ordDelivery`=?,"
 					+ "`savePoint`=?,"
 					+ "`usedPoint`=?,"
-					+ "`ordTotPrive`=?,"
+					+ "`ordTotPrice`=?,"
 					+ "`recipName`=?,"
 					+ "`recipHp`=?,"
 					+ "`recipZip`=?,"
@@ -70,63 +70,63 @@ public class OrderDAO extends DBHelper{
 	}
 	public List<OrderDTO> selectOrders (int start, SearchDTO searchDTO) {
 		List<OrderDTO> orders = new ArrayList<OrderDTO>();
-		sql = "SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` "
+		sql = "SELECT a.`prodNo`, b.*, c.`prodCate1`, c.`prodCate2`, c.`newThumb1`, c.`prodName` "
 			+ "FROM `km_product_order_item` AS a "
 			+ "JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` "
 			+ "JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` "
 			+ "JOIN `km_member` AS d ON c.`seller`=d.uid "
 			+ "WHERE d.`company`=? "
 			+ "ORDER BY b.`ordNo` DESC LIMIT ?, 10";
-		String sql_sort1 = "SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` "
+		String sql_sort1 = "SELECT a.`prodNo`, b.*, c.`prodCate1`, c.`prodCate2`, c.`newThumb1`, c.`prodName` "
 						+ "FROM `km_product_order_item` AS a "
 						+ "JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` "
 						+ "JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` "
 						+ "JOIN `km_member` AS d ON c.`seller`=d.`uid` "
 						+ "WHERE d.`company`=? AND b.`ordComplete`=1 "
 						+ "ORDER BY b.`ordNo` DESC LIMIT ?, 10";
-		String sql_sort2 = "SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` "
+		String sql_sort2 = "SELECT a.`prodNo`, b.*, c.`prodCate1`, c.`prodCate2`, c.`newThumb1`, c.`prodName` "
 						+ "FROM `km_product_order_item` AS a "
 						+ "JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` "
 						+ "JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` "
 						+ "JOIN `km_member` AS d ON c.`seller`=d.uid "
 						+ "WHERE d.`company`=? "
 						+ "ORDER BY c.`sold` DESC LIMIT ?, 10";
-		String sql_sort3 = "SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` "
+		String sql_sort3 = "SELECT a.`prodNo`, b.*, c.`prodCate1`, c.`prodCate2`, c.`newThumb1`, c.`prodName` "
 						+ "FROM `km_product_order_item` AS a "
 						+ "JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` "
 						+ "JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` "
 						+ "JOIN `km_member` AS d ON c.`seller`=d.uid "
 						+ "WHERE d.`company`=? AND b.`ordStatus`='cancel' "
 						+ "ORDER BY b.`ordNo` DESC LIMIT ?, 10";
-		String sql_sort4 = "SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` "
+		String sql_sort4 = "SELECT a.`prodNo`, b.*, c.`prodCate1`, c.`prodCate2`, c.`newThumb1`, c.`prodName` "
 						+ "FROM `km_product_order_item` AS a "
 						+ "JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` "
 						+ "JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` "
 						+ "JOIN `km_member` AS d ON c.`seller`=d.uid "
 						+ "WHERE d.`company`=? AND b.`ordStatus`='return' "
 						+ "ORDER BY b.`ordNo` DESC LIMIT ?, 10";
-		String sql_sort5 = "SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` "
+		String sql_sort5 = "SELECT a.`prodNo`, b.*, c.`prodCate1`, c.`prodCate2`, c.`newThumb1`, c.`prodName` "
 						+ "FROM `km_product_order_item` AS a "
 						+ "JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` "
 						+ "JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` "
 						+ "JOIN `km_member` AS d ON c.`seller`=d.uid "
 						+ "WHERE d.`company`=? AND b.`ordStatus`='exchange' "
 						+ "ORDER BY b.`ordNo` DESC LIMIT ?, 10";
-		String sql_search1 =  "SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` "
+		String sql_search1 =  "SELECT a.`prodNo`, b.*, c.`prodCate1`, c.`prodCate2`, c.`newThumb1`, c.`prodName` "
 								+ "FROM `km_product_order_item` AS a "
 								+ "JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` "
 								+ "JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` "
 								+ "JOIN `km_member` AS d ON c.`seller`=d.uid "
 								+ "WHERE d.`company`=? AND c.`prodName` LIKE ? "
 								+ "ORDER BY b.`ordNo` DESC LIMIT ?, 10";
-		String sql_search2 =  "SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` "
+		String sql_search2 =  "SELECT a.`prodNo`, b.*, c.`prodCate1`, c.`prodCate2`, c.`newThumb1`, c.`prodName` "
 									+ "FROM `km_product_order_item` AS a "
 									+ "JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` "
 									+ "JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` "
 									+ "JOIN `km_member` AS d ON c.`seller`=d.uid "
 									+ "WHERE d.`company`=? AND a.`prodNo` LIKE ? "
 									+ "ORDER BY b.`ordNo` DESC LIMIT ?, 10";
-		String sql_search3 =  "SELECT a.`prodNo`, b.*, c.`newThumb1`, c.`prodName` "
+		String sql_search3 =  "SELECT a.`prodNo`, b.*, c.`prodCate1`, c.`prodCate2`, c.`newThumb1`, c.`prodName` "
 									+ "FROM `km_product_order_item` AS a "
 									+ "JOIN `km_product_order` AS b ON a.`ordNo`=b.`ordNo` "
 									+ "JOIN `km_product` AS c ON a.`prodNo`= c.`prodNo` "
@@ -203,8 +203,10 @@ public class OrderDAO extends DBHelper{
 				dto.setOrdComplete(rs.getInt(18));
 				dto.setDeliveryStatus(rs.getString(19));
 				dto.setOrdDate(rs.getString(20));
-				productDTO.setNewThumb1(rs.getString(21));
-				productDTO.setProdName(rs.getString(22));
+				productDTO.setProdCate1(rs.getInt(21));
+				productDTO.setProdCate2(rs.getInt(22));
+				productDTO.setNewThumb1(rs.getString(23));
+				productDTO.setProdName(rs.getString(24));
 				dto.setProductDTO(productDTO);
 				dto.setOrderItemDTO(orderItemDTO);
 				orders.add(dto);
@@ -319,4 +321,46 @@ public class OrderDAO extends DBHelper{
 		}
 		return total;
 	}
+	
+	//추가
+	public List<OrderDTO> ordersSelect(String orduid) {
+		List<OrderDTO> orders = new ArrayList<>();
+		conn = getConnection();
+		try {
+			sql= "SELECT * FROM `km_product_order` WHERE `ordUid`=?";
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, orduid);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				OrderDTO dto = new OrderDTO();
+				dto.setOrdNo(rs.getInt(1));
+				dto.setOrdUid(rs.getString(2));
+				dto.setOrdCount(rs.getInt(3));
+				dto.setOrdPrice(rs.getInt(4));
+				dto.setOrdDiscount(rs.getInt(5));
+				dto.setOrdDelivery(rs.getInt(6));
+				dto.setSavePoint(rs.getInt(7));
+				dto.setUsedPoint(rs.getInt(8));
+				dto.setOrdTotPrice(rs.getInt(9));
+				dto.setRecipName(rs.getString(10));
+				dto.setRecipHp(rs.getString(11));
+				dto.setRecipZip(rs.getString(12));
+				dto.setRecipAddr1(rs.getString(13));
+				dto.setRecipAddr2(rs.getString(14));
+				dto.setOrdStatus(rs.getString(15));
+				dto.setOrdPayment(rs.getInt(16));
+				dto.setOrdComplete(rs.getInt(17));
+				dto.setDeliveryStatus(rs.getString(18));
+				dto.setOrdDate(rs.getString(19));
+				orders.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("ordersSelect : "+e.getMessage());
+		}
+		return orders;
+		
+	}
+	
 }

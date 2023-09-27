@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.product;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.dto.OrderDTO;
+import kr.co.Kmarket.dto.OrderItemDTO;
+import kr.co.Kmarket.dto.ProductDTO;
+import kr.co.Kmarket.dto.seller.Cate2DTO;
+import kr.co.Kmarket.service.OrderItemService;
 import kr.co.Kmarket.service.OrderService;
+import kr.co.Kmarket.service.ProductService;
+import kr.co.Kmarket.service.seller.Cate2Service;
 
 /* 
 	날짜 : 2023/09/14
@@ -28,8 +35,37 @@ public class OrderController extends HttpServlet{
 	
 	private OrderService oService = new OrderService();
 	
+	private OrderItemService otService = new OrderItemService();
+	
+	private Cate2Service Ct2Service = new Cate2Service();
+	
+	private ProductService pService = new ProductService();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String prodCate1 = req.getParameter("prodCate1");
+		String prodCate2 = req.getParameter("prodCate2");
+		String orduid = req.getParameter("orduid");
+		
+		logger.info("orduid : "+ orduid);
+		
+		List<OrderDTO> orders = oService.ordersSelect(orduid);
+		
+		logger.info("---------------------"+orders.toString());
+		
+		//aside 카테고리
+		
+		List<List<Cate2DTO>> categories = Ct2Service.selectCategories();
+									
+		List<ProductDTO> productsaside = pService.selectProductBest();
+				
+		req.setAttribute("prodCate1", prodCate1);
+		req.setAttribute("prodCate2", prodCate2);
+		req.setAttribute("categories", categories);
+		req.setAttribute("productsaside", productsaside);
+		req.setAttribute("orders", orders);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -58,11 +94,9 @@ public class OrderController extends HttpServlet{
 		String delivery = req.getParameter("delivery");
 		String total = req.getParameter("total");
 		String finalPrice = req.getParameter("final");
-		String count = req.getParameter("count2");
+		String count = req.getParameter("count");
 		
-		if(count.equals(count)) {
-			count = "1";
-		}
+		
 		logger.debug("prodNo : " + prodNo);
 		logger.debug("orduid : " + orduid);
 		logger.debug("recipName : " + recipName);
@@ -104,7 +138,22 @@ public class OrderController extends HttpServlet{
 		
 		oService.insertOrder(dto);
 		
-		resp.sendRedirect("/Kmarket/product/order.do");
+		logger.info("...insertOrder......."+dto.toString());
+		OrderItemDTO dto2 = new OrderItemDTO();
+		dto2.setOrdNo(dto.getOrdNo());
+		dto2.setProdNo(prodNo);
+		dto2.setCount(count);
+		dto2.setPrice(price);
+		dto2.setDiscount(discount);
+		dto2.setPoint(point);
+		dto2.setDelivery(delivery);
+		dto2.setTotal(finalPriceWithDelivery);
+		
+		otService.insertOrderItem(dto2);
+		
+		logger.info(".............insertOrderItem......."+dto2.toString());
+	
+		resp.sendRedirect("/Kmarket/product/order.do?orduid="+orduid);
 		
 		
 		}

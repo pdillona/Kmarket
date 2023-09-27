@@ -107,7 +107,7 @@
             	<c:when test="${empty orders }">
 	         	  <table>
 	            	<tr>
-	              		<td> 주문이 존재하지 않습니다. </td>
+	              		<td> 주문이 존재하지 않습니다.  </td>
 	            	</tr>
 	          	  </table>
 	           </c:when>
