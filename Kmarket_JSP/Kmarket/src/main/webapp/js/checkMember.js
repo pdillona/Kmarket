@@ -30,19 +30,27 @@ $(function(){
 				
 				if(xhr.readyState == XMLHttpRequest.DONE){
 					
+					
 					if(xhr.status == 200){
 						
 						const data = JSON.parse(xhr.response);
+
+
+						console.log("2");
+						console.log("3");
 						
 						if(data.result > 0){
+							console.log("1");
 							uidResult.innerText = '이미 사용중인 아이디 입니다.';
 							uidResult.style.color = 'red';
 							isUidOk = false;
 						}else{
+							console.log("2");
 							uidResult.innerText = '사용 가능한 아이디 입니다.';
 							uidResult.style.color = 'green';
 							isUidOk = true;
 						}
+						console.log("3");
 					}
 				}// readyState end
 			}// onreadystatechange end
