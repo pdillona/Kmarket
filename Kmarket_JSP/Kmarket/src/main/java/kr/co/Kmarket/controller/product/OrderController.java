@@ -76,7 +76,7 @@ public class OrderController extends HttpServlet{
 	@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String thumb1 = req.getParameter("thumb1");
+		String newThumb1 = req.getParameter("newThumb1");
 		
 		String prodNo= req.getParameter("prodNo");
 		String orduid =req.getParameter("orduid");
@@ -104,7 +104,6 @@ public class OrderController extends HttpServlet{
 		logger.debug("recipZip : " + recipZip);
 		logger.debug("recipAddr1 : " + recipAddr1);
 		logger.debug("recipAddr2 : " + recipAddr2);
-		logger.debug("thumb1 : " + thumb1);
 		logger.debug("pName : " + pName);
 		logger.debug("pDescript : " + pDescript);
 		logger.debug("price : " + price);

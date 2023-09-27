@@ -22,7 +22,7 @@ public class OrderDTO {
 	 private String ordDate;
 	 private int prodCate1;
 	 private int prodCate2;
-	 private String thumb1;
+	 private String newThumb1;
 	 private String prodName;
 	 private String descript;
 	 private OrderItemDTO orderItemDTO = new OrderItemDTO();
@@ -182,11 +182,11 @@ public class OrderDTO {
 		this.prodCate2 = prodCate2;
 	}
 	
-	public String getThumb1() {
-		return thumb1;
+	public void setNewThumb1(String newThumb1) {
+		this.newThumb1 = newThumb1;
 	}
-	public void setThumb1(String thumb1) {
-		this.thumb1 = thumb1;
+	public String getNewThumb1() {
+		return newThumb1;
 	}
 	
 	public String getProdName() {
@@ -222,9 +222,11 @@ public class OrderDTO {
 				+ ", recipHp=" + recipHp + ", recipZip=" + recipZip + ", recipAddr1=" + recipAddr1 + ", recipAddr2="
 				+ recipAddr2 + ", ordStatus=" + ordStatus + ", ordPayment=" + ordPayment + ", ordComplete="
 				+ ordComplete + ", deliveryStatus=" + deliveryStatus + ", ordDate=" + ordDate + ", prodCate1="
-				+ prodCate1 + ", prodCate2=" + prodCate2 + ", thumb1=" + thumb1 + ", prodName=" + prodName
+				+ prodCate1 + ", prodCate2=" + prodCate2 + ", newThumb1=" + newThumb1 + ", prodName=" + prodName
 				+ ", descript=" + descript + ", orderItemDTO=" + orderItemDTO + ", productDTO=" + productDTO + "]";
 	}
+	
+	
 	
 	
 	
