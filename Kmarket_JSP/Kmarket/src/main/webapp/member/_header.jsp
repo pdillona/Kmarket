@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 개발/배포에서 ContextPath(프로젝트 루트로 경로 찾기) 포함 여부에 따른 동적처리 -->
 <c:set var="ctxPath" value="${pageContext.request.contextPath}"></c:set>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
