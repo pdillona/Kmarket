@@ -51,7 +51,6 @@ public class LoginController extends HttpServlet{
 		MemberDTO dto = service.selectMember(uid, pass);
 		
 	
-		//회원일 경우
 		if (dto != null) {
 			
 			//현재 클라이언트 세션 구하기

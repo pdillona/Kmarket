@@ -120,23 +120,7 @@
   	<filter-name>CheckLoginFilter</filter-name>
   	<url-pattern>/cs/qna.do</url-pattern>
   </filter-mapping>
-  <!-- member -->
-  <filter-mapping>
-  	<filter-name>CheckLoginFilter</filter-name>
-  	<url-pattern>/member/authEmail.do</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-  	<filter-name>CheckLoginFilter</filter-name>
-  	<url-pattern>/member/checkHp.do</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-  	<filter-name>CheckLoginFilter</filter-name>
-  	<url-pattern>/member/checkUid.do</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-  	<filter-name>CheckLoginFilter</filter-name>
-  	<url-pattern>/member/logout.do</url-pattern>
-  </filter-mapping>
+  
   <!-- product -->
   <filter-mapping>
   	<filter-name>CheckLoginFilter</filter-name>
