@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.admin.board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.Kmarket.dto.cs.CsCateAsideDTO;
+import kr.co.Kmarket.dto.cs.CsCateDetailDTO;
 import kr.co.Kmarket.service.CsArticleService;
 
 @WebServlet("/admin/notice/write.do")
@@ -28,7 +31,11 @@ public class NoticeWriteController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		String group = req.getParameter("group");
+		String cateDetail = req.getParameter("cateDetail");
 		
+		
+		List<CsCateAsideDTO> cateDto = service.selectCsWriteCateNotice();
+		List<CsCateDetailDTO> cateDetailDto = service.selectCsWriteCateDeNotice();
 		
 		
 		

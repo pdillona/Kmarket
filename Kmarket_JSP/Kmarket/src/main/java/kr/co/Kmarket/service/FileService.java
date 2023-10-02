@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -24,6 +25,8 @@ import org.slf4j.LoggerFactory;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import kr.co.Kmarket.dao.cs.CsArticleDAO;
+import kr.co.Kmarket.dao.cs.CsFileDao;
 import kr.co.Kmarket.dto.FileDTO;
 
 public class FileService {
@@ -131,5 +134,7 @@ public class FileService {
 		bos.close();
 		bis.close();
 	}
+	
+
 	
 }

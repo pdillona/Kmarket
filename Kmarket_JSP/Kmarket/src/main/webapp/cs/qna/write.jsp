@@ -11,12 +11,12 @@
           <%@ include file="../_aside.jsp" %>
             <article>
               <form action="${ctxPath}/cs/write.do"  method="post" enctype="multipart/form-data">
-				  <input type="text" name="group" value="${group}"/>
-			      <input type="text" name="type" value="23"/>
-			      <input type="text" name="cateDetail" id="cateDetail" value="${cateDetail}"/>
-                  <input type="text" name="writer" value="${sessUser.uid}"/>
-			      <input type="text" name="uLevel" value="${sessUser.level}"/>
-			      <input type="text" name="regip" value="${sessUser.regip}"/> 
+				  <input type="hidden" name="group" value="${group}"/>
+			      <input type="hidden" name="type" value="23"/>
+			      <input type="hidden" name="cateDetail" id="cateDetail" value="${cateDetail}"/>
+                  <input type="hidden" name="writer" value="${sessUser.uid}"/>
+			      <input type="hidden" name="uLevel" value="${sessUser.level}"/>
+			      <input type="hidden" name="regip" value="${sessUser.regip}"/> 
                 <table>
                   <tr>
                     <td>문의유형</td>

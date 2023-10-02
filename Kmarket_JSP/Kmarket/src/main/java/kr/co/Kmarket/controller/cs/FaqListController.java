@@ -48,7 +48,9 @@ public class FaqListController extends HttpServlet{
 		req.setAttribute("cateDetail", cateDetail);
 		req.setAttribute("articles", articles);
 		
-		
+		logger.debug("FaqListController cate " + cate);
+		logger.debug("FaqListController atype " + atype);
+		logger.debug("FaqListController cateDetail " + cateDetail);
 		
 		
 		
@@ -71,11 +73,18 @@ public class FaqListController extends HttpServlet{
 		for(CsCateDetailDTO type : types) {
 			List<CsArticleDTO> csBoard = new ArrayList<>();
 			for(CsArticleDTO board : cates) {
+				logger.info("type.getType() :" + type.getType());
+				logger.info("board.getType() :" + board.getType());
 				if(type.getType() == board.getType()) {
 					csBoard.add(board);
+					logger.info("1");
+					logger.info("1");
+				}else {
+					logger.info("2");
 				}
 			}
 			type.setDto(csBoard);
+			logger.info("BoardList_get type.getDto() : " + type.getDto());
 		}
 		
 		req.setAttribute("cs", cates);

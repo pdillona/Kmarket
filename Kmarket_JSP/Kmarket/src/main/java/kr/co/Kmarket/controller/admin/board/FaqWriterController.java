@@ -37,7 +37,7 @@ public class FaqWriterController extends HttpServlet{
 		logger.debug("cateDto 값이 나왔다~~~~~"+cateDetail);
 		
 		
-		List<CsCateAsideDTO> cateDto = service.selectCsWriteCateFAQ(cateDetail);
+		List<CsCateAsideDTO> cateDto = service.selectCsWriteCateFAQ();
 		logger.debug("cateDto 값이 나왔다~~~~~");
 		
 		

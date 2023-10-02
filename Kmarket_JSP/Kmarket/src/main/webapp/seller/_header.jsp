@@ -24,7 +24,7 @@
     <div id="seller-wrapper">
         <header>
             <div>
-                <a href="/Kmarket/seller" class="logo"><img src="/Kmarket/seller/img/admin_logo.png" alt="admin_logo"/></a>
+                <a href="/Kmarket/seller" class="logo"><img src="/Kmarket/seller/img/seller.png" alt="admin_logo"/></a>
                 <p>
                     <span>${sessUser.manager}님 반갑습니다.</span>
                     <a href="/Kmarket">HOME |</a>

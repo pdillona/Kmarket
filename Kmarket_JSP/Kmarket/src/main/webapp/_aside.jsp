@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="ctxPath" value="${pageContext.request.contextPath}"></c:set>
 	<!-- 
 		날짜 : 2023/09/14
 		이름 : 김무현
@@ -13,7 +14,7 @@
           	<li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
           		<c:forEach var="cate2s" items="${categories}">
                  <li>
-                        <a href="/Kmarket/product/list.do?prodCate1=${cate2s.get(0).cate1}">
+                        <a href="${ctxPath}/product/list.do?prodCate1=${cate2s.get(0).cate1}">
                         <c:if test="${cate2s.get(0).cate1 == 10}"><i class="fas fa-tshirt"></i></c:if>                        
                         <c:if test="${cate2s.get(0).cate1 == 11}"><i class="fas fa-socks"></i></c:if>                        
                         <c:if test="${cate2s.get(0).cate1 == 12}"><i class="fas fa-child"></i></c:if>                        
@@ -27,7 +28,7 @@
                         </a>
                         <ol>
                         	<c:forEach var="cate2" items="${cate2s}">
-                            	<li><a href="/Kmarket/product/list.do?prodCate1=${cate2s.get(0).cate1}&prodCate2=${cate2.cate2}">${cate2.c2Name}</a></li>
+                            	<li><a href="${ctxPath}/product/list.do?prodCate1=${cate2s.get(0).cate1}&prodCate2=${cate2.cate2}">${cate2.c2Name}</a></li>
                             </c:forEach>
                         </ol>
         		</li>
@@ -40,10 +41,10 @@
       <ol>
       <c:forEach var="productsaside" items="${productsaside}" varStatus="loop">
         <li>
-          <a href="#">
+          <a href="${ctxPath}/product/view.do?prodCate1=${productsaside.prodCate1}&prodCate2=${productsaside.prodCate2}&prodNo=${productsaside.prodNo}" >
             <div class="thumb">
               <i>${loop.index + 1}</i>
-              <img src="/Kmarket/thumb/${productsaside.prodCate1}/${productsaside.prodCate2}/${productsaside.thumb1}" alt="상품 이미지">
+              <img src="${ctxPath}/thumb/${productsaside.prodCate1}/${productsaside.prodCate2}/${productsaside.newThumb1}" alt="상품 이미지">
             </div>
             <h2>${productsaside.prodName}</h2>
             <div class="org_price">

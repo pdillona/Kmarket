@@ -75,7 +75,7 @@
 		              	</tr>
 		              	<c:forEach var="article" items="${articles}">
 		                <tr>
-		                  <td><a href="${ctxPath}/cs/view.do?aNo=${article.aNo}" >[ ${article.dName}  ] ${article.title} && ${article.aNo } </a></td>
+		                  <td><a href="${ctxPath}/cs/view.do?aNo=${article.aNo}" >[ ${article.dName}  ] ${article.title}</a></td>
 		                  <td>${article.writer}</td>
 		                  <td>${article.rdate}</td>
 		                </tr>

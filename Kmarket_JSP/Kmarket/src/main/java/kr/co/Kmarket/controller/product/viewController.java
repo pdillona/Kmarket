@@ -79,7 +79,7 @@ public class viewController extends HttpServlet{
 		
 		ProductDTO product = pService.selectProduct(prodNo);
 		
-		logger.debug(product.toString());
+		//logger.debug(product.toString());
 		
 		// DeliveryDate 클래스의 인스턴스 생성
 	    DeliveryDate deliveryDateCalculator = new DeliveryDate();
@@ -106,7 +106,7 @@ public class viewController extends HttpServlet{
 		req.setAttribute("product", product);
 		req.setAttribute("deliveryDate", deliveryDate);
 		logger.debug("deliveryDate : " + deliveryDate);
-		
+		logger.info("product ------------------- "+product);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");

@@ -46,7 +46,7 @@
       <article>
         <a href="${ctxPath}/product/view.do?prodCate1=${productshit.prodCate1}&prodCate2=${productshit.prodCate2}&prodNo=${productshit.prodNo}">
           <div class="thumb">
-            <img src="/Kmarket/thumb/${productshit.prodCate1}/${productshit.prodCate2}/${productshit.thumb2}" alt="상품이미지" />
+            <img src="/Kmarket/thumb/${productshit.prodCate1}/${productshit.prodCate2}/${productshit.newThumb2}" alt="상품이미지" />
           </div>
           <h2>${productshit.prodName}</h2>
           <p>${productshit.descript}</p>
@@ -80,7 +80,7 @@
       <article>
         <a href="${ctxPath}/product/view.do?prodCate1=${productsScore.prodCate1}&prodCate2=${productsScore.prodCate2}&prodNo=${productsScore.prodNo}">
           <div class="thumb">
-            <img src="/Kmarket/thumb/${productsScore.prodCate1}/${productsScore.prodCate2}/${productsScore.thumb2}" alt="상품이미지" />
+            <img src="/Kmarket/thumb/${productsScore.prodCate1}/${productsScore.prodCate2}/${productsScore.newThumb2}" alt="상품이미지" />
           </div>
           <h2>${productsScore.prodName}</h2>
           <p>${productsScore.descript}</p>
@@ -114,7 +114,7 @@
       <article>
         <a href="${ctxPath}/product/view.do?prodCate1=${productsRdate.prodCate1}&prodCate2=${productsRdate.prodCate2}&prodNo=${productsRdate.prodNo}">
           <div class="thumb">
-            <img src="/Kmarket/thumb/${productsRdate.prodCate1}/${productsRdate.prodCate2}/${productsRdate.thumb2}" alt="상품이미지" />
+            <img src="/Kmarket/thumb/${productsRdate.prodCate1}/${productsRdate.prodCate2}/${productsRdate.newThumb2}" alt="상품이미지" />
           </div>
           <h2>${productsRdate.prodName}</h2>
           <p>${productsRdate.descript}</p>
@@ -148,7 +148,7 @@
       <article>
         <a href="${ctxPath}/product/view.do?prodCate1=${productsDiscount.prodCate1}&prodCate2=${productsDiscount.prodCate2}&prodNo=${productsDiscount.prodNo}">
           <div class="thumb">
-            <img src="/Kmarket/thumb/${productsDiscount.prodCate1}/${productsDiscount.prodCate2}/${productsDiscount.thumb2}" alt="상품이미지" />
+            <img src="/Kmarket/thumb/${productsDiscount.prodCate1}/${productsDiscount.prodCate2}/${productsDiscount.newThumb2}" alt="상품이미지" />
           </div>
           <h2>${productsDiscount.prodName}</h2>
           <p>${productsDiscount.descript}</p>
